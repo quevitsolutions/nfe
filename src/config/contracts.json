@@ -1,0 +1,18 @@
+{
+    "contractAddresses": {
+        "bscTestnet": "0x24428E11bF8Af72069F9672D966EF5F6Ffa1e674",
+        "bscMainnet": "0x24428E11bF8Af72069F9672D966EF5F6Ffa1e674"
+    },
+    "chainIds": {
+        "bscTestnet": 97,
+        "bscMainnet": 56
+    },
+    "rpcUrls": {
+        "bscTestnet": "https://data-seed-prebsc-1-s1.binance.org:8545",
+        "bscMainnet": "https://bsc-dataseed.binance.org"
+    },
+    "blockExplorers": {
+        "bscTestnet": "https://testnet.bscscan.com",
+        "bscMainnet": "https://bscscan.com"
+    }
+}
