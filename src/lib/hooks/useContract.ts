@@ -1,5 +1,5 @@
 import { useReadContract, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
-import { GREAT_INCOME_CLUB_ABI, getContractAddress } from '@/lib/contract';
+import { GREAT_INCOME_CLUB_ABI, REWARD_POOL_ABI, getContractAddress, getRewardPoolAddress } from '@/lib/contract';
 import { useChainId } from 'wagmi';
 
 // Hook to read user info
@@ -235,4 +235,57 @@ export function useContractUserInfo(userId: number) {
             enabled: userId > 0,
         },
     });
+}
+
+// ======================================
+// REWARD POOL HOOKS
+// ======================================
+
+// Hook to get node reward info from RewardPool
+export function useNodeInfo(userId: number) {
+    return useReadContract({
+        address: getRewardPoolAddress() as `0x${string}`,
+        abi: REWARD_POOL_ABI,
+        functionName: 'getNodeInfo',
+        args: [BigInt(userId)],
+        query: {
+            enabled: userId > 0,
+        },
+    });
+}
+
+// Hook to get global contract info from RewardPool
+export function useContractInfo() {
+    return useReadContract({
+        address: getRewardPoolAddress() as `0x${string}`,
+        abi: REWARD_POOL_ABI,
+        functionName: 'getContractInfo',
+    });
+}
+
+// Hook to claim rewards
+export function useClaim() {
+    const { writeContract, data: hash, isPending, error } = useWriteContract();
+
+    const { isLoading: isConfirming, isSuccess } = useWaitForTransactionReceipt({
+        hash,
+    });
+
+    const claim = async (userId: number) => {
+        writeContract({
+            address: getRewardPoolAddress() as `0x${string}`,
+            abi: REWARD_POOL_ABI,
+            functionName: 'claim',
+            args: [BigInt(userId)],
+        });
+    };
+
+    return {
+        claim,
+        isPending,
+        isConfirming,
+        isSuccess,
+        error,
+        hash,
+    };
 }

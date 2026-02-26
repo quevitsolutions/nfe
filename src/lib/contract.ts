@@ -1,8 +1,10 @@
 import contractABI from './GreatIncomeClub.json';
+import rewardPoolABI from './RewardPool.json';
 import contractConfig from '../config/contracts.json';
 
-// Contract ABI
+// Contract ABIs
 export const GREAT_INCOME_CLUB_ABI = contractABI.abi;
+export const REWARD_POOL_ABI = rewardPoolABI.abi;
 
 // Contract addresses
 export const CONTRACT_ADDRESSES = {
@@ -71,6 +73,11 @@ export const LEVEL_COSTS_USD = [
 // Helper to get contract address for current chain
 export function getContractAddress(chainId: number): string {
     return CONTRACT_ADDRESSES[chainId as keyof typeof CONTRACT_ADDRESSES] || CONTRACT_ADDRESSES[97];
+}
+
+// Helper to get RewardPool address
+export function getRewardPoolAddress(): string {
+    return process.env.NEXT_PUBLIC_REWARD_POOL_ADDRESS || '0x571a4fB9DA9926FA2BCbAF92a0ee19975ae374a8';
 }
 
 // Helper to format BNB

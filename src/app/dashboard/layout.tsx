@@ -11,9 +11,13 @@ import {
     GitBranch,
     Network,
     ArrowUpCircle,
+    Megaphone,
+    Gift,
+    Globe,
     Menu,
     X
 } from 'lucide-react';
+
 import { useState } from 'react';
 
 const navItems = [
@@ -23,7 +27,11 @@ const navItems = [
     { name: 'Referral Tree', path: '/dashboard/referral-tree', icon: GitBranch },
     { name: 'Binary Matrix', path: '/dashboard/matrix-tree', icon: Network },
     { name: 'Upgrade', path: '/dashboard/upgrade', icon: ArrowUpCircle },
+    { name: 'Rewards', path: '/dashboard/rewards', icon: Gift },
+    { name: 'Ecosystem', path: '/dashboard/ecosystem', icon: Globe },
+    { name: 'Promotion', path: '/dashboard/promotion', icon: Megaphone },
 ];
+
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {
     const pathname = usePathname();
@@ -34,9 +42,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             {/* Mobile menu button */}
             <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="lg:hidden fixed top-4 left-4 z-50 bg-white/10 backdrop-blur-sm p-3 rounded-xl text-white"
+                className="lg:hidden fixed top-4 left-4 z-50 bg-blue-600 p-2 rounded-lg text-white shadow-lg border border-white/20"
             >
-                {sidebarOpen ? <X /> : <Menu />}
+                {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
 
             {/* Sidebar */}
@@ -45,9 +53,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         transform transition-transform duration-300 lg:translate-x-0
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-                <div className="p-6">
-                    <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-                        Great Income Club
+                <div className="p-6 border-b border-white/10">
+                    <Link href="/" className="flex items-center">
+                        <img src="/giclub-logo.svg" alt="GICLUB Intelligence Network" className="h-12 w-auto" style={{ filter: 'drop-shadow(0 0 8px rgba(250,204,21,0.4))' }} />
                     </Link>
                 </div>
 
@@ -80,12 +88,14 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             {/* Main content */}
             <div className="lg:ml-64">
                 {/* Top bar */}
-                <header className="bg-white/5 backdrop-blur-xl border-b border-white/10 p-4">
+                <header className="bg-white/5 backdrop-blur-xl border-b border-white/10 p-4 md:p-6 sticky top-0 z-30">
                     <div className="flex justify-between items-center">
-                        <h1 className="text-2xl font-bold text-white lg:block hidden">
+                        <h1 className="text-xl md:text-2xl font-bold text-white lg:block hidden">
                             {navItems.find(item => item.path === pathname)?.name || 'Dashboard'}
                         </h1>
-                        <ConnectButton />
+                        <div className="flex items-center gap-4 ml-auto">
+                            <ConnectButton showBalance={{ smallScreen: false, largeScreen: true }} accountStatus="address" />
+                        </div>
                     </div>
                 </header>
 
