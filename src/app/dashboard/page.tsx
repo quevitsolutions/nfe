@@ -1,6 +1,6 @@
 'use client';
 
-import { useAccount } from 'wagmi';
+import { useAccount, useBalance } from 'wagmi';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { TrendingUp, Users, Wallet, ArrowUpCircle, Copy, Check } from 'lucide-react';
@@ -16,9 +16,8 @@ export default function DashboardPage() {
 
     // Get user ID from connected wallet address
     const { data: userData } = useUserIdByAddress(address);
-    const userId = userData && typeof userData === 'object' && 'id' in userData
-        ? Number(userData.id)
-        : 0;
+    // nodeId(address) returns a plain BigInt — convert directly
+    const userId = userData ? Number(userData) : 0;
 
     // Fetch user data
     const { data: config } = useContractConfig();
@@ -29,6 +28,11 @@ export default function DashboardPage() {
 
     // Calculate BNB price (use contract price or fallback)
     const bnbPrice = currentBnbPrice ? Number(currentBnbPrice) / 1e8 : 600;
+
+    // Get wallet BNB balance
+    const { data: walletBalance } = useBalance({
+        address: address,
+    });
 
     // Calculate total income in USD
     const totalIncomeBNB = incomeBreakdown
@@ -113,6 +117,35 @@ export default function DashboardPage() {
 
     return (
         <div className="space-y-6">
+            {/* Wallet BNB Balance - Prominent Display */}
+            <div className="bg-gradient-to-br from-yellow-400/20 to-orange-500/20 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-yellow-500/30">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div className="flex items-center gap-4">
+                        <div className="bg-gradient-to-br from-yellow-400 to-orange-500 p-4 rounded-xl">
+                            <Wallet className="w-8 h-8 md:w-10 md:h-10 text-black" />
+                        </div>
+                        <div>
+                            <h2 className="text-lg md:text-xl text-gray-300 font-semibold mb-1">Wallet Balance</h2>
+                            <div className="text-3xl md:text-5xl font-bold text-white">
+                                {walletBalance ? formatBNB(walletBalance.value) : '0.00'} BNB
+                            </div>
+                            <div className="text-base md:text-xl text-gray-400 mt-1">
+                                ≈ {formatCurrency(
+                                    walletBalance
+                                        ? (Number(walletBalance.value) / 1e18) * bnbPrice
+                                        : 0
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="text-sm text-gray-400 bg-white/5 rounded-lg p-3">
+                        <div className="font-mono text-xs break-all">
+                            {address ? `${address.slice(0, 6)}...${address.slice(-4)}` : '---'}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {/* Stats Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {/* User ID */}

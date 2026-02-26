@@ -1,6 +1,6 @@
 {
     "contractAddresses": {
-        "bscTestnet": "0x24428E11bF8Af72069F9672D966EF5F6Ffa1e674",
+        "bscTestnet": "0xd83c2E941f5e3fCfcbEA624A36596aBDc596FfDC",
         "bscMainnet": "0x24428E11bF8Af72069F9672D966EF5F6Ffa1e674"
     },
     "chainIds": {

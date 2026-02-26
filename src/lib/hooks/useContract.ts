@@ -14,14 +14,14 @@ export function useUserInfo(userId: number) {
     });
 }
 
-// Hook to get user ID from wallet address
+// Hook to get user ID from connected wallet address
 export function useUserIdByAddress(address: string | undefined) {
     const chainId = useChainId();
 
     return useReadContract({
         address: getContractAddress(chainId) as `0x${string}`,
         abi: GREAT_INCOME_CLUB_ABI,
-        functionName: 'getUserByAddress',
+        functionName: 'nodeId',  // mapping(address=>uint) public nodeId
         args: address ? [address as `0x${string}`] : undefined,
         query: {
             enabled: !!address,
@@ -184,7 +184,7 @@ export function useIsRegistered(address: string | undefined) {
     return useReadContract({
         address: getContractAddress(chainId) as `0x${string}`,
         abi: GREAT_INCOME_CLUB_ABI,
-        functionName: 'isUserAddressExists',
+        functionName: 'nodeId',  // mapping(address=>uint) — returns 0 if unregistered
         args: address ? [address as `0x${string}`] : undefined,
         query: {
             enabled: !!address,
@@ -222,14 +222,14 @@ export function useMatrixPosition(userId: number) {
     });
 }
 
-// Hook to get detailed user info (including referrer)
+// Hook to get detailed node info (sponsor, wallet, tier etc.) via nodes() mapping
 export function useContractUserInfo(userId: number) {
     const chainId = useChainId();
 
     return useReadContract({
         address: getContractAddress(chainId) as `0x${string}`,
         abi: GREAT_INCOME_CLUB_ABI,
-        functionName: 'userInfo',
+        functionName: 'nodes',   // mapping(uint=>Node) public nodes
         args: [BigInt(userId)],
         query: {
             enabled: userId > 0,
