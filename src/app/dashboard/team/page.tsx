@@ -25,13 +25,13 @@ export default function TeamPage() {
     // Format team data
     const formattedTeam = teamMembers && Array.isArray(teamMembers)
         ? teamMembers.map((member: any) => ({
-            id: Number(member.id),
-            address: member.account ? `${member.account.slice(0, 6)}...${member.account.slice(-4)}` : '',
-            fullAddress: member.account || '',
-            level: Number(member.level),
-            directReferrals: Number(member.directTeam),
-            totalTeam: Number(member.totalMatrixTeam),
-            start: Number(member.start),
+            id: Number(member.nodeId),
+            address: member.wallet ? `${member.wallet.slice(0, 6)}...${member.wallet.slice(-4)}` : '',
+            fullAddress: member.wallet || '',
+            level: Number(member.tier),
+            directReferrals: Number(member.directNodes),
+            totalTeam: Number(member.totalMatrixNodes),
+            start: Number(member.joinedAt),
         }))
         : [];
 
@@ -258,8 +258,8 @@ function TeamMemberCard({ member }: { member: any }) {
                             <div className="text-white">{member.totalTeam}</div>
                         </div>
                         <div>
-                            <div className="text-gray-400 text-sm mb-1">Total Income</div>
-                            <div className="text-green-400">{userStats ? formatBNB(userStats[3]) : '...'} BNB</div>
+                            <div className="text-gray-400 text-sm mb-1">Total Deposit</div>
+                            <div className="text-green-400">{userStats ? formatBNB(userStats[0]) : '...'} BNB</div>
                         </div>
                         <div>
                             <div className="text-gray-400 text-sm mb-1">Status</div>

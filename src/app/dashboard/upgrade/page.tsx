@@ -67,7 +67,7 @@ export default function UpgradePage() {
                         </div>
 
                         <div className="grid grid-cols-5 gap-2">
-                            {Array.from({ length: 25 }, (_, i) => i + 1).map((level) => (
+                            {Array.from({ length: 18 }, (_, i) => i + 1).map((level) => (
                                 <button
                                     key={level}
                                     onClick={() => setSelectedLevel(level)}

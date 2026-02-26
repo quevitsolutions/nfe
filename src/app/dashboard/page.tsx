@@ -192,7 +192,7 @@ export default function DashboardPage() {
                         {userInfo ? userInfo[3].toString() : '---'}
                     </div>
                     <div className="text-gray-400">
-                        of 25 levels
+                        of 18 levels
                     </div>
                 </div>
 

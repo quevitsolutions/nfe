@@ -45,8 +45,8 @@ function RecursiveTeamNode({ userId, address, level, directReferrals, depth = 0 
                 <div className="grid grid-cols-3 gap-4 md:flex md:gap-6 text-sm md:ml-auto mt-3 md:mt-0 border-t border-white/5 md:border-none pt-3 md:pt-0">
                     <div>
                         <div className="text-gray-400 text-xs uppercase tracking-wider">Level</div>
-                        <div className={`font-bold ${level >= 20 ? 'text-yellow-400' :
-                            level >= 10 ? 'text-green-400' :
+                        <div className={`font-bold ${level >= 15 ? 'text-yellow-400' :
+                            level >= 9 ? 'text-green-400' :
                                 'text-blue-400'
                             }`}>{level}</div>
                     </div>
@@ -74,11 +74,11 @@ function RecursiveTeamNode({ userId, address, level, directReferrals, depth = 0 
                     ) : teamMembers && Array.isArray(teamMembers) && teamMembers.length > 0 ? (
                         teamMembers.map((member: any) => (
                             <RecursiveTeamNode
-                                key={Number(member.id)}
-                                userId={Number(member.id)}
-                                address={member.account ? `${member.account.slice(0, 6)}...${member.account.slice(-4)}` : '...'}
-                                level={Number(member.level)}
-                                directReferrals={Number(member.directTeam)}
+                                key={Number(member.nodeId)}
+                                userId={Number(member.nodeId)}
+                                address={member.wallet ? `${member.wallet.slice(0, 6)}...${member.wallet.slice(-4)}` : '...'}
+                                level={Number(member.tier)}
+                                directReferrals={Number(member.directNodes)}
                                 depth={depth + 1}
                             />
                         ))
@@ -139,9 +139,9 @@ export default function ReferralTreePage() {
     // Determine root data to display
     const currentRootAddress = rootId === myUserId
         ? (address ? `${address.slice(0, 6)}...${address.slice(-4)}` : '')
-        : (rootInfo && typeof rootInfo === 'object' ? `${String(rootInfo[0]).slice(0, 6)}...${String(rootInfo[0]).slice(-4)}` : `User #${rootId}`);
+        : `User #${rootId}`;
 
-    const currentRootLevel = rootStats ? Number(rootStats[0]) : (myUserStats ? Number(myUserStats[0]) : 0);
+    const currentRootLevel = rootStats ? Number(rootStats[3]) : (myUserStats ? Number(myUserStats[3]) : 0);
     const currentRootDirects = rootStats ? Number(rootStats[1]) : (myUserStats ? Number(myUserStats[1]) : 0);
 
     return (
@@ -208,15 +208,15 @@ export default function ReferralTreePage() {
                 <div className="flex flex-wrap gap-6">
                     <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded bg-blue-400"></div>
-                        <span className="text-gray-400">Level 1-9</span>
+                        <span className="text-gray-400">Level 1-8</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded bg-green-400"></div>
-                        <span className="text-gray-400">Level 10-19</span>
+                        <span className="text-gray-400">Level 9-14</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="w-4 h-4 rounded bg-yellow-400"></div>
-                        <span className="text-gray-400">Level 20-25</span>
+                        <span className="text-gray-400">Level 15-18</span>
                     </div>
                 </div>
             </div>

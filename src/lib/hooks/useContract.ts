@@ -162,14 +162,14 @@ export function useMatrixUsers(userId: number, layer: number, startIndex: number
     });
 }
 
-// Hook to get team users
+// Hook to get team users (network tree)
 export function useTeamUsers(userId: number, layer: number, num: number = 50) {
     const chainId = useChainId();
 
     return useReadContract({
         address: getContractAddress(chainId) as `0x${string}`,
         abi: GREAT_INCOME_CLUB_ABI,
-        functionName: 'getTeamUsers',
+        functionName: 'getNetworkNodes', // Changed from getTeamUsers
         args: [BigInt(userId), BigInt(layer), BigInt(num)],
         query: {
             enabled: userId > 0,
@@ -192,14 +192,14 @@ export function useIsRegistered(address: string | undefined) {
     });
 }
 
-// Hook to get user stats
+// Hook to get user stats (mapped to getPoolQualificationData)
 export function useUserStats(userId: number) {
     const chainId = useChainId();
 
     return useReadContract({
         address: getContractAddress(chainId) as `0x${string}`,
         abi: GREAT_INCOME_CLUB_ABI,
-        functionName: 'getUserStats',
+        functionName: 'getPoolQualificationData', // Changed from getUserStats
         args: [BigInt(userId)],
         query: {
             enabled: userId > 0,
