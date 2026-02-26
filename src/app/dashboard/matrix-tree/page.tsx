@@ -54,9 +54,7 @@ export default function MatrixTreePage() {
 
     // Get user ID from connected wallet address
     const { data: userData } = useUserIdByAddress(address);
-    const userId = userData && typeof userData === 'object' && 'id' in userData
-        ? Number(userData.id)
-        : 0;
+    const userId = userData ? Number(userData) : 0;
 
     // Get user stats for team counts
     const { data: userStats } = useUserStats(userId);

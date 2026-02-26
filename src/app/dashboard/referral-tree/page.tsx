@@ -98,9 +98,7 @@ export default function ReferralTreePage() {
 
     // Get current user ID
     const { data: userData } = useUserIdByAddress(address);
-    const myUserId = userData && typeof userData === 'object' && 'id' in userData
-        ? Number(userData.id)
-        : 0;
+    const myUserId = userData ? Number(userData) : 0;
 
     const { data: myUserStats } = useUserStats(myUserId);
     const { data: myUserInfo } = useUserInfo(myUserId);
@@ -117,7 +115,7 @@ export default function ReferralTreePage() {
 
         // If searching by address
         if (searchQuery.startsWith('0x') && searchUserData) {
-            const id = typeof searchUserData === 'object' && 'id' in searchUserData ? Number(searchUserData.id) : 0;
+            const id = searchUserData ? Number(searchUserData) : 0;
             if (id > 0) setSearchResultId(id);
         }
         // If searching by ID

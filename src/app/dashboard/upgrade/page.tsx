@@ -12,9 +12,7 @@ export default function UpgradePage() {
 
     // Get user ID from connected wallet address
     const { data: userData } = useUserIdByAddress(address);
-    const userId = userData && typeof userData === 'object' && 'id' in userData
-        ? Number(userData.id)
-        : 0;
+    const userId = userData ? Number(userData) : 0;
 
     const { data: userInfo } = useUserInfo(userId);
     const { data: levelCosts } = useLevelCosts();
@@ -24,8 +22,14 @@ export default function UpgradePage() {
     const currentLevel = userInfo ? Number(userInfo[3]) : 0;
     const bnbPrice = 600; // Fixed BNB price in USD
 
+    // Check if user is genesis/root user (ID 36999 gets free upgrades)
+    const isGenesisUser = userId === 36999;
+
     // Calculate upgrade cost
     const calculateCost = (toLevel: number): bigint => {
+        // Genesis user upgrades for free
+        if (isGenesisUser) return BigInt(0);
+
         if (!levelCosts || toLevel <= currentLevel) return BigInt(0);
 
         let total = BigInt(0);
@@ -47,6 +51,7 @@ export default function UpgradePage() {
             console.error('Upgrade failed:', error);
         }
     };
+
 
     return (
         <div className="space-y-6">
@@ -129,29 +134,53 @@ export default function UpgradePage() {
                         </div>
                     ) : (
                         <>
-                            <div className="bg-gradient-to-r from-yellow-400/10 to-orange-500/10 rounded-2xl p-6 mb-6 border border-yellow-500/20">
-                                <div className="text-center mb-4">
-                                    <div className="text-5xl font-bold text-yellow-400 mb-2">
-                                        {formatBNB(upgradeCost)} BNB
+                            {isGenesisUser ? (
+                                <div className="bg-gradient-to-r from-green-400/10 to-emerald-500/10 rounded-2xl p-6 mb-6 border border-green-500/20">
+                                    <div className="text-center mb-4">
+                                        <div className="text-5xl font-bold text-green-400 mb-2">
+                                            FREE
+                                        </div>
+                                        <div className="text-xl text-gray-300">
+                                            Genesis User - No Cost
+                                        </div>
                                     </div>
-                                    <div className="text-xl text-gray-300">
-                                        ≈ {formatCurrency(upgradeCostUSD)}
-                                    </div>
-                                </div>
 
-                                <div className="border-t border-white/10 pt-4 mt-4">
-                                    <div className="text-sm text-gray-400 space-y-2">
-                                        <div className="flex justify-between">
-                                            <span>Income Distribution:</span>
-                                            <span className="text-white">{formatCurrency(upgradeCostUSD * 0.7)}</span>
-                                        </div>
-                                        <div className="flex justify-between">
-                                            <span>Pool Allocation:</span>
-                                            <span className="text-white">{formatCurrency(upgradeCostUSD * 0.3)}</span>
+                                    <div className="border-t border-white/10 pt-4 mt-4">
+                                        <div className="text-sm text-gray-400 space-y-2">
+                                            <div className="flex justify-between">
+                                                <span>You are the Genesis User (ID 36999)</span>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span>All upgrades are free - no payment required</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            ) : (
+                                <div className="bg-gradient-to-r from-yellow-400/10 to-orange-500/10 rounded-2xl p-6 mb-6 border border-yellow-500/20">
+                                    <div className="text-center mb-4">
+                                        <div className="text-5xl font-bold text-yellow-400 mb-2">
+                                            {formatBNB(upgradeCost)} BNB
+                                        </div>
+                                        <div className="text-xl text-gray-300">
+                                            ≈ {formatCurrency(upgradeCostUSD)}
+                                        </div>
+                                    </div>
+
+                                    <div className="border-t border-white/10 pt-4 mt-4">
+                                        <div className="text-sm text-gray-400 space-y-2">
+                                            <div className="flex justify-between">
+                                                <span>Income Distribution:</span>
+                                                <span className="text-white">{formatCurrency(upgradeCostUSD * 0.7)}</span>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span>Pool Allocation:</span>
+                                                <span className="text-white">{formatCurrency(upgradeCostUSD * 0.3)}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
 
                             <button
                                 onClick={handleUpgrade}

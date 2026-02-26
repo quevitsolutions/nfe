@@ -14,9 +14,7 @@ export default function IncomePage() {
 
     // Get user ID from connected wallet address
     const { data: userData } = useUserIdByAddress(address);
-    const userId = userData && typeof userData === 'object' && 'id' in userData
-        ? Number(userData.id)
-        : 0;
+    const userId = userData ? Number(userData) : 0;
 
     const { data: incomeBreakdown } = useIncomeBreakdown(userId);
     const { data: config } = useContractConfig();
