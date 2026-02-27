@@ -86,15 +86,17 @@ export default function DashboardPage() {
         window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
     };
 
-    // Handle wallet connection check with delay
+    // Handle wallet connection check
     useEffect(() => {
-        // Give wallet provider time to initialize
+        // Only redirect if we are SURE the wallet is not connected
+        // We give it a generous 3 seconds to settle
         const timer = setTimeout(() => {
             setIsLoading(false);
             if (!isConnected) {
+                console.log('Not connected, redirecting...');
                 router.push('/');
             }
-        }, 1000); // 1 second delay to allow wallet to connect
+        }, 3000);
 
         return () => clearTimeout(timer);
     }, [isConnected, router]);
@@ -192,7 +194,7 @@ export default function DashboardPage() {
                         {userInfo ? userInfo[3].toString() : '---'}
                     </div>
                     <div className="text-gray-400">
-                        of 18 levels
+                        of 17 levels
                     </div>
                 </div>
 

@@ -1,0 +1,44 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#1e1b4b;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="gold3" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" style="stop-color:#c084fc;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#9333ea;stop-opacity:1" />
+        </linearGradient>
+        <filter id="glow3">
+            <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+            <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </defs>
+    
+    <rect width="1200" height="675" fill="url(#bg3)" />
+    
+    <circle cx="100" cy="100" r="150" fill="#9333ea" opacity="0.1" filter="url(#glow3)" />
+    <circle cx="1100" cy="575" r="200" fill="#facc15" opacity="0.05" filter="url(#glow3)" />
+    
+    <rect x="100" y="80" width="1000" height="515" rx="30" fill="none" stroke="white" stroke-opacity="0.1" stroke-width="2" />
+    
+    <text x="600" y="180" text-anchor="middle" font-family="Arial, sans-serif" font-weight="900" font-size="80" fill="url(#gold3)" filter="url(#glow3)">MATRIX INCOME</text>
+    <line x1="400" y1="210" x2="800" y2="210" stroke="#9333ea" stroke-width="4" stroke-opacity="0.5" />
+    
+    <circle cx="600" cy="350" r="60" fill="#9333ea" opacity="0.2" />
+    <circle cx="600" cy="350" r="40" fill="none" stroke="#c084fc" stroke-width="4" />
+    <text x="600" y="370" text-anchor="middle" font-size="50">🔁</text>
+    
+    <g font-family="Arial, sans-serif" font-size="36" fill="white" text-anchor="middle">
+        <text x="300" y="500" fill="#c084fc" font-weight="bold">Binary Structure</text>
+        <text x="300" y="550" font-size="24" fill="#94a3b8">2x2 Simple Matrix</text>
+        
+        <text x="600" y="500" fill="#facc15" font-weight="bold">Spillover System</text>
+        <text x="600" y="550" font-size="24" fill="#94a3b8">Get Help From Upline</text>
+        
+        <text x="900" y="500" fill="#4ade80" font-weight="bold">70% Distribution</text>
+        <text x="900" y="550" font-size="24" fill="#94a3b8">Community Focused</text>
+    </g>
+</svg>

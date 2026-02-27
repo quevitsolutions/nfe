@@ -74,10 +74,15 @@ function RegisterContent() {
         <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
             {/* Navbar */}
             <nav className="flex justify-between items-center p-6 max-w-7xl mx-auto">
-                <Link href="/" className="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors">
-                    <ArrowLeft />
-                    <span>Back to Home</span>
-                </Link>
+                <div className="flex items-center gap-4">
+                    <Link href="/" className="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors">
+                        <ArrowLeft />
+                        <span>Back</span>
+                    </Link>
+                    <Link href="/">
+                        <img src="/giclub-logo.svg" alt="GICLUB Intelligence Network" className="h-10 w-auto" style={{ filter: 'drop-shadow(0 0 8px rgba(250,204,21,0.4))' }} />
+                    </Link>
+                </div>
                 <ConnectButton />
             </nav>
 

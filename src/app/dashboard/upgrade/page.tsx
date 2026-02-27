@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import { ArrowUpCircle, Check, Loader2 } from 'lucide-react';
-import { useUpgrade, useUpgradeCost, useContractConfig, useUserInfo, useUserIdByAddress } from '@/lib/hooks/useContract';
+import { useUpgrade, useUpgradeCost, useLevelCosts, useContractConfig, useUserInfo, useUserIdByAddress } from '@/lib/hooks/useContract';
 import { formatBNB, formatCurrency, LEVEL_COSTS_USD } from '@/lib/contract';
 
 export default function UpgradePage() {
@@ -15,6 +15,7 @@ export default function UpgradePage() {
     const userId = userData ? Number(userData) : 0;
 
     const { data: userInfo } = useUserInfo(userId);
+    const { data: levelCosts } = useLevelCosts();
     const { data: config } = useContractConfig();
     const { upgrade, isPending, isConfirming, isSuccess, hash } = useUpgrade();
 
@@ -57,7 +58,7 @@ export default function UpgradePage() {
                         </div>
 
                         <div className="grid grid-cols-5 gap-2">
-                            {Array.from({ length: 18 }, (_, i) => i + 1).map((level) => (
+                            {Array.from({ length: 17 }, (_, i) => i + 1).map((level) => (
                                 <button
                                     key={level}
                                     onClick={() => setSelectedLevel(level)}
