@@ -51,14 +51,18 @@ export function useBnbPrice() {
     });
 }
 
-// Hook to get level costs
-export function useLevelCosts() {
+// Hook to get upgrade cost directly from contract
+export function useUpgradeCost(fromLevel: number, numLevels: number) {
     const chainId = useChainId();
 
     return useReadContract({
         address: getContractAddress(chainId) as `0x${string}`,
         abi: GREAT_INCOME_CLUB_ABI,
-        functionName: 'getLevels',
+        functionName: 'getUpgradeCost',
+        args: [BigInt(fromLevel), BigInt(numLevels)],
+        query: {
+            enabled: numLevels > 0,
+        },
     });
 }
 

@@ -35,7 +35,7 @@ export default function IncomePage() {
     // Filter and format real income history
     const formattedHistory = incomeHistory && Array.isArray(incomeHistory)
         ? incomeHistory.map((income: any) => ({
-            type: Number(income.incomeType),
+            type: Number(income.rewardType),
             amount: (Number(income.amount) / 1e18).toFixed(6),
             from: Number(income.id),
             timestamp: Number(income.time) * 1000,
