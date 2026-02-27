@@ -74,7 +74,7 @@ function buildBrochure(link: string): Doc {
     // Logo circle
     doc.save().circle(PW / 2, 210, 58).fill(NAVY).restore();
     doc.save().circle(PW / 2, 210, 58).strokeColor(GOLD).strokeOpacity(0.7).lineWidth(2).stroke().restore();
-    doc.fontSize(26).fillColor(GOLD).font('Helvetica-Bold').text('GIC', PW / 2 - 30, 196, { width: 60, align: 'center' });
+    doc.fontSize(22).fillColor(GOLD).font('Helvetica-Bold').text('NFE', PW / 2 - 30, 201, { width: 60, align: 'center' });
 
     doc.fontSize(32).fillColor(GOLD).font('Helvetica-Bold');
     centreText(doc, 'NODEFLOW ENGINE', 300);
@@ -162,7 +162,7 @@ function buildBrochure(link: string): Doc {
     hr(doc, y); y += 12;
     y = sectionHead(doc, '❓  Common Questions', y); y += 4;
     [
-        ['Is GICLUB a scam?', 'No. It\'s a public smart contract on BSC — every tx is visible on BscScan. No one controls your funds.'],
+        ['Is NodeFlow Engine a scam?', 'No. It\'s a public smart contract on BSC — every tx is visible on BscScan. No one controls your funds.'],
         ['Do I need referrals?', 'No. Matrix spillover from your upline provides passive income. Referrals accelerate earnings.'],
         ['When do I get paid?', 'Instantly — BNB is sent directly to your wallet the moment someone in your matrix transacts.'],
         ['Can I withdraw?', 'Nothing to withdraw — income lands directly in your BSC wallet. It\'s already yours.'],
@@ -197,7 +197,7 @@ function buildFlyer(link: string): Doc {
     // Logo
     doc.save().circle(PW / 2, 140, 55).fill(NAVY).restore();
     doc.save().circle(PW / 2, 140, 55).strokeColor(GOLD).strokeOpacity(0.8).lineWidth(2).stroke().restore();
-    doc.fontSize(22).fillColor(GOLD).font('Helvetica-Bold').text('GIC', PW / 2 - 26, 128, { width: 52, align: 'center' });
+    doc.fontSize(20).fillColor(GOLD).font('Helvetica-Bold').text('NFE', PW / 2 - 26, 131, { width: 52, align: 'center' });
 
     doc.fontSize(28).fillColor(GOLD).font('Helvetica-Bold'); centreText(doc, 'NODEFLOW ENGINE', 220);
     doc.fontSize(11).fillColor(LIGHT).font('Helvetica'); centreText(doc, 'Autonomous · BNB Smart Chain · Smart Contract', 256);

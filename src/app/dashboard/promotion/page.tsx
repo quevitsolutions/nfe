@@ -51,19 +51,19 @@ export default function PromotionPage() {
             name: 'Twitter / X',
             icon: <Twitter className="w-5 h-5" />,
             color: 'from-sky-500 to-blue-600',
-            href: `https://twitter.com/intent/tweet?text=Join%20Great%20Income%20Club%20and%20earn%20passive%20income%20through%20our%20decentralized%20network!%20Register%20here:%20${encodeURIComponent(referralLink)}`,
+            href: `https://twitter.com/intent/tweet?text=Join%20NodeFlow%20Engine%20and%20earn%20algorithmic%20rewards%20through%20our%20decentralized%20protocol!%20Register%20here:%20${encodeURIComponent(referralLink)}`,
         },
         {
             name: 'WhatsApp',
             icon: <MessageCircle className="w-5 h-5" />,
             color: 'from-green-500 to-emerald-600',
-            href: `https://wa.me/?text=${encodeURIComponent('Join Great Income Club and earn passive income through our decentralized network! Register here: ' + referralLink)}`,
+            href: `https://wa.me/?text=${encodeURIComponent('Join NodeFlow Engine and earn algorithmic rewards through our decentralized protocol! Register here: ' + referralLink)}`,
         },
         {
             name: 'Telegram',
             icon: <Send className="w-5 h-5" />,
             color: 'from-blue-400 to-cyan-600',
-            href: `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent('Join Great Income Club and earn passive income through our decentralized network!')}`,
+            href: `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent('Join NodeFlow Engine and earn algorithmic rewards through our decentralized protocol!')}`,
         },
     ];
 
@@ -78,7 +78,7 @@ export default function PromotionPage() {
             title: 'Level Income',
             desc: 'Earn from your level\'s entire matrix as your network grows deeper.',
             icon: '📈',
-            highlight: 'Up to 18 levels',
+            highlight: 'Up to 25 Tiers',
         },
         {
             title: 'Binary Matrix',
@@ -158,9 +158,9 @@ export default function PromotionPage() {
                 </div>
 
                 <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-blue-500/30 transition-all">
-                    <div className="w-12 h-12 bg-blue-400/10 rounded-xl flex items-center justify-center mb-4 text-blue-400 font-bold text-xl">25L</div>
+                    <div className="w-12 h-12 bg-blue-400/10 rounded-xl flex items-center justify-center mb-4 text-blue-400 font-bold text-xl">17T</div>
                     <h3 className="text-xl font-bold text-white mb-2">Sponsorship Depth</h3>
-                    <p className="text-gray-400 text-sm">Unlock up to 25 levels of sponsorship rewards as your network of nodes grows deeper.</p>
+                    <p className="text-gray-400 text-sm">Unlock up to 17 tiers of sponsorship rewards currently active on the protocol.</p>
                 </div>
 
                 <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-purple-500/30 transition-all">
