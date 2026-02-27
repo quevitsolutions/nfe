@@ -66,6 +66,17 @@ export function useUpgradeCost(fromLevel: number, numLevels: number) {
     });
 }
 
+// Hook to get all tier costs (used in IncomeStructure and register page)
+export function useLevelCosts() {
+    const chainId = useChainId();
+
+    return useReadContract({
+        address: getContractAddress(chainId) as `0x${string}`,
+        abi: GREAT_INCOME_CLUB_ABI,
+        functionName: 'getTierCosts',
+    });
+}
+
 // Hook to get income breakdown
 export function useIncomeBreakdown(userId: number) {
     const chainId = useChainId();
