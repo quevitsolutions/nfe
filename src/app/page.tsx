@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount, useReadContract, useBalance } from 'wagmi';
 import Link from 'next/link';
@@ -55,11 +55,11 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
   return (
     <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden transition-all hover:border-yellow-500/30">
       <button onClick={() => setIsOpen(!isOpen)} className="w-full p-6 text-left flex justify-between items-center gap-4">
-        <h3 className="text-lg font-bold text-white">{question}</h3>
+        <h3 className="text-lg font-bold text-white uppercase tracking-tighter">{question}</h3>
         {isOpen ? <ChevronUp className="w-5 h-5 text-yellow-400 shrink-0" /> : <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />}
       </button>
       <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
-        <div className="px-6 pb-6 text-gray-400 border-t border-white/5 pt-4">{answer}</div>
+        <div className="px-6 pb-6 text-gray-400 border-t border-white/5 pt-4 text-sm leading-relaxed">{answer}</div>
       </div>
     </div>
   );
@@ -153,7 +153,7 @@ export default function Home() {
         style={{ backdropFilter: 'blur(16px)', background: scrollY > 50 ? 'rgba(6,6,18,0.85)' : 'transparent', transition: 'background 0.3s', borderBottom: scrollY > 50 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
         <Link href="/" className="flex items-center gap-3">
           <img src="/nfe-logo.png" alt="NodeFlow Engine" className="h-10 w-auto" style={{ filter: 'drop-shadow(0 0 10px rgba(250,204,21,0.5))' }} />
-          <span className="text-xl font-black tracking-tighter hidden sm:block">NODEFLOW <span className="text-yellow-400">ENGINE</span></span>
+          <span className="text-xl font-black tracking-tighter hidden sm:block uppercase">NODEFLOW <span className="text-yellow-400">ENGINE</span></span>
         </Link>
         <div className="flex items-center gap-3">
           {isConnected && (
@@ -176,9 +176,9 @@ export default function Home() {
               <span className="text-yellow-300 text-sm font-semibold tracking-widest uppercase">Autonomous On-Chain Protocol</span>
             </div>
 
-            <h1 className="text-5xl sm:text-7xl md:text-8xl font-black leading-[1.05] mb-8">
-              <span className="block text-white mb-2">What Is</span>
-              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-200 bg-clip-text text-transparent">NodeFlow Engine?</span>
+            <h1 className="text-5xl sm:text-7xl md:text-8xl font-black leading-[1.05] mb-8 tracking-tighter">
+              <span className="block text-white mb-2 uppercase">What Is</span>
+              <span className="bg-gradient-to-r from-yellow-400 via-orange-500 to-yellow-200 bg-clip-text text-transparent uppercase">NodeFlow Engine?</span>
             </h1>
 
             <p className="text-lg sm:text-xl md:text-2xl text-gray-400 max-w-4xl mx-auto mb-12 leading-relaxed font-medium">
@@ -203,7 +203,7 @@ export default function Home() {
       <section className="py-24 px-6 border-y border-white/5 bg-white/[0.02]">
         <div className="max-w-6xl mx-auto">
           <FadeIn className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4">Protocol Architecture</h2>
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tighter">Protocol Architecture</h2>
             <p className="text-gray-400 text-lg">Sophisticated reward flows, simplified for participation.</p>
           </FadeIn>
 
@@ -240,7 +240,7 @@ export default function Home() {
         <div className="max-w-4xl mx-auto bg-gradient-to-br from-yellow-400 to-orange-600 rounded-[3rem] p-1 overflow-hidden">
           <div className="bg-[#060612] rounded-[2.9rem] p-8 md:p-16 text-center space-y-8">
             <FadeIn>
-              <h2 className="text-3xl md:text-5xl font-black text-white">Trust the Engine.</h2>
+              <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase">Trust the Engine.</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mt-12">
                 <div className="space-y-4">
                   <div className="flex gap-4 items-center">
@@ -265,7 +265,7 @@ export default function Home() {
               </div>
             </FadeIn>
             <FadeIn delay={200}>
-              <p className="text-gray-400 text-lg italic italic border-t border-white/10 pt-8 mt-8">
+              <p className="text-gray-400 text-lg italic border-t border-white/10 pt-8 mt-8">
                 "Autonomous On-Chain Community Reward Protocol"
               </p>
             </FadeIn>
@@ -277,7 +277,7 @@ export default function Home() {
       <section id="how-it-works" className="py-24 px-6 relative">
         <FadeIn className="text-center mb-16">
           <span className="text-yellow-400 font-mono text-sm uppercase tracking-[0.3em]">Operational Flow</span>
-          <h2 className="text-4xl md:text-5xl font-black text-white mt-2">How NodeFlow Works</h2>
+          <h2 className="text-4xl md:text-5xl font-black text-white mt-2 uppercase tracking-tighter">How NodeFlow Works</h2>
         </FadeIn>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -296,7 +296,7 @@ export default function Home() {
       {/* ── FAQ ── */}
       <section className="py-24 px-6 bg-white/[0.01]">
         <FadeIn className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-black text-white mt-2">Intelligence Briefing</h2>
+          <h2 className="text-4xl md:text-5xl font-black text-white mt-2 uppercase tracking-tighter">Intelligence Briefing</h2>
         </FadeIn>
         <div className="max-w-3xl mx-auto space-y-3">
           {faqs.map((f, i) => (
@@ -310,7 +310,7 @@ export default function Home() {
       {/* ── FINAL CTA ── */}
       <section className="py-32 px-6 text-center">
         <FadeIn className="max-w-3xl mx-auto">
-          <h2 className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter">
+          <h2 className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter uppercase">
             Initialize Your <br />
             <span className="text-yellow-400">Flow.</span>
           </h2>
@@ -322,12 +322,12 @@ export default function Home() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="border-t border-white/8 py-20 px-6 bg-black">
+      <footer className="border-t border-white/10 py-20 px-6 bg-black">
         <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-16">
           <div className="space-y-6">
             <div className="flex items-center gap-3">
               <img src="/nfe-logo.png" alt="NFE" className="h-12 w-auto" />
-              <span className="text-2xl font-black text-white">NODEFLOW</span>
+              <span className="text-2xl font-black text-white tracking-tighter">NODEFLOW</span>
             </div>
             <p className="text-gray-500 text-sm leading-relaxed">
               An autonomous coordination protocol for the decentralized community.
@@ -378,63 +378,3 @@ export default function Home() {
     </div>
   );
 }
-
-// Re-using common components
-function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: string }) {
-  const [count, setCount] = useState(0);
-  const ref = useRef<HTMLSpanElement>(null);
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        let start = 0;
-        const step = target / 60;
-        const timer = setInterval(() => {
-          start += step;
-          if (start >= target) { setCount(target); clearInterval(timer); }
-          else setCount(Math.floor(start));
-        }, 16);
-        observer.disconnect();
-      }
-    }, { threshold: 0.3 });
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [target]);
-  return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
-}
-
-function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) { setVisible(true); observer.disconnect(); }
-    }, { threshold: 0.1 });
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, []);
-  return (
-    <div ref={ref} className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}>
-      {children}
-    </div>
-  );
-}
-
-const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  return (
-    <div className="bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden transition-all hover:border-yellow-500/30">
-      <button onClick={() => setIsOpen(!isOpen)} className="w-full p-6 text-left flex justify-between items-center gap-4">
-        <h3 className="text-lg font-bold text-white tracking-tight">{question}</h3>
-        {isOpen ? <ChevronUp className="w-5 h-5 text-yellow-400 shrink-0" /> : <ChevronDown className="w-5 h-5 text-gray-400 shrink-0" />}
-      </button>
-      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
-        <div className="px-6 pb-6 text-gray-400 border-t border-white/5 pt-4 text-sm leading-relaxed">{answer}</div>
-      </div>
-    </div>
-  );
-};
-
-const Particle = ({ style }: { style: React.CSSProperties }) => (
-  <div className="absolute rounded-full bg-yellow-400/20 blur-sm animate-ping" style={style} />
-);
