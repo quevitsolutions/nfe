@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Great Income Club - Passive Income Platform",
-  description: "Join the revolutionary decentralized income platform on BSC",
+  title: "NodeFlow Engine | Autonomous Reward Protocol",
+  description: "A decentralized, on-chain community coordination protocol distributing rewards algorithmically.",
 };
 
 export default function RootLayout({

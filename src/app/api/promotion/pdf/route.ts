@@ -1,5 +1,4 @@
-// app/api/promotion/pdf/route.ts
-// Generates a personalised GICLUB PDF brochure on-the-fly
+// Generates a personalised NodeFlow Engine PDF brochure on-the-fly
 // GET /api/promotion/pdf?wallet=0x...&type=brochure|income|matrix|flyer
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -78,9 +77,9 @@ function buildBrochure(link: string): Doc {
     doc.fontSize(26).fillColor(GOLD).font('Helvetica-Bold').text('GIC', PW / 2 - 30, 196, { width: 60, align: 'center' });
 
     doc.fontSize(32).fillColor(GOLD).font('Helvetica-Bold');
-    centreText(doc, 'GREAT INCOME CLUB', 300);
+    centreText(doc, 'NODEFLOW ENGINE', 300);
     doc.fontSize(13).fillColor(LIGHT).font('Helvetica');
-    centreText(doc, 'Decentralized Community Income · BNB Smart Chain', 340);
+    centreText(doc, 'Autonomous Reward Protocol · BNB Smart Chain', 340);
 
     // Tagline box
     doc.save().roundedRect(100, 375, PW - 200, 40, 5).fill(GOLD).restore();
@@ -200,8 +199,8 @@ function buildFlyer(link: string): Doc {
     doc.save().circle(PW / 2, 140, 55).strokeColor(GOLD).strokeOpacity(0.8).lineWidth(2).stroke().restore();
     doc.fontSize(22).fillColor(GOLD).font('Helvetica-Bold').text('GIC', PW / 2 - 26, 128, { width: 52, align: 'center' });
 
-    doc.fontSize(28).fillColor(GOLD).font('Helvetica-Bold'); centreText(doc, 'GREAT INCOME CLUB', 220);
-    doc.fontSize(11).fillColor(LIGHT).font('Helvetica'); centreText(doc, 'Decentralized · BNB Smart Chain · Smart Contract', 256);
+    doc.fontSize(28).fillColor(GOLD).font('Helvetica-Bold'); centreText(doc, 'NODEFLOW ENGINE', 220);
+    doc.fontSize(11).fillColor(LIGHT).font('Helvetica'); centreText(doc, 'Autonomous · BNB Smart Chain · Smart Contract', 256);
 
     // Big hook
     doc.save().roundedRect(60, 285, PW - 120, 50, 8).fill('#1A1A2E').restore();
@@ -264,12 +263,12 @@ export async function GET(req: NextRequest) {
 
     if (type === 'flyer') {
         doc = buildFlyer(refLink);
-        filename = 'GICLUB_Flyer.pdf';
+        filename = 'NodeFlow_Engine_Flyer.pdf';
     } else {
         doc = buildBrochure(refLink);
-        filename = type === 'income' ? 'GICLUB_Income_Guide.pdf'
-            : type === 'matrix' ? 'GICLUB_Matrix_Guide.pdf'
-                : 'GICLUB_Brochure.pdf';
+        filename = type === 'income' ? 'NodeFlow_Engine_Reward_Guide.pdf'
+            : type === 'matrix' ? 'NodeFlow_Engine_Matrix_Guide.pdf'
+                : 'NodeFlow_Engine_Brochure.pdf';
     }
 
     doc.end();

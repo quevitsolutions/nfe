@@ -49,11 +49,11 @@ export default function UpgradePage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Level Selector */}
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                    <h2 className="text-2xl font-bold text-white mb-6">Select Target Level</h2>
+                    <h2 className="text-2xl font-bold text-white mb-6">Select Target Tier</h2>
 
                     <div className="space-y-4">
                         <div className="flex items-center justify-between text-white mb-4">
-                            <span>Current Level:</span>
+                            <span>Active Tier:</span>
                             <span className="text-2xl font-bold text-yellow-400">{currentLevel}</span>
                         </div>
 
@@ -80,11 +80,11 @@ export default function UpgradePage() {
 
                         <div className="bg-white/5 rounded-xl p-4 mt-6">
                             <div className="flex justify-between items-center mb-2">
-                                <span className="text-gray-400">Upgrading to:</span>
-                                <span className="text-white font-bold">Level {selectedLevel}</span>
+                                <span className="text-gray-400">Unlocking Tier:</span>
+                                <span className="text-white font-bold">Tier {selectedLevel}</span>
                             </div>
                             <div className="flex justify-between items-center mb-2">
-                                <span className="text-gray-400">Levels to unlock:</span>
+                                <span className="text-gray-400">Tiers to unlock:</span>
                                 <span className="text-white font-bold">
                                     {Math.max(0, selectedLevel - currentLevel)}
                                 </span>
@@ -103,15 +103,15 @@ export default function UpgradePage() {
 
                 {/* Cost & Upgrade */}
                 <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                    <h2 className="text-2xl font-bold text-white mb-6">Upgrade Cost</h2>
+                    <h2 className="text-2xl font-bold text-white mb-6">Unlock Cost</h2>
 
                     {isSuccess ? (
                         <div className="bg-green-500/20 border border-green-500 rounded-2xl p-6 text-center">
                             <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
                                 <Check className="w-10 h-10 text-white" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-2">Upgrade Successful!</h3>
-                            <p className="text-gray-300 mb-4">You are now Level {selectedLevel}</p>
+                            <h3 className="text-2xl font-bold text-white mb-2">Tier Unlocked!</h3>
+                            <p className="text-gray-300 mb-4">Your Node is now Active in Tier {selectedLevel}</p>
                             {hash && (
                                 <a
                                     href={`https://testnet.bscscan.com/tx/${hash}`}
@@ -132,17 +132,17 @@ export default function UpgradePage() {
                                             FREE
                                         </div>
                                         <div className="text-xl text-gray-300">
-                                            Genesis User - No Cost
+                                            Genesis Node - No Cost
                                         </div>
                                     </div>
 
                                     <div className="border-t border-white/10 pt-4 mt-4">
                                         <div className="text-sm text-gray-400 space-y-2">
                                             <div className="flex justify-between">
-                                                <span>You are the Genesis User (ID 36999)</span>
+                                                <span>You are the Genesis Node (ID 36999)</span>
                                             </div>
                                             <div className="flex justify-between">
-                                                <span>All upgrades are free - no payment required</span>
+                                                <span>All Tiers are unlocked by default</span>
                                             </div>
                                         </div>
                                     </div>
@@ -181,20 +181,20 @@ export default function UpgradePage() {
                                 {isPending || isConfirming ? (
                                     <>
                                         <Loader2 className="animate-spin" />
-                                        {isPending ? 'Confirming...' : 'Processing...'}
+                                        {isPending ? 'Propagating...' : 'Verifying...'}
                                     </>
                                 ) : (
                                     <>
                                         <ArrowUpCircle />
-                                        Upgrade to Level {selectedLevel}
+                                        Unlock Tier {selectedLevel}
                                     </>
                                 )}
                             </button>
 
                             <div className="mt-4 text-sm text-gray-400 space-y-1">
-                                <p>✓ Unlock higher earning levels</p>
-                                <p>✓ Increase income from team</p>
-                                <p>✓ Expand matrix earnings</p>
+                                <p>✓ Unlock higher reward tiers</p>
+                                <p>✓ Increase sponsorship rewards</p>
+                                <p>✓ Expand matrix network earnings</p>
                             </div>
                         </>
                     )}
@@ -203,7 +203,7 @@ export default function UpgradePage() {
 
             {/* Level Breakdown Table */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                <h2 className="text-2xl font-bold text-white mb-6">All Levels Cost</h2>
+                <h2 className="text-2xl font-bold text-white mb-6">Node Tier Costs</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                     {LEVEL_COSTS_USD.map((cost, index) => (
@@ -216,13 +216,13 @@ export default function UpgradePage() {
                                     : 'bg-white/5 border-white/10'
                                 }`}
                         >
-                            <div className="text-sm text-gray-400 mb-1">Level {index}</div>
+                            <div className="text-sm text-gray-400 mb-1">Tier {index}</div>
                             <div className="text-lg font-bold text-white">{formatCurrency(cost)}</div>
                             <div className="text-xs text-gray-500">
                                 {levelCosts ? formatBNB(levelCosts[index]) : '---'} BNB
                             </div>
                             {index < currentLevel && (
-                                <div className="text-xs text-green-400 mt-2">✓ Unlocked</div>
+                                <div className="text-xs text-green-400 mt-2">✓ Active</div>
                             )}
                         </div>
                     ))}

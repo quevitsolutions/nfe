@@ -72,17 +72,17 @@ export default function DashboardPage() {
     };
 
     const shareOnTwitter = () => {
-        const text = 'Join Great Income Club and start earning passive income!';
+        const text = 'Join NodeFlow Engine and start technical decentralized growth!';
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(referralLink)}`, '_blank');
     };
 
     const shareOnTelegram = () => {
-        const text = 'Join Great Income Club and start earning passive income!';
+        const text = 'Join NodeFlow Engine and start technical decentralized growth!';
         window.open(`https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(text)}`, '_blank');
     };
 
     const shareOnWhatsApp = () => {
-        const text = `Join Great Income Club and start earning passive income! ${referralLink}`;
+        const text = `Join NodeFlow Engine and start technical decentralized growth! ${referralLink}`;
         window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
     };
 
@@ -107,7 +107,7 @@ export default function DashboardPage() {
             <div className="flex items-center justify-center min-h-[400px]">
                 <div className="text-center">
                     <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400 mb-4"></div>
-                    <p className="text-gray-300">Loading dashboard...</p>
+                    <p className="text-gray-300">Initializing Node Context...</p>
                 </div>
             </div>
         );
@@ -159,9 +159,9 @@ export default function DashboardPage() {
                         <span className="text-gray-400 font-medium">Profile</span>
                     </div>
                     <div className="space-y-1">
-                        <div className="text-2xl font-bold text-white">ID: {userId}</div>
+                        <div className="text-2xl font-bold text-white">Node: #{userId}</div>
                         <div className="text-sm text-gray-400">
-                            Referred By: <span className="text-yellow-400 font-mono">#{detailsUserInfo ? Number(detailsUserInfo[2]) : '...'}</span>
+                            Sponsor: <span className="text-yellow-400 font-mono">#{detailsUserInfo ? Number(detailsUserInfo[2]) : '...'}</span>
                         </div>
                     </div>
                 </div>
@@ -172,7 +172,7 @@ export default function DashboardPage() {
                         <div className="bg-gradient-to-br from-green-400 to-emerald-500 p-3 rounded-xl">
                             <TrendingUp className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="text-gray-300 font-semibold">Total Income</h3>
+                        <h3 className="text-gray-300 font-semibold">Total Rewards</h3>
                     </div>
                     <div className="text-3xl font-bold text-white mb-1">
                         {formatBNB(incomeBreakdown?.[0] || BigInt(0))} BNB
@@ -188,13 +188,13 @@ export default function DashboardPage() {
                         <div className="bg-gradient-to-br from-yellow-400 to-orange-500 p-3 rounded-xl">
                             <Wallet className="w-6 h-6 text-black" />
                         </div>
-                        <h3 className="text-gray-300 font-semibold">Current Level</h3>
+                        <h3 className="text-gray-300 font-semibold">Active Tier</h3>
                     </div>
                     <div className="text-3xl font-bold text-white mb-1">
                         {userInfo ? userInfo[3].toString() : '---'}
                     </div>
                     <div className="text-gray-400">
-                        of 17 levels
+                        of 17 Tiers
                     </div>
                 </div>
 
@@ -204,7 +204,7 @@ export default function DashboardPage() {
                         <div className="bg-gradient-to-br from-blue-400 to-purple-500 p-3 rounded-xl">
                             <Users className="w-6 h-6 text-white" />
                         </div>
-                        <h3 className="text-gray-300 font-semibold">Direct Referrals</h3>
+                        <h3 className="text-gray-300 font-semibold">Direct Nodes</h3>
                     </div>
                     <div className="text-3xl font-bold text-white mb-1">
                         {userInfo ? userInfo[1].toString() : '0'}
@@ -249,13 +249,13 @@ export default function DashboardPage() {
 
 
 
-            {/* Income Breakdown */}
+            {/* Reward Breakdown */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                <h2 className="text-2xl font-bold text-white mb-6">Income Breakdown</h2>
+                <h2 className="text-2xl font-bold text-white mb-6">Reward Breakdown</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                     <div className="bg-white/5 rounded-xl p-4">
-                        <div className="text-sm text-gray-400 mb-1">Referral Income</div>
+                        <div className="text-sm text-gray-400 mb-1">Sponsor Rewards</div>
                         <div className="text-xl font-bold text-yellow-400">
                             {formatBNB(incomeBreakdown?.[1] || BigInt(0))} BNB
                         </div>
@@ -265,7 +265,7 @@ export default function DashboardPage() {
                     </div>
 
                     <div className="bg-white/5 rounded-xl p-4">
-                        <div className="text-sm text-gray-400 mb-1">Direct Income</div>
+                        <div className="text-sm text-gray-400 mb-1">Direct Rewards</div>
                         <div className="text-xl font-bold text-blue-400">
                             {formatBNB(incomeBreakdown?.[4] || BigInt(0))} BNB
                         </div>
@@ -275,7 +275,7 @@ export default function DashboardPage() {
                     </div>
 
                     <div className="bg-white/5 rounded-xl p-4">
-                        <div className="text-sm text-gray-400 mb-1">Level Income</div>
+                        <div className="text-sm text-gray-400 mb-1">Tier Rewards</div>
                         <div className="text-xl font-bold text-green-400">
                             {formatBNB(incomeBreakdown?.[2] || BigInt(0))} BNB
                         </div>
@@ -285,7 +285,7 @@ export default function DashboardPage() {
                     </div>
 
                     <div className="bg-white/5 rounded-xl p-4">
-                        <div className="text-sm text-gray-400 mb-1">Binary Income</div>
+                        <div className="text-sm text-gray-400 mb-1">Matrix Rewards</div>
                         <div className="text-xl font-bold text-pink-400">
                             {formatBNB(incomeBreakdown?.[3] || BigInt(0))} BNB
                         </div>
@@ -295,7 +295,7 @@ export default function DashboardPage() {
                     </div>
 
                     <div className="bg-white/5 rounded-xl p-4">
-                        <div className="text-sm text-gray-400 mb-1">Lost Income</div>
+                        <div className="text-sm text-gray-400 mb-1">Missed Rewards</div>
                         <div className="text-xl font-bold text-red-400">
                             {formatBNB(incomeBreakdown?.[5] || BigInt(0))} BNB
                         </div>
@@ -312,12 +312,12 @@ export default function DashboardPage() {
                     href="/dashboard/upgrade"
                     className="bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl p-6 hover:scale-105 transition-transform"
                 >
-                    <h3 className="text-2xl font-bold text-black mb-2">Upgrade Level</h3>
-                    <p className="text-black/80">Unlock higher earning potential</p>
+                    <h3 className="text-2xl font-bold text-black mb-2">Unlock Tiers</h3>
+                    <p className="text-black/80">Growth earning potential across the network</p>
                 </Link>
 
                 <div className="bg-white/10 rounded-2xl p-6 border border-white/10">
-                    <h3 className="text-2xl font-bold text-white mb-4">Your Referral Link</h3>
+                    <h3 className="text-2xl font-bold text-white mb-4">Your Node Link</h3>
                     <div className="bg-white/5 rounded-lg p-3 font-mono text-sm text-gray-300 break-all mb-4">
                         {referralLink || '---'}
                     </div>

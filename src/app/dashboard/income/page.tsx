@@ -35,11 +35,13 @@ export default function IncomePage() {
     // Filter and format real income history
     const formattedHistory = incomeHistory && Array.isArray(incomeHistory)
         ? incomeHistory.map((income: any) => ({
+            rewardId: Number(income.id),
             type: Number(income.rewardType),
             amount: (Number(income.amount) / 1e18).toFixed(6),
-            from: Number(income.id),
+            from: Number(income.fromId || 0), // Adjusting based on ABI
+            tier: Number(income.tier || 0),
             timestamp: Number(income.time) * 1000,
-            isLost: income.isLost,
+            isLost: !!income.isMissed,
         }))
         : [];
 
@@ -56,14 +58,14 @@ export default function IncomePage() {
                         <DollarSign className="w-8 h-8 text-white" />
                     </div>
                     <div>
-                        <h2 className="text-gray-300 text-lg">Total Lifetime Income</h2>
+                        <h2 className="text-gray-300 text-lg">Total Lifetime Rewards</h2>
                         <div className="text-3xl md:text-5xl font-bold text-white break-all">{formatBNB(incomeBreakdown?.[0] || BigInt(0))} BNB</div>
                         <div className="text-2xl text-green-400">{formatCurrency(totalIncomeUSD)}</div>
                     </div>
                 </div>
             </div>
 
-            {/* Income Breakdown */}
+            {/* Reward Breakdown */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {incomeTypes.map((type) => {
                     const amountBNB = type.amount ? Number(type.amount) / 1e18 : 0;
@@ -76,7 +78,7 @@ export default function IncomePage() {
                             className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-colors"
                         >
                             <div className="flex items-center justify-between mb-4">
-                                <h3 className="text-gray-300 font-semibold">{type.name} Income</h3>
+                                <h3 className="text-gray-300 font-semibold">{type.name === 'Referral' ? 'Sponsor' : type.name} Rewards</h3>
                                 <TrendingUp className={`w-5 h-5 text-${type.color}-400`} />
                             </div>
                             <div className={`text-3xl font-bold text-${type.color}-400 mb-1`}>
@@ -89,10 +91,10 @@ export default function IncomePage() {
                 })}
             </div>
 
-            {/* Income History */}
+            {/* Reward History */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
                 <div className="flex justify-between items-center mb-6">
-                    <h2 className="text-2xl font-bold text-white">Income History</h2>
+                    <h2 className="text-2xl font-bold text-white mb-6">Reward History</h2>
                     <div className="flex flex-wrap gap-2">
                         <button
                             onClick={() => setFilter(null)}
@@ -122,10 +124,10 @@ export default function IncomePage() {
                     <table className="w-full">
                         <thead>
                             <tr className="border-b border-white/10">
-                                <th className="text-left text-gray-400 font-semibold p-4">Type</th>
-                                <th className="text-left text-gray-400 font-semibold p-4">Amount</th>
-                                <th className="text-left text-gray-400 font-semibold p-4">From User</th>
-                                <th className="text-left text-gray-400 font-semibold p-4">Time</th>
+                                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Reward ID</th>
+                                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Reward Type</th>
+                                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">From Node</th>
+                                <th className="px-6 py-4 text-left text-sm font-semibold text-gray-300">Active Tier</th>
                                 <th className="text-left text-gray-400 font-semibold p-4">Status</th>
                             </tr>
                         </thead>
@@ -139,6 +141,7 @@ export default function IncomePage() {
                             ) : (
                                 filteredHistory.map((record, index) => (
                                     <tr key={index} className="border-b border-white/5 hover:bg-white/5">
+                                        <td className="p-4 text-gray-300">#{record.rewardId}</td>
                                         <td className="p-4">
                                             <span className={`px-3 py-1 rounded-full text-sm font-semibold
                         ${record.type === 0 ? 'bg-yellow-500/20 text-yellow-400' : ''}
@@ -149,16 +152,8 @@ export default function IncomePage() {
                                                 {getIncomeTypeName(record.type)}
                                             </span>
                                         </td>
-                                        <td className="p-4">
-                                            <div className="font-bold text-white">{record.amount} BNB</div>
-                                            <div className="text-sm text-gray-400">
-                                                {formatCurrency(parseFloat(record.amount) * bnbPrice)}
-                                            </div>
-                                        </td>
                                         <td className="p-4 text-gray-300">#{record.from}</td>
-                                        <td className="p-4 text-gray-400 text-sm">
-                                            {new Date(record.timestamp).toLocaleString()}
-                                        </td>
+                                        <td className="p-4 text-gray-300">Tier {record.tier.toString()}</td>
                                         <td className="p-4">
                                             <span className={`px-3 py-1 rounded-full text-xs font-semibold ${record.isLost
                                                 ? 'bg-red-500/20 text-red-400'

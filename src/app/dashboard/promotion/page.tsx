@@ -95,134 +95,122 @@ export default function PromotionPage() {
     ];
 
     return (
-        <div className="space-y-8 max-w-4xl mx-auto">
-            <div className="flex items-center gap-3">
-                <Share2 className="w-8 h-8 text-yellow-400" />
-                <h1 className="text-2xl md:text-3xl font-bold text-white">Promotion</h1>
-            </div>
-
-            {/* Your Referral ID Banner */}
-            <div className="bg-gradient-to-br from-yellow-500/20 to-orange-500/20 rounded-2xl p-6 border border-yellow-500/30">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                        <p className="text-gray-400 text-sm mb-1 uppercase tracking-wider font-medium">Your Referral ID</p>
-                        <div className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-500">
-                            #{userId > 0 ? userId : '—'}
-                        </div>
-                        <p className="text-gray-400 text-sm mt-2">
-                            {userId > 0
-                                ? 'Share your ID or link to start earning referral income.'
-                                : 'Connect your wallet to get your referral ID.'}
-                        </p>
+        <div className="space-y-6">
+            {/* Header section with Node link card */}
+            <div className="bg-gradient-to-br from-yellow-400/10 to-orange-500/10 backdrop-blur-sm rounded-2xl p-6 md:p-10 border border-yellow-500/30">
+                <div className="max-w-4xl mx-auto space-y-8">
+                    <div className="text-center space-y-2">
+                        <h1 className="text-3xl md:text-5xl font-black text-white">Share & Earn Rewards</h1>
+                        <p className="text-gray-400 text-lg">Your Node is the gateway for others to join the network.</p>
                     </div>
 
-                    {userId > 0 && (
-                        <button
-                            onClick={() => copyToClipboard(String(userId), 'id')}
-                            className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-6 py-3 rounded-xl transition-all hover:scale-105"
-                        >
-                            {copiedId ? <CheckCheck className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
-                            {copiedId ? 'Copied!' : 'Copy ID'}
-                        </button>
-                    )}
-                </div>
-            </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                        <div className="bg-white/5 rounded-2xl p-6 border border-white/10 space-y-4">
+                            <div>
+                                <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Your Node ID</h3>
+                                <div className="text-3xl font-bold text-yellow-400">#{userId > 0 ? userId : '—'}</div>
+                            </div>
 
-            {/* Referral Link */}
-            {userId > 0 && (
-                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
-                    <div className="flex items-center gap-2 mb-3">
-                        <Link2 className="w-5 h-5 text-blue-400" />
-                        <h2 className="text-lg font-bold text-white">Your Referral Link</h2>
-                    </div>
-
-                    <div className="flex flex-col sm:flex-row gap-3">
-                        <div className="flex-1 bg-black/30 rounded-xl p-4 border border-white/10 overflow-hidden">
-                            <p className="text-sm text-blue-300 font-mono break-all">{referralLink}</p>
-                        </div>
-                        <button
-                            onClick={() => copyToClipboard(referralLink, 'link')}
-                            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all ${copiedLink
-                                    ? 'bg-green-500 text-white'
-                                    : 'bg-white/10 hover:bg-white/20 text-white hover:scale-105'
-                                }`}
-                        >
-                            {copiedLink ? <CheckCheck className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
-                            {copiedLink ? 'Copied!' : 'Copy Link'}
-                        </button>
-                    </div>
-                </div>
-            )}
-
-            {/* Social Sharing */}
-            {userId > 0 && (
-                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
-                    <h2 className="text-lg font-bold text-white mb-4">Share On Social Media</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        {socialLinks.map((social) => (
-                            <a
-                                key={social.name}
-                                href={social.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r ${social.color} text-white font-semibold hover:scale-105 transition-all shadow-lg`}
-                            >
-                                {social.icon}
-                                Share on {social.name}
-                            </a>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {/* Income Overview */}
-            <div>
-                <div className="flex items-center gap-2 mb-4">
-                    <Gift className="w-6 h-6 text-purple-400" />
-                    <h2 className="text-xl font-bold text-white">What Your Referrals Earn You</h2>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    {incomeCards.map((card, i) => (
-                        <div
-                            key={i}
-                            onMouseEnter={() => setActiveCard(i)}
-                            onMouseLeave={() => setActiveCard(null)}
-                            className={`bg-white/5 backdrop-blur-md rounded-2xl p-6 border transition-all cursor-default ${activeCard === i ? 'border-yellow-500/50 bg-white/10 scale-[1.01]' : 'border-white/10'
-                                }`}
-                        >
-                            <div className="text-4xl mb-3">{card.icon}</div>
-                            <h3 className="text-lg font-bold text-white mb-2">{card.title}</h3>
-                            <p className="text-gray-400 text-sm mb-4">{card.desc}</p>
-                            <div className="inline-block bg-yellow-500/20 text-yellow-400 text-xs font-bold px-3 py-1 rounded-full border border-yellow-500/30">
-                                {card.highlight}
+                            <div className="space-y-2">
+                                <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">Your Node Invitation Link</h3>
+                                <div className="flex items-center gap-2 p-3 bg-black/40 rounded-xl border border-white/10 group">
+                                    <div className="flex-1 font-mono text-sm text-gray-300 truncate">
+                                        {referralLink || '---'}
+                                    </div>
+                                    <button
+                                        onClick={() => copyToClipboard(referralLink, 'link')}
+                                        className="p-2 bg-yellow-400/10 text-yellow-400 rounded-lg hover:bg-yellow-400 hover:text-black transition-all"
+                                    >
+                                        {copiedLink ? <CheckCheck className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    ))}
+
+                        {/* Social Buttons */}
+                        <div className="grid grid-cols-1 gap-3">
+                            {socialLinks.map((social) => (
+                                <a
+                                    key={social.name}
+                                    href={social.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={`flex items-center justify-between p-4 rounded-xl bg-gradient-to-r ${social.color} text-white font-bold hover:scale-[1.02] transition-all shadow-lg group`}
+                                >
+                                    <div className="flex items-center gap-3">
+                                        {social.icon}
+                                        <span>Share on {social.name}</span>
+                                    </div>
+                                    <Share2 className="w-4 h-4 opacity-50 group-hover:opacity-100" />
+                                </a>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            {/* How It Works */}
-            <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
-                <div className="flex items-center gap-2 mb-6">
-                    <Users className="w-6 h-6 text-green-400" />
-                    <h2 className="text-xl font-bold text-white">How Referrals Work</h2>
+            {/* Why promote section */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-yellow-500/30 transition-all">
+                    <div className="w-12 h-12 bg-yellow-400/10 rounded-xl flex items-center justify-center mb-4 text-yellow-400 font-bold text-xl">10%</div>
+                    <h3 className="text-xl font-bold text-white mb-2">Direct Reward</h3>
+                    <p className="text-gray-400 text-sm">Earn an instant 10% direct reward whenever someone registers a new Node using your ID.</p>
                 </div>
 
-                <div className="flex flex-col md:flex-row gap-6">
-                    {[
-                        { step: '1', title: 'Share', desc: 'Copy your referral link or ID above and share it anywhere.' },
-                        { step: '2', title: 'They Register', desc: 'Your contact visits the link, connects wallet, and registers.' },
-                        { step: '3', title: 'You Earn', desc: 'You immediately earn direct referral income. Future network growth earns you level and binary income too.' },
-                    ].map((s) => (
-                        <div key={s.step} className="flex-1 flex flex-col items-center text-center">
-                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-black font-black text-xl mb-3 shadow-lg shadow-yellow-500/20">
-                                {s.step}
-                            </div>
-                            <h3 className="text-white font-bold mb-1">{s.title}</h3>
-                            <p className="text-gray-400 text-sm">{s.desc}</p>
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-blue-500/30 transition-all">
+                    <div className="w-12 h-12 bg-blue-400/10 rounded-xl flex items-center justify-center mb-4 text-blue-400 font-bold text-xl">25L</div>
+                    <h3 className="text-xl font-bold text-white mb-2">Sponsorship Depth</h3>
+                    <p className="text-gray-400 text-sm">Unlock up to 25 levels of sponsorship rewards as your network of nodes grows deeper.</p>
+                </div>
+
+                <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-purple-500/30 transition-all">
+                    <div className="w-12 h-12 bg-purple-400/10 rounded-xl flex items-center justify-center mb-4 text-purple-400 font-bold text-xl">70%</div>
+                    <h3 className="text-xl font-bold text-white mb-2">Matrix Propagation</h3>
+                    <p className="text-gray-400 text-sm">Benefit from automated matrix spillover as new nodes are placed in the binary structure.</p>
+                </div>
+            </div>
+
+            {/* Reward Breakdown cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {incomeCards.map((card, i) => (
+                    <div
+                        key={i}
+                        className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition-all"
+                    >
+                        <div className="text-4xl mb-3">{card.icon}</div>
+                        <h3 className="text-lg font-bold text-white mb-2">{card.title}</h3>
+                        <p className="text-gray-400 text-sm mb-4">{card.desc}</p>
+                        <div className="inline-block bg-yellow-500/20 text-yellow-400 text-xs font-bold px-3 py-1 rounded-full border border-yellow-500/30">
+                            {card.highlight}
                         </div>
-                    ))}
+                    </div>
+                ))}
+            </div>
+
+            {/* How it works educational section */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+                <h2 className="text-2xl font-bold text-white mb-8 text-center">How Sponsorship Works</h2>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
+                    <div className="hidden md:block absolute top-10 left-[20%] right-[20%] h-0.5 border-t-2 border-dashed border-white/10 -z-0"></div>
+
+                    <div className="relative z-10 text-center space-y-4">
+                        <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto text-black font-black text-2xl shadow-lg shadow-yellow-500/20">01</div>
+                        <h4 className="text-lg font-bold text-white">Invite Nodes</h4>
+                        <p className="text-gray-400 text-sm">Share your Link or Node ID with your community and network.</p>
+                    </div>
+
+                    <div className="relative z-10 text-center space-y-4">
+                        <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-purple-500 rounded-full flex items-center justify-center mx-auto text-white font-black text-2xl shadow-lg shadow-blue-500/20">02</div>
+                        <h4 className="text-lg font-bold text-white">Unlock Tiers</h4>
+                        <p className="text-gray-400 text-sm">When your direct nodes unlock higher tiers, you receive instant rewards.</p>
+                    </div>
+
+                    <div className="relative z-10 text-center space-y-4">
+                        <div className="w-20 h-20 bg-gradient-to-br from-pink-400 to-rose-500 rounded-full flex items-center justify-center mx-auto text-white font-black text-2xl shadow-lg shadow-pink-500/20">03</div>
+                        <h4 className="text-lg font-bold text-white">Compound Rewards</h4>
+                        <p className="text-gray-400 text-sm">Each time a node in your sponsorship network unlocks a tier, a reward is triggered.</p>
+                    </div>
                 </div>
             </div>
         </div>

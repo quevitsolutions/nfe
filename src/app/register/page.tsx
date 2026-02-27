@@ -80,7 +80,7 @@ function RegisterContent() {
                         <span>Back</span>
                     </Link>
                     <Link href="/">
-                        <img src="/giclub-logo.svg" alt="GICLUB Intelligence Network" className="h-10 w-auto" style={{ filter: 'drop-shadow(0 0 8px rgba(250,204,21,0.4))' }} />
+                        <img src="/nfe-logo.png" alt="NodeFlow Engine" className="h-10 w-auto" style={{ filter: 'drop-shadow(0 0 10px rgba(250,204,21,0.5))' }} />
                     </Link>
                 </div>
                 <ConnectButton />
@@ -89,14 +89,14 @@ function RegisterContent() {
             {/* Registration Form */}
             <div className="max-w-2xl mx-auto px-6 py-12">
                 <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
-                    <h1 className="text-4xl font-bold text-white mb-2">Join Great Income Club</h1>
-                    <p className="text-gray-300 mb-8">Register and start earning passive income</p>
+                    <h1 className="text-4xl font-bold text-white mb-2">Initialize Your Node</h1>
+                    <p className="text-gray-300 mb-8">Register as a Node and start technical decentralized growth</p>
 
                     {/* Referrer Info */}
                     <div className="bg-white/5 rounded-2xl p-6 mb-6 border border-white/10">
-                        <h3 className="text-lg font-semibold text-white mb-4">Your Referrer</h3>
+                        <h3 className="text-lg font-semibold text-white mb-4">Node Sponsorship</h3>
                         <div className="flex justify-between items-center">
-                            <span className="text-gray-400">Referrer ID:</span>
+                            <span className="text-gray-400">Sponsor ID:</span>
                             <span className="text-white font-mono text-xl font-bold">{referrerId}</span>
                         </div>
                         {referrerId === GENESIS_USER_ID && (
@@ -111,7 +111,7 @@ function RegisterContent() {
                         <h3 className="text-lg font-semibold text-white mb-4">Registration Cost</h3>
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
-                                <span className="text-gray-300">Level 0 Cost:</span>
+                                <span className="text-gray-300">Tier 0 Activation:</span>
                                 <div className="text-right">
                                     <div className="text-2xl font-bold text-yellow-400">
                                         {registrationCost ? formatBNB(registrationCost) : '---'} BNB
@@ -125,19 +125,19 @@ function RegisterContent() {
                             <div className="border-t border-white/10 pt-3 mt-3">
                                 <div className="text-sm text-gray-400 space-y-1">
                                     <div className="flex justify-between">
-                                        <span>• 50% Sponsor Income</span>
+                                        <span>• 50% Sponsor Reward</span>
                                         <span>{formatCurrency(usdCost * 0.5)}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>• Level Income Distribution</span>
+                                        <span>• Tier Reward Distribution</span>
                                         <span>{formatCurrency(usdCost * 0.15)}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>• Binary Matrix</span>
+                                        <span>• Matrix Propagation</span>
                                         <span>{formatCurrency(usdCost * 0.05)}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>• Pool Distribution</span>
+                                        <span>• Pool Contribution</span>
                                         <span>{formatCurrency(usdCost * 0.3)}</span>
                                     </div>
                                 </div>
@@ -188,10 +188,10 @@ function RegisterContent() {
 
                     {/* Info */}
                     <div className="mt-6 text-sm text-gray-400 space-y-2">
-                        <p>✓ Instant commission to your sponsor</p>
-                        <p>✓ Automatic matrix placement</p>
-                        <p>✓ Start earning from 4 income streams</p>
-                        <p>✓ Upgrade anytime to unlock higher levels</p>
+                        <p>✓ Instant reward to your sponsor</p>
+                        <p>✓ Automated matrix node placement</p>
+                        <p>✓ Participate in 4 algorithmic flow streams</p>
+                        <p>✓ Unlock tiers anytime to expand rewards</p>
                     </div>
                 </div>
             </div>

@@ -21,13 +21,13 @@ import {
 import { useState } from 'react';
 
 const navItems = [
-    { name: 'Overview', path: '/dashboard', icon: LayoutDashboard },
-    { name: 'Income', path: '/dashboard/income', icon: TrendingUp },
-    { name: 'Team', path: '/dashboard/team', icon: Users },
-    { name: 'Referral Tree', path: '/dashboard/referral-tree', icon: GitBranch },
-    { name: 'Binary Matrix', path: '/dashboard/matrix-tree', icon: Network },
-    { name: 'Upgrade', path: '/dashboard/upgrade', icon: ArrowUpCircle },
-    { name: 'Rewards', path: '/dashboard/rewards', icon: Gift },
+    { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
+    { name: 'Rewards', path: '/dashboard/income', icon: TrendingUp },
+    { name: 'Node Network', path: '/dashboard/team', icon: Users },
+    { name: 'Sponsorship Tree', path: '/dashboard/referral-tree', icon: GitBranch },
+    { name: 'Node Matrix', path: '/dashboard/matrix-tree', icon: Network },
+    { name: 'Node Tiers', path: '/dashboard/upgrade', icon: ArrowUpCircle },
+    { name: 'Pools', path: '/dashboard/rewards', icon: Gift },
     { name: 'Ecosystem', path: '/dashboard/ecosystem', icon: Globe },
     { name: 'Promotion', path: '/dashboard/promotion', icon: Megaphone },
 ];
@@ -53,10 +53,17 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
         transform transition-transform duration-300 lg:translate-x-0
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-                <div className="p-6 border-b border-white/10">
-                    <Link href="/" className="flex items-center">
-                        <img src="/giclub-logo.svg" alt="GICLUB Intelligence Network" className="h-12 w-auto" style={{ filter: 'drop-shadow(0 0 8px rgba(250,204,21,0.4))' }} />
-                    </Link>
+                <div className="p-6">
+                    <div className="flex items-center gap-4 mb-10 px-2 group">
+                        <div className="relative">
+                            <div className="absolute -inset-2 bg-yellow-400/20 rounded-xl blur-lg group-hover:bg-yellow-400/30 transition-all opacity-0 group-hover:opacity-100"></div>
+                            <img src="/nfe-logo.png" alt="NFE" className="h-10 w-auto relative shadow-[0_0_15px_rgba(250,204,21,0.3)] group-hover:shadow-[0_0_20px_rgba(250,204,21,0.5)] transition-all" />
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-2xl font-black text-white tracking-tighter leading-none">NODEFLOW</span>
+                            <span className="text-xs font-bold text-yellow-400 tracking-[0.2em]">ENGINE CORE</span>
+                        </div>
+                    </div>
                 </div>
 
                 <nav className="px-4 space-y-2">

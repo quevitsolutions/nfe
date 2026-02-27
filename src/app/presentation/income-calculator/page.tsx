@@ -5,12 +5,10 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
-const LEVEL_COSTS = [
+const TIER_COSTS = [
     5, 7.5, 15, 30, 60, 120, 240, 480, 960, 1920,
-    3840, 7680, 15360, 30720, 61440, 122880, 245760,
-    491520, 983040, 1966080, 3932160, 7864320, 15728640,
-    31457280, 62914560
-];
+    3840, 7680, 15360, 30720, 61440, 122880, 245760
+]; // Limited to 17 tiers as per latest contract spec
 
 const levelIncomePercents = [
     2, 2, 2, 2, 2,           // L1-5
@@ -59,10 +57,10 @@ export default function IncomeCalculatorPage() {
                 {/* Title */}
                 <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
                     <h1 className="text-4xl md:text-5xl font-black tracking-tight">
-                        <span className="bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent">DETAILED INCOME</span>
+                        <span className="bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent uppercase">NodeFlow Engine</span>
                         <span className="text-white/60"> CALCULATOR</span>
                     </h1>
-                    <p className="text-gray-500 mt-2">All 24 Levels · All 4 Income Streams · GICLUB</p>
+                    <p className="text-gray-500 mt-2">All 17 Tiers · All 4 Reward Flows · Operational Protocol</p>
                 </motion.div>
 
                 {/* Tab Navigation */}
@@ -87,23 +85,23 @@ export default function IncomeCalculatorPage() {
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             {/* Table */}
                             <div className="lg:col-span-2 overflow-x-auto">
-                                <h2 className="text-2xl font-black text-yellow-400 mb-4">COMPLETE LEVEL COSTS — ALL 24 LEVELS</h2>
+                                <h2 className="text-2xl font-black text-yellow-400 mb-4">COMPLETE TIER COSTS — ALL 17 TIERS</h2>
                                 <table className="w-full text-sm border-collapse">
                                     <thead>
                                         <tr className="bg-yellow-900/30 text-yellow-400">
-                                            <th className="p-2 text-left border border-white/10">Level</th>
+                                            <th className="p-2 text-left border border-white/10">Tier</th>
                                             <th className="p-2 text-right border border-white/10">USD Cost</th>
                                             <th className="p-2 text-right border border-white/10">Admin Fee (5%)</th>
                                             <th className="p-2 text-right border border-white/10">Cumulative</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {LEVEL_COSTS.map((cost, i) => {
-                                            const cumulative = LEVEL_COSTS.slice(0, i + 1).reduce((a, b) => a + b, 0);
+                                        {TIER_COSTS.map((cost, i) => {
+                                            const cumulative = TIER_COSTS.slice(0, i + 1).reduce((a, b) => a + b, 0);
                                             const adminFee = cost * 0.05;
                                             return (
                                                 <tr key={i} className={`${i % 2 === 0 ? 'bg-white/[0.02]' : 'bg-white/[0.05]'} hover:bg-white/10 transition-colors`}>
-                                                    <td className="p-2 border border-white/10 font-bold text-white">L{i + 1}</td>
+                                                    <td className="p-2 border border-white/10 font-bold text-white">T{i + 1}</td>
                                                     <td className="p-2 border border-white/10 text-right text-gray-300">{fmtUSD(cost)}</td>
                                                     <td className="p-2 border border-white/10 text-right text-gray-400">{fmtUSD(adminFee)}</td>
                                                     <td className="p-2 border border-white/10 text-right text-yellow-300 font-semibold">{fmtUSD(cumulative)}</td>

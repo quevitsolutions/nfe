@@ -120,11 +120,11 @@ export default function Presentation() {
 
                 {/* Header */}
                 <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10">
-                    <h1 className="text-4xl md:text-6xl font-black tracking-tight">
-                        <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 bg-clip-text text-transparent">GICLUB</span>
-                        <span className="text-white/80"> — 4 Income Streams</span>
+                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter">
+                        <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 bg-clip-text text-transparent uppercase">NodeFlow Engine</span>
+                        <span className="text-white/80 block md:inline md:ml-4"> — 4 Reward Flows</span>
                     </h1>
-                    <p className="text-gray-500 text-sm mt-2">Tap a card to expand details</p>
+                    <p className="text-gray-500 text-sm mt-3 tracking-widest uppercase">Select an architectural layer to expand technical details</p>
                 </motion.div>
 
                 {/* 2×2 Card Grid */}
