@@ -22,30 +22,6 @@ export default function DirectReferralSlide() {
                 </Link>
                 <span className="text-xs text-white/80 font-mono uppercase tracking-widest">Slide 1 / 4 — Direct Referral</span>
                 <Link href="/presentation/matrix-income" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group">
-'use client';
-
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-
-export default function DirectReferralSlide() {
-    const [mounted, setMounted] = useState(false);
-    useEffect(() => { setMounted(true); }, []);
-    if (!mounted) return null;
-
-    return (
-        <div className="min-h-screen bg-[#050510] flex flex-col font-sans text-white">
-
-            {/* ── TOP NAV BAR ── */}
-            <div className="sticky top-0 z-50 flex items-center justify-between px-4 md:px-8 py-3 bg-black/60 backdrop-blur-md border-b border-white/10">
-                <Link href="/presentation" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group">
-                    <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                    <span className="text-sm tracking-widest uppercase font-mono hidden sm:block">Back to Presentation</span>
-                    <span className="text-sm font-mono sm:hidden">Back</span>
-                </Link>
-                <span className="text-xs text-white/80 font-mono uppercase tracking-widest">Slide 1 / 4 — Direct Referral</span>
-                <Link href="/presentation/matrix-income" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group">
                     <span className="text-sm tracking-widest uppercase font-mono hidden sm:block">Matrix Income</span>
                     <span className="text-sm font-mono sm:hidden">Next</span>
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
