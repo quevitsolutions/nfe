@@ -150,8 +150,8 @@ export default function NodeTeamPage() {
     const myNodeIdNum = myNodeIdData ? Number(myNodeIdData) : 0;
     
     const { data: stats } = useUserStats(myNodeIdNum);
-    const totalMatrixNodes = stats ? Number(stats[3]) : 0;
-    const totalReferrals = stats ? Number(stats[0]) : 0;
+    const totalMatrixNodes = stats ? Number(stats[5]) : 0;
+    const totalReferrals = stats ? Number(stats[1]) : 0;
 
     if (!isConnected) return null;
 
