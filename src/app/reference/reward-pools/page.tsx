@@ -10,7 +10,7 @@ export default function RewardPoolsPage() {
             <section className="mb-8">
                 <h2 className="text-2xl font-bold text-white mb-4 border-b border-white/10 pb-2">Global Volume Distribution</h2>
                 <p className="mb-4">
-                    Within the AIPCore ecosystem, the <strong>Community Reward Pools</strong> represent the highest level of participation and network contribution. While standard Matrix rewards fuel your direct growth, the Reward Pools capture 10% of the entire protocol's global volume and distribute it proportionally to qualified leaders.
+                    Within the AIPCore ecosystem, the <strong>Community Reward Pools</strong> represent the highest level of participation and network contribution. While standard Matrix rewards fuel your direct growth, the Reward Pools capture 5% of the entire protocol's global volume and distribute it proportionally to qualified leaders.
                 </p>
                 <p className="mb-4">
                     The Reward Pool system is designed to incentivize depth, sustainability, and quality referrals. By participating in these pools, nodes earn a share of every single registration and upgrade that occurs across the entire network, regardless of whether it is in their direct matrix or not. This creates a powerful collective incentive where the success of the global protocol benefits every top contributor.
@@ -21,17 +21,17 @@ export default function RewardPoolsPage() {
                         <div className="text-center p-4 bg-black/20 rounded-xl border border-white/10">
                             <div className="text-3xl mb-2 text-orange-400">🥉</div>
                             <div className="text-xl font-bold text-white">Bronze Pool</div>
-                            <div className="text-yellow-400 font-bold">3% Allocation</div>
+                            <div className="text-yellow-400 font-bold">1.5% Allocation</div>
                         </div>
                         <div className="text-center p-4 bg-black/20 rounded-xl border border-white/10">
                             <div className="text-3xl mb-2 text-gray-300">🥈</div>
                             <div className="text-xl font-bold text-white">Silver Pool</div>
-                            <div className="text-yellow-400 font-bold">3.5% Allocation</div>
+                            <div className="text-yellow-400 font-bold">1.75% Allocation</div>
                         </div>
                         <div className="text-center p-4 bg-black/20 rounded-xl border border-white/10">
                             <div className="text-3xl mb-2 text-yellow-400">🥇</div>
                             <div className="text-xl font-bold text-white">Gold Pool</div>
-                            <div className="text-yellow-400 font-bold">3.5% Allocation</div>
+                            <div className="text-yellow-400 font-bold">1.75% Allocation</div>
                         </div>
                     </div>
                 </div>

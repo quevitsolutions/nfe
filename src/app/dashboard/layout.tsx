@@ -40,7 +40,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <aside className="hidden lg:flex fixed inset-y-0 left-0 w-72 flex-col p-6 z-40">
                 <div className="bg-white rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col h-full overflow-hidden">
                     <div className="p-8 border-b border-slate-50">
-                        <Link href="/dashboard" className="block text-center">
+                        <Link href="/" className="block text-center">
                             <span className="text-3xl font-black text-[#e30613] tracking-tighter">AIPCORE</span>
                         </Link>
                     </div>
@@ -81,7 +81,9 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <div className="lg:ml-72 flex flex-col min-h-screen">
                 {/* Mobile Header (Clean Vi style) */}
                 <header className="lg:hidden bg-white/80 backdrop-blur-xl sticky top-0 z-30 px-6 py-4 flex justify-between items-center border-b border-slate-100 shadow-sm">
-                    <span className="text-xl font-black text-[#e30613] tracking-tighter">AIPCORE</span>
+                    <Link href="/">
+                        <span className="text-xl font-black text-[#e30613] tracking-tighter">AIPCORE</span>
+                    </Link>
                     <ConnectButton accountStatus="avatar" chainStatus="icon" showBalance={false} />
                 </header>
 

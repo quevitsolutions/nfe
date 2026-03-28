@@ -90,21 +90,21 @@ export default function IncomeInteractionPage() {
                 </p>
                 <div className="space-y-4">
                     <div className="flex items-center gap-4 p-4 bg-red-900/5 rounded-xl border border-red-500/10">
-                        <div className="w-12 h-12 rounded-xl bg-red-600 text-white flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(227,6,19,0.2)]">3%</div>
+                        <div className="w-12 h-12 rounded-xl bg-red-600 text-white flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(227,6,19,0.2)]">1.5%</div>
                         <div>
                             <div className="font-black text-white uppercase tracking-tighter">Bronze Pool</div>
                             <div className="text-xs text-gray-400 font-bold uppercase tracking-widest">Shared among Layer 6+ participants.</div>
                         </div>
                     </div>
                     <div className="flex items-center gap-4 p-4 bg-red-900/5 rounded-xl border border-red-500/10">
-                        <div className="w-12 h-12 rounded-xl bg-rose-600 text-white flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(225,29,72,0.2)]">3.5%</div>
+                        <div className="w-12 h-12 rounded-xl bg-rose-600 text-white flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(225,29,72,0.2)]">1.75%</div>
                         <div>
                             <div className="font-black text-white uppercase tracking-tighter">Silver Pool</div>
                             <div className="text-xs text-gray-400 font-bold uppercase tracking-widest">Shared among Layer 10+ participants.</div>
                         </div>
                     </div>
                     <div className="flex items-center gap-4 p-4 bg-red-900/5 rounded-xl border border-red-500/10">
-                        <div className="w-12 h-12 rounded-xl bg-red-700 text-white flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(185,28,28,0.2)]">3.5%</div>
+                        <div className="w-12 h-12 rounded-xl bg-red-700 text-white flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(185,28,28,0.2)]">1.75%</div>
                         <div>
                             <div className="font-black text-white uppercase tracking-tighter">Gold Pool</div>
                             <div className="text-xs text-gray-400 font-bold uppercase tracking-widest">Shared among Layer 14+ participants.</div>
