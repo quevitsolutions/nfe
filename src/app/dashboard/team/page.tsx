@@ -78,7 +78,7 @@ function LayerSection({
             >
                 <div className="flex items-center gap-6">
                     <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
-                        isExpanded ? 'bg-[#1b5e20] text-white shadow-lg shadow-[#1b5e20]/20' : 'bg-slate-50 text-slate-400'
+                        isExpanded ? 'bg-[#e30613] text-white shadow-lg shadow-[#e30613]/20' : 'bg-slate-50 text-slate-400'
                     }`}>
                         <Layers className="w-6 h-6" />
                     </div>
@@ -105,7 +105,7 @@ function LayerSection({
                     >
                         <div className="p-4 space-y-3">
                             {isLoading ? (
-                                <div className="p-8 text-center text-[10px] font-black uppercase tracking-widest text-[#1b5e20]/40 animate-pulse">Analyzing Neural Path...</div>
+                                <div className="p-8 text-center text-[10px] font-black uppercase tracking-widest text-[#e30613]/40 animate-pulse">Analyzing Neural Path...</div>
                             ) : members.length === 0 ? (
                                 <div className="p-8 text-center text-[10px] font-black uppercase tracking-widest text-slate-300">No nodes in this layer</div>
                             ) : (
@@ -113,20 +113,20 @@ function LayerSection({
                                     {members.map(m => (
                                         <div key={m.id} className="bg-white border border-slate-100 p-5 rounded-[2rem] shadow-sm hover:shadow-md transition-all group flex items-center justify-between">
                                             <div className="flex items-center gap-4">
-                                                <div className={`w-10 h-10 rounded-2xl flex items-center justify-center ${m.isDirect ? 'bg-[#1b5e20]/10 text-[#1b5e20]' : 'bg-slate-50 text-slate-300'}`}>
+                                                <div className={`w-10 h-10 rounded-2xl flex items-center justify-center ${m.isDirect ? 'bg-[#e30613]/10 text-[#e30613]' : 'bg-slate-50 text-slate-300'}`}>
                                                     <UserCircle2 className="w-6 h-6" />
                                                 </div>
                                                 <div>
                                                     <div className="flex items-center gap-2">
                                                         <span className="text-sm font-black text-slate-800 tracking-tighter">Node #{m.id}</span>
-                                                        {m.isDirect && <span className="text-[8px] font-black bg-[#1b5e20] text-white px-2 py-0.5 rounded-full uppercase tracking-widest">Direct</span>}
+                                                        {m.isDirect && <span className="text-[8px] font-black bg-[#e30613] text-white px-2 py-0.5 rounded-full uppercase tracking-widest">Direct</span>}
                                                     </div>
                                                     <p className="text-[10px] font-bold text-slate-400 font-mono">{shortAddr(m.wallet)}</p>
                                                 </div>
                                             </div>
                                             <div className="text-right">
                                                 <div className="text-[10px] font-black text-slate-300 uppercase tracking-widest mb-1">Tier {m.tier}</div>
-                                                <div className="flex items-center gap-1 justify-end text-[8px] font-black text-slate-400 bg-slate-50 px-2 py-1 rounded-full uppercase tracking-tighter group-hover:bg-[#1b5e20]/5 group-hover:text-[#1b5e20] transition-all">
+                                                <div className="flex items-center gap-1 justify-end text-[8px] font-black text-slate-400 bg-slate-50 px-2 py-1 rounded-full uppercase tracking-tighter group-hover:bg-[#e30613]/5 group-hover:text-[#e30613] transition-all">
                                                     <Network className="w-3 h-3" />
                                                     {m.totalMatrixNodes} Path Nodes
                                                 </div>
@@ -159,28 +159,28 @@ export default function NodeTeamPage() {
         <div className="space-y-8 pb-12">
             {/* 1. Network Overview Banner */}
             <div className="relative overflow-hidden bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.02)] p-10 lg:p-12 mb-8 group">
-                <div className="absolute top-0 right-0 -mt-8 -mr-8 opacity-[0.03] text-[#1b5e20] group-hover:scale-110 transition-transform duration-700">
+                <div className="absolute top-0 right-0 -mt-8 -mr-8 opacity-[0.03] text-[#e30613] group-hover:scale-110 transition-transform duration-700">
                     <Network className="w-64 h-64" />
                 </div>
                 
                 <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-10">
                     <div className="space-y-6">
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 bg-[#1b5e20]/10 rounded-2xl flex items-center justify-center">
-                                <Network className="w-6 h-6 text-[#1b5e20]" />
+                            <div className="w-12 h-12 bg-[#e30613]/10 rounded-2xl flex items-center justify-center">
+                                <Network className="w-6 h-6 text-[#e30613]" />
                             </div>
                             <span className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Node Ecosystem</span>
                         </div>
                         
                         <div className="space-y-1">
                             <div className="flex items-baseline gap-4">
-                                <span className="text-6xl lg:text-8xl font-black text-[#1b5e20] tracking-tighter">
+                                <span className="text-6xl lg:text-8xl font-black text-[#e30613] tracking-tighter">
                                     {totalMatrixNodes}
                                 </span>
                                 <span className="text-2xl lg:text-3xl font-black text-slate-200 uppercase tracking-tighter">Neural Nodes</span>
                             </div>
                             <div className="flex items-center gap-3">
-                                <Activity className="w-4 h-4 text-emerald-500 animate-pulse" />
+                                <Activity className="w-4 h-4 text-red-500 animate-pulse" />
                                 <p className="text-xs font-black text-slate-300 uppercase tracking-widest">Currently Synchronized in Matrix Path</p>
                             </div>
                         </div>
@@ -188,12 +188,12 @@ export default function NodeTeamPage() {
 
                     <div className="flex flex-col gap-4 w-full md:w-auto min-w-[280px]">
                         <div className="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 text-center space-y-3 relative overflow-hidden group">
-                             <div className="absolute bottom-[-20%] left-[-10%] opacity-[0.03] text-[#1b5e20]">
+                             <div className="absolute bottom-[-20%] left-[-10%] opacity-[0.03] text-[#e30613]">
                                 <UserPlus className="w-32 h-32" />
                              </div>
                              <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Active Referrals</div>
                              <div className="text-5xl font-black text-slate-800 tracking-tighter">+{totalReferrals}</div>
-                             <div className="text-[10px] font-bold text-[#1b5e20] bg-[#1b5e20]/5 px-4 py-2 rounded-full uppercase tracking-widest inline-block">Direct Protocol Access</div>
+                             <div className="text-[10px] font-bold text-[#e30613] bg-[#e30613]/5 px-4 py-2 rounded-full uppercase tracking-widest inline-block">Direct Protocol Access</div>
                         </div>
                     </div>
                 </div>
@@ -202,14 +202,14 @@ export default function NodeTeamPage() {
             {/* 2. Global Node Search */}
             <div className="relative group max-w-2xl">
                 <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
-                    <Search className="w-6 h-6 text-slate-300 group-focus-within:text-[#1b5e20] transition-colors" />
+                    <Search className="w-6 h-6 text-slate-300 group-focus-within:text-[#e30613] transition-colors" />
                 </div>
                 <input
                     type="text"
                     placeholder="SCAN NEURAL ID OR WALLET ADDRESS..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full bg-white border border-slate-100 rounded-[2.5rem] py-6 pl-16 pr-8 text-xs font-black text-slate-800 placeholder:text-slate-300 uppercase tracking-[0.2em] shadow-sm group-focus-within:shadow-xl group-focus-within:border-[#1b5e20]/20 outline-none transition-all"
+                    className="w-full bg-white border border-slate-100 rounded-[2.5rem] py-6 pl-16 pr-8 text-xs font-black text-slate-800 placeholder:text-slate-300 uppercase tracking-[0.2em] shadow-sm group-focus-within:shadow-xl group-focus-within:border-[#e30613]/20 outline-none transition-all"
                 />
             </div>
 
@@ -217,7 +217,7 @@ export default function NodeTeamPage() {
             <div className="pt-4">
                 <div className="flex items-center gap-4 mb-8">
                     <div className="w-10 h-10 bg-white border border-slate-100 rounded-2xl flex items-center justify-center shadow-sm">
-                        <Eye className="w-5 h-5 text-[#1b5e20]" />
+                        <Eye className="w-5 h-5 text-[#e30613]" />
                     </div>
                     <div>
                          <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase leading-none">Matrix Scan</h2>

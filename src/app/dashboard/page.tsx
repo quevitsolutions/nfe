@@ -113,7 +113,7 @@ export default function DashboardPage() {
         return (
             <div className="flex items-center justify-center min-h-[400px]">
                 <div className="text-center">
-                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#1b5e20] mb-4"></div>
+                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#e30613] mb-4"></div>
                     <p className="text-slate-400 font-black tracking-widest uppercase text-[10px]">Initializing Node Assets...</p>
                 </div>
             </div>
@@ -126,22 +126,22 @@ export default function DashboardPage() {
         <div className="space-y-8 pb-12">
             {/* 1. Main Account Banner */}
             <div className="relative overflow-hidden bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.02)] p-8 lg:p-12">
-                <div className="absolute top-0 right-0 -mt-10 -mr-10 opacity-[0.05] text-[#1b5e20] rotate-12 transition-transform duration-700 hover:rotate-45">
+                <div className="absolute top-0 right-0 -mt-10 -mr-10 opacity-[0.05] text-[#e30613] rotate-12 transition-transform duration-700 hover:rotate-45">
                     <Wallet className="w-80 h-80" />
                 </div>
                 
                 <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
                     <div className="space-y-6">
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 bg-[#1b5e20]/10 rounded-2xl flex items-center justify-center">
-                                <Wallet className="w-6 h-6 text-[#1b5e20]" />
+                            <div className="w-12 h-12 bg-[#e30613]/10 rounded-2xl flex items-center justify-center">
+                                <Wallet className="w-6 h-6 text-[#e30613]" />
                             </div>
                             <span className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Primary Vault</span>
                         </div>
                         
                         <div className="space-y-1">
                             <div className="flex items-baseline gap-4">
-                                <span className="text-6xl lg:text-8xl font-black text-[#1b5e20] tracking-tighter">
+                                <span className="text-6xl lg:text-8xl font-black text-[#e30613] tracking-tighter">
                                     {walletBalance ? formatBNB(walletBalance.value) : '0.00'}
                                 </span>
                                 <span className="text-2xl lg:text-4xl font-black text-slate-200 uppercase tracking-tighter">BNB</span>
@@ -153,14 +153,14 @@ export default function DashboardPage() {
 
                         <div className="pt-6 flex flex-wrap gap-4">
                             <div className="px-5 py-3 bg-slate-50 border border-slate-100 rounded-[1.5rem] flex items-center gap-4">
-                                <Activity className="w-4 h-4 text-emerald-500 animate-pulse" />
+                                <Activity className="w-4 h-4 text-red-500 animate-pulse" />
                                 <span className="text-xs font-black text-slate-500 uppercase tracking-widest leading-none">
                                     {address ? `${address.slice(0, 10)}...${address.slice(-8)}` : 'Disconnected'}
                                 </span>
                             </div>
                             <Link 
                                 href="/dashboard/rewards"
-                                className="px-8 py-3 bg-[#1b5e20] text-white rounded-[1.5rem] font-black text-xs uppercase tracking-widest shadow-[0_10px_30px_rgba(27,94,32,0.3)] hover:scale-105 active:scale-95 transition-all text-center"
+                                className="px-8 py-3 bg-[#e30613] text-white rounded-[1.5rem] font-black text-xs uppercase tracking-widest shadow-[0_10px_30px_rgba(227,6,19,0.3)] hover:scale-105 active:scale-95 transition-all text-center"
                             >
                                 Claim rewards »
                             </Link>
@@ -174,7 +174,7 @@ export default function DashboardPage() {
                              </div>
                              <div className="text-sm font-black text-slate-400 uppercase tracking-widest relative z-10">Global Node Identity</div>
                              <div className="text-5xl font-black text-slate-800 tracking-tighter relative z-10">#{userId}</div>
-                             <div className="text-[10px] font-bold text-[#1b5e20] bg-[#1b5e20]/5 px-4 py-1 rounded-full uppercase tracking-widest inline-block relative z-10">Active Tier {userInfo ? Number(userInfo[0]) : 1}</div>
+                             <div className="text-[10px] font-bold text-[#e30613] bg-[#e30613]/5 px-4 py-1 rounded-full uppercase tracking-widest inline-block relative z-10">Active Tier {userInfo ? Number(userInfo[0]) : 1}</div>
                         </div>
                     </div>
                 </div>
@@ -184,7 +184,7 @@ export default function DashboardPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 
                 {/* Referral Expansion Card */}
-                <div className="md:row-span-2 relative overflow-hidden bg-gradient-to-br from-[#1b5e20] to-[#2e7d32] rounded-[3.5rem] p-10 text-white flex flex-col shadow-[0_25px_60px_rgba(27,94,32,0.2)] group cursor-default">
+                <div className="md:row-span-2 relative overflow-hidden bg-gradient-to-br from-[#e30613] to-[#ff4d4d] rounded-[3.5rem] p-10 text-white flex flex-col shadow-[0_25px_60px_rgba(227,6,19,0.2)] group cursor-default">
                     <div className="absolute bottom-[-10%] right-[-10%] opacity-20 group-hover:scale-110 group-hover:-rotate-12 transition-all duration-1000 ease-out pointer-events-none">
                         <Users className="w-64 h-64" />
                     </div>
@@ -204,7 +204,7 @@ export default function DashboardPage() {
                                 <div className="flex gap-3">
                                     <button 
                                         onClick={copyToClipboard}
-                                        className="flex-1 py-4 bg-white text-[#1b5e20] rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl hover:bg-slate-50 active:scale-95 transition-all flex items-center justify-center gap-3"
+                                        className="flex-1 py-4 bg-white text-[#e30613] rounded-2xl font-black text-xs uppercase tracking-widest shadow-2xl hover:bg-slate-50 active:scale-95 transition-all flex items-center justify-center gap-3"
                                     >
                                         {copied ? <Check className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                                         {copied ? 'Link Copied' : 'Share Link'}
@@ -230,16 +230,16 @@ export default function DashboardPage() {
 
                 {/* Sub-Services Grid */}
                 <Link href="/dashboard/income" className="relative overflow-hidden bg-white rounded-[3rem] p-10 border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] transition-all group flex flex-col items-center text-center">
-                    <div className="absolute bottom-4 right-4 text-[#1b5e20]/10 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-500">
+                    <div className="absolute bottom-4 right-4 text-[#e30613]/10 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-500">
                         <TrendingUp className="w-32 h-32" />
                     </div>
                     <div className="relative z-10 w-full">
-                        <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-[#1b5e20]/5 transition-colors">
-                            <TrendingUp className="w-10 h-10 text-[#1b5e20]" />
+                        <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-[#e30613]/5 transition-colors">
+                            <TrendingUp className="w-10 h-10 text-[#e30613]" />
                         </div>
                         <h4 className="text-2xl font-black text-slate-800 tracking-tight leading-none mb-2">Income</h4>
                         <p className="text-xs font-bold text-slate-400 mb-8 uppercase tracking-widest">History Ledger</p>
-                        <div className="text-4xl font-black text-[#1b5e20] tracking-tighter mb-1">
+                        <div className="text-4xl font-black text-[#e30613] tracking-tighter mb-1">
                             {totalIncomeBNB.toFixed(4)} <span className="text-sm">BNB</span>
                         </div>
                         <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">≈ {formatCurrency(totalIncomeUSD)}</p>
@@ -247,16 +247,16 @@ export default function DashboardPage() {
                 </Link>
 
                 <Link href="/dashboard/matrix-tree" className="relative overflow-hidden bg-white rounded-[3rem] p-10 border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] transition-all group flex flex-col items-center text-center">
-                    <div className="absolute bottom-4 right-4 text-[#1b5e20]/10 group-hover:scale-125 group-hover:-rotate-12 transition-transform duration-500">
+                    <div className="absolute bottom-4 right-4 text-[#e30613]/10 group-hover:scale-125 group-hover:-rotate-12 transition-transform duration-500">
                         <Network className="w-32 h-32" />
                     </div>
                     <div className="relative z-10 w-full">
-                        <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-[#1b5e20]/5 transition-colors">
-                            <Network className="w-10 h-10 text-[#1b5e20]" />
+                        <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-8 group-hover:bg-[#e30613]/5 transition-colors">
+                            <Network className="w-10 h-10 text-[#e30613]" />
                         </div>
                         <h4 className="text-2xl font-black text-slate-800 tracking-tight leading-none mb-2">Matrix</h4>
                         <p className="text-xs font-bold text-slate-400 mb-8 uppercase tracking-widest">Placement Team</p>
-                        <div className="text-4xl font-black text-[#1b5e20] tracking-tighter">
+                        <div className="text-4xl font-black text-[#e30613] tracking-tighter">
                             {userInfo ? Number(userInfo[5]) : 0}
                         </div>
                         <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest mt-3">Active Sync Nodes</p>
@@ -265,11 +265,11 @@ export default function DashboardPage() {
 
                 {/* Smaller Utility Grid Cards */}
                 <Link href="/dashboard/rewards" className="relative overflow-hidden bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] transition-all group">
-                    <div className="absolute top-4 right-4 text-[#1b5e20]/5 group-hover:rotate-12 transition-transform">
+                    <div className="absolute top-4 right-4 text-[#e30613]/5 group-hover:rotate-12 transition-transform">
                         <Gift className="w-16 h-16" />
                     </div>
                     <div className="relative z-10 space-y-4">
-                        <div className="w-14 h-14 bg-slate-50 rounded-[1.5rem] flex items-center justify-center group-hover:bg-[#1b5e20]/5 transition-colors text-[#1b5e20]">
+                        <div className="w-14 h-14 bg-slate-50 rounded-[1.5rem] flex items-center justify-center group-hover:bg-[#e30613]/5 transition-colors text-[#e30613]">
                             <Gift className="w-7 h-7" />
                         </div>
                         <div>
@@ -280,11 +280,11 @@ export default function DashboardPage() {
                 </Link>
 
                 <Link href="/dashboard/upgrade" className="relative overflow-hidden bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] transition-all group">
-                    <div className="absolute top-4 right-4 text-[#1b5e20]/5 group-hover:rotate-12 transition-transform">
+                    <div className="absolute top-4 right-4 text-[#e30613]/5 group-hover:rotate-12 transition-transform">
                         <ArrowUpCircle className="w-16 h-16" />
                     </div>
                     <div className="relative z-10 space-y-4">
-                        <div className="w-14 h-14 bg-slate-50 rounded-[1.5rem] flex items-center justify-center group-hover:bg-[#1b5e20]/5 transition-colors text-[#1b5e20]">
+                        <div className="w-14 h-14 bg-slate-50 rounded-[1.5rem] flex items-center justify-center group-hover:bg-[#e30613]/5 transition-colors text-[#e30613]">
                             <ArrowUpCircle className="w-7 h-7" />
                         </div>
                         <div>
@@ -295,11 +295,11 @@ export default function DashboardPage() {
                 </Link>
 
                 <Link href="/dashboard/team" className="relative overflow-hidden bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.05)] transition-all group">
-                    <div className="absolute top-4 right-4 text-[#1b5e20]/5 group-hover:rotate-12 transition-transform">
+                    <div className="absolute top-4 right-4 text-[#e30613]/5 group-hover:rotate-12 transition-transform">
                         <Users className="w-16 h-16" />
                     </div>
                     <div className="relative z-10 space-y-4">
-                        <div className="w-14 h-14 bg-slate-50 rounded-[1.5rem] flex items-center justify-center group-hover:bg-[#1b5e20]/5 transition-colors text-[#1b5e20]">
+                        <div className="w-14 h-14 bg-slate-50 rounded-[1.5rem] flex items-center justify-center group-hover:bg-[#e30613]/5 transition-colors text-[#e30613]">
                             <Users className="w-7 h-7" />
                         </div>
                         <div>

@@ -98,29 +98,29 @@ export default function PromotionPage() {
         <div className="-m-6 p-6 min-h-[calc(100vh-48px)] bg-white text-gray-500 flex flex-col items-center">
             <div className="max-w-7xl w-full space-y-6">
             {/* Header section with Node link card */}
-            <div className="relative overflow-hidden bg-[#f4f8f4] rounded-2xl p-6 md:p-10 border border-[#c8e6c9] shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)]">
+            <div className="relative overflow-hidden bg-slate-50 rounded-2xl p-6 md:p-10 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)]">
                 <div className="max-w-4xl mx-auto space-y-8">
                     <div className="text-center space-y-2">
-                        <h1 className="text-3xl md:text-5xl font-black text-[#1b5e20] uppercase tracking-wider [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">Share & Earn Rewards</h1>
+                        <h1 className="text-3xl md:text-5xl font-black text-[#e30613] uppercase tracking-wider [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">Share & Earn Rewards</h1>
                         <p className="text-gray-500 font-bold text-lg">Your Node is the gateway for others to join the network.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div className="bg-white border border-[#c8e6c9] rounded-3xl p-6 lg:p-8 space-y-5 shadow-[inset_0_2px_8px_rgba(0,0,0,0.8)]">
+                        <div className="bg-white border border-slate-200 rounded-3xl p-6 lg:p-8 space-y-5 shadow-[inset_0_2px_8px_rgba(0,0,0,0.8)]">
                             <div>
                                 <h3 className="text-sm font-black text-gray-500 uppercase tracking-widest mb-2">Your Node ID</h3>
-                                <div className="text-4xl font-black text-[#1b5e20] [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">#{userId > 0 ? userId : '—'}</div>
+                                <div className="text-4xl font-black text-[#e30613] [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">#{userId > 0 ? userId : '—'}</div>
                             </div>
 
                             <div className="space-y-2">
                                 <h3 className="text-sm font-black text-gray-500 uppercase tracking-widest">Your Node Invitation Link</h3>
-                                <div className="flex items-center gap-2 p-3 bg-[#f4f8f4] rounded-xl shadow-sm border border-[#c8e6c9] group">
+                                <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-xl shadow-sm border border-slate-200 group">
                                     <div className="flex-1 font-mono text-sm text-gray-600 font-bold truncate">
                                         {referralLink || '---'}
                                     </div>
                                     <button
                                         onClick={() => copyToClipboard(referralLink, 'link')}
-                                        className="p-2 bg-blue-50 text-[#1b5e20] border border-blue-200 rounded-lg hover:bg-[#2471a3] hover:text-white transition-all shadow-[inset_0_1px_2px_rgba(255,255,255,0.05)]"
+                                        className="p-2 bg-red-50 text-[#e30613] border border-red-200 rounded-lg hover:bg-[#e30613] hover:text-white transition-all shadow-[inset_0_1px_2px_rgba(255,255,255,0.05)]"
                                     >
                                         {copiedLink ? <CheckCheck className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                                     </button>
@@ -152,7 +152,7 @@ export default function PromotionPage() {
 
             {/* Why promote section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="relative overflow-hidden bg-[#f4f8f4] rounded-2xl p-6 lg:p-8 border border-[#c8e6c9] shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] group hover:-translate-y-1 hover:shadow-lg transition-all">
+                <div className="relative overflow-hidden bg-slate-50 rounded-2xl p-6 lg:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] group hover:-translate-y-1 hover:shadow-lg transition-all">
                     <div className="w-14 h-14 bg-amber-50 border border-amber-200 rounded-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.05)] flex items-center justify-center mb-6 text-amber-500 font-black text-xl">10%</div>
                     <h3 className="text-xl font-black text-gray-800 mb-2">Direct Reward</h3>
                     <p className="text-gray-500 font-bold text-sm">Earn an instant 10% direct reward whenever someone registers a new Node using your ID.</p>
@@ -176,7 +176,7 @@ export default function PromotionPage() {
                 {incomeCards.map((card, i) => (
                     <div
                         key={i}
-                        className="relative overflow-hidden bg-[#f4f8f4] rounded-2xl p-6 border border-[#c8e6c9] shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] group hover:-translate-y-1 hover:shadow-lg transition-all flex flex-col justify-between"
+                        className="relative overflow-hidden bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] group hover:-translate-y-1 hover:shadow-lg transition-all flex flex-col justify-between"
                     >
                         <div className="text-4xl mb-3 drop-shadow-sm">{card.icon}</div>
                         <h3 className="text-lg font-black text-gray-800 mb-2">{card.title}</h3>
@@ -189,19 +189,19 @@ export default function PromotionPage() {
             </div>
 
             {/* How it works educational section */}
-            <div className="relative overflow-hidden bg-[#f4f8f4] rounded-3xl p-8 md:p-12 mt-12 border border-[#c8e6c9] shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] text-center">
-                <h2 className="text-3xl font-black text-[#1b5e20] mb-12 tracking-wider uppercase [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">How Sponsorship Works</h2>
+            <div className="relative overflow-hidden bg-slate-50 rounded-3xl p-8 md:p-12 mt-12 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] text-center">
+                <h2 className="text-3xl font-black text-[#e30613] mb-12 tracking-wider uppercase [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">How Sponsorship Works</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
                     <div className="hidden md:block absolute top-10 left-[20%] right-[20%] h-0.5 border-t-2 border-dashed border-[#3f3f46] -z-0"></div>
 
-                    <div className="relative z-10 space-y-4 bg-white border border-[#c8e6c9] shadow-sm p-6 rounded-2xl">
+                    <div className="relative z-10 space-y-4 bg-white border border-slate-200 shadow-sm p-6 rounded-2xl">
                         <div className="w-20 h-20 bg-amber-50 border-2 border-amber-200 rounded-full flex items-center justify-center mx-auto text-amber-500 font-black text-3xl shadow-[inset_1px_1px_3px_rgba(255,255,255,1)]">1</div>
                         <h4 className="text-lg font-black text-gray-800 uppercase tracking-widest">Invite Nodes</h4>
                         <p className="text-gray-500 font-bold text-sm leading-relaxed">Share your Link or Node ID with your community and network.</p>
                     </div>
 
-                    <div className="relative z-10 space-y-4 bg-white border border-[#c8e6c9] shadow-sm p-6 rounded-2xl">
+                    <div className="relative z-10 space-y-4 bg-white border border-slate-200 shadow-sm p-6 rounded-2xl">
                         <div className="w-20 h-20 bg-blue-50 border-2 border-blue-200 rounded-full flex items-center justify-center mx-auto text-blue-500 font-black text-3xl shadow-[inset_1px_1px_3px_rgba(255,255,255,1)]">2</div>
                         <h4 className="text-lg font-black text-gray-800 uppercase tracking-widest">Unlock Layers</h4>
                         <p className="text-gray-500 font-bold text-sm leading-relaxed">When your direct nodes unlock higher layers, you receive instant rewards.</p>

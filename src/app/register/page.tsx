@@ -77,16 +77,16 @@ function RegisterContent() {
     }, [isSuccess, router]);
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900">
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-[#8b0000] to-neutral-950">
             {/* Navbar */}
             <nav className="flex justify-between items-center p-6 max-w-7xl mx-auto">
                 <div className="flex items-center gap-4">
-                    <Link href="/" className="flex items-center gap-2 text-white hover:text-yellow-400 transition-colors">
+                    <Link href="/" className="flex items-center gap-2 text-white hover:text-[#e30613] transition-colors">
                         <ArrowLeft />
                         <span>Back</span>
                     </Link>
                     <Link href="/">
-                        <img src="/aipcore-logo.svg" alt="AIPCore" className="h-10 w-auto drop-shadow-[0_0_10px_rgba(250,204,21,0.3)]" />
+                        <img src="/aipcore-logo.svg" alt="AIPCore" className="h-10 w-auto drop-shadow-[0_0_10px_rgba(227,6,19,0.3)]" />
                     </Link>
                 </div>
                 <ConnectButton />
@@ -96,41 +96,41 @@ function RegisterContent() {
             <div className="max-w-2xl mx-auto px-6 py-12">
                 <div className="relative overflow-hidden bg-gradient-to-br from-white/10 to-transparent backdrop-blur-2xl border-t border-l border-white/20 border-b border-r border-black/80 shadow-[10px_10px_20px_rgba(0,0,0,0.6),-2px_-2px_10px_rgba(255,255,255,0.05),inset_1px_1px_2px_rgba(255,255,255,0.2)] rounded-[3rem] p-8 lg:p-12">
                     <h1 className="text-4xl font-black text-white mb-2 uppercase tracking-widest italic drop-shadow-md">Initialize Node</h1>
-                    <p className="text-neural-gold mb-8 font-medium">Register your Node ID and synchronize with the protocol</p>
+                    <p className="text-[#e30613] mb-8 font-medium">Register your Node ID and synchronize with the protocol</p>
 
                     {/* Referrer Info */}
                     <div className="bg-black/40 border-t border-l border-black/80 border-b border-r border-white/10 shadow-[inset_2px_2px_10px_rgba(0,0,0,0.8),inset_-1px_-1px_2px_rgba(255,255,255,0.1)] rounded-2xl p-6 mb-8">
                         <h3 className="text-lg font-black text-white mb-4 uppercase tracking-tighter drop-shadow-lg">Node Sponsorship</h3>
                         <div className="flex justify-between items-center">
-                            <span className="text-neural-gold font-medium">Sponsor ID:</span>
+                            <span className="text-[#e30613] font-medium">Sponsor ID:</span>
                             <span className="text-white font-mono text-xl font-black">{referrerId}</span>
                         </div>
                         {referrerId === GENESIS_USER_ID && (
-                            <p className="text-sm text-yellow-500 font-bold mt-2 italic">
+                            <p className="text-sm text-red-500 font-bold mt-2 italic">
                                 ✨ Root Node Sync
                             </p>
                         )}
                     </div>
 
                     {/* Cost Breakdown */}
-                    <div className="bg-black/40 border-t border-l border-black/80 border-b border-r border-yellow-500/20 shadow-[inset_2px_2px_10px_rgba(0,0,0,0.8),inset_-1px_-1px_2px_rgba(255,255,255,0.1)] rounded-2xl p-6 mb-8 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent" />
+                    <div className="bg-black/40 border-t border-l border-black/80 border-b border-r border-red-500/20 shadow-[inset_2px_2px_10px_rgba(0,0,0,0.8),inset_-1px_-1px_2px_rgba(255,255,255,0.1)] rounded-2xl p-6 mb-8 relative overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#e30613]/50 to-transparent" />
                         <h3 className="text-lg font-black text-white mb-4 uppercase tracking-tighter drop-shadow-lg">Protocol Cost</h3>
                         <div className="space-y-3">
                             <div className="flex justify-between items-center">
                                 <span className="text-gray-300 font-medium">Layer 1 Activation:</span>
                                 <div className="text-right">
-                                    <div className="text-2xl font-black text-yellow-400">
+                                    <div className="text-2xl font-black text-[#e30613]">
                                         {registrationCost ? formatBNB(registrationCost) : '---'} BNB
                                     </div>
-                                    <div className="text-sm text-neural-gold font-medium">
+                                    <div className="text-sm text-[#e30613] font-medium">
                                         ≈ {formatCurrency(usdCost)}
                                     </div>
                                 </div>
                             </div>
 
                             <div className="border-t border-white/10 pt-3 mt-3">
-                                <div className="text-sm text-neural-gold space-y-1 font-medium italic">
+                                <div className="text-sm text-[#e30613] space-y-1 font-medium italic">
                                     <div className="flex justify-between">
                                         <span>• 10% Sponsor Reward</span>
                                         <span>{formatCurrency(usdCost * 0.10)}</span>
@@ -155,7 +155,7 @@ function RegisterContent() {
                     {/* Register Button */}
                     {!isConnected ? (
                         <div className="text-center">
-                            <p className="text-neural-gold mb-4">Connect your wallet to register</p>
+                            <p className="text-[#e30613] mb-4">Connect your wallet to register</p>
                             <ConnectButton />
                         </div>
                     ) : isSuccess ? (
@@ -170,7 +170,7 @@ function RegisterContent() {
                                     href={`https://testnet.bscscan.com/tx/${hash}`}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-yellow-400 hover:underline text-sm"
+                                    className="text-[#e30613] hover:underline text-sm"
                                 >
                                     View Transaction
                                 </a>
@@ -180,7 +180,7 @@ function RegisterContent() {
                         <button
                             onClick={handleRegister}
                             disabled={isPending || isConfirming || isProcessing || !registrationCost}
-                            className="w-full relative overflow-hidden bg-gradient-to-r from-yellow-400 to-orange-500 text-black py-4 rounded-full font-black text-xl shadow-[0_4px_15px_rgba(250,204,21,0.5),inset_1px_1px_2px_rgba(255,255,255,0.8),inset_-1px_-1px_2px_rgba(0,0,0,0.2)] hover:scale-105 hover:shadow-[0_8px_25px_rgba(250,204,21,0.6)] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 border border-yellow-300"
+                            className="w-full relative overflow-hidden bg-[#e30613] text-white py-4 rounded-full font-black text-xl shadow-[0_4px_15px_rgba(227,6,19,0.5),inset_1px_1px_2px_rgba(255,255,255,0.3),inset_-1px_-1px_2px_rgba(0,0,0,0.2)] hover:scale-105 hover:shadow-[0_8px_25px_rgba(227,6,19,0.6)] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2 border border-red-500"
                         >
                             {isPending || isConfirming || isProcessing ? (
                                 <>
@@ -202,7 +202,7 @@ function RegisterContent() {
                     )}
 
                     {/* Info */}
-                    <div className="mt-6 text-sm text-neural-gold space-y-2">
+                    <div className="mt-6 text-sm text-[#e30613] space-y-2">
                         <p>✓ Instant reward to your sponsor</p>
                         <p>✓ Automated matrix node placement</p>
                         <p>✓ Participate in 4 algorithmic flow streams</p>

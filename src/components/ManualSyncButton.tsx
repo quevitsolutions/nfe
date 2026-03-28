@@ -86,10 +86,10 @@ export function ManualSyncButton({ nodeId, missingRequirements, isQualifiedForNe
                 disabled={isPending || status === 'success' || isConfirmed}
                 className={`w-full relative flex items-center justify-center gap-3 px-8 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest transition-all shadow-xl active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed group overflow-hidden border ${
                     status === 'success' || isConfirmed 
-                    ? 'bg-emerald-500 text-white border-emerald-400' 
+                    ? 'bg-red-600 text-white border-red-500 shadow-red-600/20' 
                     : status === 'ineligible' || status === 'error'
                     ? 'bg-rose-500 text-white border-rose-400Shadow-rose-500/20'
-                    : 'bg-white border-slate-100 text-[#1b5e20] hover:bg-slate-50 shadow-slate-100'
+                    : 'bg-white border-slate-100 text-[#e30613] hover:bg-slate-50 shadow-slate-100'
                 }`}
             >
                 {isPending ? (
@@ -109,7 +109,7 @@ export function ManualSyncButton({ nodeId, missingRequirements, isQualifiedForNe
                     </>
                 ) : (
                     <>
-                        <Zap className="w-5 h-5 text-[#1b5e20] relative z-10 group-hover:scale-110 transition-transform" />
+                        <Zap className="w-5 h-5 text-[#e30613] relative z-10 group-hover:scale-110 transition-transform" />
                         <span className="relative z-10">Manual Protocol Sync</span>
                     </>
                 )}

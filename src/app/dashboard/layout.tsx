@@ -35,13 +35,13 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     const pathname = usePathname();
 
     return (
-        <div className="min-h-screen bg-[#F8FAFC] text-slate-800 pb-20 lg:pb-0 font-sans">
+        <div className="min-h-screen bg-[#ecf3e6] text-slate-800 pb-20 lg:pb-0 font-sans">
             {/* Desktop Sidebar (Vi Style - Floating Card) */}
             <aside className="hidden lg:flex fixed inset-y-0 left-0 w-72 flex-col p-6 z-40">
                 <div className="bg-white rounded-[2.5rem] shadow-[0_10px_40px_rgba(0,0,0,0.03)] border border-slate-100 flex flex-col h-full overflow-hidden">
                     <div className="p-8 border-b border-slate-50">
                         <Link href="/dashboard" className="block text-center">
-                            <span className="text-3xl font-black text-[#1b5e20] tracking-tighter">AIPCORE</span>
+                            <span className="text-3xl font-black text-[#e30613] tracking-tighter">AIPCORE</span>
                         </Link>
                     </div>
 
@@ -57,8 +57,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                                     className={`
                                         flex items-center gap-4 px-6 py-4 rounded-[1.5rem] transition-all duration-300 group
                                         ${isActive
-                                            ? 'bg-[#1b5e20] text-white shadow-[0_8px_20px_rgba(27,94,32,0.2)]'
-                                            : 'text-slate-500 hover:bg-slate-50 hover:text-[#1b5e20]'
+                                            ? 'bg-[#e30613] text-white shadow-[0_8px_20px_rgba(227,6,19,0.2)]'
+                                            : 'text-slate-500 hover:bg-slate-50 hover:text-[#e30613]'
                                         }
                                     `}
                                 >
@@ -81,12 +81,12 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
             <div className="lg:ml-72 flex flex-col min-h-screen">
                 {/* Mobile Header (Clean Vi style) */}
                 <header className="lg:hidden bg-white/80 backdrop-blur-xl sticky top-0 z-30 px-6 py-4 flex justify-between items-center border-b border-slate-100 shadow-sm">
-                    <span className="text-xl font-black text-[#1b5e20] tracking-tighter">AIPCORE</span>
+                    <span className="text-xl font-black text-[#e30613] tracking-tighter">AIPCORE</span>
                     <ConnectButton accountStatus="avatar" chainStatus="icon" showBalance={false} />
                 </header>
 
                 {/* Desktop Header */}
-                <header className="hidden lg:flex justify-between items-center px-8 py-6 sticky top-0 z-30 bg-[#F8FAFC]/80 backdrop-blur-md">
+                <header className="hidden lg:flex justify-between items-center px-8 py-6 sticky top-0 z-30 bg-[#ecf3e6]/80 backdrop-blur-md">
                     <h1 className="text-2xl font-black text-slate-800 tracking-tight">
                         {navItems.find(item => item.path === pathname)?.name || 'Home'}
                     </h1>
@@ -119,14 +119,14 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
                             href={item.path}
                             className={`flex flex-col items-center gap-1 group relative px-3 py-1`}
                         >
-                            <div className={`p-2 rounded-2xl transition-all duration-300 ${isActive ? 'bg-[#1b5e20] text-white shadow-lg -translate-y-1' : 'text-slate-400'}`}>
+                            <div className={`p-2 rounded-2xl transition-all duration-300 ${isActive ? 'bg-[#e30613] text-white shadow-lg -translate-y-1' : 'text-slate-400'}`}>
                                 <Icon className="w-6 h-6" />
                             </div>
-                            <span className={`text-[10px] font-black uppercase tracking-widest ${isActive ? 'text-[#1b5e20]' : 'text-slate-400'}`}>
+                            <span className={`text-[10px] font-black uppercase tracking-widest ${isActive ? 'text-[#e30613]' : 'text-slate-400'}`}>
                                 {shortName}
                             </span>
                             {isActive && (
-                                <div className="absolute -bottom-1 w-1 h-1 bg-[#1b5e20] rounded-full"></div>
+                                <div className="absolute -bottom-1 w-1 h-1 bg-[#e30613] rounded-full"></div>
                             )}
                         </Link>
                     );

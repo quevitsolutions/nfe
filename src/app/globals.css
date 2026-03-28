@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-neural-gold: #facc15;
+  --color-neural-gold: #e30613;
   --color-neural-indigo: #0f172a;
-  --color-cyber-cyan: #22d3ee;
-  --color-matrix-green: #10b981;
+  --color-cyber-cyan: #b01025;
+  --color-matrix-green: #e30613;
 }
 
 :root {
-  --background: #f4f8f4;
+  --background: #ecf3e6;
   --foreground: #111827;
-  --accent: #1b5e20;
+  --accent: #e30613;
 }
 
 body {
@@ -37,22 +37,22 @@ body {
 }
 
 .neural-glow {
-  box-shadow: 0 0 20px rgba(250, 204, 21, 0.3);
+  box-shadow: 0 0 20px rgba(227, 6, 19, 0.3);
 }
 
 .neural-glow-cyan {
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+  box-shadow: 0 0 20px rgba(176, 16, 37, 0.3);
 }
 
 .cyber-border {
   border: 1px solid transparent;
-  background-image: linear-gradient(#060612, #060612), linear-gradient(to right, #facc15, #22d3ee);
+  background-image: linear-gradient(#060612, #060612), linear-gradient(to right, #e30613, #b01025);
   background-origin: border-box;
   background-clip: padding-box, border-box;
 }
 
 .text-glow {
-  text-shadow: 0 0 8px rgba(250, 204, 21, 0.5);
+  text-shadow: 0 0 8px rgba(227, 6, 19, 0.5);
 }
 
 @keyframes neural-pulse {

@@ -132,10 +132,10 @@ export default function Home() {
   ];
 
   const steps = [
-    { num: '01', title: 'Create Node', desc: 'Initialize your presence in the protocol by registering your Node ID.', color: 'from-yellow-400 to-orange-500' },
+    { num: '01', title: 'Create Node', desc: 'Initialize your presence in the protocol by registering your Node ID.', color: 'from-red-400 to-rose-600' },
     { num: '02', title: 'Connect to Network', desc: 'Synchronize with your sponsor and join the global binary structure.', color: 'from-blue-400 to-purple-500' },
     { num: '03', title: 'Unlock Layers', desc: 'Propagate through the network by activating higher reward layers.', color: 'from-purple-400 to-pink-500' },
-    { num: '04', title: 'Earn Algorithmic Rewards', desc: 'Receive on-chain rewards automatically as the engine processes flows.', color: 'from-green-400 to-emerald-500' },
+    { num: '04', title: 'Earn Algorithmic Rewards', desc: 'Receive on-chain rewards automatically as the engine processes flows.', color: 'from-red-500 to-rose-700' },
   ];
 
   const faqs = [
@@ -181,13 +181,13 @@ export default function Home() {
               <img 
                 src="/aipcore-logo.svg" 
                 alt="AIP CORE" 
-                className="h-32 w-auto drop-shadow-[0_0_25px_rgba(250,204,21,0.4)] animate-neural-slow" 
+                className="h-32 w-auto drop-shadow-[0_0_25px_rgba(227,6,19,0.4)] animate-neural-slow" 
               />
             </div>
 
-            <div className="inline-flex items-center gap-2 mb-6 px-5 py-2 rounded-full border border-yellow-400/30 bg-gradient-to-br from-yellow-400/20 to-yellow-400/5 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4),_0_4px_8px_rgba(0,0,0,0.3)] backdrop-blur-md animate-neural">
-              <span className="w-2 h-2 bg-matrix-green rounded-full animate-ping" />
-              <span className="text-yellow-400 text-sm font-semibold tracking-widest uppercase">Autonomous Node Network v4.0</span>
+            <div className="inline-flex items-center gap-2 mb-6 px-5 py-2 rounded-full border border-red-400/30 bg-gradient-to-br from-red-400/20 to-red-400/5 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4),_0_4px_8px_rgba(0,0,0,0.3)] backdrop-blur-md animate-neural">
+              <span className="w-2 h-2 bg-[#e30613] rounded-full animate-ping" />
+              <span className="text-[#e30613] text-sm font-semibold tracking-widest uppercase">Autonomous Node Network v4.0</span>
             </div>
 
             <h1 className="text-5xl sm:text-7xl md:text-8xl font-black leading-[1.05] mb-8 tracking-tighter">
@@ -195,13 +195,13 @@ export default function Home() {
               <span className="bg-gradient-to-r from-neural-gold via-cyber-cyan to-white bg-clip-text text-transparent uppercase text-glow">AIPCore</span>
             </h1>
 
-            <p className="text-lg sm:text-xl md:text-2xl text-neural-gold max-w-4xl mx-auto mb-12 leading-relaxed font-medium">
+            <p className="text-lg sm:text-xl md:text-2xl text-[#e30613]/80 max-w-4xl mx-auto mb-12 leading-relaxed font-medium">
               AIPCore is a decentralized, on-chain community coordination protocol that distributes rewards <span className="text-white">algorithmically</span> based on network expansion and participation.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/register"
-                className="w-full sm:w-auto relative overflow-hidden bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-10 py-5 rounded-[2rem] font-black text-xl shadow-[0_4px_15px_rgba(250,204,21,0.5),inset_1px_1px_2px_rgba(255,255,255,0.8),inset_-1px_-1px_2px_rgba(0,0,0,0.2)] hover:scale-105 hover:shadow-[0_8px_25px_rgba(250,204,21,0.6)] transition-all border border-yellow-300 active:scale-95">
+                className="w-full sm:w-auto relative overflow-hidden bg-gradient-to-r from-red-600 to-rose-800 text-white px-10 py-5 rounded-[2rem] font-black text-xl shadow-[0_4px_15px_rgba(227,6,19,0.5),inset_1px_1px_2px_rgba(255,255,255,0.3),inset_-1px_-1px_2px_rgba(0,0,0,0.2)] hover:scale-105 hover:shadow-[0_8px_25px_rgba(227,6,19,0.6)] transition-all border border-red-500 active:scale-95">
                 Initialize Node →
               </Link>
               <a href={`https://bscscan.com/address/${contractAddress}`} target="_blank" rel="noopener noreferrer"
@@ -328,10 +328,10 @@ export default function Home() {
         <FadeIn className="max-w-3xl mx-auto relative z-10">
           <h2 className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter uppercase text-glow">
             Initialize Your <br />
-            <span className="text-neural-gold">Node.</span>
+            <span className="text-[#e30613]">Node.</span>
           </h2>
           <Link href="/register"
-            className="inline-block relative overflow-hidden bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-12 py-6 rounded-[2rem] font-black text-2xl shadow-[0_4px_15px_rgba(250,204,21,0.5),inset_1px_1px_2px_rgba(255,255,255,0.8),inset_-1px_-1px_2px_rgba(0,0,0,0.2)] hover:scale-105 hover:shadow-[0_8px_30px_rgba(250,204,21,0.7)] transition-all border border-yellow-300 active:scale-95">
+            className="inline-block relative overflow-hidden bg-gradient-to-r from-red-600 to-rose-800 text-white px-12 py-6 rounded-[2rem] font-black text-2xl shadow-[0_4px_15px_rgba(227,6,19,0.5),inset_1px_1px_2px_rgba(255,255,255,0.3),inset_-1px_-1px_2px_rgba(0,0,0,0.2)] hover:scale-105 hover:shadow-[0_8px_30px_rgba(227,6,19,0.7)] transition-all border border-red-500 active:scale-95">
             Sync To Network →
           </Link>
         </FadeIn>
@@ -372,11 +372,11 @@ export default function Home() {
             <div className="bg-black/60 border-t border-l border-black/80 border-b border-r border-white/10 shadow-[inset_2px_2px_10px_rgba(0,0,0,0.8),inset_-1px_-1px_2px_rgba(255,255,255,0.1)] p-5 rounded-2xl space-y-3">
               <div className="flex justify-between text-[10px] font-black tracking-widest uppercase">
                 <span className="text-white/80">Node Sync</span>
-                <span className="text-matrix-green">ACTIVE</span>
+                <span className="text-[#e30613]">ACTIVE</span>
               </div>
               <div className="flex justify-between text-[10px] font-black tracking-widest uppercase">
                 <span className="text-white/80">Reward Flow</span>
-                <span className="text-matrix-green">NOMINAL</span>
+                <span className="text-[#e30613]">NOMINAL</span>
               </div>
               <div className="flex justify-between text-[10px] font-black tracking-widest uppercase">
                 <span className="text-white/80">Core Engine</span>

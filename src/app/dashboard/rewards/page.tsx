@@ -85,15 +85,15 @@ export default function RewardsPage() {
         <div className="space-y-8 pb-12">
             {/* 1. Main Reward Banner */}
             <div className={`relative overflow-hidden bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.02)] p-10 lg:p-12 mb-8`}>
-                <div className="absolute top-0 right-0 -mt-8 -mr-8 opacity-[0.03] text-[#1b5e20] rotate-12 transition-transform duration-700 hover:rotate-45">
+                <div className="absolute top-0 right-0 -mt-8 -mr-8 opacity-[0.03] text-[#e30613] rotate-12 transition-transform duration-700 hover:rotate-45">
                     <Gift className="w-80 h-80" />
                 </div>
                 
                 <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
                     <div className="space-y-6">
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 bg-[#1b5e20]/10 rounded-2xl flex items-center justify-center">
-                                <Award className="w-6 h-6 text-[#1b5e20]" />
+                            <div className="w-12 h-12 bg-[#e30613]/10 rounded-2xl flex items-center justify-center">
+                                <Award className="w-6 h-6 text-[#e30613]" />
                             </div>
                             <div className="flex flex-col">
                                 <span className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Active Status</span>
@@ -106,9 +106,9 @@ export default function RewardsPage() {
                                 <div className="space-y-4">
                                      <div className="text-4xl lg:text-5xl font-black text-slate-300 tracking-tighter uppercase">No Active Yield</div>
                                      {mq && Number(mq[0]) === 0 && Number(mq[1]) === 0 && Number(mq[2]) === 0 ? (
-                                         <div className="bg-emerald-50 border border-emerald-100 p-6 rounded-[2rem] space-y-2 animate-in fade-in slide-in-from-bottom-4">
-                                             <div className="text-2xl font-black text-[#1b5e20]">🎉 Qualified for Bronze!</div>
-                                             <p className="text-xs font-bold text-[#1b5e20]/60 uppercase tracking-widest leading-relaxed">Your node has met all requirements.<br/>Click manual sync below if auto-registration is pending.</p>
+                                         <div className="bg-red-50 border border-red-100 p-6 rounded-[2rem] space-y-2 animate-in fade-in slide-in-from-bottom-4">
+                                             <div className="text-2xl font-black text-[#e30613]">🎉 Qualified for Bronze!</div>
+                                             <p className="text-xs font-bold text-[#e30613]/60 uppercase tracking-widest leading-relaxed">Your node has met all requirements.<br/>Click manual sync below if auto-registration is pending.</p>
                                              <div className="animate-bounce pt-2">
                                                  <ManualSyncButton nodeId={userId} />
                                              </div>
@@ -120,7 +120,7 @@ export default function RewardsPage() {
                             ) : (
                                 <div className="space-y-6">
                                     <div className="flex items-baseline gap-4">
-                                        <span className="text-6xl lg:text-8xl font-black text-[#1b5e20] tracking-tighter">
+                                        <span className="text-6xl lg:text-8xl font-black text-[#e30613] tracking-tighter">
                                             {formatBNB(claimableBNB)}
                                         </span>
                                         <span className="text-2xl lg:text-4xl font-black text-slate-200 uppercase tracking-tighter">BNB</span>
@@ -131,7 +131,7 @@ export default function RewardsPage() {
                                             disabled={isClaimPending || isClaimConfirming || Number(claimableBNB) === 0 || isCapReached}
                                             className={`px-10 py-4 rounded-[1.5rem] font-black text-xs uppercase tracking-widest shadow-xl transition-all flex items-center gap-3 ${
                                                 Number(claimableBNB) > 0 && !isCapReached
-                                                ? 'bg-[#1b5e20] text-white hover:scale-105 active:scale-95 shadow-[#1b5e20]/20'
+                                                ? 'bg-[#e30613] text-white hover:scale-105 active:scale-95 shadow-[#e30613]/20'
                                                 : 'bg-slate-50 text-slate-400 border border-slate-100 cursor-not-allowed'
                                             }`}
                                         >
@@ -140,10 +140,10 @@ export default function RewardsPage() {
                                         </button>
                                         
                                         {isQualifiedForNext && (
-                                            <div className="bg-emerald-50 border border-emerald-100 p-4 rounded-[1.5rem] flex items-center gap-4 animate-in zoom-in-95">
-                                                <Sparkles className="w-5 h-5 text-[#1b5e20]" />
+                                            <div className="bg-red-50 border border-red-100 p-4 rounded-[1.5rem] flex items-center gap-4 animate-in zoom-in-95">
+                                                <Sparkles className="w-5 h-5 text-[#e30613]" />
                                                 <div className="flex flex-col">
-                                                    <span className="text-[10px] font-black text-[#1b5e20] uppercase tracking-widest leading-none mb-1">Level Up Qualified</span>
+                                                    <span className="text-[10px] font-black text-[#e30613] uppercase tracking-widest leading-none mb-1">Level Up Qualified</span>
                                                     <ManualSyncButton nodeId={userId} isQualifiedForNext={true} />
                                                 </div>
                                             </div>
@@ -159,10 +159,10 @@ export default function RewardsPage() {
                              <div className="text-xs font-black text-slate-400 uppercase tracking-widest">Global Rewards Performance</div>
                              <div className="flex gap-4">
                                  <div className="flex flex-col items-center p-4 bg-white rounded-3xl shadow-sm min-w-[100px] border border-slate-100">
-                                     <span className="text-xs font-black text-[#1b5e20] tracking-tighter">{formatBNB(lifetimeClaimed)}</span>
+                                     <span className="text-xs font-black text-[#e30613] tracking-tighter">{formatBNB(lifetimeClaimed)}</span>
                                      <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest mt-1">Claimed</span>
                                  </div>
-                                 <div className="flex flex-col items-center p-4 bg-white rounded-3xl shadow-sm min-w-[100px] border border-slate-100 text-[#1b5e20]">
+                                 <div className="flex flex-col items-center p-4 bg-white rounded-3xl shadow-sm min-w-[100px] border border-slate-100 text-[#e30613]">
                                       <span className="text-xs font-black tracking-tighter">{formatBNB(capRemaining)}</span>
                                       <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest mt-1">Remaining Scope</span>
                                  </div>
@@ -182,17 +182,17 @@ export default function RewardsPage() {
                 ].map((pool) => (
                     <div key={pool.id} className={`relative overflow-hidden bg-white rounded-[3rem] p-10 border transition-all group ${
                         pool.id === currentPoolId 
-                        ? 'border-[#1b5e20] shadow-[0_15px_40px_rgba(27,94,32,0.1)]' 
+                        ? 'border-[#e30613] shadow-[0_15px_40px_rgba(227,6,19,0.1)]' 
                         : 'border-slate-100 shadow-sm opacity-80'
                     }`}>
-                        <div className={`absolute top-4 right-4 text-[#1b5e20]/5 group-hover:scale-125 transition-transform`}>
+                        <div className={`absolute top-4 right-4 text-[#e30613]/5 group-hover:scale-125 transition-transform`}>
                             <pool.icon className="w-16 h-16" />
                         </div>
                         
                         <div className="relative z-10 flex flex-col items-center text-center space-y-6">
                             <div className={`w-20 h-20 rounded-3xl flex items-center justify-center border transition-all ${
                                 pool.id <= currentPoolId 
-                                ? 'bg-[#1b5e20] text-white border-[#1b5e20] shadow-lg shadow-[#1b5e20]/20 scale-110' 
+                                ? 'bg-[#e30613] text-white border-[#e30613] shadow-lg shadow-[#e30613]/20 scale-111' 
                                 : 'bg-slate-50 text-slate-200 border-slate-100'
                             }`}>
                                 {pool.id <= currentPoolId ? <CheckCircle2 className="w-10 h-10" /> : <Lock className="w-10 h-10" />}
@@ -200,7 +200,7 @@ export default function RewardsPage() {
                             
                             <div>
                                 <h4 className="text-2xl font-black text-slate-800 tracking-tight leading-none mb-2">{pool.name} Pool</h4>
-                                <p className={`text-[10px] font-black uppercase tracking-widest ${pool.id <= currentPoolId ? 'text-[#1b5e20]' : 'text-slate-400'}`}>
+                                <p className={`text-[10px] font-black uppercase tracking-widest ${pool.id <= currentPoolId ? 'text-[#e30613]' : 'text-slate-400'}`}>
                                     {pool.id < currentPoolId ? 'Full Distribution Active' : pool.id === currentPoolId ? 'Primary Revenue Source' : 'Tier Locked'}
                                 </p>
                             </div>
@@ -230,11 +230,11 @@ export default function RewardsPage() {
                 </div>
                 <div className="space-y-2">
                     <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest leading-none">Node Efficiency</p>
-                    <p className="text-2xl font-black text-emerald-500 tracking-tighter">100.0% <span className="text-xs">Uptime</span></p>
+                    <p className="text-2xl font-black text-red-500 tracking-tighter">100.0% <span className="text-xs">Uptime</span></p>
                 </div>
                 <div className="space-y-2">
                     <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest leading-none">Synchronizer</p>
-                    <p className="text-2xl font-black text-[#1b5e20] tracking-tighter">PROACTIVE</p>
+                    <p className="text-2xl font-black text-[#e30613] tracking-tighter">PROACTIVE</p>
                 </div>
             </div>
             
@@ -250,7 +250,7 @@ export default function RewardsPage() {
             )}
 
             {isClaimSuccess && (
-                <div className="bg-emerald-50 border border-emerald-100 p-6 rounded-[2rem] text-[#1b5e20] font-black text-xs uppercase tracking-widest flex items-center gap-4 animate-in fade-in">
+                <div className="bg-red-50 border border-red-100 p-6 rounded-[2rem] text-[#e30613] font-black text-xs uppercase tracking-widest flex items-center gap-4 animate-in fade-in">
                     <CheckCircle2 className="w-6 h-6" />
                     <span>Protocol Yield Successfully Synchronized with Wallet Vault.</span>
                 </div>

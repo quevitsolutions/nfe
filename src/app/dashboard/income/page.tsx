@@ -26,7 +26,7 @@ export default function IncomePage() {
 
     const incomeTypes = [
         { id: 1, name: 'Sponsor', color: 'bg-amber-500', amount: incomeBreakdown?.[1] },
-        { id: 2, name: 'Layer', color: 'bg-emerald-500', amount: incomeBreakdown?.[2] },
+        { id: 2, name: 'Layer', color: 'bg-[#e30613]', amount: incomeBreakdown?.[2] },
         { id: 3, name: 'Matrix', color: 'bg-cyan-500', amount: incomeBreakdown?.[3] },
         { id: 4, name: 'Missed', color: 'bg-rose-500', amount: incomeBreakdown?.[5], isLost: true },
     ];
@@ -62,22 +62,22 @@ export default function IncomePage() {
             {/* 1. Summary Cards */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <div className="lg:col-span-2 relative overflow-hidden bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)] p-10 group">
-                    <div className="absolute top-0 right-0 -mt-8 -mr-8 opacity-[0.03] text-[#1b5e20] group-hover:scale-110 transition-transform duration-700">
+                    <div className="absolute top-0 right-0 -mt-8 -mr-8 opacity-[0.03] text-[#e30613] group-hover:scale-110 transition-transform duration-700">
                         <TrendingUp className="w-56 h-56" />
                     </div>
                     
                     <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
                         <div className="space-y-4 text-center md:text-left">
                             <div className="flex items-center justify-center md:justify-start gap-4">
-                                <div className="w-12 h-12 bg-[#1b5e20]/10 rounded-2xl flex items-center justify-center">
-                                    <PieChart className="w-6 h-6 text-[#1b5e20]" />
+                                <div className="w-12 h-12 bg-[#e30613]/10 rounded-2xl flex items-center justify-center">
+                                    <PieChart className="w-6 h-6 text-[#e30613]" />
                                 </div>
                                 <span className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Total Realized Income</span>
                             </div>
                             
                             <div className="space-y-1">
                                 <div className="flex items-baseline justify-center md:justify-start gap-4">
-                                    <span className="text-5xl lg:text-7xl font-black text-[#1b5e20] tracking-tighter">
+                                    <span className="text-5xl lg:text-7xl font-black text-[#e30613] tracking-tighter">
                                         {formatBNB(incomeBreakdown?.[0] || BigInt(0))}
                                     </span>
                                     <span className="text-2xl lg:text-3xl font-black text-slate-200 uppercase tracking-tighter">BNB</span>
@@ -90,9 +90,9 @@ export default function IncomePage() {
 
                         <div className="w-full md:w-px h-px md:h-32 bg-slate-100 mx-2 hidden md:block" />
 
-                        <div className="space-y-2 text-center md:text-right">
+                         <div className="space-y-2 text-center md:text-right">
                              <div className="text-[10px] font-black text-slate-300 uppercase tracking-widest leading-none mb-2">Network Status</div>
-                             <div className="text-xs font-black text-emerald-500 bg-emerald-50 px-4 py-2 rounded-full uppercase tracking-widest inline-block border border-emerald-100">Synchronized</div>
+                             <div className="text-xs font-black text-[#e30613] bg-[#e30613]/5 px-4 py-2 rounded-full uppercase tracking-widest inline-block border border-[#e30613]/10">Synchronized</div>
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@ export default function IncomePage() {
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                     <div className="flex items-center gap-4">
                         <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center border border-slate-100">
-                            <Clock className="w-6 h-6 text-[#1b5e20]" />
+                            <Clock className="w-6 h-6 text-[#e30613]" />
                         </div>
                         <div>
                             <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Reward Ledger</h2>
@@ -159,7 +159,7 @@ export default function IncomePage() {
                         <button
                             onClick={() => { setFilter(null); setCurrentPage(1); }}
                             className={`px-6 py-2.5 rounded-full font-black text-[10px] uppercase tracking-widest transition-all border ${filter === null
-                                ? 'bg-[#1b5e20] text-white border-[#1b5e20] shadow-lg shadow-[#1b5e20]/20'
+                                ? 'bg-[#e30613] text-white border-[#e30613] shadow-lg shadow-[#e30613]/20'
                                 : 'bg-slate-50 border-slate-100 text-slate-500 hover:bg-slate-100'
                             }`}
                         >
@@ -170,7 +170,7 @@ export default function IncomePage() {
                                 key={type.id}
                                 onClick={() => { setFilter(type.id); setCurrentPage(1); }}
                                 className={`px-6 py-2.5 rounded-full font-black text-[10px] uppercase tracking-widest transition-all border ${filter === type.id
-                                    ? 'bg-[#1b5e20] text-white border-[#1b5e20] shadow-lg shadow-[#1b5e20]/20'
+                                    ? 'bg-[#e30613] text-white border-[#e30613] shadow-lg shadow-[#e30613]/20'
                                     : 'bg-slate-50 border-slate-100 text-slate-500 hover:bg-slate-100'
                                 }`}
                             >
@@ -196,7 +196,7 @@ export default function IncomePage() {
                                 <tr key={index} className="bg-slate-50/50 hover:bg-white transition-all group border border-slate-100">
                                     <td className="px-8 py-5 rounded-l-[1.5rem] border-l border-y border-slate-50 group-hover:border-slate-100 transition-all">
                                         <div className="flex items-center gap-3">
-                                            <div className={`w-2 h-2 rounded-full ${item.isLost ? 'bg-rose-500' : 'bg-[#1b5e20]'}`} />
+                                            <div className={`w-2 h-2 rounded-full ${item.isLost ? 'bg-rose-500' : 'bg-[#e30613]'}`} />
                                             <span className={`font-black uppercase tracking-widest text-[10px] ${item.isLost ? 'text-rose-500' : 'text-slate-800'}`}>
                                                 {getIncomeTypeName(item.type)} {item.isLost ? '(Lost)' : ''}
                                             </span>
@@ -216,7 +216,7 @@ export default function IncomePage() {
                                         <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{new Date(item.timestamp).toLocaleString()}</div>
                                     </td>
                                     <td className="px-8 py-5 rounded-r-[1.5rem] border-r border-y border-slate-50 group-hover:border-slate-100 transition-all text-right">
-                                        <div className={`text-sm font-black tracking-tighter ${item.isLost ? 'text-rose-500' : 'text-[#1b5e20]'}`}>
+                                        <div className={`text-sm font-black tracking-tighter ${item.isLost ? 'text-rose-500' : 'text-[#e30613]'}`}>
                                             {item.amount} <span className="text-[10px] opacity-60 ml-0.5">BNB</span>
                                         </div>
                                     </td>
@@ -231,17 +231,17 @@ export default function IncomePage() {
                     <div className="flex justify-between items-center pt-8 border-t border-slate-50">
                         <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest">Page {currentPage} of {totalPages}</p>
                         <div className="flex gap-2">
-                            <button
+                             <button
                                 onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
                                 disabled={currentPage === 1}
-                                className="p-3 rounded-2xl bg-white border border-slate-100 text-[#1b5e20] disabled:opacity-30 hover:bg-slate-50 transition-all"
+                                className="p-3 rounded-2xl bg-white border border-slate-100 text-[#e30613] disabled:opacity-30 hover:bg-slate-50 transition-all"
                             >
                                 <ArrowRight className="w-5 h-5 rotate-180" />
                             </button>
                             <button
                                 onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
                                 disabled={currentPage === totalPages}
-                                className="p-3 rounded-2xl bg-[#1b5e20] text-white shadow-lg shadow-[#1b5e20]/20 disabled:opacity-30 hover:scale-105 active:scale-95 transition-all"
+                                className="p-3 rounded-2xl bg-[#e30613] text-white shadow-lg shadow-[#e30613]/20 disabled:opacity-30 hover:scale-105 active:scale-95 transition-all"
                             >
                                 <ArrowRight className="w-5 h-5" />
                             </button>

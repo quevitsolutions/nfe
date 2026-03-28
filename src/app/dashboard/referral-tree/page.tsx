@@ -70,7 +70,7 @@ function TreeNode({
 
     const layerGradient = 
         tier >= 15 ? 'from-yellow-400 to-orange-500' :
-        tier >= 9  ? 'from-green-400 to-emerald-600' :
+        tier >= 9  ? 'from-red-400 to-red-600' :
                      'from-blue-500 to-indigo-600';
 
     return (
@@ -84,7 +84,7 @@ function TreeNode({
                 layout
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                className={`group relative z-10 mb-3 transition-all duration-300 overflow-hidden bg-[#f4f8f4] border border-[#c8e6c9] shadow-[0_8px_20px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.04)] ${
+                className={`group relative z-10 mb-3 transition-all duration-300 overflow-hidden bg-slate-50 border border-slate-200 shadow-[0_8px_20px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.04)] ${
                     isExpanded ? 'rounded-t-2xl rounded-b-none' : 'rounded-2xl hover:-translate-y-0.5 hover:shadow-lg'
                 }`}
             >
@@ -99,9 +99,9 @@ function TreeNode({
                         
                         <div>
                             <div className="flex items-center gap-2">
-                                <span className="text-[#1b5e20] font-black [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">Node #{userId}</span>
+                                <span className="text-[#e30613] font-black [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">Node #{userId}</span>
                                 {depth === 0 && (
-                                    <span className="px-1.5 py-0.5 rounded-full bg-blue-50 text-[#1b5e20] text-[10px] font-black uppercase tracking-wider border border-blue-200">Root</span>
+                                    <span className="px-1.5 py-0.5 rounded-full bg-blue-50 text-[#e30613] text-[10px] font-black uppercase tracking-wider border border-blue-200">Root</span>
                                 )}
                             </div>
                             <p className="text-gray-500 font-mono font-bold text-xs">{address}</p>
@@ -112,7 +112,7 @@ function TreeNode({
                         <div className="text-center min-w-[60px]">
                             <p className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Tier</p>
                             <p className={`font-black text-sm ${
-                                tier >= 15 ? 'text-amber-500' : tier >= 9 ? 'text-emerald-500' : 'text-blue-500'
+                                tier >= 15 ? 'text-amber-500' : tier >= 9 ? 'text-red-500' : 'text-blue-500'
                             }`}>{tier}</p>
                         </div>
                         <div className="text-center min-w-[60px]">
@@ -125,7 +125,7 @@ function TreeNode({
                         </div>
                         
                         {hasChildren && (
-                            <div className="ml-2 w-8 h-8 rounded-lg bg-white border border-[#c8e6c9] flex items-center justify-center group-hover:bg-[#f4f8f4] transition-colors">
+                            <div className="ml-2 w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center group-hover:bg-slate-100 transition-colors">
                                 {isExpanded ? (
                                     <ChevronDown className="w-4 h-4 text-gray-500" />
                                 ) : (
@@ -147,7 +147,7 @@ function TreeNode({
                     >
                         {isLoading || isFetching ? (
                             <div className="flex items-center gap-2 text-gray-500 py-3 italic text-sm font-bold">
-                                <Loader2 className="w-4 h-4 animate-spin text-[#1b5e20]" />
+                                <Loader2 className="w-4 h-4 animate-spin text-[#e30613]" />
                                 <span>Syncing deep node data...</span>
                             </div>
                         ) : children.length > 0 ? (
@@ -208,13 +208,13 @@ export default function ReferralTreePage() {
         <div className="-m-6 p-6 min-h-[calc(100vh-48px)] bg-gradient-to-b from-[#e31837] to-[#b01025] text-white flex flex-col items-center">
             <div className="max-w-7xl w-full space-y-8 pb-20">
             {/* Header Area */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-[#c8e6c9]">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-6 border-b border-white/20">
                 <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
-                    <h1 className="text-4xl md:text-5xl font-black text-[#1b5e20] tracking-wider uppercase mb-2 [text-shadow:0_1px_1px_rgba(255,255,255,0.8)] flex items-center gap-4">
-                        <GitBranch className="w-10 h-10 text-[#1b5e20] rotate-90" />
+                    <h1 className="text-4xl md:text-5xl font-black text-white tracking-wider uppercase mb-2 flex items-center gap-4">
+                        <GitBranch className="w-10 h-10 text-white rotate-90" />
                         SPONSORSHIP TREE
                     </h1>
-                    <p className="text-gray-500 font-bold">Advanced layered visualization of your autonomous node hierarchy.</p>
+                    <p className="text-white/70 font-bold">Advanced layered visualization of your autonomous node hierarchy.</p>
                 </motion.div>
 
                 <div className="flex gap-3 w-full md:w-auto">
@@ -247,7 +247,7 @@ export default function ReferralTreePage() {
             </div>
 
             {/* Tree Container */}
-            <div className="relative overflow-hidden bg-white border border-[#c8e6c9] shadow-[inset_0_4px_10px_rgba(0,0,0,0.02)] rounded-3xl p-8 min-h-[600px]">
+            <div className="relative overflow-hidden bg-white border border-slate-100 shadow-[inset_0_4px_10px_rgba(0,0,0,0.02)] rounded-3xl p-8 min-h-[600px]">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#2471a3]/30 to-transparent" />
                 
                 <div className="relative z-10 max-w-4xl mx-auto">
@@ -265,9 +265,9 @@ export default function ReferralTreePage() {
                             <motion.div 
                                 animate={{ rotate: 360 }}
                                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                                className="w-16 h-16 border-4 border-[#2471a3]/30 border-t-[#2471a3] rounded-full mb-6" 
+                                className="w-16 h-16 border-4 border-[#e30613]/30 border-t-[#e30613] rounded-full mb-6" 
                             />
-                            <h3 className="text-[#1b5e20] font-black text-xl mb-2 [text-shadow:0_1px_1px_rgba(255,255,255,0.8)] uppercase">INITIALIZING TREE DATA</h3>
+                            <h3 className="text-[#e30613] font-black text-xl mb-2 [text-shadow:0_1px_1px_rgba(255,255,255,0.8)] uppercase">INITIALIZING TREE DATA</h3>
                             <p className="text-gray-500 font-bold text-sm">Synchronizing your node connections with the blockchain...</p>
                         </div>
                     )}
@@ -276,9 +276,9 @@ export default function ReferralTreePage() {
 
             {/* Documentation / Legend Overlay */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-                <div className="relative overflow-hidden bg-[#f4f8f4] border border-[#c8e6c9] shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] rounded-2xl p-6">
-                    <div className="flex items-center gap-3 mb-4 text-[#1b5e20] font-black uppercase tracking-[0.2em] text-xs">
-                        <Layers className="w-4 h-4 text-[#1b5e20]" />
+                <div className="relative overflow-hidden bg-slate-50 border border-slate-200 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] rounded-2xl p-6">
+                    <div className="flex items-center gap-3 mb-4 text-[#e30613] font-black uppercase tracking-[0.2em] text-xs">
+                        <Layers className="w-4 h-4 text-[#e30613]" />
                         Tier Categorization
                     </div>
                     <div className="grid grid-cols-3 gap-4">
@@ -287,7 +287,7 @@ export default function ReferralTreePage() {
                             <p className="text-[10px] text-gray-500 font-black uppercase tracking-wider">Beginner (1-8)</p>
                         </div>
                         <div className="space-y-2">
-                            <div className="h-1.5 w-full bg-emerald-500 rounded-full shadow-sm" />
+                            <div className="h-1.5 w-full bg-red-500 rounded-full shadow-sm" />
                             <p className="text-[10px] text-gray-500 font-black uppercase tracking-wider">Elite (9-14)</p>
                         </div>
                         <div className="space-y-2">
