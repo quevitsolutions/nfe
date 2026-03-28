@@ -2,15 +2,14 @@
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ArrowUpCircle, Check, Loader2 } from 'lucide-react';
-import { useUpgrade, useUpgradeCost, useLevelCosts, useContractConfig, useUserInfo, useUserIdByAddress } from '@/lib/hooks/useContract';
+import { ArrowUpCircle, Check, Loader2, Layers, ShieldCheck, Zap, TrendingUp, Info } from 'lucide-react';
+import { useUpgrade, useLevelCosts, useContractConfig, useUserInfo, useUserIdByAddress } from '@/lib/hooks/useContract';
 import { formatBNB, formatCurrency, LEVEL_COSTS_USD } from '@/lib/contract';
 
 export default function UpgradePage() {
     const { isConnected, address } = useAccount();
-    const [selectedLevel, setSelectedLevel] = useState<number>(1);
+    const [selectedLevel, setSelectedLevel] = useState<number>(0);
 
-    // Get user ID from connected wallet address
     const { data: userData } = useUserIdByAddress(address);
     const userId = userData ? Number(userData) : 0;
 
@@ -20,22 +19,22 @@ export default function UpgradePage() {
     const { upgrade, isPending, isConfirming, isSuccess, hash } = useUpgrade();
 
     const currentLevel = userInfo ? Number(userInfo[3]) : 0;
-    const numLevels = Math.max(0, selectedLevel - currentLevel);
-    const bnbPrice = 600; // Fixed BNB price in USD
+    
+    if (selectedLevel === 0 && currentLevel > 0) {
+        setSelectedLevel(Math.min(18, currentLevel + 1));
+    }
 
-    // Check if user is genesis/root user (ID 36999 gets free upgrades)
     const isGenesisUser = userId === 36999;
+    const upgradeCost = isGenesisUser || !levelCosts
+        ? BigInt(0)
+        : levelCosts.slice(currentLevel, selectedLevel).reduce((acc, cost) => acc + (cost || BigInt(0)), BigInt(0));
 
-    // Fetch upgrade cost directly from contract
-    const { data: contractUpgradeCost } = useUpgradeCost(currentLevel, numLevels);
-
-    // Use contract cost if available, otherwise 0
-    const upgradeCost = isGenesisUser ? BigInt(0) : (contractUpgradeCost ? BigInt(contractUpgradeCost.toString()) : BigInt(0));
-    const upgradeCostUSD = (Number(upgradeCost) / 1e18) * bnbPrice;
+    const exactUsdCost = LEVEL_COSTS_USD
+        .slice(currentLevel, selectedLevel)
+        .reduce((a, b) => a + b, 0);
 
     const handleUpgrade = async () => {
         if (!isConnected || selectedLevel <= currentLevel) return;
-
         try {
             await upgrade(userId, selectedLevel, upgradeCost);
         } catch (error) {
@@ -43,186 +42,192 @@ export default function UpgradePage() {
         }
     };
 
-
     return (
-        <div className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Level Selector */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                    <h2 className="text-2xl font-bold text-white mb-6">Select Target Tier</h2>
-
-                    <div className="space-y-4">
-                        <div className="flex items-center justify-between text-white mb-4">
-                            <span>Active Tier:</span>
-                            <span className="text-2xl font-bold text-yellow-400">{currentLevel}</span>
+        <div className="space-y-8 pb-12">
+            {/* 1. Header Overview Banner */}
+            <div className="relative overflow-hidden bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.02)] p-10 lg:p-12 mb-8 group">
+                <div className="absolute top-0 right-0 -mt-8 -mr-8 opacity-[0.03] text-[#1b5e20] group-hover:scale-110 transition-transform duration-700">
+                    <Layers className="w-64 h-64" />
+                </div>
+                
+                <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-10">
+                    <div className="space-y-6">
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-[#1b5e20]/10 rounded-2xl flex items-center justify-center">
+                                <Zap className="w-6 h-6 text-[#1b5e20]" />
+                            </div>
+                            <span className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Protocol Scaling</span>
                         </div>
-
-                        <div className="grid grid-cols-5 gap-2">
-                            {Array.from({ length: 17 }, (_, i) => i + 1).map((level) => (
-                                <button
-                                    key={level}
-                                    onClick={() => setSelectedLevel(level)}
-                                    disabled={level <= currentLevel}
-                                    className={`
-                    p-3 rounded-lg font-bold transition-all
-                    ${selectedLevel === level
-                                            ? 'bg-gradient-to-r from-yellow-400 to-orange-500 text-black scale-110'
-                                            : level <= currentLevel
-                                                ? 'bg-green-500/20 text-green-400 cursor-not-allowed'
-                                                : 'bg-white/5 text-white hover:bg-white/10'
-                                        }
-                  `}
-                                >
-                                    {level}
-                                </button>
-                            ))}
+                        
+                        <div className="space-y-1">
+                            <div className="flex items-baseline gap-4 text-center md:text-left">
+                                <span className="text-6xl lg:text-8xl font-black text-[#1b5e20] tracking-tighter">
+                                    Tier {currentLevel}
+                                </span>
+                                <span className="text-2xl lg:text-3xl font-black text-slate-200 uppercase tracking-tighter">Current Access</span>
+                            </div>
                         </div>
+                    </div>
 
-                        <div className="bg-white/5 rounded-xl p-4 mt-6">
-                            <div className="flex justify-between items-center mb-2">
-                                <span className="text-gray-400">Unlocking Tier:</span>
-                                <span className="text-white font-bold">Tier {selectedLevel}</span>
-                            </div>
-                            <div className="flex justify-between items-center mb-2">
-                                <span className="text-gray-400">Tiers to unlock:</span>
-                                <span className="text-white font-bold">
-                                    {Math.max(0, selectedLevel - currentLevel)}
-                                </span>
-                            </div>
-                            <div className="flex justify-between items-center">
-                                <span className="text-gray-400">USD Value:</span>
-                                <span className="text-white font-bold">
-                                    {formatCurrency(
-                                        LEVEL_COSTS_USD.slice(currentLevel, selectedLevel).reduce((a, b) => a + b, 0)
-                                    )}
-                                </span>
-                            </div>
+                    <div className="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 text-center space-y-4 min-w-[300px]">
+                         <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none">Global Tier Authority</div>
+                         <div className="flex items-center justify-center gap-3">
+                             <ShieldCheck className="w-8 h-8 text-[#1b5e20]" />
+                             <span className="text-3xl font-black text-slate-800 tracking-tighter">Verified Node</span>
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                {/* 2. Tier Selector Panel */}
+                <div className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)] space-y-8">
+                    <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 bg-slate-50 rounded-2xl flex items-center justify-center border border-slate-100">
+                            <Layers className="w-5 h-5 text-[#1b5e20]" />
+                        </div>
+                        <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase">Select Neural Tier</h2>
+                    </div>
+
+                    <div className="grid grid-cols-6 gap-3">
+                        {Array.from({ length: 18 }, (_, i) => i + 1).map((level) => (
+                            <button
+                                key={level}
+                                onClick={() => setSelectedLevel(level)}
+                                disabled={level <= currentLevel}
+                                className={`
+                                    h-14 rounded-2xl font-black text-xs transition-all border
+                                    ${selectedLevel === level
+                                        ? 'bg-[#1b5e20] border-[#1b5e20] text-white shadow-lg shadow-[#1b5e20]/20 scale-110 z-10'
+                                        : level <= currentLevel
+                                            ? 'bg-slate-50 border-slate-100 text-slate-200 cursor-not-allowed'
+                                            : 'bg-white border-slate-100 text-slate-400 hover:border-[#1b5e20]/30 hover:text-slate-600'
+                                    }
+                                `}
+                            >
+                                {level < 10 ? `0${level}` : level}
+                            </button>
+                        ))}
+                    </div>
+
+                    <div className="bg-slate-50 border border-slate-100 rounded-[2rem] p-8 space-y-4">
+                        <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest">
+                            <span className="text-slate-400">Target Scaling:</span>
+                            <span className="text-[#1b5e20]">Tier {selectedLevel}</span>
+                        </div>
+                        <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest">
+                            <span className="text-slate-400">Authorization Steps:</span>
+                            <span className="text-slate-800">{Math.max(0, selectedLevel - currentLevel)} Layers</span>
+                        </div>
+                        <div className="pt-2 border-t border-slate-200 flex justify-between items-center">
+                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Protocol Cost:</span>
+                            <span className="text-2xl font-black text-slate-800 tracking-tighter">
+                                {formatCurrency(exactUsdCost)}
+                            </span>
                         </div>
                     </div>
                 </div>
 
-                {/* Cost & Upgrade */}
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                    <h2 className="text-2xl font-bold text-white mb-6">Unlock Cost</h2>
+                {/* 3. Authentication Panel */}
+                <div className="flex flex-col">
+                <div className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)] flex-1 relative overflow-hidden group">
+                    <div className="absolute top-0 right-0 -mt-6 -mr-6 opacity-[0.03] text-[#1b5e20] group-hover:rotate-12 transition-transform duration-500">
+                        <ArrowUpCircle className="w-48 h-48" />
+                    </div>
+                    
+                    <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase mb-8">Authorization</h2>
 
                     {isSuccess ? (
-                        <div className="bg-green-500/20 border border-green-500 rounded-2xl p-6 text-center">
-                            <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                                <Check className="w-10 h-10 text-white" />
+                        <div className="bg-emerald-50 border border-emerald-100 rounded-[2.5rem] p-10 text-center animate-in zoom-in-95">
+                            <div className="w-20 h-20 bg-[#1b5e20] shadow-xl rounded-3xl flex items-center justify-center mx-auto mb-6">
+                                <Check className="w-12 h-12 text-white" />
                             </div>
-                            <h3 className="text-2xl font-bold text-white mb-2">Tier Unlocked!</h3>
-                            <p className="text-gray-300 mb-4">Your Node is now Active in Tier {selectedLevel}</p>
+                            <h3 className="text-2xl font-black text-[#1b5e20] mb-2 uppercase tracking-tight">Access Granted</h3>
+                            <p className="text-xs font-bold text-[#1b5e20]/60 uppercase tracking-widest mb-6">Your Node is now Synchronized in Tier {selectedLevel}</p>
                             {hash && (
                                 <a
-                                    href={`https://testnet.bscscan.com/tx/${hash}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-yellow-400 hover:underline text-sm"
+                                    href={`${config?.blockExplorers?.default?.url}/tx/${hash}`}
+                                    target="_blank" rel="noopener noreferrer"
+                                    className="px-8 py-3 bg-white border border-emerald-100 text-[#1b5e20] rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-emerald-100 transition-all inline-block"
                                 >
-                                    View Transaction
+                                    View Tx Ledger »
                                 </a>
                             )}
                         </div>
                     ) : (
-                        <>
-                            {isGenesisUser ? (
-                                <div className="bg-gradient-to-r from-green-400/10 to-emerald-500/10 rounded-2xl p-6 mb-6 border border-green-500/20">
-                                    <div className="text-center mb-4">
-                                        <div className="text-5xl font-bold text-green-400 mb-2">
-                                            FREE
-                                        </div>
-                                        <div className="text-xl text-gray-300">
-                                            Genesis Node - No Cost
-                                        </div>
-                                    </div>
-
-                                    <div className="border-t border-white/10 pt-4 mt-4">
-                                        <div className="text-sm text-gray-400 space-y-2">
-                                            <div className="flex justify-between">
-                                                <span>You are the Genesis Node (ID 36999)</span>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <span>All Tiers are unlocked by default</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div className="space-y-8">
+                            <div className="bg-slate-50 border border-slate-100 rounded-[2rem] p-8 text-center space-y-4">
+                                <div className="text-5xl lg:text-6xl font-black text-[#1b5e20] tracking-tighter">
+                                    {formatBNB(upgradeCost)} <span className="text-xl text-slate-300 uppercase italic">BNB</span>
                                 </div>
-                            ) : (
-                                <div className="bg-gradient-to-r from-yellow-400/10 to-orange-500/10 rounded-2xl p-6 mb-6 border border-yellow-500/20">
-                                    <div className="text-center mb-4">
-                                        <div className="text-5xl font-bold text-yellow-400 mb-2">
-                                            {formatBNB(upgradeCost)} BNB
-                                        </div>
-                                        <div className="text-xl text-gray-300">
-                                            ≈ {formatCurrency(upgradeCostUSD)}
-                                        </div>
-                                    </div>
-
-                                    <div className="border-t border-white/10 pt-4 mt-4">
-                                        <div className="text-sm text-gray-400 space-y-2">
-                                            <div className="flex justify-between">
-                                                <span>Income Distribution:</span>
-                                                <span className="text-white">{formatCurrency(upgradeCostUSD * 0.7)}</span>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <span>Pool Allocation:</span>
-                                                <span className="text-white">{formatCurrency(upgradeCostUSD * 0.3)}</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div className="text-[10px] font-black text-slate-400 bg-white px-6 py-2 rounded-full uppercase tracking-widest inline-block border border-slate-100 shadow-sm">
+                                    Market Value: {formatCurrency(exactUsdCost)}
                                 </div>
-                            )}
+                            </div>
 
                             <button
                                 onClick={handleUpgrade}
                                 disabled={!isConnected || selectedLevel <= currentLevel || isPending || isConfirming}
-                                className="w-full bg-gradient-to-r from-yellow-400 to-orange-500 text-black py-4 rounded-full font-bold text-lg hover:scale-105 transition-transform disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
+                                className="w-full relative overflow-hidden bg-[#1b5e20] text-white py-6 rounded-[2rem] font-black tracking-widest text-sm uppercase shadow-2xl shadow-[#1b5e20]/20 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-30 disabled:grayscale disabled:hover:scale-100 flex items-center justify-center gap-3 group"
                             >
                                 {isPending || isConfirming ? (
                                     <>
-                                        <Loader2 className="animate-spin" />
-                                        {isPending ? 'Propagating...' : 'Verifying...'}
+                                        <Loader2 className="animate-spin w-6 h-6" />
+                                        Authenticating Node...
                                     </>
                                 ) : (
                                     <>
-                                        <ArrowUpCircle />
-                                        Unlock Tier {selectedLevel}
+                                        <ArrowUpCircle className="w-6 h-6 group-hover:animate-bounce" />
+                                        Authorize Neural Expansion
                                     </>
                                 )}
                             </button>
 
-                            <div className="mt-4 text-sm text-gray-400 space-y-1">
-                                <p>✓ Unlock higher reward tiers</p>
-                                <p>✓ Increase sponsorship rewards</p>
-                                <p>✓ Expand matrix network earnings</p>
+                            <div className="grid grid-cols-2 gap-3">
+                                <div className="bg-slate-50/50 p-4 rounded-2xl flex items-center gap-3 border border-slate-100">
+                                    <TrendingUp className="w-4 h-4 text-[#1b5e20]" />
+                                    <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Increased Performance</span>
+                                </div>
+                                <div className="bg-slate-50/50 p-4 rounded-2xl flex items-center gap-3 border border-slate-100">
+                                    <Network className="w-4 h-4 text-[#1b5e20]" />
+                                    <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Extended Path Scope</span>
+                                </div>
                             </div>
-                        </>
+                        </div>
                     )}
+                </div>
                 </div>
             </div>
 
-            {/* Level Breakdown Table */}
-            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/10">
-                <h2 className="text-2xl font-bold text-white mb-6">Node Tier Costs</h2>
+            {/* 4. Directory Grid */}
+            <div className="bg-slate-50/50 rounded-[3rem] p-10 border border-slate-100 space-y-10">
+                <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-white border border-slate-100 rounded-2xl flex items-center justify-center shadow-sm">
+                        <Info className="w-5 h-5 text-[#1b5e20]" />
+                    </div>
+                    <h2 className="text-2xl font-black text-slate-800 tracking-tight uppercase leading-none">Protocol Tier Directory</h2>
+                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                     {LEVEL_COSTS_USD.map((cost, index) => (
                         <div
                             key={index}
-                            className={`rounded-xl p-4 border ${index < currentLevel
-                                ? 'bg-green-500/10 border-green-500/30'
+                            className={`rounded-3xl p-6 border transition-all ${index < currentLevel
+                                ? 'bg-emerald-50 border-emerald-100'
                                 : index < selectedLevel
-                                    ? 'bg-yellow-500/10 border-yellow-500/30'
-                                    : 'bg-white/5 border-white/10'
+                                    ? 'bg-white border-[#1b5e20] shadow-lg shadow-[#1b5e20]/5 scale-105 z-10'
+                                    : 'bg-white border-slate-100 shadow-sm opacity-60'
                                 }`}
                         >
-                            <div className="text-sm text-gray-400 mb-1">Tier {index}</div>
-                            <div className="text-lg font-bold text-white">{formatCurrency(cost)}</div>
-                            <div className="text-xs text-gray-500">
+                            <div className={`text-[9px] font-black uppercase tracking-widest mb-1 ${index < currentLevel ? 'text-emerald-600' : index < selectedLevel ? 'text-[#1b5e20]' : 'text-slate-400'}`}>Layer {index + 1}</div>
+                            <div className={`text-xl font-black ${index < currentLevel ? 'text-emerald-700' : index < selectedLevel ? 'text-[#1b5e20]' : 'text-slate-800'}`}>{formatCurrency(cost)}</div>
+                            <div className="text-[9px] font-bold text-slate-300 mt-1 uppercase tracking-tighter">
                                 {levelCosts ? formatBNB(levelCosts[index]) : '---'} BNB
                             </div>
                             {index < currentLevel && (
-                                <div className="text-xs text-green-400 mt-2">✓ Active</div>
+                                <div className="text-[8px] text-[#1b5e20] font-black uppercase tracking-widest mt-4 bg-white/50 w-fit px-2 py-1 rounded-full flex items-center gap-1 border border-emerald-100">
+                                    <Check className="w-3 h-3" /> Activated
+                                </div>
                             )}
                         </div>
                     ))}

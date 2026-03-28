@@ -19,7 +19,7 @@ export default function Presentation() {
             icon: '🤝',
             mainStat: '10%',
             mainLabel: 'Commission',
-            details: ['On Registration & Upgrades', 'Levels 1 to 24', 'Unlimited Width'],
+            details: ['On Registration & Upgrades', 'All 18 Reward Tiers', 'Unlimited Width'],
             badge: 'INSTANT PAYMENT',
             borderColor: 'border-cyan-400/40',
             bgGlow: 'from-cyan-500/20 to-blue-600/10',
@@ -29,10 +29,10 @@ export default function Presentation() {
             link: '/presentation/direct-referral',
             expandDetails: [
                 { label: 'Commission Rate', value: '10% instant on every referral' },
-                { label: 'Coverage', value: 'Registration + all 24 level upgrades' },
+                { label: 'Coverage', value: 'Registration + all 17 tier upgrades' },
                 { label: 'Payment', value: 'Direct to wallet, no waiting' },
                 { label: 'Requirement', value: 'No qualifications needed' },
-                { label: 'Potential (100 refs)', value: '$500+ from Level 1 alone' },
+                { label: 'Potential (100 refs)', value: '$500+ from L1 alone' },
             ],
         },
         {
@@ -41,8 +41,8 @@ export default function Presentation() {
             icon: '🔺',
             mainStat: '70%',
             mainLabel: 'Distribution',
-            details: ['2×2 Binary Matrix', 'Auto Spillover', 'Levels 2 to 24'],
-            badge: '24 LAYERS DEEP',
+            details: ['2×2 Binary Matrix', 'Auto Spillover', 'Tiers L1 to L18'],
+            badge: '18 LAYERS DEEP',
             borderColor: 'border-purple-400/40',
             bgGlow: 'from-purple-500/20 to-pink-600/10',
             badgeBg: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
@@ -53,17 +53,17 @@ export default function Presentation() {
                 { label: 'Distribution', value: '70% of upgrade cost to upline' },
                 { label: 'Structure', value: '2×2 Binary — auto fill L→R' },
                 { label: 'Spillover', value: 'Global spillover supported' },
-                { label: 'Levels', value: 'L2 to L24 (23 levels)' },
-                { label: 'Qualification', value: 'Must be at higher level than payer' },
+                { label: 'Matrix Depth', value: 'Earns up to 18 layers deep' },
+                { label: 'Qualification', value: 'Must be upgraded > tier level' },
             ],
         },
         {
             number: '3',
             title: 'Level Income',
             icon: '💰',
-            mainStat: '20%',
+            mainStat: '15%',
             mainLabel: 'Total Dist.',
-            details: ['24 Unilevel Layers', 'L1-5: 2%, L6-10: 1%', 'L11-24: 0.35% each'],
+            details: ['17 Unilevel Layers', 'L1-5: 1.5%, L6-10: 1.0%', 'L11-17: 0.35% each'],
             badge: 'PASSIVE INCOME',
             borderColor: 'border-green-400/40',
             bgGlow: 'from-green-500/20 to-emerald-600/10',
@@ -72,11 +72,11 @@ export default function Presentation() {
             expandBg: 'bg-green-900/20 border-green-500/20',
             link: '/presentation/level-income',
             expandDetails: [
-                { label: 'Levels 1–5', value: '2.00% per level (Foundation)' },
-                { label: 'Levels 6–10', value: '1.00% per level (Growth)' },
-                { label: 'Levels 11–24', value: '0.35% per level (Deep)' },
-                { label: 'Total', value: '~20% total distribution' },
-                { label: 'Requirement', value: 'Must be upgraded higher than payer' },
+                { label: 'Layers 1–5', value: '1.50% per layer (Foundation)' },
+                { label: 'Layers 6–10', value: '1.00% per layer (Growth)' },
+                { label: 'Layers 11–17', value: '0.35% per layer (Deep)' },
+                { label: 'Total', value: '~15% total distribution' },
+                { label: 'Qualification', value: '2 Directs for L6+ Layers' },
             ],
         },
         {
@@ -98,7 +98,7 @@ export default function Presentation() {
                 { label: 'Top Performers', value: 'Highest direct referral volume' },
                 { label: 'Achievers', value: 'Rank & team growth milestones' },
                 { label: 'Leaders', value: 'Consistent active participation' },
-                { label: 'Payout', value: 'Periodic — automated on-chain' },
+                { label: 'Payout', value: 'Real-Time Auto Distributed' },
             ],
         },
     ];
@@ -121,10 +121,10 @@ export default function Presentation() {
                 {/* Header */}
                 <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10">
                     <h1 className="text-4xl md:text-6xl font-black tracking-tighter">
-                        <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 bg-clip-text text-transparent uppercase">NodeFlow Engine</span>
+                        <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-500 bg-clip-text text-transparent uppercase">AIPCore</span>
                         <span className="text-white/80 block md:inline md:ml-4"> — 4 Reward Flows</span>
                     </h1>
-                    <p className="text-gray-500 text-sm mt-3 tracking-widest uppercase">Select an architectural layer to expand technical details</p>
+                    <p className="text-white/80 text-sm mt-3 tracking-widest uppercase">Select an architectural layer to expand technical details</p>
                 </motion.div>
 
                 {/* 2×2 Card Grid */}
@@ -137,9 +137,9 @@ export default function Presentation() {
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.12, duration: 0.5 }}
-                                className={`relative rounded-2xl border ${stream.borderColor} bg-gradient-to-br ${stream.bgGlow} backdrop-blur-xl overflow-hidden transition-all duration-300`}
+                                className={`relative overflow-hidden bg-gradient-to-br from-white/10 to-transparent backdrop-blur-xl border-t border-l border-white/20 border-b border-r border-black/50 shadow-[6px_6px_15px_rgba(0,0,0,0.4),-2px_-2px_8px_rgba(255,255,255,0.02),inset_1px_1px_2px_rgba(255,255,255,0.2)] rounded-[2rem] transition-all duration-300 group ${isOpen ? `shadow-[10px_10px_30px_rgba(0,0,0,0.7)] scale-[1.01] z-10 ${stream.borderColor}` : ''}`}
                             >
-                                <div className="absolute inset-0 bg-black/40 rounded-2xl pointer-events-none" />
+                                <div className={`absolute inset-0 bg-gradient-to-br ${stream.bgGlow} opacity-30 pointer-events-none`} />
 
                                 {/* Card Header — always visible, clickable */}
                                 <button
@@ -156,7 +156,7 @@ export default function Presentation() {
                                             <div className="text-xs text-white/50 font-semibold uppercase tracking-wide">{stream.mainLabel}</div>
                                             <div className="mt-2 flex flex-wrap gap-x-3 gap-y-0.5">
                                                 {stream.details.map((d, i) => (
-                                                    <span key={i} className="text-xs text-gray-400">{d}</span>
+                                                    <span key={i} className="text-xs text-neural-gold">{d}</span>
                                                 ))}
                                             </div>
                                         </div>
@@ -182,10 +182,10 @@ export default function Presentation() {
                                             transition={{ duration: 0.3, ease: 'easeInOut' }}
                                             className="overflow-hidden"
                                         >
-                                            <div className={`relative z-10 mx-4 mb-5 rounded-xl border p-4 ${stream.expandBg} space-y-2`}>
+                                            <div className="relative z-10 mx-5 mb-5 bg-black/40 border-t border-l border-black/80 border-b border-r border-white/10 shadow-[inset_2px_2px_10px_rgba(0,0,0,0.8),inset_-1px_-1px_2px_rgba(255,255,255,0.1)] rounded-2xl p-5 space-y-3">
                                                 {stream.expandDetails.map((item, i) => (
                                                     <div key={i} className="flex justify-between items-start gap-3 text-sm border-b border-white/5 pb-2 last:border-0 last:pb-0">
-                                                        <span className="text-gray-400 shrink-0">{item.label}</span>
+                                                        <span className="text-neural-gold shrink-0">{item.label}</span>
                                                         <span className="text-white font-semibold text-right">{item.value}</span>
                                                     </div>
                                                 ))}
@@ -217,30 +217,30 @@ export default function Presentation() {
                     <Link href="/presentation/how-to-join">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
-                            className="p-5 rounded-2xl border border-teal-500/30 bg-gradient-to-br from-teal-900/20 to-cyan-900/10 backdrop-blur-xl cursor-pointer hover:scale-[1.02] transition-all group"
+                            className="p-6 relative overflow-hidden bg-gradient-to-br from-white/10 to-transparent backdrop-blur-xl border-t border-l border-white/20 border-b border-r border-black/50 shadow-[6px_6px_15px_rgba(0,0,0,0.4),-2px_-2px_8px_rgba(255,255,255,0.02),inset_1px_1px_2px_rgba(255,255,255,0.2)] rounded-[2rem] cursor-pointer hover:scale-[1.02] hover:shadow-[8px_8px_20px_rgba(20,184,166,0.2)] transition-all group"
                         >
                             <div className="flex items-center gap-4">
                                 <span className="text-4xl">⚙️</span>
                                 <div>
                                     <h3 className="text-xl font-bold text-teal-300 group-hover:text-teal-200 transition-colors">How to Join & Upgrade</h3>
-                                    <p className="text-sm text-gray-500">Step-by-step registration & upgrade guide</p>
+                                    <p className="text-sm text-white/80">Step-by-step registration & upgrade guide</p>
                                 </div>
-                                <ArrowRight className="ml-auto w-5 h-5 text-white/20 group-hover:text-white/60 transition-colors" />
+                                <ArrowRight className="ml-auto w-5 h-5 text-white/20 group-hover:text-neural-gold transition-colors" />
                             </div>
                         </motion.div>
                     </Link>
                     <Link href="/presentation/income-calculator">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}
-                            className="p-5 rounded-2xl border border-orange-500/30 bg-gradient-to-br from-orange-900/20 to-yellow-900/10 backdrop-blur-xl cursor-pointer hover:scale-[1.02] transition-all group"
+                            className="p-6 relative overflow-hidden bg-gradient-to-br from-white/10 to-transparent backdrop-blur-xl border-t border-l border-white/20 border-b border-r border-black/50 shadow-[6px_6px_15px_rgba(0,0,0,0.4),-2px_-2px_8px_rgba(255,255,255,0.02),inset_1px_1px_2px_rgba(255,255,255,0.2)] rounded-[2rem] cursor-pointer hover:scale-[1.02] hover:shadow-[8px_8px_20px_rgba(249,115,22,0.2)] transition-all group"
                         >
                             <div className="flex items-center gap-4">
                                 <span className="text-4xl">📊</span>
                                 <div>
                                     <h3 className="text-xl font-bold text-orange-300 group-hover:text-orange-200 transition-colors">Detailed Income Calculator</h3>
-                                    <p className="text-sm text-gray-500">Level costs, matrix income, earning scenarios</p>
+                                    <p className="text-sm text-white/80">Level costs, matrix income, earning scenarios</p>
                                 </div>
-                                <ArrowRight className="ml-auto w-5 h-5 text-white/20 group-hover:text-white/60 transition-colors" />
+                                <ArrowRight className="ml-auto w-5 h-5 text-white/20 group-hover:text-neural-gold transition-colors" />
                             </div>
                         </motion.div>
                     </Link>
@@ -248,19 +248,19 @@ export default function Presentation() {
 
                 {/* Bottom Summary */}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }} className="text-center space-y-4">
-                    <div className="inline-block px-6 md:px-8 py-3 rounded-xl bg-white/5 border border-white/10 backdrop-blur-md">
+                    <div className="inline-block px-6 md:px-8 py-3 bg-black/40 border-t border-l border-black/80 border-b border-r border-yellow-500/20 shadow-[inset_2px_2px_10px_rgba(0,0,0,0.8),inset_-1px_-1px_2px_rgba(255,255,255,0.1)] rounded-2xl">
                         <span className="text-gray-300 text-base md:text-lg font-semibold">Total Investment: </span>
                         <span className="text-white text-base md:text-lg font-black">$5 to Start</span>
-                        <span className="text-gray-400 text-base md:text-lg"> (24 Levels) · </span>
+                        <span className="text-neural-gold text-base md:text-lg"> (18 Tiers L0–L17) · </span>
                         <span className="text-yellow-400 text-base md:text-lg font-bold italic">Unlimited Potential</span>
                     </div>
                     <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap">
-                        <div className="flex items-center gap-2 text-sm text-gray-400">
+                        <div className="flex items-center gap-2 text-sm text-neural-gold">
                             <span className="text-yellow-500">⚙️</span>
                             <span><strong className="text-white">Network:</strong> BSC Mainnet</span>
                         </div>
                         <span className="text-white/20 hidden sm:block">|</span>
-                        <div className="flex items-center gap-2 text-sm text-gray-400">
+                        <div className="flex items-center gap-2 text-sm text-neural-gold">
                             <span><strong className="text-white">Payment:</strong> Native BNB</span>
                             <span className="text-yellow-500">🪙</span>
                         </div>

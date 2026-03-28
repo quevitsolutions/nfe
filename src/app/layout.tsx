@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "NodeFlow Engine | Autonomous Reward Protocol",
+  title: "AIPCore | Autonomous Reward Protocol",
   description: "A decentralized, on-chain community coordination protocol distributing rewards algorithmically.",
 };
 

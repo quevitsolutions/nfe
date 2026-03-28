@@ -1,9 +1,9 @@
-import contractABI from './GreatIncomeClub.json';
+import contractABI from './AIPCore.json';
 import rewardPoolABI from './RewardPool.json';
 import contractConfig from '../config/contracts.json';
 
 // Contract ABIs
-export const GREAT_INCOME_CLUB_ABI = contractABI.abi;
+export const AIPCORE_ABI = contractABI.abi;
 export const REWARD_POOL_ABI = rewardPoolABI.abi;
 
 // Contract addresses
@@ -58,10 +58,9 @@ export const GENESIS_USER_ID = 36999;
 
 // Income types
 export const INCOME_TYPES = {
-    0: 'Referral',
-    1: 'Direct',
-    2: 'Level',
-    3: 'Binary',
+    1: 'Sponsor',
+    2: 'Layer',
+    3: 'Matrix',
 } as const;
 
 // Level costs (in USD)
@@ -76,8 +75,16 @@ export function getContractAddress(chainId: number): string {
 }
 
 // Helper to get RewardPool address
-export function getRewardPoolAddress(): string {
-    return process.env.NEXT_PUBLIC_REWARD_POOL_ADDRESS || '0x571a4fB9DA9926FA2BCbAF92a0ee19975ae374a8';
+export function getRewardPoolAddress(chainId?: number): string {
+    if (process.env.NEXT_PUBLIC_REWARD_POOL_ADDRESS) {
+        return process.env.NEXT_PUBLIC_REWARD_POOL_ADDRESS;
+    }
+    
+    // Explicit chain mapping based on standard IDs
+    if (chainId === 56) return contractConfig.rewardPoolAddresses.bscMainnet;
+    if (chainId === 97) return contractConfig.rewardPoolAddresses.bscTestnet;
+    
+    return contractConfig.rewardPoolAddresses.bscMainnet; // Default to Mainnet if chain undefined
 }
 
 // Helper to format BNB

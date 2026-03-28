@@ -1,223 +1,258 @@
 'use client';
 
-import { useAccount, useChainId } from 'wagmi';
-import { useUserIdByAddress, useNodeInfo, useClaim } from '@/lib/hooks/useContract';
-import { formatBNB, formatCurrency } from '@/lib/contract';
-import { Gift, Wallet, Award, ArrowUpRight, Ban } from 'lucide-react';
+import { useAccount } from 'wagmi';
+import { 
+    useUserIdByAddress, 
+    useClaim, 
+    useIncomeBreakdown, 
+    usePoolViewHelper, 
+    useUserInfo, 
+    usePoolRequirements 
+} from '@/lib/hooks/useContract';
+import { formatBNB } from '@/lib/contract';
+import { 
+    Gift, 
+    Wallet, 
+    Award, 
+    ArrowUpRight, 
+    Ban, 
+    TrendingUp, 
+    Layers, 
+    Network, 
+    Activity, 
+    Cpu,
+    CheckCircle2,
+    Lock,
+    Sparkles,
+    ChevronRight
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { ManualSyncButton } from '@/components/ManualSyncButton';
 
 export default function RewardsPage() {
     const { address, isConnected } = useAccount();
     const [isMounted, setIsMounted] = useState(false);
 
-    // Get user ID mapped from wallet
     const { data: userData } = useUserIdByAddress(address);
     const userId = userData ? Number(userData) : 0;
 
-    // Fetch RewardPool Info
-    const { data: nodeInfo, refetch: refetchNodeInfo } = useNodeInfo(userId);
+    const { data: poolView, refetch: refetchPoolView } = usePoolViewHelper(userId);
+    const { data: userInfo, refetch: refetchUserInfo } = useUserInfo(userId);
+    const { data: coreIncomeData, refetch: refetchCoreIncome } = useIncomeBreakdown(userId);
+    const { data: poolReqs } = usePoolRequirements();
 
-    // Claim Hook
-    const { claim, isPending, isConfirming, isSuccess, error } = useClaim();
+    const { claim, isPending: isClaimPending, isConfirming: isClaimConfirming, isSuccess: isClaimSuccess, error: claimError } = useClaim();
 
     useEffect(() => {
         setIsMounted(true);
     }, []);
 
-    // Refresh after successful claim
     useEffect(() => {
-        if (isSuccess && userId > 0) {
-            refetchNodeInfo();
+        if (isClaimSuccess && userId > 0) {
+            refetchPoolView();
+            refetchUserInfo();
+            refetchCoreIncome();
         }
-    }, [isSuccess, userId, refetchNodeInfo]);
+    }, [isClaimSuccess, userId, refetchPoolView, refetchUserInfo, refetchCoreIncome]);
 
     if (!isMounted || !isConnected) return null;
 
-    if (userId === 0) {
-        return (
-            <div className="flex flex-col items-center justify-center min-h-[400px] text-gray-400">
-                <Ban className="w-16 h-16 text-red-500/50 mb-4" />
-                <h2 className="text-xl font-bold text-white mb-2">Unregistered Address</h2>
-                <p>Register a node first to start earning rewards.</p>
-            </div>
-        );
+    const currentPoolId = poolView ? Number(poolView[0]) : 0;
+    const poolName = poolView ? String(poolView[1]) : 'None';
+    const claimableBNB = poolView ? poolView[2] as bigint : BigInt(0);
+    const lifetimeClaimed = poolView ? poolView[4] as bigint : BigInt(0);
+    const capRemaining = poolView ? poolView[5] as bigint : BigInt(0);
+    const lifetimeCap = poolView ? poolView[6] as bigint : BigInt(0);
+    const totalDeposited = poolView ? poolView[7] as bigint : BigInt(0);
+    const nfeLayer = poolView ? Number(poolView[8]) : 0;
+    const isQualifiedForNext = poolView ? Boolean(poolView[9]) : false;
+    const mq = poolView ? poolView[11] as bigint[] : undefined;
+
+    const isCapReached = lifetimeClaimed >= lifetimeCap && lifetimeCap > BigInt(0);
+    
+    let missingRequirements = '';
+    if (mq && mq.length === 3) {
+        const parts = [];
+        if (Number(mq[0]) > 0) parts.push(`${mq[0]} layers`);
+        if (Number(mq[1]) > 0) parts.push(`${mq[1]} directs`);
+        if (Number(mq[2]) > 0) parts.push(`${mq[2]} team`);
+        missingRequirements = parts.join(', ');
     }
 
-    // Mapping nodeInfo array elements (from RewardPool.sol getNodeInfo)
-    const currentPoolId = nodeInfo ? Number(nodeInfo[0]) : 0;
-    const poolName = nodeInfo ? String(nodeInfo[1]) : 'None';
-    const nfeTier = nodeInfo ? Number(nodeInfo[2]) : 0;
-    const claimableBNB = nodeInfo ? nodeInfo[3] : BigInt(0);
-    const lifetimeCap = nodeInfo ? nodeInfo[4] : BigInt(0);
-    const lifetimeClaimed = nodeInfo ? nodeInfo[5] : BigInt(0);
-    const capRemaining = nodeInfo ? nodeInfo[6] : BigInt(0);
-    const isCapReached = nodeInfo ? Boolean(nodeInfo[7]) : false;
-    const totalDeposited = nodeInfo ? nodeInfo[8] : BigInt(0);
-
-    const handleClaim = () => {
-        if (userId > 0) {
-            claim(userId);
-        }
-    };
-
-    // Pool Colors
-    const getPoolColor = (id: number) => {
-        switch (id) {
-            case 3: return 'from-yellow-400 to-yellow-600 shadow-yellow-500/20'; // Gold
-            case 2: return 'from-gray-300 to-gray-500 shadow-gray-500/20';       // Silver
-            case 1: return 'from-orange-700 to-orange-900 shadow-orange-500/20'; // Bronze
-            default: return 'from-slate-700 to-slate-900 shadow-slate-900/20';   // None
-        }
-    };
-
-    const getProgressPercentage = () => {
-        if (lifetimeCap === BigInt(0)) return 0;
-        const cap = Number(lifetimeCap);
-        const claimed = Number(lifetimeClaimed);
-        const percent = (claimed / cap) * 100;
-        return Math.min(100, Math.max(0, percent));
-    };
+    const formatPrice = (val: bigint) => (Number(val) / 1e18).toFixed(4);
 
     return (
-        <div className="space-y-6 max-w-7xl mx-auto">
-            <h1 className="text-2xl md:text-3xl font-bold text-white mb-8">Reward Pool</h1>
-
-            {/* Top Pool Status Banner */}
-            <div className={`p-8 rounded-2xl bg-gradient-to-br ${getPoolColor(currentPoolId)} border border-white/20 shadow-lg relative overflow-hidden backdrop-blur-md`}>
-                <div className="absolute top-0 right-0 -mt-10 -mr-10 opacity-20 transform rotate-12">
-                    <Award className="w-64 h-64" />
+        <div className="space-y-8 pb-12">
+            {/* 1. Main Reward Banner */}
+            <div className={`relative overflow-hidden bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_10px_40px_rgba(0,0,0,0.02)] p-10 lg:p-12 mb-8`}>
+                <div className="absolute top-0 right-0 -mt-8 -mr-8 opacity-[0.03] text-[#1b5e20] rotate-12 transition-transform duration-700 hover:rotate-45">
+                    <Gift className="w-80 h-80" />
                 </div>
-
-                <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                    <div>
-                        <div className="text-white/80 font-medium mb-1 tracking-wider uppercase">Active Membership</div>
-                        <div className="text-4xl md:text-6xl font-black text-white drop-shadow-lg mb-2">
-                            {poolName} Pool
+                
+                <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
+                    <div className="space-y-6">
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-[#1b5e20]/10 rounded-2xl flex items-center justify-center">
+                                <Award className="w-6 h-6 text-[#1b5e20]" />
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-sm font-black text-slate-400 uppercase tracking-[0.2em]">Active Status</span>
+                                <span className="text-xl font-bold text-slate-800">{currentPoolId === 0 ? 'Awaiting Entry' : `${poolName} Pool Member`}</span>
+                            </div>
                         </div>
-                        <div className="text-lg text-white/90">
-                            NodeFlowEngine Tier: <span className="font-bold">{nfeTier}</span>
+                        
+                        <div className="space-y-1">
+                            {currentPoolId === 0 ? (
+                                <div className="space-y-4">
+                                     <div className="text-4xl lg:text-5xl font-black text-slate-300 tracking-tighter uppercase">No Active Yield</div>
+                                     {mq && Number(mq[0]) === 0 && Number(mq[1]) === 0 && Number(mq[2]) === 0 ? (
+                                         <div className="bg-emerald-50 border border-emerald-100 p-6 rounded-[2rem] space-y-2 animate-in fade-in slide-in-from-bottom-4">
+                                             <div className="text-2xl font-black text-[#1b5e20]">🎉 Qualified for Bronze!</div>
+                                             <p className="text-xs font-bold text-[#1b5e20]/60 uppercase tracking-widest leading-relaxed">Your node has met all requirements.<br/>Click manual sync below if auto-registration is pending.</p>
+                                             <div className="animate-bounce pt-2">
+                                                 <ManualSyncButton nodeId={userId} />
+                                             </div>
+                                         </div>
+                                     ) : (
+                                         <p className="text-sm font-bold text-slate-400 uppercase tracking-widest max-w-[300px]">Unlock global distribution by qualifying for the Bronze Pool.</p>
+                                     )}
+                                </div>
+                            ) : (
+                                <div className="space-y-6">
+                                    <div className="flex items-baseline gap-4">
+                                        <span className="text-6xl lg:text-8xl font-black text-[#1b5e20] tracking-tighter">
+                                            {formatBNB(claimableBNB)}
+                                        </span>
+                                        <span className="text-2xl lg:text-4xl font-black text-slate-200 uppercase tracking-tighter">BNB</span>
+                                    </div>
+                                    <div className="flex flex-wrap gap-4">
+                                        <button 
+                                            onClick={() => claim()}
+                                            disabled={isClaimPending || isClaimConfirming || Number(claimableBNB) === 0 || isCapReached}
+                                            className={`px-10 py-4 rounded-[1.5rem] font-black text-xs uppercase tracking-widest shadow-xl transition-all flex items-center gap-3 ${
+                                                Number(claimableBNB) > 0 && !isCapReached
+                                                ? 'bg-[#1b5e20] text-white hover:scale-105 active:scale-95 shadow-[#1b5e20]/20'
+                                                : 'bg-slate-50 text-slate-400 border border-slate-100 cursor-not-allowed'
+                                            }`}
+                                        >
+                                            <Gift className="w-5 h-5" />
+                                            {isClaimPending || isClaimConfirming ? 'Securing...' : isCapReached ? 'Cap Reached' : 'Claim Yield »'}
+                                        </button>
+                                        
+                                        {isQualifiedForNext && (
+                                            <div className="bg-emerald-50 border border-emerald-100 p-4 rounded-[1.5rem] flex items-center gap-4 animate-in zoom-in-95">
+                                                <Sparkles className="w-5 h-5 text-[#1b5e20]" />
+                                                <div className="flex flex-col">
+                                                    <span className="text-[10px] font-black text-[#1b5e20] uppercase tracking-widest leading-none mb-1">Level Up Qualified</span>
+                                                    <ManualSyncButton nodeId={userId} isQualifiedForNext={true} />
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
 
-                    <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-white/10 w-full md:w-auto min-w-[300px]">
-                        <div className="text-sm text-white/70 mb-1">Available to Claim</div>
-                        <div className="text-3xl font-bold text-white mb-4">
-                            {formatBNB(claimableBNB)} BNB
+                    <div className="flex flex-col gap-4 w-full md:w-auto min-w-[280px]">
+                        <div className="bg-slate-50 rounded-[2.5rem] p-8 border border-slate-100 flex flex-col items-center justify-center text-center space-y-4">
+                             <div className="text-xs font-black text-slate-400 uppercase tracking-widest">Global Rewards Performance</div>
+                             <div className="flex gap-4">
+                                 <div className="flex flex-col items-center p-4 bg-white rounded-3xl shadow-sm min-w-[100px] border border-slate-100">
+                                     <span className="text-xs font-black text-[#1b5e20] tracking-tighter">{formatBNB(lifetimeClaimed)}</span>
+                                     <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest mt-1">Claimed</span>
+                                 </div>
+                                 <div className="flex flex-col items-center p-4 bg-white rounded-3xl shadow-sm min-w-[100px] border border-slate-100 text-[#1b5e20]">
+                                      <span className="text-xs font-black tracking-tighter">{formatBNB(capRemaining)}</span>
+                                      <span className="text-[8px] font-black text-slate-300 uppercase tracking-widest mt-1">Remaining Scope</span>
+                                 </div>
+                             </div>
                         </div>
-
-                        <button
-                            onClick={handleClaim}
-                            disabled={isPending || isConfirming || Number(claimableBNB) === 0 || isCapReached}
-                            className={`w-full py-3 px-6 rounded-lg font-bold flex items-center justify-center gap-2 transition-all ${isCapReached
-                                    ? 'bg-red-500/50 text-white cursor-not-allowed'
-                                    : Number(claimableBNB) > 0 && !isPending && !isConfirming
-                                        ? 'bg-white text-black hover:bg-gray-100 hover:scale-[1.02] shadow-xl'
-                                        : 'bg-white/20 text-white/50 cursor-not-allowed'
-                                }`}
-                        >
-                            <Gift className="w-5 h-5" />
-                            {isPending || isConfirming
-                                ? 'Claiming...'
-                                : isCapReached
-                                    ? 'Cap Reached'
-                                    : 'Claim Rewards'
-                            }
-                        </button>
-
-                        {error && (
-                            <div className="text-red-300 text-xs mt-3 bg-red-900/50 p-2 rounded">
-                                {(error as any).shortMessage || error.message}
-                            </div>
-                        )}
-                        {isSuccess && (
-                            <div className="text-green-300 text-xs mt-3 bg-green-900/50 p-2 rounded">
-                                Successfully claimed!
-                            </div>
-                        )}
                     </div>
                 </div>
             </div>
 
-            {/* Metrics Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition">
-                    <div className="flex items-center gap-3 mb-4">
-                        <div className="p-3 bg-blue-500/20 text-blue-400 rounded-xl">
-                            <Wallet className="w-6 h-6" />
+            {/* 2. Pool Status & Tiers (Vi Style Grid) */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                {[
+                    { id: 1, name: 'Bronze', color: 'slate', icon: Award, active: currentPoolId >= 1 },
+                    { id: 2, name: 'Silver', color: 'slate', icon: Sparkles, active: currentPoolId >= 2 },
+                    { id: 3, name: 'Gold', color: 'slate', icon: Award, active: currentPoolId >= 3 },
+                ].map((pool) => (
+                    <div key={pool.id} className={`relative overflow-hidden bg-white rounded-[3rem] p-10 border transition-all group ${
+                        pool.id === currentPoolId 
+                        ? 'border-[#1b5e20] shadow-[0_15px_40px_rgba(27,94,32,0.1)]' 
+                        : 'border-slate-100 shadow-sm opacity-80'
+                    }`}>
+                        <div className={`absolute top-4 right-4 text-[#1b5e20]/5 group-hover:scale-125 transition-transform`}>
+                            <pool.icon className="w-16 h-16" />
                         </div>
-                        <h3 className="text-gray-400 font-medium">Total Deposited</h3>
-                    </div>
-                    <div className="text-2xl font-bold text-white">{formatBNB(totalDeposited)} BNB</div>
-                    <div className="text-sm text-gray-500 mt-1">Via NodeFlowEngine</div>
-                </div>
+                        
+                        <div className="relative z-10 flex flex-col items-center text-center space-y-6">
+                            <div className={`w-20 h-20 rounded-3xl flex items-center justify-center border transition-all ${
+                                pool.id <= currentPoolId 
+                                ? 'bg-[#1b5e20] text-white border-[#1b5e20] shadow-lg shadow-[#1b5e20]/20 scale-110' 
+                                : 'bg-slate-50 text-slate-200 border-slate-100'
+                            }`}>
+                                {pool.id <= currentPoolId ? <CheckCircle2 className="w-10 h-10" /> : <Lock className="w-10 h-10" />}
+                            </div>
+                            
+                            <div>
+                                <h4 className="text-2xl font-black text-slate-800 tracking-tight leading-none mb-2">{pool.name} Pool</h4>
+                                <p className={`text-[10px] font-black uppercase tracking-widest ${pool.id <= currentPoolId ? 'text-[#1b5e20]' : 'text-slate-400'}`}>
+                                    {pool.id < currentPoolId ? 'Full Distribution Active' : pool.id === currentPoolId ? 'Primary Revenue Source' : 'Tier Locked'}
+                                </p>
+                            </div>
 
-                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition">
-                    <div className="flex items-center gap-3 mb-4">
-                        <div className="p-3 bg-green-500/20 text-green-400 rounded-xl">
-                            <ArrowUpRight className="w-6 h-6" />
+                            {pool.id > currentPoolId && (
+                                <div className="w-full pt-4 space-y-3">
+                                    <div className="h-1.5 w-full bg-slate-50 rounded-full overflow-hidden">
+                                        <div className="h-full bg-slate-200 rounded-full w-1/3" />
+                                    </div>
+                                    <p className="text-[9px] font-black text-slate-300 uppercase tracking-widest">Optimization in progress</p>
+                                </div>
+                            )}
                         </div>
-                        <h3 className="text-gray-400 font-medium">Lifetime Claimed</h3>
                     </div>
-                    <div className="text-2xl font-bold text-white">{formatBNB(lifetimeClaimed)} BNB</div>
-                    <div className="text-sm text-gray-500 mt-1">Total withdrawn</div>
-                </div>
-
-                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition">
-                    <div className="flex items-center gap-3 mb-4">
-                        <div className="p-3 bg-purple-500/20 text-purple-400 rounded-xl">
-                            <Award className="w-6 h-6" />
-                        </div>
-                        <h3 className="text-gray-400 font-medium">Lifetime Cap</h3>
-                    </div>
-                    <div className="text-2xl font-bold text-white">{formatBNB(lifetimeCap)} BNB</div>
-                    <div className="text-sm text-gray-500 mt-1">Maximum earnings</div>
-                </div>
-
-                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10 hover:bg-white/10 transition">
-                    <div className="flex items-center gap-3 mb-4">
-                        <div className="p-3 bg-yellow-500/20 text-yellow-400 rounded-xl">
-                            <Gift className="w-6 h-6" />
-                        </div>
-                        <h3 className="text-gray-400 font-medium">Cap Remaining</h3>
-                    </div>
-                    <div className="text-2xl font-bold text-white">{formatBNB(capRemaining)} BNB</div>
-                    <div className="text-sm text-gray-500 mt-1">Available to earn</div>
-                </div>
+                ))}
             </div>
 
-            {/* Progress Bar Section */}
-            {currentPoolId > 0 && (
-                <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
-                    <div className="flex justify-between items-end mb-4">
-                        <div>
-                            <h3 className="text-lg font-bold text-white mb-1">Cap Progress</h3>
-                            <p className="text-sm text-gray-400">Track how close you are to your pool's earnings cap.</p>
-                        </div>
-                        <div className="text-2xl font-black text-white">
-                            {getProgressPercentage().toFixed(2)}%
-                        </div>
+            {/* 3. Global Stats */}
+            <div className="bg-white rounded-[2.5rem] p-8 lg:p-10 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)] grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div className="space-y-2">
+                    <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest leading-none">Global Distributed</p>
+                    <p className="text-2xl font-black text-slate-800 tracking-tighter">{formatBNB(totalDeposited)} <span className="text-xs">BNB</span></p>
+                </div>
+                <div className="space-y-2">
+                    <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest leading-none">Target Nodes</p>
+                    <p className="text-2xl font-black text-slate-800 tracking-tighter">8,192 <span className="text-xs">Capacity</span></p>
+                </div>
+                <div className="space-y-2">
+                    <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest leading-none">Node Efficiency</p>
+                    <p className="text-2xl font-black text-emerald-500 tracking-tighter">100.0% <span className="text-xs">Uptime</span></p>
+                </div>
+                <div className="space-y-2">
+                    <p className="text-[10px] font-black text-slate-300 uppercase tracking-widest leading-none">Synchronizer</p>
+                    <p className="text-2xl font-black text-[#1b5e20] tracking-tighter">PROACTIVE</p>
+                </div>
+            </div>
+            
+            {/* Error Handlers */}
+            {claimError && (
+                <div className="bg-rose-50 border border-rose-100 p-6 rounded-[2rem] text-rose-500 font-bold text-xs uppercase tracking-widest flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                        <Activity className="w-5 h-5" />
+                        <span>Execution Rejected: {(claimError as any).shortMessage || claimError.message}</span>
                     </div>
+                    <button onClick={() => window.location.reload()} className="hover:underline">Retry Connection</button>
+                </div>
+            )}
 
-                    <div className="w-full bg-white/10 rounded-full h-4 mb-4 overflow-hidden border border-white/5">
-                        <div
-                            className={`h-4 rounded-full transition-all duration-1000 bg-gradient-to-r ${getPoolColor(currentPoolId)}`}
-                            style={{ width: `${getProgressPercentage()}%` }}
-                        ></div>
-                    </div>
-
-                    <div className="flex justify-between text-sm font-mono text-gray-400">
-                        <span>0 BNB</span>
-                        <span>{formatBNB(lifetimeCap)} BNB Limit</span>
-                    </div>
-
-                    {isCapReached && (
-                        <div className="mt-6 bg-red-500/10 border border-red-500/20 rounded-xl p-4 text-center">
-                            <p className="text-red-400 font-medium">
-                                You have reached your lifetime earnings cap for the {poolName} pool!
-                                Upgrade your tier in NodeFlowEngine to enter a higher pool and increase your cap limit.
-                            </p>
-                        </div>
-                    )}
+            {isClaimSuccess && (
+                <div className="bg-emerald-50 border border-emerald-100 p-6 rounded-[2rem] text-[#1b5e20] font-black text-xs uppercase tracking-widest flex items-center gap-4 animate-in fade-in">
+                    <CheckCircle2 className="w-6 h-6" />
+                    <span>Protocol Yield Successfully Synchronized with Wallet Vault.</span>
                 </div>
             )}
         </div>

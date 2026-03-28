@@ -5,15 +5,15 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
 
-const TIER_COSTS = [
-    5, 7.5, 15, 30, 60, 120, 240, 480, 960, 1920,
-    3840, 7680, 15360, 30720, 61440, 122880, 245760
-]; // Limited to 17 tiers as per latest contract spec
+const LAYER_COSTS = [
+    5, 5, 10, 20, 40, 80, 160, 320, 640, 1280,
+    2560, 5120, 10240, 20480, 40960, 81920, 163840, 327680
+]; // All 18 tiers: L0($5 registration) to L17($327,680) matching contract tierPriceUSD
 
 const levelIncomePercents = [
-    2, 2, 2, 2, 2,           // L1-5
+    1.5, 1.5, 1.5, 1.5, 1.5, // L1-5
     1, 1, 1, 1, 1,           // L6-10
-    0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35 // L11-24
+    0.35, 0.35, 0.35, 0.35, 0.35, 0.35, 0.35 // L11-17
 ];
 
 function fmtUSD(val: number) {
@@ -57,10 +57,10 @@ export default function IncomeCalculatorPage() {
                 {/* Title */}
                 <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
                     <h1 className="text-4xl md:text-5xl font-black tracking-tight">
-                        <span className="bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent uppercase">NodeFlow Engine</span>
-                        <span className="text-white/60"> CALCULATOR</span>
+                        <span className="bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent uppercase">AIPCore</span>
+                        <span className="text-neural-gold"> CALCULATOR</span>
                     </h1>
-                    <p className="text-gray-500 mt-2">All 17 Tiers · All 4 Reward Flows · Operational Protocol</p>
+                    <p className="text-white/80 mt-2">All 18 Tiers (L0–L17) · All 4 Reward Flows · Live on BSC Mainnet</p>
                 </motion.div>
 
                 {/* Tab Navigation */}
@@ -71,7 +71,7 @@ export default function IncomeCalculatorPage() {
                             onClick={() => setActiveTab(tab.id)}
                             className={`px-5 py-2.5 rounded-full font-bold text-sm tracking-wider transition-all border ${activeTab === tab.id
                                 ? `${tab.color} bg-white/10 border-white/20 scale-105`
-                                : 'text-gray-500 bg-white/5 border-white/5 hover:bg-white/10'
+                                : 'text-white/80 bg-white/5 border-white/5 hover:bg-white/10'
                                 }`}
                         >
                             {tab.label}
@@ -85,25 +85,22 @@ export default function IncomeCalculatorPage() {
                         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             {/* Table */}
                             <div className="lg:col-span-2 overflow-x-auto">
-                                <h2 className="text-2xl font-black text-yellow-400 mb-4">COMPLETE TIER COSTS — ALL 17 TIERS</h2>
+                                <h2 className="text-2xl font-black text-yellow-400 mb-4">COMPLETE TIER COSTS — ALL 18 TIERS</h2>
                                 <table className="w-full text-sm border-collapse">
                                     <thead>
                                         <tr className="bg-yellow-900/30 text-yellow-400">
-                                            <th className="p-2 text-left border border-white/10">Tier</th>
+                                            <th className="p-2 text-left border border-white/10">Layer</th>
                                             <th className="p-2 text-right border border-white/10">USD Cost</th>
-                                            <th className="p-2 text-right border border-white/10">Admin Fee (5%)</th>
                                             <th className="p-2 text-right border border-white/10">Cumulative</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {TIER_COSTS.map((cost, i) => {
-                                            const cumulative = TIER_COSTS.slice(0, i + 1).reduce((a, b) => a + b, 0);
-                                            const adminFee = cost * 0.05;
+                                        {LAYER_COSTS.map((cost, i) => {
+                                            const cumulative = LAYER_COSTS.slice(0, i + 1).reduce((a, b) => a + b, 0);
                                             return (
                                                 <tr key={i} className={`${i % 2 === 0 ? 'bg-white/[0.02]' : 'bg-white/[0.05]'} hover:bg-white/10 transition-colors`}>
-                                                    <td className="p-2 border border-white/10 font-bold text-white">T{i + 1}</td>
+                                                    <td className="p-2 border border-white/10 font-bold text-white">L{i}</td>
                                                     <td className="p-2 border border-white/10 text-right text-gray-300">{fmtUSD(cost)}</td>
-                                                    <td className="p-2 border border-white/10 text-right text-gray-400">{fmtUSD(adminFee)}</td>
                                                     <td className="p-2 border border-white/10 text-right text-yellow-300 font-semibold">{fmtUSD(cumulative)}</td>
                                                 </tr>
                                             );
@@ -119,7 +116,6 @@ export default function IncomeCalculatorPage() {
                                     <ul className="space-y-3 text-gray-300 text-sm">
                                         <li>• Progressive <strong className="text-white">doubling</strong> structure</li>
                                         <li>• Each level <strong className="text-white">doubles</strong> the previous cost</li>
-                                        <li>• <span className="text-yellow-400">Admin fee</span> is consistent 5% per level</li>
                                         <li>• <strong className="text-white">BNB amount</strong> adjusts with market price</li>
                                         <li>• Cumulative cost grows exponentially</li>
                                     </ul>
@@ -127,11 +123,10 @@ export default function IncomeCalculatorPage() {
                                 <div className="p-6 rounded-2xl bg-yellow-900/10 border border-yellow-500/20">
                                     <h3 className="text-lg font-bold text-yellow-400 mb-3">PAYMENT DISTRIBUTION:</h3>
                                     <ul className="space-y-2 text-sm text-gray-300">
-                                        <li>- Admin Fee: <strong className="text-white">5%</strong></li>
-                                        <li>- Reward Fund: <strong className="text-white">5%</strong></li>
-                                        <li>- Direct Referral: <strong className="text-white">10%</strong></li>
-                                        <li>- Level Income: <strong className="text-white">~20%</strong></li>
-                                        <li>- Matrix Income: <strong className="text-white">~70%</strong></li>
+                                        <li>- Direct Referral (Sponsor): <strong className="text-white">10%</strong></li>
+                                        <li>- Binary Matrix: <strong className="text-white">70%</strong></li>
+                                        <li>- Layer (Unilevel) Income: <strong className="text-white">~15%</strong></li>
+                                        <li>- Reward Pool: <strong className="text-white">5%</strong></li>
                                     </ul>
                                 </div>
                             </div>
@@ -152,7 +147,7 @@ export default function IncomeCalculatorPage() {
                                 <h2 className="text-2xl font-black text-purple-400">MATRIX INCOME FORMULA:</h2>
                                 <p className="text-xl text-white mt-1">70% of Upgrade Cost → <span className="text-purple-300">First Qualified Upline</span></p>
                             </div>
-                            <div className="ml-auto text-sm text-gray-400 max-w-sm">
+                            <div className="ml-auto text-sm text-neural-gold max-w-sm">
                                 Income earned when a member in your downline upgrades, calculated as 70% of their upgrade cost, goes to the first qualified upline in the chain.
                             </div>
                         </div>
@@ -162,7 +157,7 @@ export default function IncomeCalculatorPage() {
                             <h3 className="text-lg font-bold text-green-400 mb-2">✅ QUALIFICATION REQUIREMENTS:</h3>
                             <div className="flex flex-wrap gap-6 text-sm text-gray-300">
                                 <span>✅ Your level &gt; Payer&apos;s level</span>
-                                <span>✅ Within 24 layers</span>
+                                <span>✅ Within 18 layers</span>
                                 <span>✅ Active account</span>
                             </div>
                         </div>
@@ -180,7 +175,7 @@ export default function IncomeCalculatorPage() {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {LEVEL_COSTS.map((cost, i) => (
+                                        {LAYER_COSTS.map((cost, i) => (
                                             <tr key={i} className={`${i % 2 === 0 ? 'bg-white/[0.02]' : 'bg-white/[0.05]'}`}>
                                                 <td className="p-2 border border-white/10 font-bold text-white">L{i + 1}</td>
                                                 <td className="p-2 border border-white/10 text-right text-gray-300">{fmtUSD(cost)}</td>
@@ -197,14 +192,14 @@ export default function IncomeCalculatorPage() {
                             <h3 className="text-xl font-bold text-white mb-4">EXAMPLE SCENARIOS:</h3>
                             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
                                 {[
-                                    { label: 'Scenario A', desc: "You're L10, someone in layer 5 upgrades to L7", result: fmtUSD(240 * 0.7), color: 'border-green-500/30 bg-green-900/10', emoji: '✅' },
-                                    { label: 'Scenario B', desc: "You're L13, 5 people upgrade to L10 this month", result: fmtUSD(1920 * 0.7 * 5), color: 'border-blue-500/30 bg-blue-900/10', emoji: '🚀' },
+                                    { label: 'Scenario A', desc: "You're L10, someone in layer 5 upgrades to L7", result: fmtUSD(320 * 0.7), color: 'border-green-500/30 bg-green-900/10', emoji: '✅' },
+                                    { label: 'Scenario B', desc: "You're L13, 5 people upgrade to L10 this month", result: fmtUSD(2560 * 0.7 * 5), color: 'border-blue-500/30 bg-blue-900/10', emoji: '🚀' },
                                     { label: 'Scenario C', desc: "You're L8, someone in layer 3 upgrades to L9", result: '$0', color: 'border-red-500/30 bg-red-900/10', emoji: '❌' },
                                     { label: 'Scenario D', desc: "You're L13 with 200-person team, 20 upgrades/month", result: '$20k-$50k', color: 'border-yellow-500/30 bg-yellow-900/10', emoji: '👑' },
                                 ].map((s, i) => (
                                     <div key={i} className={`p-4 rounded-xl border ${s.color}`}>
                                         <h4 className="font-bold text-white mb-1">{s.emoji} {s.label}</h4>
-                                        <p className="text-xs text-gray-400 mb-3">{s.desc}</p>
+                                        <p className="text-xs text-neural-gold mb-3">{s.desc}</p>
                                         <div className="text-xl font-black text-white">→ You earn: {s.result}</div>
                                         {s.result === '$0' && <p className="text-xs text-red-400 mt-1">(Not qualified - they&apos;re higher level)</p>}
                                     </div>
@@ -216,7 +211,7 @@ export default function IncomeCalculatorPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="p-5 rounded-xl bg-red-900/10 border border-red-500/20">
                                 <h4 className="font-bold text-red-400 mb-2">⚠️ WHAT IF NOT QUALIFIED?</h4>
-                                <ul className="text-sm text-gray-400 space-y-1">
+                                <ul className="text-sm text-neural-gold space-y-1">
                                     <li>- Income goes to next qualified upline</li>
                                     <li>- Or to root user if no one qualified</li>
                                     <li>- This is &quot;lost income&quot; - motivation to qualify!</li>
@@ -224,7 +219,7 @@ export default function IncomeCalculatorPage() {
                             </div>
                             <div className="p-5 rounded-xl bg-green-900/10 border border-green-500/20">
                                 <h4 className="font-bold text-green-400 mb-2">💡 QUALIFICATION TIPS:</h4>
-                                <ol className="text-sm text-gray-400 space-y-1 list-decimal pl-4">
+                                <ol className="text-sm text-neural-gold space-y-1 list-decimal pl-4">
                                     <li>Always be higher level than your team</li>
                                     <li>Encourage team to upgrade</li>
                                     <li>Stay active in the system</li>
@@ -241,7 +236,7 @@ export default function IncomeCalculatorPage() {
                             {/* Table */}
                             <div>
                                 <h2 className="text-2xl font-black text-green-400 mb-4">LEVEL INCOME STRUCTURE</h2>
-                                <p className="text-gray-400 mb-4">Total: ~20% across 24 unilevel layers</p>
+                                <p className="text-neural-gold mb-4">Total: ~15% across 17 unilevel layers</p>
                                 <table className="w-full text-sm border-collapse">
                                     <thead>
                                         <tr className="bg-green-900/30 text-green-300">
@@ -260,8 +255,8 @@ export default function IncomeCalculatorPage() {
                                         ))}
                                         <tr className="bg-green-900/30 font-bold">
                                             <td className="p-2 border border-white/10 text-green-400">TOTAL</td>
-                                            <td className="p-2 border border-white/10 text-right text-green-400">~19.9%</td>
-                                            <td className="p-2 border border-white/10 text-right text-green-400">$199</td>
+                                            <td className="p-2 border border-white/10 text-right text-green-400">~14.95%</td>
+                                            <td className="p-2 border border-white/10 text-right text-green-400">$149.5</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -272,9 +267,9 @@ export default function IncomeCalculatorPage() {
                                 <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
                                     <h3 className="text-lg font-bold text-white mb-3">📋 EXAMPLE CALCULATION:</h3>
                                     <p className="text-gray-300 text-sm mb-3">Team member upgrades to L10 ($1,920)</p>
-                                    <ul className="space-y-2 text-sm text-gray-400">
-                                        <li>• As L1 upline: <strong className="text-white">${(1920 * 0.02).toFixed(0)}</strong> (2.00%)</li>
-                                        <li>• As L5 upline: <strong className="text-white">${(1920 * 0.02).toFixed(0)}</strong> (2.00%)</li>
+                                    <ul className="space-y-2 text-sm text-neural-gold">
+                                        <li>• As L1 upline: <strong className="text-white">${(1920 * 0.015).toFixed(1)}</strong> (1.50%)</li>
+                                        <li>• As L5 upline: <strong className="text-white">${(1920 * 0.015).toFixed(1)}</strong> (1.50%)</li>
                                         <li>• As L10 upline: <strong className="text-white">${(1920 * 0.01).toFixed(0)}</strong> (1.00%)</li>
                                         <li>• As L15 upline: <strong className="text-white">${(1920 * 0.0035).toFixed(1)}</strong> (0.35%)</li>
                                     </ul>
@@ -289,8 +284,8 @@ export default function IncomeCalculatorPage() {
                                     ].map((p, i) => (
                                         <div key={i} className="mb-3 p-3 rounded-lg bg-black/30 border border-white/5">
                                             <span className="text-green-300 font-bold text-sm">{p.label}</span>
-                                            <span className="text-gray-500 text-xs"> ({p.desc})</span>
-                                            <div className="text-xs text-gray-400 mt-1">→ Total volume: {p.vol}</div>
+                                            <span className="text-white/80 text-xs"> ({p.desc})</span>
+                                            <div className="text-xs text-neural-gold mt-1">→ Total volume: {p.vol}</div>
                                             <div className="text-xs text-white font-semibold">→ Your commission: {p.earn}</div>
                                         </div>
                                     ))}
@@ -298,16 +293,16 @@ export default function IncomeCalculatorPage() {
 
                                 <div className="p-5 rounded-xl bg-white/5 border border-white/10">
                                     <h4 className="font-bold text-yellow-400 mb-2">🌿 POWER OF COMPOUNDING:</h4>
-                                    <ul className="text-sm text-gray-400 space-y-1">
+                                    <ul className="text-sm text-neural-gold space-y-1">
                                         <li>• Build deep networks for exponential growth!</li>
-                                        <li>• 24 levels deep = massive earning potential</li>
+                                        <li>• 17 layers deep = massive earning potential</li>
                                         <li>• Passive income from your entire downline</li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div className="p-4 rounded-xl bg-gradient-to-r from-green-900/20 to-emerald-900/20 border border-green-500/20 text-center">
-                            <p className="text-green-300 font-bold">Passive income from 24 levels deep | Qualification-based rewards</p>
+                            <p className="text-green-300 font-bold">Passive income from 17 layers deep | Qualification-based rewards</p>
                         </div>
                     </motion.div>
                 )}
@@ -356,7 +351,7 @@ export default function IncomeCalculatorPage() {
                                 },
                                 {
                                     title: 'ENTERPRISE', members: '1000+ Active Members', color: 'border-yellow-500/30', titleBg: 'bg-yellow-900/30 text-yellow-400',
-                                    team: ['50+ Direct referrals', '950+ Deep network', 'Average level: L12', 'You at L13 (All royalty tiers)'],
+                                    team: ['50+ Direct referrals', '950+ Deep network', 'Average layer: L12', 'You at L13 (All royalty pools)'],
                                     income: [
                                         'Direct Referrals: $237.50',
                                         'Matrix Income: $50,000 - $100,000',
@@ -379,19 +374,19 @@ export default function IncomeCalculatorPage() {
                                     </div>
                                     <div className="p-4 space-y-4">
                                         <div>
-                                            <h4 className="text-xs font-bold text-gray-500 uppercase mb-2">Team Structure</h4>
-                                            <ul className="text-xs text-gray-400 space-y-1">
+                                            <h4 className="text-xs font-bold text-white/80 uppercase mb-2">Team Structure</h4>
+                                            <ul className="text-xs text-neural-gold space-y-1">
                                                 {s.team.map((t, j) => <li key={j}>- {t}</li>)}
                                             </ul>
                                         </div>
                                         <div>
-                                            <h4 className="text-xs font-bold text-gray-500 uppercase mb-2">Monthly Income</h4>
+                                            <h4 className="text-xs font-bold text-white/80 uppercase mb-2">Monthly Income</h4>
                                             <ul className="text-xs text-gray-300 space-y-1">
                                                 {s.income.map((inc, j) => <li key={j}>• {inc}</li>)}
                                             </ul>
                                         </div>
                                         <div className="p-3 rounded-xl bg-white/5 text-center">
-                                            <span className="text-xs text-gray-500">Monthly Total:</span>
+                                            <span className="text-xs text-white/80">Monthly Total:</span>
                                             <div className="text-xl font-black text-white">{s.total}</div>
                                         </div>
                                     </div>
@@ -403,17 +398,17 @@ export default function IncomeCalculatorPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div className="p-5 rounded-xl bg-white/5 border border-white/10">
                                 <h4 className="font-bold text-white mb-3">KEY FACTORS:</h4>
-                                <div className="grid grid-cols-2 gap-2 text-sm text-gray-400">
+                                <div className="grid grid-cols-2 gap-2 text-sm text-neural-gold">
                                     <span>✅ Team activity level</span>
                                     <span>✅ Direct referral count</span>
                                     <span>✅ Upgrade frequency</span>
-                                    <span>✅ Royalty tier eligibility</span>
+                                    <span>✅ Royalty pool eligibility</span>
                                     <span>✅ Your qualification status</span>
                                 </div>
                             </div>
                             <div className="p-5 rounded-xl bg-white/5 border border-white/10">
                                 <h4 className="font-bold text-white mb-3">GROWTH MULTIPLIERS:</h4>
-                                <ul className="space-y-1 text-sm text-gray-400">
+                                <ul className="space-y-1 text-sm text-neural-gold">
                                     <li>→ Higher Levels = <strong className="text-white">Higher Earnings</strong></li>
                                     <li>→ More Directs = <strong className="text-white">More Qualifications</strong></li>
                                     <li>→ Deeper Network = <strong className="text-white">More Layers</strong></li>

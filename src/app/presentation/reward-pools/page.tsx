@@ -20,7 +20,7 @@ export default function RewardPoolsSlide() {
                     <span className="text-sm tracking-widest uppercase font-mono hidden sm:block">Level Income</span>
                     <span className="text-sm font-mono sm:hidden">Prev</span>
                 </Link>
-                <span className="text-xs text-gray-500 font-mono uppercase tracking-widest">Slide 4 / 4 — Reward Pools</span>
+                <span className="text-xs text-white/80 font-mono uppercase tracking-widest">Slide 4 / 4 — Reward Pools</span>
                 <Link href="/presentation" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group">
                     <span className="text-sm tracking-widest uppercase font-mono hidden sm:block">Hub</span>
                     <span className="text-sm font-mono sm:hidden">Finish</span>
@@ -63,7 +63,7 @@ export default function RewardPoolsSlide() {
                         <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2 }}
                             className="bg-gradient-to-br from-yellow-500 to-orange-600 p-0.5 rounded-3xl shadow-[0_0_50px_rgba(234,179,8,0.2)]">
                             <div className="bg-black/80 backdrop-blur-xl rounded-[22px] p-6 md:p-8 text-center border border-white/10">
-                                <div className="text-gray-400 text-sm md:text-base uppercase tracking-wider mb-2">Total Allocation</div>
+                                <div className="text-neural-gold text-sm md:text-base uppercase tracking-wider mb-2">Total Allocation</div>
                                 <div className="text-6xl md:text-8xl font-black text-white mb-2">5%</div>
                                 <div className="text-yellow-400 font-bold text-lg">of Global Revenue</div>
                             </div>
@@ -90,7 +90,7 @@ export default function RewardPoolsSlide() {
                                     <span className="flex-shrink-0 w-9 h-9 rounded-full bg-yellow-500/20 flex items-center justify-center text-yellow-400 text-lg">★</span>
                                     <div>
                                         <strong className="block text-white text-sm md:text-base">{item.title}</strong>
-                                        <span className="text-gray-400 text-sm">{item.desc}</span>
+                                        <span className="text-neural-gold text-sm">{item.desc}</span>
                                     </div>
                                 </motion.li>
                             ))}
@@ -99,10 +99,10 @@ export default function RewardPoolsSlide() {
                         <div className="bg-blue-900/20 rounded-2xl p-5 border border-blue-500/20 text-center">
                             <span className="block text-blue-300 text-xs uppercase tracking-widest mb-1">Payout Frequency</span>
                             <span className="text-xl font-bold text-white">Periodic Distribution</span>
-                            <span className="block text-gray-500 text-xs mt-1">(Automated via Smart Contract)</span>
+                            <span className="block text-white/80 text-xs mt-1">(Automated via Smart Contract)</span>
                         </div>
 
-                        <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 pt-2">
+                        <div className="flex flex-wrap justify-center gap-4 text-sm text-white/80 pt-2">
                             <span>👑 Recognize Excellence</span>
                             <span>🌍 Global Share</span>
                             <span>🚀 Infinite Motivation</span>

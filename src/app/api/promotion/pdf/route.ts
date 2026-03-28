@@ -1,4 +1,4 @@
-// Generates a personalised NodeFlow Engine PDF brochure on-the-fly
+// Generates a personalised AIPCore PDF brochure on-the-fly
 // GET /api/promotion/pdf?wallet=0x...&type=brochure|income|matrix|flyer
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -77,7 +77,7 @@ function buildBrochure(link: string): Doc {
     doc.fontSize(22).fillColor(GOLD).font('Helvetica-Bold').text('NFE', PW / 2 - 30, 201, { width: 60, align: 'center' });
 
     doc.fontSize(32).fillColor(GOLD).font('Helvetica-Bold');
-    centreText(doc, 'NODEFLOW ENGINE', 300);
+    centreText(doc, 'AIPCORE', 300);
     doc.fontSize(13).fillColor(LIGHT).font('Helvetica');
     centreText(doc, 'Autonomous Reward Protocol · BNB Smart Chain', 340);
 
@@ -162,7 +162,7 @@ function buildBrochure(link: string): Doc {
     hr(doc, y); y += 12;
     y = sectionHead(doc, '❓  Common Questions', y); y += 4;
     [
-        ['Is NodeFlow Engine a scam?', 'No. It\'s a public smart contract on BSC — every tx is visible on BscScan. No one controls your funds.'],
+        ['Is AIPCore a scam?', 'No. It\'s a public smart contract on BSC — every tx is visible on BscScan. No one controls your funds.'],
         ['Do I need referrals?', 'No. Matrix spillover from your upline provides passive income. Referrals accelerate earnings.'],
         ['When do I get paid?', 'Instantly — BNB is sent directly to your wallet the moment someone in your matrix transacts.'],
         ['Can I withdraw?', 'Nothing to withdraw — income lands directly in your BSC wallet. It\'s already yours.'],
@@ -199,7 +199,7 @@ function buildFlyer(link: string): Doc {
     doc.save().circle(PW / 2, 140, 55).strokeColor(GOLD).strokeOpacity(0.8).lineWidth(2).stroke().restore();
     doc.fontSize(20).fillColor(GOLD).font('Helvetica-Bold').text('NFE', PW / 2 - 26, 131, { width: 52, align: 'center' });
 
-    doc.fontSize(28).fillColor(GOLD).font('Helvetica-Bold'); centreText(doc, 'NODEFLOW ENGINE', 220);
+    doc.fontSize(28).fillColor(GOLD).font('Helvetica-Bold'); centreText(doc, 'AIPCORE', 220);
     doc.fontSize(11).fillColor(LIGHT).font('Helvetica'); centreText(doc, 'Autonomous · BNB Smart Chain · Smart Contract', 256);
 
     // Big hook
@@ -263,12 +263,12 @@ export async function GET(req: NextRequest) {
 
     if (type === 'flyer') {
         doc = buildFlyer(refLink);
-        filename = 'NodeFlow_Engine_Flyer.pdf';
+        filename = 'AIPCore_Engine_Flyer.pdf';
     } else {
         doc = buildBrochure(refLink);
-        filename = type === 'income' ? 'NodeFlow_Engine_Reward_Guide.pdf'
-            : type === 'matrix' ? 'NodeFlow_Engine_Matrix_Guide.pdf'
-                : 'NodeFlow_Engine_Brochure.pdf';
+        filename = type === 'income' ? 'AIPCore_Engine_Reward_Guide.pdf'
+            : type === 'matrix' ? 'AIPCore_Engine_Matrix_Guide.pdf'
+                : 'AIPCore_Engine_Brochure.pdf';
     }
 
     doc.end();

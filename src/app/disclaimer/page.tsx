@@ -17,7 +17,7 @@ export default function DisclaimerPage() {
                     <section>
                         <h2 className="text-2xl font-bold text-white mb-4">1. General Information</h2>
                         <p>
-                            Great Income Club ("The Platform") is a decentralized application (DApp) running on the Binance Smart Chain (BSC).
+                            AIPCore ("The Platform") is a decentralized application (DApp) running on the Binance Smart Chain (BSC).
                             The Platform operates automatically via smart contracts and cannot be stopped, altered, or censored by any single entity.
                             Participation in the Platform is entirely voluntary.
                         </p>
@@ -43,7 +43,7 @@ export default function DisclaimerPage() {
                     <section>
                         <h2 className="text-2xl font-bold text-white mb-4">4. Community Driven Revenue Sharing</h2>
                         <p>
-                            Great Income Club is a "Community Driven Revenue Sharing" model. Income is generated solely through the sale of products/services
+                            AIPCore is a "Community Driven Revenue Sharing" model. Income is generated solely through the sale of products/services
                             (membership levels) and the expansion of the user community. There are no guaranteed returns or passive income without
                             community growth and activity.
                         </p>
@@ -52,14 +52,14 @@ export default function DisclaimerPage() {
                     <section>
                         <h2 className="text-2xl font-bold text-white mb-4">5. Limitation of Liability</h2>
                         <p>
-                            The creators, developers, and promoters of Great Income Club shall not be held liable for any losses, damages, or claims
+                            The creators, developers, and promoters of AIPCore shall not be held liable for any losses, damages, or claims
                             arising from your use of the Platform, including but not limited to smart contract bugs, blockchain network failures,
                             or loss of private keys.
                         </p>
                     </section>
 
                     <div className="pt-8 border-t border-gray-700">
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-white/80">
                             By continuing to use this website and connecting your wallet, you acknowledge that you have read, understood, and agreed to this disclaimer.
                         </p>
                     </div>

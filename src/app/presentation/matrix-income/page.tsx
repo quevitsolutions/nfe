@@ -20,7 +20,7 @@ export default function MatrixIncomeSlide() {
                     <span className="text-sm tracking-widest uppercase font-mono hidden sm:block">Direct Referral</span>
                     <span className="text-sm font-mono sm:hidden">Prev</span>
                 </Link>
-                <span className="text-xs text-gray-500 font-mono uppercase tracking-widest">Slide 2 / 4 — Matrix Income</span>
+                <span className="text-xs text-white/80 font-mono uppercase tracking-widest">Slide 2 / 4 — Matrix Income</span>
                 <Link href="/presentation/level-income" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group">
                     <span className="text-sm tracking-widest uppercase font-mono hidden sm:block">Level Income</span>
                     <span className="text-sm font-mono sm:hidden">Next</span>
@@ -50,7 +50,7 @@ export default function MatrixIncomeSlide() {
                             Matrix Level Income
                         </span>
                     </h1>
-                    <p className="text-sm md:text-lg text-purple-400 font-mono tracking-widest uppercase">Binary Matrix • Levels 2–24</p>
+                    <p className="text-sm md:text-lg text-purple-400 font-mono tracking-widest uppercase">Binary Matrix • 18 Tiers (L0–L17)</p>
                 </div>
 
                 {/* Content Grid */}
@@ -100,7 +100,7 @@ export default function MatrixIncomeSlide() {
                                 {[1, 2].map((n) => (
                                     <motion.div key={n} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.4 + n * 0.1 }}
                                         className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gray-800 border-2 border-purple-500/50 flex items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.2)]">
-                                        <span className="text-xs text-gray-400">L1</span>
+                                        <span className="text-xs text-neural-gold">L1</span>
                                     </motion.div>
                                 ))}
                             </div>
@@ -110,7 +110,7 @@ export default function MatrixIncomeSlide() {
                                 {[1, 2, 3, 4].map((n) => (
                                     <motion.div key={n} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.6 + n * 0.1 }}
                                         className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-gray-900 border border-purple-500/30 flex items-center justify-center">
-                                        <span className="text-[10px] text-gray-500">L2</span>
+                                        <span className="text-[10px] text-white/80">L2</span>
                                     </motion.div>
                                 ))}
                             </div>
@@ -125,7 +125,7 @@ export default function MatrixIncomeSlide() {
                         <h3 className="text-lg font-bold text-white border-b border-white/10 pb-2">Key Features</h3>
                         <ul className="space-y-3">
                             {[
-                                "Earn from Levels 2 to 24",
+                                "Earn from Matrix Tiers L0 to L17",
                                 "Auto-filled: Top-to-Bottom, Left-to-Right",
                                 "Global Spillover Supported",
                                 "Massive income from deep structure",
@@ -139,7 +139,7 @@ export default function MatrixIncomeSlide() {
                         </ul>
 
                         <div className="bg-gradient-to-r from-purple-900/40 to-indigo-900/40 rounded-xl p-5 border border-white/10">
-                            <div className="text-gray-400 text-xs uppercase tracking-wider mb-1">Max Potential</div>
+                            <div className="text-neural-gold text-xs uppercase tracking-wider mb-1">Max Potential</div>
                             <div className="text-3xl font-black text-white">UNLIMITED</div>
                             <div className="text-purple-300 text-sm">Exponential Growth</div>
                         </div>

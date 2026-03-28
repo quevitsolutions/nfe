@@ -42,9 +42,9 @@ const joinSteps = [
         title: 'PAYMENT',
         icon: '💡',
         details: [
-            'Level 1 cost: ~0.008 BNB ($5)',
-            'Admin fee: 5% additional',
-            'Total: ~0.0084 BNB',
+            'Level 1 cost: $5 paid in BNB',
+            'Zero Admin Fees! 100% Distribution',
+            'Total: Just the $5 + BNB gas',
             'Transaction confirms in seconds',
         ],
     },
@@ -67,8 +67,8 @@ const upgradeSteps = [
         icon: '🧮',
         details: [
             'Each level has fixed USD cost',
-            'BNB amount adjusts with oracle price',
-            'Admin fee: 5% additional',
+            'BNB amount adjusts with live oracle price',
+            'Zero Admin Fees! 100% Distribution',
             'Can upgrade multiple levels at once',
         ],
     },
@@ -89,7 +89,7 @@ const upgradeSteps = [
         icon: '📈',
         details: [
             'Higher levels = more income potential',
-            'Unlock royalty tiers',
+            'Unlock royalty layers',
             'Qualify for more commissions',
             'Increase matrix earnings',
         ],
@@ -98,11 +98,10 @@ const upgradeSteps = [
 
 const levelCosts = [
     { level: 1, cost: '$5' },
-    { level: 5, cost: '$60' },
-    { level: 10, cost: '$1,920' },
-    { level: 15, cost: '$61,440' },
-    { level: 20, cost: '$1.96M' },
-    { level: 24, cost: '$62.9M' },
+    { level: 5, cost: '$80' },
+    { level: 10, cost: '$2,560' },
+    { level: 15, cost: '$81,920' },
+    { level: 17, cost: '$327,680' },
 ];
 
 export default function HowToJoinSlide() {
@@ -133,7 +132,7 @@ export default function HowToJoinSlide() {
                     <div className="text-5xl mb-2">⚙️</div>
                     <h1 className="text-5xl md:text-6xl font-black tracking-tight">
                         <span className="bg-gradient-to-r from-teal-300 to-cyan-400 bg-clip-text text-transparent">HOW TO JOIN</span>
-                        <span className="text-white/60"> & </span>
+                        <span className="text-neural-gold"> & </span>
                         <span className="bg-gradient-to-r from-blue-300 to-indigo-400 bg-clip-text text-transparent">UPGRADE</span>
                     </h1>
                 </motion.div>
@@ -165,7 +164,7 @@ export default function HowToJoinSlide() {
                                         </div>
                                         <ul className="space-y-1">
                                             {step.details.map((d, j) => (
-                                                <li key={j} className="text-sm text-gray-400 flex items-start gap-2">
+                                                <li key={j} className="text-sm text-neural-gold flex items-start gap-2">
                                                     <span className="text-teal-500 mt-0.5">•</span> {d}
                                                 </li>
                                             ))}
@@ -181,7 +180,7 @@ export default function HowToJoinSlide() {
                             className="mt-6 p-4 rounded-xl bg-green-900/20 border border-green-500/30 text-center"
                         >
                             <span className="text-green-400 text-lg font-bold">✅ REGISTRATION COMPLETE</span>
-                            <p className="text-gray-400 text-sm mt-1">You&apos;re now Level 1 and can start earning!</p>
+                            <p className="text-neural-gold text-sm mt-1">You&apos;re now Level 1 and can start earning!</p>
                         </motion.div>
                     </div>
 
@@ -209,7 +208,7 @@ export default function HowToJoinSlide() {
                                         </div>
                                         <ul className="space-y-1">
                                             {step.details.map((d, j) => (
-                                                <li key={j} className="text-sm text-gray-400 flex items-start gap-2">
+                                                <li key={j} className="text-sm text-neural-gold flex items-start gap-2">
                                                     <span className="text-blue-500 mt-0.5">•</span> {d}
                                                 </li>
                                             ))}
@@ -225,7 +224,7 @@ export default function HowToJoinSlide() {
                             className="mt-6 p-4 rounded-xl bg-blue-900/20 border border-blue-500/30 text-center"
                         >
                             <span className="text-blue-400 text-lg font-bold">🚀 LEVEL UP = EARN MORE</span>
-                            <p className="text-gray-400 text-sm mt-1">Higher levels unlock exponentially higher income potential!</p>
+                            <p className="text-neural-gold text-sm mt-1">Higher levels unlock exponentially higher income potential!</p>
                         </motion.div>
                     </div>
                 </div>
@@ -239,7 +238,7 @@ export default function HowToJoinSlide() {
                     <div className="flex flex-wrap gap-3">
                         {levelCosts.map((lc, i) => (
                             <div key={i} className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm">
-                                <span className="text-gray-400">Level {lc.level}:</span>{' '}
+                                <span className="text-neural-gold">Level {lc.level}:</span>{' '}
                                 <span className="text-white font-bold">{lc.cost}</span>
                             </div>
                         ))}

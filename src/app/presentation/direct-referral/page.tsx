@@ -20,7 +20,7 @@ export default function DirectReferralSlide() {
                     <span className="text-sm tracking-widest uppercase font-mono hidden sm:block">Back to Presentation</span>
                     <span className="text-sm font-mono sm:hidden">Back</span>
                 </Link>
-                <span className="text-xs text-gray-500 font-mono uppercase tracking-widest">Slide 1 / 4 — Direct Referral</span>
+                <span className="text-xs text-white/80 font-mono uppercase tracking-widest">Slide 1 / 4 — Direct Referral</span>
                 <Link href="/presentation/matrix-income" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group">
                     <span className="text-sm tracking-widest uppercase font-mono hidden sm:block">Matrix Income</span>
                     <span className="text-sm font-mono sm:hidden">Next</span>
@@ -50,7 +50,7 @@ export default function DirectReferralSlide() {
                             Direct Referral Income
                         </span>
                     </h1>
-                    <p className="text-sm md:text-lg text-blue-400 font-mono tracking-widest uppercase">Great Income Club on BSC</p>
+                    <p className="text-sm md:text-lg text-blue-400 font-mono tracking-widest uppercase">AIPCore on BSC</p>
                 </div>
 
                 {/* Content Grid */}
@@ -64,7 +64,7 @@ export default function DirectReferralSlide() {
                                 "When someone registers using your referral link",
                                 "You earn 10% of their Level 1 registration fee",
                                 "Instant payment directly to your wallet",
-                                "Earn 10% on EVERY level upgrade (Level 1 to 24)",
+                                "Earn 10% on EVERY tier upgrade (L1 to L17)",
                                 "No qualification requirements needed",
                             ].map((item, i) => (
                                 <motion.li key={i}
@@ -81,22 +81,22 @@ export default function DirectReferralSlide() {
 
                     {/* Right: Earnings */}
                     <div className="space-y-5">
-                        <div className="bg-white/5 rounded-2xl p-5 md:p-7 border border-white/10 hover:border-yellow-500/30 transition-colors relative overflow-hidden">
+                        <div className="bg-black/40 border-t border-l border-black/80 border-b border-r border-white/10 shadow-[inset_2px_2px_10px_rgba(0,0,0,0.8),inset_-1px_-1px_2px_rgba(255,255,255,0.1)] rounded-[2rem] p-6 lg:p-8 hover:border-white/30 transition-colors relative overflow-hidden">
                             <div className="absolute top-0 right-0 px-3 py-1.5 bg-yellow-500/10 rounded-bl-2xl border-b border-l border-white/5">
                                 <span className="text-yellow-400 font-bold text-sm">10% Commission</span>
                             </div>
                             <h3 className="text-lg md:text-xl font-bold text-white mb-4">Earnings Breakdown</h3>
                             <div className="space-y-3 text-sm md:text-base">
                                 <div className="flex justify-between border-b border-white/5 pb-2">
-                                    <span className="text-gray-400">Registration (Level 1)</span>
+                                    <span className="text-neural-gold">Registration (Level 1)</span>
                                     <span className="text-white font-mono">10% Instant</span>
                                 </div>
                                 <div className="flex justify-between border-b border-white/5 pb-2">
-                                    <span className="text-gray-400">Upgrades (L2 – L24)</span>
+                                    <span className="text-neural-gold">Upgrades (L1 – L17)</span>
                                     <span className="text-white font-mono">10% Instant</span>
                                 </div>
                                 <div className="flex justify-between items-center pt-1">
-                                    <span className="text-gray-400">Payment Mode</span>
+                                    <span className="text-neural-gold">Payment Mode</span>
                                     <span className="text-green-400 font-bold bg-green-900/30 px-3 py-1 rounded-full text-xs">BNB (BEP20)</span>
                                 </div>
                             </div>
@@ -111,20 +111,20 @@ export default function DirectReferralSlide() {
                                     { label: "100 Referrals", val: "$500+", color: "from-purple-500 to-pink-500" },
                                 ].map((stat, i) => (
                                     <motion.div key={i} whileHover={{ scale: 1.05 }} className={`bg-gradient-to-br ${stat.color} p-0.5 rounded-xl`}>
-                                        <div className="bg-black/80 h-full rounded-[10px] p-3 text-center backdrop-blur-xl">
-                                            <div className="text-gray-300 text-xs mb-1">{stat.label}</div>
-                                            <div className="text-lg md:text-xl font-black text-white">{stat.val}</div>
+                                        <div className="relative overflow-hidden bg-gradient-to-br from-white/10 to-transparent backdrop-blur-xl border-t border-l border-white/20 border-b border-r border-black/50 shadow-[6px_6px_15px_rgba(0,0,0,0.4),-2px_-2px_8px_rgba(255,255,255,0.02),inset_1px_1px_2px_rgba(255,255,255,0.2)] rounded-xl h-full p-4 flex flex-col justify-center">
+                                            <div className="text-gray-300 text-xs mb-1 text-center font-bold">{stat.label}</div>
+                                            <div className="text-lg md:text-xl font-black text-white text-center drop-shadow-md">{stat.val}</div>
                                         </div>
                                     </motion.div>
                                 ))}
                             </div>
-                            <p className="text-xs text-gray-500 mt-3 text-center">* Estimates based on Level 1 only. Upgrades increase earnings significantly.</p>
+                            <p className="text-xs text-white/80 mt-3 text-center">* Estimates based on Level 1 only. Upgrades increase earnings significantly.</p>
                         </div>
                     </div>
                 </div>
 
                 {/* Info footer */}
-                <div className="flex flex-wrap justify-center gap-3 md:gap-6 text-xs md:text-sm text-gray-500 py-2 border-t border-white/5">
+                <div className="flex flex-wrap justify-center gap-3 md:gap-6 text-xs md:text-sm text-white/80 py-2 border-t border-white/5">
                     <span>Network: <strong className="text-gray-300">BSC Mainnet</strong></span>
                     <span className="hidden sm:block">|</span>
                     <span>Currency: <strong className="text-gray-300">BNB</strong></span>

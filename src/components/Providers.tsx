@@ -14,7 +14,7 @@ const chains = (defaultChainId === 97 ? [bscTestnet, bsc] : [bsc, bscTestnet]) a
 const projectId = process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || '';
 
 const { connectors } = getDefaultWallets({
-    appName: 'Great Income Club',
+    appName: 'AIPCore',
     projectId,
 });
 
