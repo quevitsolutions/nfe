@@ -3,7 +3,7 @@ import React from "react";
 export default function IntroductionPage() {
     return (
         <div className="space-y-6 text-gray-300 leading-relaxed">
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-8">
+            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-red-400 to-rose-600 bg-clip-text text-transparent mb-8 uppercase tracking-tighter font-mono">
                 Introduction
             </h1>
 

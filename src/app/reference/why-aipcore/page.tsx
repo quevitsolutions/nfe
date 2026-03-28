@@ -3,7 +3,7 @@ import React from "react";
 export default function WhyAIPCorePage() {
     return (
         <div className="space-y-6 text-gray-300 leading-relaxed">
-            <h1 className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent mb-8">
+            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-red-400 to-rose-600 bg-clip-text text-transparent mb-8 uppercase tracking-tighter font-mono">
                 Why AIPCore — The Evolution of Community Wealth
             </h1>
 
@@ -16,8 +16,8 @@ export default function WhyAIPCorePage() {
             <p>
                 AIPCore's most disruptive innovation is its <strong>Zero Leakage Policy</strong>. In most protocols, a portion of every transaction is diverted to "platform fees" or "dev wallets." AIPCore has removed these bottlenecks entirely. 100% of the funds entering the contract are distributed back to the community across our direct, matrix, and pool reward layers. This means that every action, from a Layer registration to an upgrade, directly strengthens the community's earning potential.
             </p>
-            <p className="text-xl font-semibold text-white italic border-l-4 border-yellow-400 pl-4 py-2 bg-yellow-400/10 my-6">
-                In AIPCore, 100% of value belongs to the community — always.
+            <p className="text-xl font-bold text-white italic border-l-4 border-red-600 pl-4 py-3 bg-red-900/10 my-10 uppercase tracking-tighter">
+                &quot;In AIPCore, 100% of value belongs to the community — always.&quot;
             </p>
             <p>
                 To ensure continuous stability, the <strong>AIPCore Engine</strong> — a high-performance smart contract architecture — governs the internal distribution. It manages 17 layers of growth, ranging from $5 to $327,680, allowing participants to scale their involvement at their own pace. The system is designed to be immutable; once the contract is deployed on the Binance Smart Chain, the rules of distribution are sealed and cannot be altered, providing a secure and permanent foundation for wealth creation.
@@ -32,24 +32,24 @@ export default function WhyAIPCorePage() {
             <h2 className="text-2xl font-bold text-white mt-10 mb-4 border-b border-white/10 pb-2">Key Innovations at a Glance</h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-                <div className="bg-white/5 border border-white/10 p-5 rounded-xl">
-                    <h3 className="text-lg font-bold text-yellow-400 mb-2">AI-Optimized Binary Placement</h3>
+                <div className="bg-red-900/5 border border-red-500/10 p-5 rounded-xl hover:bg-red-900/10 transition-colors">
+                    <h3 className="text-lg font-black text-rose-500 mb-2 uppercase tracking-tighter font-mono">AI-Optimized Binary Placement</h3>
                     <p className="text-sm">Logarithmic placement logic ensures your matrix grows with maximum efficiency and zero gaps.</p>
                 </div>
-                <div className="bg-white/5 border border-white/10 p-5 rounded-xl">
-                    <h3 className="text-lg font-bold text-yellow-400 mb-2">100% Distribution Model</h3>
+                <div className="bg-red-900/5 border border-red-500/10 p-5 rounded-xl hover:bg-red-900/10 transition-colors">
+                    <h3 className="text-lg font-black text-rose-500 mb-2 uppercase tracking-tighter font-mono">100% Distribution Model</h3>
                     <p className="text-sm">0% platform fees. Every BNB is distributed directly to Sponsor, Matrix, and Reward Pools.</p>
                 </div>
-                <div className="bg-white/5 border border-white/10 p-5 rounded-xl">
-                    <h3 className="text-lg font-bold text-yellow-400 mb-2">Audited Immutable Logic</h3>
+                <div className="bg-red-900/5 border border-red-500/10 p-5 rounded-xl hover:bg-red-900/10 transition-colors">
+                    <h3 className="text-lg font-black text-rose-500 mb-2 uppercase tracking-tighter font-mono">Audited Immutable Logic</h3>
                     <p className="text-sm">Verified by Antigravity AI, ensuring 100% security and mathematical transparency on Mainnet.</p>
                 </div>
-                <div className="bg-white/5 border border-white/10 p-5 rounded-xl">
-                    <h3 className="text-lg font-bold text-yellow-400 mb-2">Scalable 17-Layer Economy</h3>
+                <div className="bg-red-900/5 border border-red-500/10 p-5 rounded-xl hover:bg-red-900/10 transition-colors">
+                    <h3 className="text-lg font-black text-rose-500 mb-2 uppercase tracking-tighter font-mono">Scalable 17-Layer Economy</h3>
                     <p className="text-sm">Grow from Layer 1 ($5) to Layer 17 ($327K+), scaling your rewards proportionally with the network.</p>
                 </div>
-                <div className="bg-white/5 border border-white/10 p-5 rounded-xl lg:col-span-2">
-                    <h3 className="text-lg font-bold text-yellow-400 mb-2">Triple Reward Pool</h3>
+                <div className="bg-red-900/5 border border-red-500/10 p-5 rounded-xl lg:col-span-2 hover:bg-red-900/10 transition-colors">
+                    <h3 className="text-lg font-black text-rose-500 mb-2 uppercase tracking-tighter font-mono">Triple Reward Pool</h3>
                     <p className="text-sm">Bronze, Silver, and Gold pools reward top participants with a share of global protocol volume.</p>
                 </div>
             </div>

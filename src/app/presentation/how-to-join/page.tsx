@@ -121,8 +121,8 @@ export default function HowToJoinSlide() {
             {/* Background */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-                <div className="absolute w-[600px] h-[600px] bg-teal-600/10 rounded-full blur-[120px] top-1/4 left-1/4" />
-                <div className="absolute w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[120px] bottom-1/4 right-1/4" />
+                <div className="absolute w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[120px] top-1/4 left-1/4" />
+                <div className="absolute w-[600px] h-[600px] bg-rose-600/10 rounded-full blur-[120px] bottom-1/4 right-1/4" />
             </div>
 
             <div className="relative z-20 max-w-7xl mx-auto px-6 py-20">
@@ -131,9 +131,9 @@ export default function HowToJoinSlide() {
                 <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
                     <div className="text-5xl mb-2">⚙️</div>
                     <h1 className="text-5xl md:text-6xl font-black tracking-tight">
-                        <span className="bg-gradient-to-r from-teal-300 to-cyan-400 bg-clip-text text-transparent">HOW TO JOIN</span>
-                        <span className="text-neural-gold"> & </span>
-                        <span className="bg-gradient-to-r from-blue-300 to-indigo-400 bg-clip-text text-transparent">UPGRADE</span>
+                        <span className="bg-gradient-to-r from-red-400 to-rose-600 bg-clip-text text-transparent">HOW TO JOIN</span>
+                        <span className="text-white/40 mx-2">&</span>
+                        <span className="bg-gradient-to-r from-red-500 to-rose-700 bg-clip-text text-transparent">UPGRADE</span>
                     </h1>
                 </motion.div>
 
@@ -142,8 +142,8 @@ export default function HowToJoinSlide() {
 
                     {/* LEFT: How to Join */}
                     <div>
-                        <h2 className="text-3xl font-black text-teal-400 mb-6 text-center">
-                            HOW TO JOIN <span className="text-white/40 text-xl">(Registration)</span>
+                        <h2 className="text-3xl font-black text-red-400 mb-6 text-center uppercase tracking-widest">
+                            HOW TO JOIN <span className="text-white/40 text-xl font-medium">(Registration)</span>
                         </h2>
                         <div className="space-y-4">
                             {joinSteps.map((step, i) => (
@@ -152,9 +152,9 @@ export default function HowToJoinSlide() {
                                     initial={{ opacity: 0, x: -30 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.15 }}
-                                    className="flex gap-4 items-start p-5 rounded-2xl bg-gradient-to-r from-teal-900/20 to-transparent border border-teal-500/20 hover:border-teal-400/40 transition-colors"
+                                    className="flex gap-4 items-start p-5 rounded-2xl bg-gradient-to-r from-red-900/20 to-transparent border border-red-500/20 hover:border-red-400/40 transition-colors"
                                 >
-                                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-teal-500/20 flex items-center justify-center text-teal-300 font-black text-lg border border-teal-500/30">
+                                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-300 font-black text-lg border border-red-500/30">
                                         {step.num}
                                     </div>
                                     <div className="flex-1">
@@ -164,8 +164,8 @@ export default function HowToJoinSlide() {
                                         </div>
                                         <ul className="space-y-1">
                                             {step.details.map((d, j) => (
-                                                <li key={j} className="text-sm text-neural-gold flex items-start gap-2">
-                                                    <span className="text-teal-500 mt-0.5">•</span> {d}
+                                                <li key={j} className="text-sm text-gray-400 flex items-start gap-2">
+                                                    <span className="text-red-500 mt-0.5">•</span> {d}
                                                 </li>
                                             ))}
                                         </ul>
@@ -177,16 +177,16 @@ export default function HowToJoinSlide() {
                         {/* Registration Complete */}
                         <motion.div
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
-                            className="mt-6 p-4 rounded-xl bg-green-900/20 border border-green-500/30 text-center"
+                            className="mt-6 p-4 rounded-xl bg-red-900/20 border border-red-500/30 text-center"
                         >
-                            <span className="text-green-400 text-lg font-bold">✅ REGISTRATION COMPLETE</span>
-                            <p className="text-neural-gold text-sm mt-1">You&apos;re now Level 1 and can start earning!</p>
+                            <span className="text-red-400 text-lg font-bold">✅ REGISTRATION COMPLETE</span>
+                            <p className="text-gray-400 text-sm mt-1 uppercase tracking-tighter">You&apos;re now Level 1 and can start earning!</p>
                         </motion.div>
                     </div>
 
                     {/* RIGHT: How to Upgrade */}
                     <div>
-                        <h2 className="text-3xl font-black text-blue-400 mb-6 text-center">
+                        <h2 className="text-3xl font-black text-red-500 mb-6 text-center uppercase tracking-widest">
                             HOW TO UPGRADE
                         </h2>
                         <div className="space-y-4">
@@ -196,9 +196,9 @@ export default function HowToJoinSlide() {
                                     initial={{ opacity: 0, x: 30 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.15 }}
-                                    className="flex gap-4 items-start p-5 rounded-2xl bg-gradient-to-r from-transparent to-blue-900/20 border border-blue-500/20 hover:border-blue-400/40 transition-colors"
+                                    className="flex gap-4 items-start p-5 rounded-2xl bg-gradient-to-r from-transparent to-rose-900/20 border border-rose-500/20 hover:border-rose-400/40 transition-colors"
                                 >
-                                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-300 font-black text-lg border border-blue-500/30">
+                                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-300 font-black text-lg border border-rose-500/30">
                                         {step.num}
                                     </div>
                                     <div className="flex-1">
@@ -208,8 +208,8 @@ export default function HowToJoinSlide() {
                                         </div>
                                         <ul className="space-y-1">
                                             {step.details.map((d, j) => (
-                                                <li key={j} className="text-sm text-neural-gold flex items-start gap-2">
-                                                    <span className="text-blue-500 mt-0.5">•</span> {d}
+                                                <li key={j} className="text-sm text-gray-400 flex items-start gap-2">
+                                                    <span className="text-rose-500 mt-0.5">•</span> {d}
                                                 </li>
                                             ))}
                                         </ul>
@@ -221,10 +221,10 @@ export default function HowToJoinSlide() {
                         {/* Earn More */}
                         <motion.div
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
-                            className="mt-6 p-4 rounded-xl bg-blue-900/20 border border-blue-500/30 text-center"
+                            className="mt-6 p-4 rounded-xl bg-red-900/20 border border-red-500/30 text-center"
                         >
-                            <span className="text-blue-400 text-lg font-bold">🚀 LEVEL UP = EARN MORE</span>
-                            <p className="text-neural-gold text-sm mt-1">Higher levels unlock exponentially higher income potential!</p>
+                            <span className="text-red-400 text-lg font-bold">🚀 LEVEL UP = EARN MORE</span>
+                            <p className="text-gray-400 text-sm mt-1 uppercase tracking-tighter">Higher levels unlock exponentially higher income potential!</p>
                         </motion.div>
                     </div>
                 </div>
@@ -238,8 +238,8 @@ export default function HowToJoinSlide() {
                     <div className="flex flex-wrap gap-3">
                         {levelCosts.map((lc, i) => (
                             <div key={i} className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm">
-                                <span className="text-neural-gold">Level {lc.level}:</span>{' '}
-                                <span className="text-white font-bold">{lc.cost}</span>
+                                <span className="text-red-400 font-bold uppercase tracking-tighter mr-2">Level {lc.level}:</span>{' '}
+                                <span className="text-white font-black">{lc.cost}</span>
                             </div>
                         ))}
                     </div>
@@ -251,7 +251,7 @@ export default function HowToJoinSlide() {
                     className="mb-10"
                 >
                     <h3 className="text-lg font-bold text-white mb-3 uppercase tracking-wider">Requirements:</h3>
-                    <div className="flex flex-wrap gap-6 text-sm text-gray-300">
+                    <div className="flex flex-wrap gap-6 text-sm text-gray-400 font-bold">
                         <span>✅ BSC-compatible wallet</span>
                         <span>✅ BNB for transactions</span>
                         <span>✅ Referral link (or use default)</span>
@@ -261,11 +261,11 @@ export default function HowToJoinSlide() {
                 {/* Bottom Banner */}
                 <motion.div
                     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}
-                    className="w-full p-4 rounded-2xl bg-gradient-to-r from-teal-900/30 to-blue-900/30 border border-white/10 text-center"
+                    className="w-full p-4 rounded-2xl bg-gradient-to-r from-red-900/20 via-[#e30613]/10 to-rose-900/20 border border-white/5 text-center"
                 >
-                    <p className="text-lg font-bold text-white">
-                        Simple 4-Step Process <span className="text-white/30 mx-2">|</span>
-                        Instant Activation <span className="text-white/30 mx-2">|</span>
+                    <p className="text-lg font-black text-white uppercase tracking-tight">
+                        Simple 4-Step Process <span className="text-white/20 mx-2">|</span>
+                        Instant Activation <span className="text-white/20 mx-2">|</span>
                         Start Earning Immediately
                     </p>
                 </motion.div>

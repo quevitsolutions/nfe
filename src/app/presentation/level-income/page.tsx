@@ -30,7 +30,7 @@ export default function LevelIncomeSlide() {
 
             {/* ── BACKGROUND ── */}
             <div className="fixed inset-0 pointer-events-none -z-0">
-                <div className="absolute w-[600px] h-[600px] bg-green-600/10 rounded-full blur-[120px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse" />
+                <div className="absolute w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[120px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse" />
                 <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
             </div>
 
@@ -39,18 +39,18 @@ export default function LevelIncomeSlide() {
 
                 {/* Header */}
                 <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 shadow-lg shadow-green-500/30 mb-4 p-1 animate-pulse">
+                    <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-red-400 to-rose-600 shadow-lg shadow-red-500/30 mb-4 p-1 animate-pulse">
                         <div className="w-full h-full rounded-full bg-black/50 flex items-center justify-center border border-white/20">
                             <span className="text-3xl md:text-4xl">📊</span>
                         </div>
                     </div>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-2 tracking-tight">
-                        Income Stream #3:{' '}
-                        <span className="bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-2 tracking-tight uppercase">
+                        Stream #3:{' '}
+                        <span className="bg-gradient-to-r from-red-400 to-rose-600 bg-clip-text text-transparent">
                             Level Income
                         </span>
                     </h1>
-                    <p className="text-sm md:text-lg text-green-400 font-mono tracking-widest uppercase">18-Tier Distribution Plan</p>
+                    <p className="text-sm md:text-lg text-red-100/40 font-mono tracking-widest uppercase">18-Tier Distribution Plan</p>
                 </div>
 
                 {/* Content Grid */}
@@ -61,33 +61,33 @@ export default function LevelIncomeSlide() {
                         <h3 className="text-xl md:text-2xl font-bold text-white border-b border-white/10 pb-2">Commission Breakdown</h3>
                         <div className="space-y-3">
                             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}
-                                className="flex items-center justify-between bg-white/5 p-4 rounded-xl border-l-4 border-green-400">
+                                className="flex items-center justify-between bg-white/5 p-4 rounded-xl border-l-4 border-red-400">
                                 <div>
-                                    <span className="block text-base md:text-lg font-bold text-white">Levels 1 – 5</span>
-                                    <span className="text-sm text-neural-gold">Foundation Team</span>
+                                    <span className="block text-base md:text-lg font-bold text-white uppercase tracking-tighter">Levels 1 – 5</span>
+                                    <span className="text-sm text-gray-400 font-bold uppercase tracking-widest">Foundation Team</span>
                                 </div>
-                                <div className="text-2xl md:text-3xl font-black text-green-400">1.50%</div>
+                                <div className="text-2xl md:text-3xl font-black text-red-400">1.50%</div>
                             </motion.div>
                             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.3 }}
-                                className="flex items-center justify-between bg-white/5 p-4 rounded-xl border-l-4 border-emerald-500">
+                                className="flex items-center justify-between bg-white/5 p-4 rounded-xl border-l-4 border-rose-500">
                                 <div>
-                                    <span className="block text-base md:text-lg font-bold text-white">Levels 6 – 10</span>
-                                    <span className="text-sm text-neural-gold">Growth Network</span>
+                                    <span className="block text-base md:text-lg font-bold text-white uppercase tracking-tighter">Levels 6 – 10</span>
+                                    <span className="text-sm text-gray-400 font-bold uppercase tracking-widest">Growth Network</span>
                                 </div>
-                                <div className="text-2xl md:text-3xl font-black text-emerald-500">1.00%</div>
+                                <div className="text-2xl md:text-3xl font-black text-rose-500">1.00%</div>
                             </motion.div>
                             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }}
-                                className="flex items-center justify-between bg-white/5 p-4 rounded-xl border-l-4 border-teal-600">
+                                className="flex items-center justify-between bg-white/5 p-4 rounded-xl border-l-4 border-red-700">
                                 <div>
-                                    <span className="block text-base md:text-lg font-bold text-white">Tiers 11 – 17</span>
-                                    <span className="text-sm text-neural-gold">Deep Structure</span>
+                                    <span className="block text-base md:text-lg font-bold text-white uppercase tracking-tighter">Tiers 11 – 18</span>
+                                    <span className="text-sm text-gray-400 font-bold uppercase tracking-widest">Deep Structure</span>
                                 </div>
-                                <div className="text-2xl md:text-3xl font-black text-teal-600">0.35%</div>
+                                <div className="text-2xl md:text-3xl font-black text-red-700">0.35%</div>
                             </motion.div>
                         </div>
                         <div className="flex justify-between items-center bg-black/40 p-4 rounded-xl border border-white/10">
-                            <span className="text-neural-gold text-base">Total Distribution</span>
-                            <span className="text-2xl font-bold text-white">~15%</span>
+                            <span className="text-gray-400 text-base uppercase tracking-widest font-bold">Total Distribution</span>
+                            <span className="text-2xl font-black text-white">~15%</span>
                         </div>
                     </div>
 
@@ -117,18 +117,18 @@ export default function LevelIncomeSlide() {
                         </motion.div>
 
                         <div className="bg-white/5 rounded-2xl p-5 border border-white/10">
-                            <h3 className="text-lg font-bold text-green-300 mb-3">Earning Example</h3>
-                            <p className="text-sm text-neural-gold mb-3">Team Member Level 5 Upgrade ($80)</p>
+                            <h3 className="text-lg font-bold text-red-300 mb-3 font-mono uppercase tracking-widest">Earning Example</h3>
+                            <p className="text-sm text-gray-400 mb-3 font-bold uppercase">Team Member Level 5 Upgrade ($80)</p>
                             <div className="grid grid-cols-2 gap-3">
                                 <div className="bg-black/30 p-3 rounded-lg text-center">
                                     <span className="block text-white/80 text-xs mb-1">If in Layers 1–5</span>
                                     <span className="block text-white font-bold text-lg">$1.20</span>
-                                    <span className="block text-green-500 text-xs">(1.5%)</span>
+                                    <span className="block text-red-500 text-xs font-bold">(1.5%)</span>
                                 </div>
                                 <div className="bg-black/30 p-3 rounded-lg text-center">
                                     <span className="block text-white/80 text-xs mb-1">If in Layers 6–10</span>
                                     <span className="block text-white font-bold text-lg">$0.80</span>
-                                    <span className="block text-green-500 text-xs">(1.0%)</span>
+                                    <span className="block text-red-500 text-xs font-bold">(1.0%)</span>
                                 </div>
                             </div>
                         </div>
@@ -150,11 +150,11 @@ export default function LevelIncomeSlide() {
                 </Link>
                 <div className="flex gap-2">
                     {['direct-referral', 'matrix-income', 'level-income', 'reward-pools'].map((s, i) => (
-                        <div key={i} className={`w-2.5 h-2.5 rounded-full transition-all ${s === 'level-income' ? 'bg-green-400 scale-125' : 'bg-white/20'}`} />
+                        <div key={i} className={`w-2.5 h-2.5 rounded-full transition-all ${s === 'level-income' ? 'bg-red-500 scale-125 shadow-[0_0_8px_rgba(227,6,19,0.5)]' : 'bg-white/20'}`} />
                     ))}
                 </div>
                 <Link href="/presentation/reward-pools"
-                    className="flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-5 py-2.5 rounded-xl font-black text-sm shadow-lg shadow-green-500/20 transition-all hover:scale-105">
+                    className="flex items-center gap-2 bg-gradient-to-r from-red-600 to-rose-800 text-white px-5 py-2.5 rounded-xl font-black text-sm shadow-lg shadow-red-500/20 transition-all hover:scale-105 border border-red-500/30">
                     <span className="hidden sm:block">Next: Reward Pools</span>
                     <span className="sm:hidden">Next</span>
                     <ArrowRight className="w-4 h-4" />
