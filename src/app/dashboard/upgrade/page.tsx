@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useAccount } from 'wagmi';
-import { ArrowUpCircle, Check, Loader2, Layers, ShieldCheck, Zap, TrendingUp, Info } from 'lucide-react';
+import { ArrowUpCircle, Check, Loader2, Layers, ShieldCheck, Zap, TrendingUp, Info, Network } from 'lucide-react';
 import { useUpgrade, useLevelCosts, useContractConfig, useUserInfo, useUserIdByAddress } from '@/lib/hooks/useContract';
 import { formatBNB, formatCurrency, LEVEL_COSTS_USD } from '@/lib/contract';
 
