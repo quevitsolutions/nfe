@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, BookOpen, LayoutDashboard, User, ArrowUpCircle, Network, Users, TrendingUp, Gift } from 'lucide-react';
+import { Home, BookOpen, LayoutDashboard, User, ArrowUpCircle, Network, Users, TrendingUp, Gift, Bell } from 'lucide-react';
+import { NotificationCenter } from './NotificationCenter';
 
 const mainNav = [
   { name: 'Neural Core', href: '/dashboard', icon: LayoutDashboard },
@@ -37,6 +38,9 @@ export default function Sidebar() {
             <p className="text-xs text-brand-amber font-black tracking-widest uppercase flex items-center gap-1">
               <span className="w-1.5 h-1.5 bg-brand-green rounded-full animate-ping"></span> Live Sync
             </p>
+          </div>
+          <div className="ml-auto">
+            <NotificationCenter />
           </div>
         </div>
       </div>

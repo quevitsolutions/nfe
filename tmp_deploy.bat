@@ -24,6 +24,8 @@ pscp -pw %PASS% -batch -q src/app/dashboard/team/page.tsx root@%IP%:%REMOTE_PATH
 pscp -pw %PASS% -batch -q src/app/dashboard/income/page.tsx root@%IP%:%REMOTE_PATH%/src/app/dashboard/income/
 pscp -pw %PASS% -batch -q src/app/dashboard/matrix-tree/page.tsx root@%IP%:%REMOTE_PATH%/src/app/dashboard/matrix-tree/
 pscp -pw %PASS% -batch -q src/app/dashboard/rewards/page.tsx root@%IP%:%REMOTE_PATH%/src/app/dashboard/rewards/
+pscp -pw %PASS% -batch -q src/app/register/page.tsx root@%IP%:%REMOTE_PATH%/src/app/register/
+pscp -pw %PASS% -batch -q src/lib/hooks/useContract.ts root@%IP%:%REMOTE_PATH%/src/lib/hooks/
 
 echo "Executing remote build..."
 plink -ssh -pw %PASS% -batch root@%IP% "cd %REMOTE_PATH% && npm i next-themes && export NODE_OPTIONS='--max-old-space-size=8192' && npm run build && pm2 restart aipcore && pm2 save"

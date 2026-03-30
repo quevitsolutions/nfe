@@ -1,8 +1,10 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Outfit, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import { Toaster } from "sonner";
+import { NotificationListener } from "@/components/NotificationListener";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -32,6 +34,8 @@ export default function RootLayout({
         className={`${outfit.variable} ${jetbrainsMono.variable} antialiased`}
       >
         <Providers>
+          <NotificationListener />
+          <Toaster position="top-right" expand={true} richColors closeButton />
           <LayoutWrapper>
             {children}
           </LayoutWrapper>

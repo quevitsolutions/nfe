@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, LayoutDashboard, ArrowUpCircle, Network, Users } from 'lucide-react';
+import { Home, LayoutDashboard, ArrowUpCircle, Network, Users, Bell } from 'lucide-react';
+import { NotificationCenter } from './NotificationCenter';
 
 const mobileNavItems = [
   { name: 'Global', href: '/', icon: Home },
@@ -36,6 +37,11 @@ export default function BottomNav() {
           </Link>
         );
       })}
+      
+      {/* Notifications Button */}
+      <div className="flex flex-col items-center justify-center h-full px-2">
+        <NotificationCenter />
+      </div>
     </nav>
   );
 }
