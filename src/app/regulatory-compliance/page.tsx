@@ -3,19 +3,19 @@ import Link from "next/link";
 
 export default function RegulatoryCompliancePage() {
     return (
-        <div className="min-h-screen bg-[#0f172a] text-white p-8 md:p-16 font-sans">
+        <div className="min-h-screen bg-[#fcf3eb] text-[#001a33] p-8 md:p-16 font-sans">
             <div className="max-w-4xl mx-auto">
                 <div className="mb-8">
-                    <Link href="/" className="text-blue-400 hover:text-blue-300">← Back to Home</Link>
+                    <Link href="/" className="text-brand-blue hover:text-[#ed1b24] font-black uppercase italic tracking-widest text-xs transition-colors">← Back to Home</Link>
                 </div>
 
                 <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-400 to-emerald-500 bg-clip-text text-transparent mb-4">
                     Regulatory Compliance Notice – AIPCORE
                 </h1>
 
-                <p className="text-neural-gold mb-8 font-semibold">Effective Date: 1 January 2026</p>
+                <p className="text-[#ed1b24] mb-8 font-semibold">Effective Date: 1 January 2026</p>
 
-                <div className="space-y-8 text-gray-300 leading-relaxed">
+                <div className="space-y-8 text-brand-blue font-bold leading-relaxed">
                     <p>
                         This Regulatory Compliance Notice is provided to explain the legal and regulatory context under which AIPCORE (the "Protocol") operates.
                     </p>
@@ -24,7 +24,7 @@ export default function RegulatoryCompliancePage() {
                     </p>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">1. Decentralized Nature of the Protocol</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">1. Decentralized Nature of the Protocol</h2>
                         <p className="mb-2">AIPCORE is a decentralized finance protocol governed by a decentralized autonomous organization (DAO) and executed exclusively through autonomous smart contracts deployed on public blockchain networks.</p>
                         <ul className="list-disc pl-6 space-y-1">
                             <li>No centralized operator or controlling entity exists</li>
@@ -36,7 +36,7 @@ export default function RegulatoryCompliancePage() {
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">2. No Financial or Investment Services</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">2. No Financial or Investment Services</h2>
                         <p className="mb-2">AIPCORE does not:</p>
                         <ul className="list-disc pl-6 space-y-1">
                             <li>Act as a bank, broker, exchange, or money services business</li>
@@ -47,7 +47,7 @@ export default function RegulatoryCompliancePage() {
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">3. No KYC / AML Obligations</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">3. No KYC / AML Obligations</h2>
                         <p className="mb-2">Because the Protocol is:</p>
                         <ul className="list-disc pl-6 space-y-1 mb-2">
                             <li>Non-custodial</li>
@@ -64,7 +64,7 @@ export default function RegulatoryCompliancePage() {
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">4. User Responsibility for Legal Compliance</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">4. User Responsibility for Legal Compliance</h2>
                         <p className="mb-2">Users are solely responsible for ensuring that their use of the Protocol complies with:</p>
                         <ul className="list-disc pl-6 space-y-1 mb-2">
                             <li>Local, national, and international laws</li>
@@ -75,13 +75,13 @@ export default function RegulatoryCompliancePage() {
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">5 Jurisdictional Restrictions</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">5 Jurisdictional Restrictions</h2>
                         <p className="mb-2">The Protocol does not target or market to users in any specific jurisdiction.</p>
                         <p>If the use of decentralized finance protocols is restricted or prohibited under your local laws, you must not access or use aipcore.online.</p>
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">6. Regulatory Uncertainty</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">6. Regulatory Uncertainty</h2>
                         <ul className="list-disc pl-6 space-y-1">
                             <li>Blockchain and DeFi regulations are evolving globally</li>
                             <li>Regulatory interpretations may change without notice</li>
@@ -91,7 +91,7 @@ export default function RegulatoryCompliancePage() {
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">7. DAO Governance & Legal Status</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">7. DAO Governance & Legal Status</h2>
                         <p className="mb-2">The Protocol is governed by a DAO composed of token holders or governance participants.</p>
                         <ul className="list-disc pl-6 space-y-1">
                             <li>DAO participants are not partners, agents, or employees</li>
@@ -101,13 +101,13 @@ export default function RegulatoryCompliancePage() {
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">8. Tax Responsibility</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">8. Tax Responsibility</h2>
                         <p className="mb-2">AIPCORE does not calculate, report, or withhold taxes.</p>
                         <p>Users are solely responsible for tracking transactions, reporting taxable events, and complying with tax laws. Consult a qualified tax professional if needed.</p>
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">9. Third-Party Interfaces & Services</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">9. Third-Party Interfaces & Services</h2>
                         <p className="mb-2">Users may access the Protocol through third-party interfaces, wallets, or tools.</p>
                         <ul className="list-disc pl-6 space-y-1 mb-2">
                             <li>AIPCORE does not control third-party services</li>
@@ -117,7 +117,7 @@ export default function RegulatoryCompliancePage() {
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">10. No Guarantees or Protections</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">10. No Guarantees or Protections</h2>
                         <p className="mb-2">Assets interacting with the Protocol are not protected by:</p>
                         <ul className="list-disc pl-6 space-y-1 mb-2">
                             <li>Government guarantees</li>
@@ -128,7 +128,7 @@ export default function RegulatoryCompliancePage() {
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">11. Limitation of Liability</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">11. Limitation of Liability</h2>
                         <p className="mb-2">To the maximum extent permitted by law, AIPCORE, DAO participants, developers, contributors, and interface providers shall not be liable for:</p>
                         <ul className="list-disc pl-6 space-y-1">
                             <li>Regulatory actions or enforcement</li>
@@ -139,19 +139,19 @@ export default function RegulatoryCompliancePage() {
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">12. Changes to This Notice</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">12. Changes to This Notice</h2>
                         <p className="mb-2">This Regulatory Compliance Notice may be updated from time to time. Updates will be reflected on this page with a revised effective date.</p>
                         <p>Continued use of the Protocol constitutes acceptance of the updated Notice.</p>
                     </section>
 
                     <section>
-                        <h2 className="text-2xl font-bold text-white mb-4">13. Contact & Governance Information</h2>
+                        <h2 className="text-2xl font-bold text-[#001a33] mb-4">13. Contact & Governance Information</h2>
                         <p className="mb-2">For governance participation and protocol discussions, refer to official DAO communication channels.</p>
-                        <p>Website: <a href="https://aipcore.online" className="text-blue-400 hover:text-blue-300 transition-colors" target="_blank" rel="noopener noreferrer">https://aipcore.online</a></p>
+                        <p>Website: <a href="https://aipcore.online" className="text-slate-500 hover:text-brand-blue font-bold transition-colors" target="_blank" rel="noopener noreferrer">https://aipcore.online</a></p>
                     </section>
 
-                    <div className="pt-8 border-t border-gray-700">
-                        <h3 className="text-xl font-bold text-white mb-2">Important Legal Notice</h3>
+                    <div className="pt-8 border-t border-brand-green/20">
+                        <h3 className="text-xl font-bold text-[#001a33] mb-2">Important Legal Notice</h3>
                         <p className="mb-2">Decentralized protocols may be subject to regulatory scrutiny or restrictions in certain jurisdictions.</p>
                         <p>Users are responsible for understanding and complying with applicable laws before interacting with the Protocol.</p>
                     </div>
@@ -160,3 +160,4 @@ export default function RegulatoryCompliancePage() {
         </div>
     );
 }
+

@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useLevelCosts } from '@/lib/hooks/useContract';
 import { formatBNB } from '@/lib/contract';
@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const cardColors: Record<string, { bg: string, border: string, text: string, iconBg: string }> = {
     yellow: { bg: 'hover:border-amber-300', border: 'border-amber-200', text: 'text-amber-500', iconBg: 'bg-amber-50' },
-    blue: { bg: 'hover:border-blue-300', border: 'border-blue-200', text: 'text-blue-500', iconBg: 'bg-blue-50' },
+    blue: { bg: 'hover:border-blue-300', border: 'border-blue-200', text: 'text-[#ed1b24]', iconBg: 'bg-blue-50' },
     purple: { bg: 'hover:border-purple-300', border: 'border-purple-200', text: 'text-purple-500', iconBg: 'bg-purple-50' },
     red: { bg: 'hover:border-red-300', border: 'border-red-200', text: 'text-red-500', iconBg: 'bg-red-50' }
 };
@@ -20,7 +20,7 @@ const IncomeCard = ({ title, icon: Icon, color, children }: any) => {
                 <Icon className={`w-8 h-8 ${theme.text}`} />
             </div>
             <h3 className={`text-xl font-black text-gray-800 mb-4 uppercase tracking-widest`}>{title}</h3>
-            <div className="text-gray-500 space-y-4 flex-grow font-bold">
+            <div className="text-[#ed1b24] space-y-4 flex-grow font-bold">
                 {children}
             </div>
         </div>
@@ -37,7 +37,7 @@ export default function IncomeStructure() {
     return (
         <section className="py-12">
             <div className="max-w-6xl mx-auto px-6">
-                <h2 className="text-3xl md:text-4xl font-black text-[#e30613] text-center mb-12 uppercase tracking-widest [text-shadow:1px_1px_0_#fff,-1px_-1px_0_#e5e7eb,2px_2px_4px_rgba(227,6,19,0.3)]">
+                <h2 className="text-3xl md:text-4xl font-black text-[#ed1b24] text-center mb-12 uppercase tracking-widest [text-shadow:1px_1px_0_#fff,-1px_-1px_0_#e5e7eb,2px_2px_4px_rgba(227,6,19,0.3)]">
                     💰 Contract-Verified Income Structure
                 </h2>
 
@@ -46,7 +46,7 @@ export default function IncomeStructure() {
                     <IncomeCard title="Direct Income" icon={Zap} color="yellow">
                         <p>Earn <span className="text-amber-500 font-black">10%</span> instantly on every direct referral.</p>
                         <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 shadow-inner">
-                            <div className="flex justify-between text-sm mb-2 text-gray-500">
+                            <div className="flex justify-between text-sm mb-2 text-[#ed1b24]">
                                 <span>Entry Cost (L1)</span>
                                 <span className="text-gray-800 font-black">{firstLevelCost} BNB</span>
                             </div>
@@ -55,23 +55,23 @@ export default function IncomeStructure() {
                                 <span>{(firstLevelCost * 0.10).toFixed(4)} BNB</span>
                             </div>
                         </div>
-                        <p className="text-xs text-gray-400">*Unlimited direct referrals allowed.</p>
+                        <p className="text-xs text-slate-500">*Unlimited direct referrals allowed.</p>
                     </IncomeCard>
 
                     {/* Level Income */}
                     <IncomeCard title="Level Income" icon={TrendingUp} color="blue">
-                        <p>Earn across <span className="text-blue-500 font-black">18 Levels</span> deep.</p>
+                        <p>Earn across <span className="text-[#ed1b24] font-black">18 Levels</span> deep.</p>
                         <div className="space-y-2 text-sm">
                             <div className="flex justify-between border-b border-gray-100 pb-1">
-                                <span className="text-gray-500">Level 1-5</span>
+                                <span className="text-[#ed1b24]">Level 1-5</span>
                                 <span className="text-gray-800 font-black">5%</span>
                             </div>
                             <div className="flex justify-between border-b border-gray-100 pb-1">
-                                <span className="text-gray-500">Level 6-10</span>
+                                <span className="text-[#ed1b24]">Level 6-10</span>
                                 <span className="text-gray-800 font-black">3%</span>
                             </div>
                             <div className="flex justify-between">
-                                <span className="text-gray-500">Level 11-18</span>
+                                <span className="text-[#ed1b24]">Level 11-18</span>
                                 <span className="text-gray-800 font-black">1%</span>
                             </div>
                         </div>
@@ -103,7 +103,7 @@ export default function IncomeStructure() {
 
                 {/* Live Contract Data Badge */}
                 <div className="flex justify-center">
-                    <div className="inline-flex items-center gap-2 bg-red-50 border border-red-100 px-4 py-2 rounded-full text-[#e30613] font-bold text-sm shadow-sm">
+                    <div className="inline-flex items-center gap-2 bg-red-50 border border-red-100 px-4 py-2 rounded-full text-[#ed1b24] font-bold text-sm shadow-sm">
                         <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
                         Fetched live from Smart Contract
                     </div>
@@ -112,3 +112,4 @@ export default function IncomeStructure() {
         </section>
     );
 }
+

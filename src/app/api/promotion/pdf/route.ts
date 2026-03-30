@@ -253,7 +253,7 @@ export async function GET(req: NextRequest) {
     const wallet = searchParams.get('wallet') || '';
     const type = searchParams.get('type') || 'brochure';
 
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://giclub.online';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://aipcore.online';
     const refLink = wallet
         ? `${baseUrl}/register?ref=${wallet}`
         : `${baseUrl}/register`;
@@ -263,12 +263,12 @@ export async function GET(req: NextRequest) {
 
     if (type === 'flyer') {
         doc = buildFlyer(refLink);
-        filename = 'AIPCore_Engine_Flyer.pdf';
+        filename = 'AIPCORE_Engine_Flyer.pdf';
     } else {
         doc = buildBrochure(refLink);
-        filename = type === 'income' ? 'AIPCore_Engine_Reward_Guide.pdf'
-            : type === 'matrix' ? 'AIPCore_Engine_Matrix_Guide.pdf'
-                : 'AIPCore_Engine_Brochure.pdf';
+        filename = type === 'income' ? 'AIPCORE_Engine_Reward_Guide.pdf'
+            : type === 'matrix' ? 'AIPCORE_Engine_Matrix_Guide.pdf'
+                : 'AIPCORE_Engine_Brochure.pdf';
     }
 
     doc.end();

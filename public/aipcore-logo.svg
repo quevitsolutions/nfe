@@ -5,10 +5,9 @@
             <stop offset="50%" style="stop-color:#FFA500;stop-opacity:1" />
             <stop offset="100%" style="stop-color:#FF8C00;stop-opacity:1" />
         </linearGradient>
-        <linearGradient id="blueGradient" x1="100%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#00FFFF;stop-opacity:1" />
-            <stop offset="50%" style="stop-color:#00BFFF;stop-opacity:1" />
-            <stop offset="100%" style="stop-color:#1E90FF;stop-opacity:1" />
+        <linearGradient id="sharpBlueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#0088ff;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#0044ff;stop-opacity:1" />
         </linearGradient>
         <filter id="glow">
             <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
@@ -33,15 +32,15 @@
     <!-- Logo Icon -->
     <g transform="translate(80, 80) scale(0.4)">
         <path d="M0 -160 L138.56 -80 L138.56 80 L0 160 L-138.56 80 L-138.56 -80 Z" 
-              fill="none" stroke="url(#blueGradient)" stroke-width="12" filter="url(#glow)" />
+              fill="none" stroke="url(#sharpBlueGradient)" stroke-width="12" filter="url(#glow)" />
         <path d="M-70 -40 Q-30 -80 0 -40 Q30 0 70 -40" 
-              fill="none" stroke="url(#goldGradient)" stroke-width="15" stroke-linecap="round" filter="url(#glow)" />
+              fill="none" stroke="url(#sharpBlueGradient)" stroke-width="15" stroke-linecap="round" filter="url(#glow)" />
         <path d="M-70 40 Q-30 80 0 40 Q30 0 70 40" 
-              fill="none" stroke="url(#goldGradient)" stroke-width="15" stroke-linecap="round" filter="url(#glow)" />
-        <circle cx="0" cy="0" r="30" fill="url(#blueGradient)" filter="url(#glow)" />
+              fill="none" stroke="url(#sharpBlueGradient)" stroke-width="15" stroke-linecap="round" filter="url(#glow)" />
+        <circle cx="0" cy="0" r="30" fill="url(#sharpBlueGradient)" filter="url(#glow)" />
     </g>
 
     <!-- Main Text -->
-    <text x="160" y="85" font-family="Arial Black, sans-serif" font-weight="900" font-size="64" fill="white" filter="url(#shadow)" letter-spacing="-2">AIP<tspan fill="url(#goldGradient)">CORE</tspan></text>
-    <text x="162" y="125" font-family="Arial, sans-serif" font-weight="700" font-size="16" fill="url(#goldGradient)" letter-spacing="6" opacity="0.8">AUTONOMOUS REWARD PROTOCOL</text>
+    <text x="160" y="85" font-family="Arial Black, sans-serif" font-weight="900" font-size="64" fill="#0088ff" filter="url(#shadow)" letter-spacing="-2">AIP<tspan fill="#f8fafc">CORE</tspan></text>
+    <text x="162" y="125" font-family="Arial, sans-serif" font-weight="700" font-size="16" fill="#22c55e" letter-spacing="6" opacity="0.8">AUTONOMOUS REWARD PROTOCOL</text>
 </svg>

@@ -2,8 +2,8 @@ import React from "react";
 
 export default function IntroductionPage() {
     return (
-        <div className="space-y-6 text-gray-300 leading-relaxed">
-            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-red-400 to-rose-600 bg-clip-text text-transparent mb-8 uppercase tracking-tighter font-mono">
+        <div className="space-y-6 text-slate-600 leading-relaxed font-medium">
+            <h1 className="text-3xl md:text-5xl font-black text-brand-green mb-8 uppercase tracking-tighter italic">
                 Introduction
             </h1>
 

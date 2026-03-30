@@ -3,13 +3,13 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Wallet, Link2, LogIn, CreditCard, ChevronUp, TrendingUp, CheckCircle2, Info } from 'lucide-react';
 
 const joinSteps = [
     {
         num: 1,
         title: 'CONNECT WALLET',
-        icon: '🦊',
+        icon: <Wallet className="w-6 h-6" />,
         details: [
             'Install MetaMask or compatible wallet',
             'Connect to BSC Mainnet (Chain ID: 56)',
@@ -19,7 +19,7 @@ const joinSteps = [
     {
         num: 2,
         title: 'GET REFERRAL LINK',
-        icon: '🔗',
+        icon: <Link2 className="w-6 h-6" />,
         details: [
             'Obtain referral link from sponsor',
             'Or use default referrer if no sponsor',
@@ -28,8 +28,8 @@ const joinSteps = [
     },
     {
         num: 3,
-        title: 'REGISTER',
-        icon: '💻',
+        title: 'PROTOCOL REGISTRATION',
+        icon: <LogIn className="w-6 h-6" />,
         details: [
             'Visit platform website',
             "Click 'Register' or 'Join'",
@@ -39,8 +39,8 @@ const joinSteps = [
     },
     {
         num: 4,
-        title: 'PAYMENT',
-        icon: '💡',
+        title: 'ATOMIC SETTLEMENT',
+        icon: <CreditCard className="w-6 h-6" />,
         details: [
             'Level 1 cost: $5 paid in BNB',
             'Zero Admin Fees! 100% Distribution',
@@ -53,8 +53,8 @@ const joinSteps = [
 const upgradeSteps = [
     {
         num: 1,
-        title: 'CHECK YOUR LEVEL',
-        icon: '📊',
+        title: 'AUDIT STATUS',
+        icon: <CheckCircle2 className="w-6 h-6" />,
         details: [
             'View current level in dashboard',
             'See available upgrade levels',
@@ -63,8 +63,8 @@ const upgradeSteps = [
     },
     {
         num: 2,
-        title: 'CALCULATE COST',
-        icon: '🧮',
+        title: 'COST CALCULATION',
+        icon: <Info className="w-6 h-6" />,
         details: [
             'Each level has fixed USD cost',
             'BNB amount adjusts with live oracle price',
@@ -74,8 +74,8 @@ const upgradeSteps = [
     },
     {
         num: 3,
-        title: 'UPGRADE TRANSACTION',
-        icon: '⬆️',
+        title: 'UPGRADE EXECUTION',
+        icon: <ChevronUp className="w-6 h-6" />,
         details: [
             "Click 'Upgrade' in dashboard",
             'Select number of levels',
@@ -85,8 +85,8 @@ const upgradeSteps = [
     },
     {
         num: 4,
-        title: 'EARN MORE',
-        icon: '📈',
+        title: 'YIELD SCALING',
+        icon: <TrendingUp className="w-6 h-6" />,
         details: [
             'Higher levels = more income potential',
             'Unlock royalty layers',
@@ -110,62 +110,68 @@ export default function HowToJoinSlide() {
     if (!mounted) return null;
 
     return (
-        <div className="min-h-screen bg-[#050510] overflow-auto relative font-sans text-white">
+        <div className="min-h-screen bg-[#f8faf8] overflow-auto relative font-sans text-slate-800">
 
-            {/* Navigation */}
-            <Link href="/presentation" className="fixed top-6 left-6 z-50 flex items-center gap-2 text-white/50 hover:text-white transition-colors group">
-                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                <span className="text-sm tracking-widest uppercase font-mono">Back to Presentation</span>
-            </Link>
-
-            {/* Background */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-                <div className="absolute w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[120px] top-1/4 left-1/4" />
-                <div className="absolute w-[600px] h-[600px] bg-rose-600/10 rounded-full blur-[120px] bottom-1/4 right-1/4" />
+            {/* Background Decor */}
+            <div className="fixed inset-0 pointer-events-none">
+                <div className="absolute w-[800px] h-[800px] bg-brand-green/5 rounded-full blur-[150px] top-0 left-1/4" />
+                <div className="absolute w-[800px] h-[800px] bg-brand-red/5 rounded-full blur-[150px] bottom-0 right-1/4" />
+                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
             </div>
 
-            <div className="relative z-20 max-w-7xl mx-auto px-6 py-20">
+            {/* Navigation */}
+            <Link href="/presentation" className="fixed top-8 left-8 z-50 flex items-center gap-3 text-slate-500 hover:text-brand-green transition-all group font-black text-[10px] uppercase tracking-[0.2em] italic">
+                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                <span className="hidden sm:block">Back to Presentation Hub</span>
+                <span className="sm:hidden">Back</span>
+            </Link>
+
+            <div className="relative z-20 max-w-7xl mx-auto px-8 py-24">
 
                 {/* Title */}
-                <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
-                    <div className="text-5xl mb-2">⚙️</div>
-                    <h1 className="text-5xl md:text-6xl font-black tracking-tight">
-                        <span className="bg-gradient-to-r from-red-400 to-rose-600 bg-clip-text text-transparent">HOW TO JOIN</span>
-                        <span className="text-white/40 mx-2">&</span>
-                        <span className="bg-gradient-to-r from-red-500 to-rose-700 bg-clip-text text-transparent">UPGRADE</span>
+                <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-20">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-[1.5rem] bg-brand-mint border border-brand-green/10 shadow-xl mb-8">
+                        <TrendingUp className="w-8 h-8 text-brand-green" />
+                    </div>
+                    <h1 className="text-5xl md:text-8xl font-black tracking-tighter uppercase italic drop-shadow-sm">
+                        <span className="text-brand-green">JOIN</span>
+                        <span className="text-slate-400 mx-4 opacity-50">&</span>
+                        <span className="text-brand-red">SCALE</span>
                     </h1>
+                    <p className="text-[10px] md:text-xs text-slate-400 font-black tracking-[0.5em] uppercase italic mt-4">Protocol Deployment & Upgrade Archetype</p>
                 </motion.div>
 
                 {/* Two Column Layout */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 mb-20">
 
                     {/* LEFT: How to Join */}
-                    <div>
-                        <h2 className="text-3xl font-black text-red-400 mb-6 text-center uppercase tracking-widest">
-                            HOW TO JOIN <span className="text-white/40 text-xl font-medium">(Registration)</span>
+                    <div className="space-y-10">
+                        <h2 className="text-2xl font-black text-brand-green border-b-2 border-brand-green/10 pb-6 uppercase italic tracking-tight flex items-center gap-4">
+                            01. Deployment Protocol
+                            <span className="text-slate-400 text-xs font-black opacity-30 italic">(Registration)</span>
                         </h2>
-                        <div className="space-y-4">
+                        <div className="space-y-6">
                             {joinSteps.map((step, i) => (
                                 <motion.div
                                     key={i}
                                     initial={{ opacity: 0, x: -30 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.15 }}
-                                    className="flex gap-4 items-start p-5 rounded-2xl bg-gradient-to-r from-red-900/20 to-transparent border border-red-500/20 hover:border-red-400/40 transition-colors"
+                                    className="flex gap-6 items-start p-8 rounded-[2.5rem] bg-white border border-brand-green/5 shadow-2xl hover:border-brand-green/20 transition-all group"
                                 >
-                                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-300 font-black text-lg border border-red-500/30">
+                                    <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-brand-mint flex items-center justify-center text-brand-green font-black text-lg border border-brand-green/10 shadow-inner group-hover:scale-110 transition-transform">
                                         {step.num}
                                     </div>
                                     <div className="flex-1">
-                                        <div className="flex items-center gap-3 mb-2">
-                                            <h3 className="text-xl font-bold text-white">{step.title}</h3>
-                                            <span className="text-2xl">{step.icon}</span>
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <h3 className="text-xl font-black text-slate-900 uppercase italic tracking-tight">{step.title}</h3>
+                                            <div className="text-brand-green opacity-40">{step.icon}</div>
                                         </div>
-                                        <ul className="space-y-1">
+                                        <ul className="space-y-3">
                                             {step.details.map((d, j) => (
-                                                <li key={j} className="text-sm text-gray-400 flex items-start gap-2">
-                                                    <span className="text-red-500 mt-0.5">•</span> {d}
+                                                <li key={j} className="text-sm font-bold text-slate-500 flex items-start gap-3 italic">
+                                                    <CheckCircle2 className="w-4 h-4 text-brand-green mt-0.5 opacity-40" />
+                                                    <span>{d}</span>
                                                 </li>
                                             ))}
                                         </ul>
@@ -177,39 +183,41 @@ export default function HowToJoinSlide() {
                         {/* Registration Complete */}
                         <motion.div
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
-                            className="mt-6 p-4 rounded-xl bg-red-900/20 border border-red-500/30 text-center"
+                            className="p-8 rounded-[2rem] bg-slate-900 text-center shadow-3xl group"
                         >
-                            <span className="text-red-400 text-lg font-bold">✅ REGISTRATION COMPLETE</span>
-                            <p className="text-gray-400 text-sm mt-1 uppercase tracking-tighter">You&apos;re now Level 1 and can start earning!</p>
+                            <span className="text-brand-green text-xl font-black uppercase italic tracking-widest">Protocol Activation Complete</span>
+                            <p className="text-white/40 text-[10px] mt-2 uppercase tracking-[0.3em] font-black italic">Node Priority L1 Established • Yield Stream Open</p>
                         </motion.div>
                     </div>
 
                     {/* RIGHT: How to Upgrade */}
-                    <div>
-                        <h2 className="text-3xl font-black text-red-500 mb-6 text-center uppercase tracking-widest">
-                            HOW TO UPGRADE
+                    <div className="space-y-10">
+                        <h2 className="text-2xl font-black text-brand-red border-b-2 border-brand-red/10 pb-6 uppercase italic tracking-tight flex items-center gap-4">
+                            02. Scaling Strategy
+                            <span className="text-slate-400 text-xs font-black opacity-30 italic">(Upgrading)</span>
                         </h2>
-                        <div className="space-y-4">
+                        <div className="space-y-6">
                             {upgradeSteps.map((step, i) => (
                                 <motion.div
                                     key={i}
                                     initial={{ opacity: 0, x: 30 }}
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: i * 0.15 }}
-                                    className="flex gap-4 items-start p-5 rounded-2xl bg-gradient-to-r from-transparent to-rose-900/20 border border-rose-500/20 hover:border-rose-400/40 transition-colors"
+                                    className="flex gap-6 items-start p-8 rounded-[2.5rem] bg-white border border-brand-red/5 shadow-2xl hover:border-brand-red/20 transition-all group"
                                 >
-                                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-rose-500/20 flex items-center justify-center text-rose-300 font-black text-lg border border-rose-500/30">
+                                    <div className="flex-shrink-0 w-12 h-12 rounded-2xl bg-brand-red/5 flex items-center justify-center text-brand-red font-black text-lg border border-brand-red/10 shadow-inner group-hover:scale-110 transition-transform">
                                         {step.num}
                                     </div>
                                     <div className="flex-1">
-                                        <div className="flex items-center gap-3 mb-2">
-                                            <h3 className="text-xl font-bold text-white">{step.title}</h3>
-                                            <span className="text-2xl">{step.icon}</span>
+                                        <div className="flex items-center gap-4 mb-4">
+                                            <h3 className="text-xl font-black text-slate-900 uppercase italic tracking-tight">{step.title}</h3>
+                                            <div className="text-brand-red opacity-40">{step.icon}</div>
                                         </div>
-                                        <ul className="space-y-1">
+                                        <ul className="space-y-3">
                                             {step.details.map((d, j) => (
-                                                <li key={j} className="text-sm text-gray-400 flex items-start gap-2">
-                                                    <span className="text-rose-500 mt-0.5">•</span> {d}
+                                                <li key={j} className="text-sm font-bold text-slate-500 flex items-start gap-3 italic">
+                                                    <CheckCircle2 className="w-4 h-4 text-brand-red mt-0.5 opacity-40" />
+                                                    <span>{d}</span>
                                                 </li>
                                             ))}
                                         </ul>
@@ -221,10 +229,10 @@ export default function HowToJoinSlide() {
                         {/* Earn More */}
                         <motion.div
                             initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }}
-                            className="mt-6 p-4 rounded-xl bg-red-900/20 border border-red-500/30 text-center"
+                            className="p-8 rounded-[2rem] bg-brand-mint border border-brand-red/10 text-center shadow-3xl"
                         >
-                            <span className="text-red-400 text-lg font-bold">🚀 LEVEL UP = EARN MORE</span>
-                            <p className="text-gray-400 text-sm mt-1 uppercase tracking-tighter">Higher levels unlock exponentially higher income potential!</p>
+                            <span className="text-brand-red text-xl font-black uppercase italic tracking-widest">Exponential Yield Scaling</span>
+                            <p className="text-slate-500 text-[10px] mt-2 uppercase tracking-[0.3em] font-black italic">Tier Parification Required • Maximize Matrix Extraction</p>
                         </motion.div>
                     </div>
                 </div>
@@ -232,14 +240,14 @@ export default function HowToJoinSlide() {
                 {/* Quick Reference Bar */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1 }}
-                    className="mb-6"
+                    className="mb-12"
                 >
-                    <h3 className="text-lg font-bold text-white mb-3 uppercase tracking-wider">Quick Reference:</h3>
-                    <div className="flex flex-wrap gap-3">
+                    <h3 className="text-[10px] font-black text-slate-400 mb-6 uppercase tracking-[0.4em] italic text-center">Protocol Cost Reference Archetype</h3>
+                    <div className="flex flex-wrap justify-center gap-6">
                         {levelCosts.map((lc, i) => (
-                            <div key={i} className="px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-sm">
-                                <span className="text-red-400 font-bold uppercase tracking-tighter mr-2">Level {lc.level}:</span>{' '}
-                                <span className="text-white font-black">{lc.cost}</span>
+                            <div key={i} className="px-8 py-4 rounded-2xl bg-white border border-brand-mint shadow-xl group hover:-translate-y-1 transition-all">
+                                <span className="text-brand-green font-black uppercase text-[10px] tracking-widest italic mr-4">Node Tier {lc.level}</span>
+                                <span className="text-slate-900 font-black text-xl italic tracking-tighter">{lc.cost}</span>
                             </div>
                         ))}
                     </div>
@@ -248,25 +256,34 @@ export default function HowToJoinSlide() {
                 {/* Requirements Bar */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.1 }}
-                    className="mb-10"
+                    className="mb-16 text-center"
                 >
-                    <h3 className="text-lg font-bold text-white mb-3 uppercase tracking-wider">Requirements:</h3>
-                    <div className="flex flex-wrap gap-6 text-sm text-gray-400 font-bold">
-                        <span>✅ BSC-compatible wallet</span>
-                        <span>✅ BNB for transactions</span>
-                        <span>✅ Referral link (or use default)</span>
+                    <h3 className="text-[10px] font-black text-slate-400 mb-6 uppercase tracking-[0.4em] italic">Pre-Deployment Requirements</h3>
+                    <div className="flex flex-wrap justify-center gap-12 text-[10px] font-black text-slate-600 uppercase tracking-widest italic">
+                        <span className="flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-brand-green" />
+                            BSC-Compatible Web3 Wallet
+                        </span>
+                        <span className="flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-brand-green" />
+                            Native BNB Asset (BEP20)
+                        </span>
+                        <span className="flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-brand-green" />
+                            Valid Protocol Referral Hash
+                        </span>
                     </div>
                 </motion.div>
 
                 {/* Bottom Banner */}
                 <motion.div
                     initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}
-                    className="w-full p-4 rounded-2xl bg-gradient-to-r from-red-900/20 via-[#e30613]/10 to-rose-900/20 border border-white/5 text-center"
+                    className="w-full p-8 rounded-[3rem] bg-white border border-brand-green/10 text-center shadow-3xl"
                 >
-                    <p className="text-lg font-black text-white uppercase tracking-tight">
-                        Simple 4-Step Process <span className="text-white/20 mx-2">|</span>
-                        Instant Activation <span className="text-white/20 mx-2">|</span>
-                        Start Earning Immediately
+                    <p className="text-lg font-black text-slate-900 uppercase tracking-tight italic">
+                        Atomic Protocol Activation <span className="text-slate-300 mx-4">|</span>
+                        Zero Admin Intervention <span className="text-slate-300 mx-4">|</span>
+                        Immediate Asset Liquidity
                     </p>
                 </motion.div>
 
@@ -274,3 +291,6 @@ export default function HowToJoinSlide() {
         </div>
     );
 }
+
+
+

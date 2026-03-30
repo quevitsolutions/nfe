@@ -1,14 +1,14 @@
-import React from "react";
+﻿import React from "react";
 
 export default function IncomeInteractionPage() {
     return (
-        <div className="space-y-6 text-gray-300 leading-relaxed">
-            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-red-400 to-rose-600 bg-clip-text text-transparent mb-8 uppercase tracking-tighter font-mono">
+        <div className="space-y-6 text-slate-400 leading-relaxed">
+            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-red-400 to-red-600 bg-clip-text text-transparent mb-8 uppercase tracking-tighter font-mono">
                 Income Interaction — The Flow of Community Wealth
             </h1>
 
             <section className="mb-10">
-                <h2 className="text-2xl font-bold text-white mb-4 border-b border-white/10 pb-2">Algorithmic Distribution Full Flow</h2>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b border-slate-200 pb-2">Algorithmic Distribution Full Flow</h2>
                 <p className="mb-6">
                     AIPCore interactions are purely mathematical. From the moment a participant clicks "Register" or "Upgrade," every single wei of BNB is tracked and distributed autonomously by the smart contract. Our <strong>Zero Leakage Policy</strong> ensures that 100% of the protocol volume remains within the community.
                 </p>
@@ -16,30 +16,30 @@ export default function IncomeInteractionPage() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-10">
                     <div className="bg-red-900/5 border border-red-500/20 p-4 rounded-2xl hover:bg-red-900/10 transition-colors">
                         <div className="text-2xl font-black text-red-500 mb-2 font-mono">10%</div>
-                        <h3 className="text-sm font-bold text-white mb-1 uppercase tracking-widest">Direct</h3>
-                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Instant referral rewards.</p>
+                        <h3 className="text-sm font-bold text-slate-900 mb-1 uppercase tracking-widest">Direct</h3>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">Instant referral rewards.</p>
                     </div>
-                    <div className="bg-red-900/5 border border-rose-500/20 p-4 rounded-2xl hover:bg-red-900/10 transition-colors">
-                        <div className="text-2xl font-black text-rose-500 mb-2 font-mono">70%</div>
-                        <h3 className="text-sm font-bold text-white mb-1 uppercase tracking-widest">Matrix</h3>
-                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">AI-placed binary growth.</p>
+                    <div className="bg-red-900/5 border border-red-500/20 p-4 rounded-2xl hover:bg-red-900/10 transition-colors">
+                        <div className="text-2xl font-black text-red-500 mb-2 font-mono">70%</div>
+                        <h3 className="text-sm font-bold text-slate-900 mb-1 uppercase tracking-widest">Matrix</h3>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">AI-placed binary growth.</p>
                     </div>
                     <div className="bg-red-900/5 border border-red-500/20 p-4 rounded-2xl hover:bg-red-900/10 transition-colors">
                         <div className="text-2xl font-black text-red-400 mb-2 font-mono">15%</div>
-                        <h3 className="text-sm font-bold text-white mb-1 uppercase tracking-widest">Layers</h3>
-                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">17-layer referral depth.</p>
+                        <h3 className="text-sm font-bold text-slate-900 mb-1 uppercase tracking-widest">Layers</h3>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">17-layer referral depth.</p>
                     </div>
-                    <div className="bg-red-900/5 border border-rose-500/20 p-4 rounded-2xl hover:bg-red-900/10 transition-colors">
-                        <div className="text-2xl font-black text-rose-400 mb-2 font-mono">5%</div>
-                        <h3 className="text-sm font-bold text-white mb-1 uppercase tracking-widest">Pools</h3>
-                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-tighter">Global volume sharing.</p>
+                    <div className="bg-red-900/5 border border-red-500/20 p-4 rounded-2xl hover:bg-red-900/10 transition-colors">
+                        <div className="text-2xl font-black text-red-400 mb-2 font-mono">5%</div>
+                        <h3 className="text-sm font-bold text-slate-900 mb-1 uppercase tracking-widest">Pools</h3>
+                        <p className="text-[10px] text-slate-500 font-bold uppercase tracking-tighter">Global volume sharing.</p>
                     </div>
                 </div>
             </section>
 
             <section className="mb-10">
-                <h2 className="text-2xl font-bold text-white mb-4 border-b border-white/10 pb-2">Phase 1: Direct Recognition (10%)</h2>
-                <div className="bg-black/20 p-6 rounded-2xl border border-white/5">
+                <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b border-slate-200 pb-2">Phase 1: Direct Recognition (10%)</h2>
+                <div className="bg-black/20 p-6 rounded-2xl border border-slate-100">
                     <p className="mb-4">
                         The 10% Direct Reward triggers for every registration and upgrade within your direct network. This rewards the core act of connection and onboarding.
                     </p>
@@ -51,7 +51,7 @@ export default function IncomeInteractionPage() {
             </section>
 
             <section className="mb-10">
-                <h2 className="text-2xl font-bold text-white mb-4 border-b border-white/10 pb-2">Phase 2: Matrix & Layers (70% + 15%)</h2>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b border-slate-200 pb-2">Phase 2: Matrix & Layers (70% + 15%)</h2>
                 <p className="mb-4">
                     The majority of the reward flow—85%—is dedicated to the collective community structure.
                 </p>
@@ -69,13 +69,13 @@ export default function IncomeInteractionPage() {
                     <div className="flex flex-col sm:flex-row gap-6">
                         <div className="flex-1">
                             <h4 className="font-black text-red-500 mb-2 uppercase tracking-widest font-mono">Matrix (70%)</h4>
-                            <p className="text-xs text-gray-400 font-bold uppercase tracking-tighter">
+                            <p className="text-xs text-slate-500 font-bold uppercase tracking-tighter">
                                 Optimized by the MOM engine, these rewards ensure that binary growth is shared deep into the network.
                             </p>
                         </div>
-                        <div className="flex-1 border-l border-white/10 pl-0 sm:pl-6">
-                            <h4 className="font-black text-rose-500 mb-2 uppercase tracking-widest font-mono">Layers (15%)</h4>
-                            <p className="text-xs text-gray-400 font-bold uppercase tracking-tighter">
+                        <div className="flex-1 border-l border-slate-200 pl-0 sm:pl-6">
+                            <h4 className="font-black text-red-500 mb-2 uppercase tracking-widest font-mono">Layers (15%)</h4>
+                            <p className="text-xs text-slate-500 font-bold uppercase tracking-tighter">
                                 Distributed across 17 vertical levels of your referral tree, rewarding the leadership that builds deep teams.
                             </p>
                         </div>
@@ -84,41 +84,44 @@ export default function IncomeInteractionPage() {
             </section>
 
             <section className="mb-10">
-                <h2 className="text-2xl font-bold text-white mb-4 border-b border-white/10 pb-2">Phase 3: Global Participation (5%)</h2>
+                <h2 className="text-2xl font-bold text-slate-900 mb-4 border-b border-slate-200 pb-2">Phase 3: Global Participation (5%)</h2>
                 <p className="mb-4">
                     The final 5% is allocated to the RewardPool contract, distributed proportionally to qualified leaders across the Bronze, Silver, and Gold Pools.
                 </p>
                 <div className="space-y-4">
                     <div className="flex items-center gap-4 p-4 bg-red-900/5 rounded-xl border border-red-500/10">
-                        <div className="w-12 h-12 rounded-xl bg-red-600 text-white flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(227,6,19,0.2)]">1.5%</div>
+                        <div className="w-12 h-12 rounded-xl bg-[#ed1b24] text-white flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(227,6,19,0.2)]">1.5%</div>
                         <div>
-                            <div className="font-black text-white uppercase tracking-tighter">Bronze Pool</div>
-                            <div className="text-xs text-gray-400 font-bold uppercase tracking-widest">Shared among Layer 6+ participants.</div>
+                            <div className="font-black text-slate-900 uppercase tracking-tighter">Bronze Pool</div>
+                            <div className="text-xs text-slate-500 font-bold uppercase tracking-widest">Shared among Layer 6+ participants.</div>
                         </div>
                     </div>
                     <div className="flex items-center gap-4 p-4 bg-red-900/5 rounded-xl border border-red-500/10">
-                        <div className="w-12 h-12 rounded-xl bg-rose-600 text-white flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(225,29,72,0.2)]">1.75%</div>
+                        <div className="w-12 h-12 rounded-xl bg-[#ed1b24] text-slate-900 flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(237, 27, 36,0.2)]">1.75%</div>
                         <div>
-                            <div className="font-black text-white uppercase tracking-tighter">Silver Pool</div>
-                            <div className="text-xs text-gray-400 font-bold uppercase tracking-widest">Shared among Layer 10+ participants.</div>
+                            <div className="font-black text-slate-900 uppercase tracking-tighter">Silver Pool</div>
+                            <div className="text-xs text-slate-500 font-bold uppercase tracking-widest">Shared among Layer 10+ participants.</div>
                         </div>
                     </div>
                     <div className="flex items-center gap-4 p-4 bg-red-900/5 rounded-xl border border-red-500/10">
-                        <div className="w-12 h-12 rounded-xl bg-red-700 text-white flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(185,28,28,0.2)]">1.75%</div>
+                        <div className="w-12 h-12 rounded-xl bg-red-700 text-slate-900 flex items-center justify-center font-black text-lg shadow-[0_0_15px_rgba(185,28,28,0.2)]">1.75%</div>
                         <div>
-                            <div className="font-black text-white uppercase tracking-tighter">Gold Pool</div>
-                            <div className="text-xs text-gray-400 font-bold uppercase tracking-widest">Shared among Layer 14+ participants.</div>
+                            <div className="font-black text-slate-900 uppercase tracking-tighter">Gold Pool</div>
+                            <div className="text-xs text-slate-500 font-bold uppercase tracking-widest">Shared among Layer 14+ participants.</div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <div className="bg-gradient-to-r from-red-900/20 to-rose-900/20 border border-red-500/20 p-6 rounded-2xl text-center">
-                <h4 className="text-xl font-black text-white mb-2 uppercase tracking-tighter">Immutable and Instant</h4>
-                <p className="text-sm text-gray-400 font-bold uppercase tracking-tighter">
+            <div className="bg-gradient-to-r from-red-900/20 to-red-900/20 border border-red-500/20 p-6 rounded-2xl text-center">
+                <h4 className="text-xl font-black text-slate-900 mb-2 uppercase tracking-tighter">Immutable and Instant</h4>
+                <p className="text-sm text-slate-500 font-bold uppercase tracking-tighter">
                     Because this logic is hard-coded into the smart contract, there is no delay. Once the transaction is confirmed on the BNB GreenChain/Mainnet, all 40/50/10 distributions are settled. Your rewards are visible in your dashboard instantly.
                 </p>
             </div>
         </div>
     );
 }
+
+
+

@@ -60,7 +60,7 @@ export function useLevelCosts() {
         address: getContractAddress(chainId) as `0x${string}`,
         abi: AIPCORE_ABI,
         functionName: 'getTierCost',
-        args: [BigInt(i)],
+        args: [BigInt(i + 1)],  // Contract is 1-indexed: tier 1 = entry, tier 18 = max
     }));
 
     const { data, ...rest } = useReadContracts({
@@ -82,6 +82,18 @@ export function useIncomeBreakdown(userId: number) {
         abi: AIPCORE_ABI,
         functionName: 'getIncomeBreakdown',
         args: [BigInt(userId)],
+    });
+}
+
+// Hook to get registration cost (Tier 1 = first entry tier, index 1 in the contract)
+export function useRegistrationCost() {
+    const chainId = useChainId();
+
+    return useReadContract({
+        address: getContractAddress(chainId) as `0x${string}`,
+        abi: AIPCORE_ABI,
+        functionName: 'getTierCost',
+        args: [BigInt(1)], // Contract is 1-indexed: tier 0 = no tier (returns 0), tier 1 = entry tier
     });
 }
 

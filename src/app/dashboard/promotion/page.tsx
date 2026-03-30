@@ -50,19 +50,22 @@ export default function PromotionPage() {
         {
             name: 'Twitter / X',
             icon: <Twitter className="w-5 h-5" />,
-            color: 'from-sky-500 to-blue-600',
+            color: 'from-slate-800 to-black',
+            textColor: 'text-white',
             href: `https://twitter.com/intent/tweet?text=Join%20AIPCore%20Engine%20and%20earn%20algorithmic%20rewards%20through%20our%20decentralized%20protocol!%20Register%20here:%20${encodeURIComponent(referralLink)}`,
         },
         {
             name: 'WhatsApp',
             icon: <MessageCircle className="w-5 h-5" />,
-            color: 'from-green-500 to-emerald-600',
+            color: 'from-brand-green to-emerald-700',
+            textColor: 'text-white',
             href: `https://wa.me/?text=${encodeURIComponent('Join AIPCore and earn algorithmic rewards through our decentralized protocol! Register here: ' + referralLink)}`,
         },
         {
             name: 'Telegram',
             icon: <Send className="w-5 h-5" />,
-            color: 'from-blue-400 to-cyan-600',
+            color: 'from-blue-500 to-indigo-600',
+            textColor: 'text-white',
             href: `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent('Join AIPCore and earn algorithmic rewards through our decentralized protocol!')}`,
         },
     ];
@@ -83,44 +86,44 @@ export default function PromotionPage() {
         {
             title: 'Binary Matrix',
             desc: 'Earn from both your left and right matrix trees. Unlimited depth.',
-            icon: '🌲',
+            icon: '🎄',
             highlight: 'Unlimited depth',
         },
         {
             title: 'Reward Pools',
-            desc: 'Qualify for Bronze, Silver, Gold global reward pools as you upgrade.',
+            desc: 'Qualify for multi-tier global reward pools as you evolve your node.',
             icon: '🏆',
-            highlight: '3 reward pools',
+            highlight: 'Global Rewards',
         },
     ];
 
     return (
-        <div className="-m-6 p-6 min-h-[calc(100vh-48px)] bg-white text-gray-500 flex flex-col items-center">
+        <div className="-m-6 p-6 min-h-[calc(100vh-48px)] bg-brand-mint text-foreground flex flex-col items-center">
             <div className="max-w-7xl w-full space-y-6">
             {/* Header section with Node link card */}
-            <div className="relative overflow-hidden bg-slate-50 rounded-2xl p-6 md:p-10 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)]">
+            <div className="relative overflow-hidden bg-white rounded-2xl p-6 md:p-10 border border-brand-green/10 shadow-2xl">
                 <div className="max-w-4xl mx-auto space-y-8">
                     <div className="text-center space-y-2">
-                        <h1 className="text-3xl md:text-5xl font-black text-[#e30613] uppercase tracking-wider [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">Share & Earn Rewards</h1>
-                        <p className="text-gray-500 font-bold text-lg">Your Node is the gateway for others to join the network.</p>
+                        <h1 className="text-3xl md:text-5xl font-black text-brand-red uppercase tracking-tighter italic">Neural Growth</h1>
+                        <p className="text-foreground font-black uppercase tracking-[0.2em] text-xs italic">Your Node is the gateway for network propagation.</p>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                        <div className="bg-white border border-slate-200 rounded-3xl p-6 lg:p-8 space-y-5 shadow-[inset_0_2px_8px_rgba(0,0,0,0.8)]">
+                        <div className="bg-brand-mint border border-brand-green/10 rounded-3xl p-6 lg:p-8 space-y-5 shadow-sm">
                             <div>
-                                <h3 className="text-sm font-black text-gray-500 uppercase tracking-widest mb-2">Your Node ID</h3>
-                                <div className="text-4xl font-black text-[#e30613] [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">#{userId > 0 ? userId : '—'}</div>
+                                <h3 className="text-xs font-black text-brand-blue uppercase tracking-widest mb-2 italic leading-none">Node Hierarchy ID</h3>
+                                <div className="text-4xl font-black text-brand-green italic">#{userId > 0 ? userId : '—'}</div>
                             </div>
 
                             <div className="space-y-2">
-                                <h3 className="text-sm font-black text-gray-500 uppercase tracking-widest">Your Node Invitation Link</h3>
-                                <div className="flex items-center gap-2 p-3 bg-slate-50 rounded-xl shadow-sm border border-slate-200 group">
-                                    <div className="flex-1 font-mono text-sm text-gray-600 font-bold truncate">
+                                <h3 className="text-xs font-black text-foreground uppercase tracking-widest italic leading-none">Invite Token Link</h3>
+                                <div className="flex items-center gap-2 p-3 bg-white rounded-xl shadow-sm border border-brand-green/10 group">
+                                    <div className="flex-1 font-mono text-xs text-foreground font-bold truncate">
                                         {referralLink || '---'}
                                     </div>
                                     <button
                                         onClick={() => copyToClipboard(referralLink, 'link')}
-                                        className="p-2 bg-red-50 text-[#e30613] border border-red-200 rounded-lg hover:bg-[#e30613] hover:text-white transition-all shadow-[inset_0_1px_2px_rgba(255,255,255,0.05)]"
+                                        className="p-2 bg-brand-mint text-brand-green rounded-lg hover:bg-brand-red hover:text-white transition-all shadow-sm"
                                     >
                                         {copiedLink ? <CheckCheck className="w-5 h-5" /> : <Copy className="w-5 h-5" />}
                                     </button>
@@ -136,11 +139,11 @@ export default function PromotionPage() {
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className={`flex items-center justify-between p-4 rounded-xl bg-gradient-to-r ${social.color} text-white font-black hover:-translate-y-1 transition-all shadow-[0_4px_10px_rgba(0,0,0,0.1),inset_1px_1px_2px_rgba(255,255,255,0.3)] group`}
+                                    className={`flex items-center justify-between p-4 rounded-xl bg-gradient-to-r ${social.color} ${social.textColor} font-black hover:-translate-y-1 transition-all shadow-[0_4px_10px_rgba(0,0,0,0.1),inset_1px_1px_2px_rgba(255,255,255,0.3)] group`}
                                 >
                                     <div className="flex items-center gap-3">
                                         {social.icon}
-                                        <span className="drop-shadow-sm">Share on {social.name}</span>
+                                        <span className="drop-shadow-sm uppercase text-xs tracking-widest">Share on {social.name}</span>
                                     </div>
                                     <Share2 className="w-4 h-4 opacity-70 group-hover:opacity-100" />
                                 </a>
@@ -152,65 +155,69 @@ export default function PromotionPage() {
 
             {/* Why promote section */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="relative overflow-hidden bg-slate-50 rounded-2xl p-6 lg:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] group hover:-translate-y-1 hover:shadow-lg transition-all">
-                    <div className="w-14 h-14 bg-amber-50 border border-amber-200 rounded-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.05)] flex items-center justify-center mb-6 text-amber-500 font-black text-xl">10%</div>
-                    <h3 className="text-xl font-black text-gray-800 mb-2">Direct Reward</h3>
-                    <p className="text-gray-500 font-bold text-sm">Earn an instant 10% direct reward whenever someone registers a new Node using your ID.</p>
+                <div className="relative overflow-hidden bg-white rounded-2xl p-6 lg:p-8 border border-brand-green/10 shadow-2xl group hover:-translate-y-1 transition-all">
+                    <div className="w-14 h-14 bg-brand-mint border border-brand-green/10 rounded-xl flex items-center justify-center mb-6 text-brand-green font-black text-xl italic">10%</div>
+                    <h3 className="text-xl font-black text-foreground mb-2 italic">Direct Rewards</h3>
+                    <p className="text-foreground font-bold text-xs italic">Earn instant rewards when others register using your Node ID.</p>
                 </div>
 
-                <div className="relative overflow-hidden bg-[#f4f8f4] rounded-2xl p-6 lg:p-8 border border-[#c8e6c9] shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] group hover:-translate-y-1 hover:shadow-lg transition-all">
-                    <div className="w-14 h-14 bg-blue-50 border border-blue-200 rounded-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.05)] flex items-center justify-center mb-6 text-blue-500 font-black text-xl">17L</div>
-                    <h3 className="text-xl font-black text-gray-800 mb-2">Sponsorship Depth</h3>
-                    <p className="text-gray-500 font-bold text-sm">Unlock up to 17 layers of sponsorship rewards currently active on the protocol.</p>
+                <div className="relative overflow-hidden bg-white rounded-2xl p-6 lg:p-8 border border-brand-green/10 shadow-2xl group hover:-translate-y-1 transition-all">
+                    <div className="w-14 h-14 bg-brand-mint border border-brand-green/10 rounded-xl flex items-center justify-center mb-6 text-brand-green font-black text-xl italic">17L</div>
+                    <h3 className="text-xl font-black text-foreground mb-2 italic">Network Depth</h3>
+                    <p className="text-foreground font-bold text-xs italic">Unlock up to 17 layers of sponsorship rewards on the protocol.</p>
                 </div>
 
-                <div className="relative overflow-hidden bg-[#f4f8f4] rounded-2xl p-6 lg:p-8 border border-[#c8e6c9] shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] group hover:-translate-y-1 hover:shadow-lg transition-all">
-                    <div className="w-14 h-14 bg-purple-50 border border-purple-200 rounded-xl shadow-[inset_0_1px_2px_rgba(255,255,255,0.05)] flex items-center justify-center mb-6 text-purple-500 font-black text-xl">70%</div>
-                    <h3 className="text-xl font-black text-gray-800 mb-2">Matrix Propagation</h3>
-                    <p className="text-gray-500 font-bold text-sm">Benefit from automated matrix spillover as new nodes are placed in the binary structure.</p>
+                <div className="relative overflow-hidden bg-white rounded-2xl p-6 lg:p-8 border border-brand-green/10 shadow-2xl group hover:-translate-y-1 transition-all">
+                    <div className="w-14 h-14 bg-brand-mint border border-brand-green/10 rounded-xl flex items-center justify-center mb-6 text-brand-green font-black text-xl italic">70%</div>
+                    <h3 className="text-xl font-black text-foreground mb-2 italic">Matrix Yield</h3>
+                    <p className="text-foreground font-bold text-xs italic">Benefit from automated matrix propagation in the binary system.</p>
                 </div>
             </div>
 
             {/* Reward Breakdown cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {incomeCards.map((card, i) => (
+                {incomeCards.map((card, i) => {
+                    const cardClass = i % 2 === 0 ? 'card-green' : 'card-red';
+                    return (
                     <div
                         key={i}
-                        className="relative overflow-hidden bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] group hover:-translate-y-1 hover:shadow-lg transition-all flex flex-col justify-between"
+                        className={`relative overflow-hidden ${cardClass} p-6 group hover:-translate-y-1 transition-all flex flex-col justify-between`}
                     >
                         <div className="text-4xl mb-3 drop-shadow-sm">{card.icon}</div>
-                        <h3 className="text-lg font-black text-gray-800 mb-2">{card.title}</h3>
-                        <p className="text-gray-500 font-bold text-sm mb-4">{card.desc}</p>
-                        <div className="inline-block bg-amber-50 text-amber-600 border border-amber-200 text-xs font-black uppercase tracking-wider px-3 py-1 rounded">
+                        <h3 className="text-lg font-black text-foreground mb-2 italic tracking-tight">{card.title}</h3>
+                        <p className="text-foreground font-bold text-xs mb-4 italic leading-tight uppercase tracking-tight">{card.desc}</p>
+                        <div className="inline-block bg-white text-foreground border border-brand-green/10 text-xs font-black uppercase tracking-widest px-3 py-1 rounded w-fit italic">
                             {card.highlight}
                         </div>
                     </div>
-                ))}
+                    );
+                })}
             </div>
 
+
             {/* How it works educational section */}
-            <div className="relative overflow-hidden bg-slate-50 rounded-3xl p-8 md:p-12 mt-12 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] text-center">
-                <h2 className="text-3xl font-black text-[#e30613] mb-12 tracking-wider uppercase [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">How Sponsorship Works</h2>
+            <div className="relative overflow-hidden bg-white rounded-3xl p-8 md:p-12 mt-12 border border-brand-green/10 shadow-2xl text-center">
+                <h2 className="text-3xl font-black text-brand-red mb-12 tracking-tighter uppercase italic">Neural Propagation</h2>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12 relative">
-                    <div className="hidden md:block absolute top-10 left-[20%] right-[20%] h-0.5 border-t-2 border-dashed border-[#3f3f46] -z-0"></div>
+                    <div className="hidden md:block absolute top-10 left-[20%] right-[20%] h-0.5 border-t-2 border-dashed border-brand-green/10 -z-0"></div>
 
-                    <div className="relative z-10 space-y-4 bg-white border border-slate-200 shadow-sm p-6 rounded-2xl">
-                        <div className="w-20 h-20 bg-amber-50 border-2 border-amber-200 rounded-full flex items-center justify-center mx-auto text-amber-500 font-black text-3xl shadow-[inset_1px_1px_3px_rgba(255,255,255,1)]">1</div>
-                        <h4 className="text-lg font-black text-gray-800 uppercase tracking-widest">Invite Nodes</h4>
-                        <p className="text-gray-500 font-bold text-sm leading-relaxed">Share your Link or Node ID with your community and network.</p>
+                    <div className="relative z-10 space-y-4 bg-brand-mint border border-brand-green/10 shadow-sm p-6 rounded-2xl">
+                        <div className="w-20 h-20 bg-white border border-brand-green/10 rounded-full flex items-center justify-center mx-auto text-brand-green font-black text-3xl italic shadow-sm">1</div>
+                        <h4 className="text-xs font-black text-brand-blue uppercase tracking-widest italic">Invite Hubs</h4>
+                        <p className="text-foreground font-bold text-xs leading-relaxed italic uppercase">Broadcast your invitation link to your network hubs.</p>
                     </div>
 
-                    <div className="relative z-10 space-y-4 bg-white border border-slate-200 shadow-sm p-6 rounded-2xl">
-                        <div className="w-20 h-20 bg-blue-50 border-2 border-blue-200 rounded-full flex items-center justify-center mx-auto text-blue-500 font-black text-3xl shadow-[inset_1px_1px_3px_rgba(255,255,255,1)]">2</div>
-                        <h4 className="text-lg font-black text-gray-800 uppercase tracking-widest">Unlock Layers</h4>
-                        <p className="text-gray-500 font-bold text-sm leading-relaxed">When your direct nodes unlock higher layers, you receive instant rewards.</p>
+                    <div className="relative z-10 space-y-4 bg-brand-mint border border-brand-green/10 shadow-sm p-6 rounded-2xl">
+                        <div className="w-20 h-20 bg-white border border-brand-green/10 rounded-full flex items-center justify-center mx-auto text-brand-green font-black text-3xl italic shadow-sm">2</div>
+                        <h4 className="text-xs font-black text-brand-blue uppercase tracking-widest italic">Trigger Layers</h4>
+                        <p className="text-foreground font-bold text-xs leading-relaxed italic uppercase">Direct activations unlock higher-tier neural rewards.</p>
                     </div>
 
-                    <div className="relative z-10 space-y-4 bg-white border border-[#c8e6c9] shadow-sm p-6 rounded-2xl">
-                        <div className="w-20 h-20 bg-rose-50 border-2 border-rose-200 rounded-full flex items-center justify-center mx-auto text-rose-500 font-black text-3xl shadow-[inset_1px_1px_3px_rgba(255,255,255,1)]">3</div>
-                        <h4 className="text-lg font-black text-gray-800 uppercase tracking-widest">Compound Rewards</h4>
-                        <p className="text-gray-500 font-bold text-sm leading-relaxed">Each time a node in your sponsorship network unlocks a layer, a reward is triggered.</p>
+                    <div className="relative z-10 space-y-4 bg-brand-mint border border-brand-green/10 shadow-sm p-6 rounded-2xl">
+                        <div className="w-20 h-20 bg-white border border-brand-green/10 rounded-full flex items-center justify-center mx-auto text-brand-green font-black text-3xl italic shadow-sm">3</div>
+                        <h4 className="text-xs font-black text-brand-blue uppercase tracking-widest italic">Maximize Yield</h4>
+                        <p className="text-foreground font-bold text-xs leading-relaxed italic uppercase">Depth propagation secures long-term matrix yields.</p>
                     </div>
                 </div>
             </div>
@@ -218,3 +225,6 @@ export default function PromotionPage() {
         </div>
     );
 }
+
+
+

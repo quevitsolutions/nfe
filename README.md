@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AIPCORE: Web Application Interface
 
-## Getting Started
+This directory contains the primary Next.js Frontend for the AIPCORE protocol. It manages user registration, dashboard views, and node matrix visualizations.
 
-First, run the development server:
+## 🛠 Features
 
+- **Decentralized Authentication**: Built with RainbowKit for seamless wallet connectivity.
+- **On-Chain Analytics**: Real-time stats visualization using Recharts.
+- **Node Matrix Views**: High-fidelity node and layer propagation visualization.
+- **Dynamic Rewards**: Algorithmic reward flow monitoring.
+
+## 📁 Key Directories
+
+- `src/app/`: Core routing and layouts (Next.js App Router).
+- `src/components/`: Reusable UI components for dashboard and admin panels.
+- `src/lib/`: Logic for contract interactions (ethers/viem) and utility functions.
+- `public/`: Static assets and branding.
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18.17+ 
+- npm or pnpm
+
+### Development
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Production Build
+```bash
+npm run build
+npm start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🎨 Branding & Theme
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application uses the **"Mint & Red"** theme as defined in `src/app/globals.css`.
+- **Primary Color**: `#ed1b24` (AIP Red)
+- **Background**: `#fcf3eb` (AIP Cream)
+- **Secondary**: `#22c55e` (AIP Green)
 
-## Learn More
+## 🔧 Environment Configuration
 
-To learn more about Next.js, take a look at the following resources:
+Ensure you have a `.env.local` or `.env.production` file for local testing:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=85bbe9...
+NEXT_PUBLIC_ENABLE_TESTNETS=false
+NEXT_PUBLIC_DEFAULT_CHAIN=56
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
+*Visit the root [README.md](file:///f:/GICLUB/README.md) for full project architecture.*
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

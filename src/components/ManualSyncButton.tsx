@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState } from 'react';
 import { RefreshCw, Zap, CheckCircle2, ShieldAlert } from 'lucide-react';
@@ -86,10 +86,10 @@ export function ManualSyncButton({ nodeId, missingRequirements, isQualifiedForNe
                 disabled={isPending || status === 'success' || isConfirmed}
                 className={`w-full relative flex items-center justify-center gap-3 px-8 py-5 rounded-[2rem] font-black text-xs uppercase tracking-widest transition-all shadow-xl active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed group overflow-hidden border ${
                     status === 'success' || isConfirmed 
-                    ? 'bg-red-600 text-white border-red-500 shadow-red-600/20' 
+                    ? 'bg-[#ed1b24] text-white border-red-500 shadow-red-600/20' 
                     : status === 'ineligible' || status === 'error'
-                    ? 'bg-rose-500 text-white border-rose-400Shadow-rose-500/20'
-                    : 'bg-white border-slate-100 text-[#e30613] hover:bg-slate-50 shadow-slate-100'
+                    ? 'bg-red-500 text-slate-900 border-red-400Shadow-rose-500/20'
+                    : 'bg-white border-slate-100 text-[#ed1b24] hover:bg-[#fcf3eb] shadow-slate-100'
                 }`}
             >
                 {isPending ? (
@@ -99,26 +99,28 @@ export function ManualSyncButton({ nodeId, missingRequirements, isQualifiedForNe
                     </>
                 ) : status === 'success' || isConfirmed ? (
                     <>
-                        <CheckCircle2 className="w-5 h-5 text-white relative z-10" />
+                        <CheckCircle2 className="w-5 h-5 text-slate-900 relative z-10" />
                         <span className="relative z-10">Synced Successfully</span>
                     </>
                 ) : status === 'ineligible' || status === 'error' ? (
                     <>
-                        <ShieldAlert className="w-5 h-5 text-white relative z-10" />
+                        <ShieldAlert className="w-5 h-5 text-slate-900 relative z-10" />
                         <span className="relative z-10">Criteria Conflict</span>
                     </>
                 ) : (
                     <>
-                        <Zap className="w-5 h-5 text-[#e30613] relative z-10 group-hover:scale-110 transition-transform" />
+                        <Zap className="w-5 h-5 text-[#ed1b24] relative z-10 group-hover:scale-110 transition-transform" />
                         <span className="relative z-10">Manual Protocol Sync</span>
                     </>
                 )}
             </button>
             {errorMessage && (
-                <div className="text-[10px] text-rose-500 font-bold bg-rose-50 rounded-2xl p-4 text-center border border-rose-100 animate-in slide-in-from-top-2">
+                <div className="text-[10px] text-red-500 font-bold bg-red-50 rounded-2xl p-4 text-center border border-red-100 animate-in slide-in-from-top-2">
                     {errorMessage}
                 </div>
             )}
         </div>
     );
 }
+
+

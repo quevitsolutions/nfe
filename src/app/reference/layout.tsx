@@ -36,38 +36,31 @@ export default function ReferenceLayout({ children }: { children: ReactNode }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <div className="min-h-screen bg-[#050510] relative">
-            <div className="fixed inset-0 bg-[#050510] -z-10" />
-            <div className="fixed inset-0 bg-gradient-to-br from-red-900/5 via-transparent to-red-900/5 -z-10" />
+        <div className="min-h-screen bg-brand-mint relative ">
+            <div className="fixed inset-0 bg-brand-mint -z-10" />
+            <div className="fixed inset-0 bg-gradient-to-br from-brand-green/5 via-transparent to-brand-red/5 -z-10" />
             {/* Mobile menu button */}
             <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="lg:hidden fixed top-4 left-4 z-50 bg-red-600 p-2 rounded-lg text-white shadow-lg border border-white/20"
+                className="lg:hidden fixed top-4 left-4 z-50 bg-[#ed1b24] text-white shadow-lg border border-white/20"
             >
                 {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
 
             {/* Sidebar */}
             <aside className={`
-                fixed inset-y-0 left-0 z-40 w-64 bg-white/5 backdrop-blur-xl border-r border-white/10
+                fixed inset-y-0 left-0 z-40 w-64 bg-white backdrop-blur-xl border-r border-brand-green/10
                 transform transition-transform duration-300 lg:translate-x-0
                 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
             `}>
                 <div className="p-6">
                     <Link href="/" onClick={() => setSidebarOpen(false)} className="flex items-center gap-4 mb-10 px-2 group cursor-pointer">
-                        <div className="relative">
-                            <div className="absolute -inset-2 bg-red-500/20 rounded-xl blur-lg group-hover:bg-red-500/30 transition-all opacity-0 group-hover:opacity-100"></div>
-                            <img src="/nfe-logo.png" alt="NFE" className="h-10 w-auto relative shadow-[0_0_15px_rgba(227,6,19,0.3)] group-hover:shadow-[0_0_20px_rgba(227,6,19,0.5)] transition-all" />
-                        </div>
-                        <div className="flex flex-col">
-                            <span className="text-2xl font-black text-white tracking-tighter leading-none font-mono">AIPCORE</span>
-                            <span className="text-xs font-bold text-red-500 tracking-[0.2em] font-mono">REFERENCE</span>
-                        </div>
+                        <img src="/aipcore-logo.svg" alt="AIPCORE" className="h-10 w-auto drop-shadow-[0_0_15px_rgba(0,136,255,0.3)] transition-all group-hover:drop-shadow-[0_0_20px_rgba(237, 27, 36,0.5)]" />
                     </Link>
                 </div>
 
                 <nav className="px-4 space-y-2 overflow-y-auto max-h-[calc(100vh-120px)] pb-20">
-                    <div className="text-xs font-bold text-white/50 uppercase tracking-widest px-4 mb-4 mt-2">Documentation</div>
+                    <div className="text-xs font-bold text-slate-400 uppercase tracking-widest px-4 mb-4 mt-2">Documentation</div>
                     {referenceNavItems.map((item) => {
                         const Icon = item.icon;
                         const isActive = pathname === item.path || (pathname === '/reference/introduction' && item.path === '/reference');
@@ -80,8 +73,8 @@ export default function ReferenceLayout({ children }: { children: ReactNode }) {
                                 className={`
                                     flex items-center gap-3 px-4 py-3 rounded-xl transition-colors font-mono
                                     ${isActive
-                                        ? 'bg-gradient-to-r from-red-600 to-rose-800 text-white font-black'
-                                        : 'text-gray-400 hover:bg-white/5 hover:text-white'
+                                        ? 'bg-brand-green text-white font-black'
+                                        : 'text-slate-500 hover:bg-brand-mint hover:text-brand-green'
                                     }
                                 `}
                             >
@@ -96,14 +89,14 @@ export default function ReferenceLayout({ children }: { children: ReactNode }) {
             {/* Main content */}
             <div className="lg:ml-64">
                 {/* Top bar */}
-                <header className="bg-white/5 backdrop-blur-xl border-b border-white/10 p-4 md:p-6 sticky top-0 z-30">
+                <header className="bg-white backdrop-blur-xl border-b border-brand-green/10 p-4 md:p-6 sticky top-0 z-30">
                     <div className="flex justify-between items-center">
-                        <h1 className="text-xl md:text-2xl font-bold text-white lg:block hidden">
+                        <h1 className="text-xl md:text-2xl font-bold text-brand-green lg:block hidden">
                             {referenceNavItems.find(item => item.path === pathname || (pathname === '/reference/introduction' && item.path === '/reference'))?.name || 'Reference'}
                         </h1>
                         <div className="flex items-center gap-4 ml-auto">
                             <ConnectButton showBalance={{ smallScreen: false, largeScreen: true }} accountStatus="address" />
-                            <Link href="/dashboard" className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-semibold transition-colors border border-white/10 hidden sm:block">
+                            <Link href="/dashboard" className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-white/20 text-slate-900 text-sm font-semibold transition-colors border border-slate-200 hidden sm:block">
                                 Portal Dashboard
                             </Link>
                         </div>
@@ -112,9 +105,9 @@ export default function ReferenceLayout({ children }: { children: ReactNode }) {
 
                 {/* Page content */}
                 <main className="p-4 md:p-8 max-w-4xl mx-auto">
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-10 shadow-xl text-gray-300 overflow-hidden relative">
+                    <div className="bg-white backdrop-blur-xl border border-brand-green/10 rounded-2xl p-6 md:p-10 shadow-xl text-slate-600 overflow-hidden relative">
                         {/* Corner decorative light */}
-                        <div className="absolute top-0 right-0 p-32 bg-red-600/10 blur-[100px] pointer-events-none rounded-full"></div>
+                        <div className="absolute top-0 right-0 p-32 bg-brand-green/5 blur-[100px] pointer-events-none rounded-full"></div>
                         <div className="relative z-10">
                             {children}
                         </div>
@@ -132,3 +125,7 @@ export default function ReferenceLayout({ children }: { children: ReactNode }) {
         </div>
     );
 }
+
+
+
+

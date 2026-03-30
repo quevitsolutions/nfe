@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Network, Layers, AlertTriangle, Cpu } from 'lucide-react';
 
 export default function MatrixIncomeSlide() {
     const [mounted, setMounted] = useState(false);
@@ -11,166 +11,180 @@ export default function MatrixIncomeSlide() {
     if (!mounted) return null;
 
     return (
-        <div className="min-h-screen bg-[#050510] flex flex-col font-sans text-white">
+        <div className="min-h-screen bg-[#f8faf8] flex flex-col font-sans text-slate-800 relative overflow-hidden">
+
+            {/* Background Decor */}
+            <div className="fixed inset-0 pointer-events-none">
+                <div className="absolute w-[800px] h-[800px] bg-brand-red/5 rounded-full blur-[150px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
+            </div>
 
             {/* ── TOP NAV BAR ── */}
-            <div className="sticky top-0 z-50 flex items-center justify-between px-4 md:px-8 py-3 bg-black/60 backdrop-blur-md border-b border-white/10">
-                <Link href="/presentation/direct-referral" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group">
+            <div className="sticky top-0 z-50 flex items-center justify-between px-6 md:px-12 py-5 bg-white/80 backdrop-blur-md border-b border-brand-green/10">
+                <Link href="/presentation/direct-referral" className="flex items-center gap-3 text-slate-500 hover:text-brand-green transition-all group font-black text-[10px] uppercase tracking-[0.2em] italic">
                     <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                    <span className="text-sm tracking-widest uppercase font-mono hidden sm:block">Direct Referral</span>
-                    <span className="text-sm font-mono sm:hidden">Prev</span>
+                    <span className="hidden sm:block">Direct Referral</span>
+                    <span className="sm:hidden">Prev</span>
                 </Link>
-                <span className="text-xs text-white/80 font-mono uppercase tracking-widest">Slide 2 / 4 — Matrix Income</span>
-                <Link href="/presentation/level-income" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group">
-                    <span className="text-sm tracking-widest uppercase font-mono hidden sm:block">Level Income</span>
-                    <span className="text-sm font-mono sm:hidden">Next</span>
+                <span className="text-[10px] text-slate-400 font-black uppercase tracking-[0.3em] italic">Slide 2 / 4 — Matrix Income</span>
+                <Link href="/presentation/level-income" className="flex items-center gap-3 text-slate-500 hover:text-brand-green transition-all group font-black text-[10px] uppercase tracking-[0.2em] italic">
+                    <span className="hidden sm:block">Level Income</span>
+                    <span className="sm:hidden">Next</span>
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
             </div>
 
-            {/* ── BACKGROUND ── */}
-            <div className="fixed inset-0 pointer-events-none -z-0">
-                <div className="absolute w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[120px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse" />
-                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-            </div>
-
             {/* ── MAIN CONTENT ── */}
-            <div className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-4 md:px-10 py-8 flex flex-col gap-6">
+            <div className="relative z-10 flex-1 w-full max-w-7xl mx-auto px-6 md:px-12 py-12 flex flex-col gap-12 animate-in fade-in slide-in-from-bottom-5 duration-700">
 
                 {/* Header */}
                 <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-red-400 to-rose-600 shadow-lg shadow-red-500/30 mb-4 p-1 animate-pulse">
-                        <div className="w-full h-full rounded-full bg-black/50 flex items-center justify-center border border-white/20">
-                            <span className="text-3xl md:text-4xl">🕸️</span>
-                        </div>
-                    </div>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-2 tracking-tight uppercase">
+                    <motion.div 
+                        initial={{ scale: 0.8, opacity: 0 }} 
+                        animate={{ scale: 1, opacity: 1 }}
+                        className="inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-[2rem] bg-brand-mint border border-brand-red/10 shadow-xl mb-8 group overflow-hidden"
+                    >
+                        <div className="absolute inset-0 bg-brand-red/5 group-hover:scale-150 transition-transform duration-700" />
+                        <Network className="w-10 h-10 md:w-12 md:h-12 text-brand-red relative z-10" />
+                    </motion.div>
+                    <h1 className="text-4xl md:text-7xl font-black text-slate-900 mb-4 tracking-tighter uppercase italic">
                         Stream #2:{' '}
-                        <span className="bg-gradient-to-r from-red-400 to-rose-600 bg-clip-text text-transparent">
-                            Matrix Income
-                        </span>
+                        <span className="text-brand-red">Matrix Income</span>
                     </h1>
-                    <p className="text-sm md:text-lg text-red-100/40 font-mono tracking-widest uppercase">Binary Matrix • 18 Tiers (L0–L17)</p>
+                    <p className="text-[10px] md:text-xs text-slate-500 font-black tracking-[0.4em] uppercase italic">Binary Matrix • 18 Tiers (L0–L17) Architecture</p>
                 </div>
 
                 {/* Content Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
 
                     {/* Left: Logic & Rules */}
-                    <div className="space-y-4">
-                        <div className="bg-white/5 rounded-2xl p-5 border border-white/10">
-                            <h3 className="text-lg font-bold text-red-300 mb-4 border-b border-white/10 pb-2">Distribution Logic</h3>
-                            <ul className="space-y-4">
+                    <div className="space-y-8">
+                        <div className="bg-brand-mint border border-brand-green/10 rounded-[2.5rem] p-8 shadow-xl">
+                            <h3 className="text-xl font-black text-brand-green mb-6 border-b border-brand-green/10 pb-4 uppercase italic tracking-tight">Distribution Logic</h3>
+                            <ul className="space-y-6">
                                 {[
-                                    { label: "Standard Distribution", val: "70%" },
-                                    { label: "Spillover / Auto-placed", val: "70%" },
+                                    { label: "Standard Yield", val: "70%" },
+                                    { label: "Global Spillover", val: "70%" },
                                 ].map((item, i) => (
                                     <li key={i} className="flex justify-between items-center">
-                                        <span className="text-gray-300 text-sm">{item.label}</span>
-                                        <span className="text-2xl font-bold text-white">{item.val}</span>
+                                        <span className="text-slate-500 font-black uppercase text-[10px] tracking-widest italic">{item.label}</span>
+                                        <span className="text-3xl font-black text-slate-900 italic tracking-tighter">{item.val}</span>
                                     </li>
                                 ))}
                             </ul>
                         </div>
 
-                        <div className="bg-red-900/20 rounded-2xl p-5 border border-red-500/20">
-                            <h3 className="text-base font-bold text-white mb-3 flex items-center gap-2 uppercase tracking-tighter">
-                                <span>⚠️</span> Upgrade Rule
+                        <div className="bg-white border border-brand-red/10 rounded-[2.5rem] p-8 shadow-xl relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 p-4 bg-brand-red/10 rounded-bl-3xl border-b border-l border-brand-red/20 translate-x-1 -translate-y-1">
+                                <AlertTriangle className="w-4 h-4 text-brand-red" />
+                            </div>
+                            <h3 className="text-sm font-black text-slate-900 mb-4 flex items-center gap-2 uppercase tracking-tight italic">
+                                Logic Priority Rule
                             </h3>
-                            <p className="text-gray-300 text-sm leading-relaxed">
-                                Eligible ONLY if receiver has <strong className="text-white">UPGRADED to a HIGHER LEVEL</strong> than the payer.
+                            <p className="text-slate-600 font-bold text-sm leading-relaxed italic">
+                                Eligible ONLY if receiver has <strong className="text-brand-red">UPGRADED to a HIGHER LEVEL</strong> than the initiator.
                             </p>
-                            <div className="mt-3 p-2.5 bg-red-900/20 border border-red-500/20 rounded-lg text-xs text-red-200">
-                                Otherwise: Income is <strong className="text-red-400">LOST</strong> (passed up/burned).
+                            <div className="mt-6 p-4 bg-brand-red/5 border border-brand-red/10 rounded-2xl text-[10px] font-black text-brand-red uppercase tracking-widest italic animate-pulse">
+                                Failure Result: Income Pass-Up
                             </div>
                         </div>
                     </div>
 
                     {/* Center: Matrix Visualization */}
-                    <div className="flex flex-col items-center justify-center py-4">
-                        <div className="relative flex flex-col items-center gap-6">
+                    <div className="flex flex-col items-center justify-center py-6">
+                        <div className="relative flex flex-col items-center gap-10">
                             {/* You node */}
                             <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.2 }}
-                                className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center shadow-[0_0_30px_rgba(227,6,19,0.5)] border-4 border-black z-10">
-                                <span className="text-white font-bold text-sm">YOU</span>
+                                className="w-18 h-18 md:w-24 md:h-24 rounded-[2rem] bg-brand-red flex items-center justify-center shadow-2xl shadow-brand-red/30 border-2 border-white z-10 group cursor-pointer hover:rotate-12 transition-all">
+                                <span className="text-white font-black text-[10px] uppercase tracking-widest italic">YOU</span>
                             </motion.div>
 
                             {/* L1 nodes */}
-                            <div className="flex gap-10 md:gap-14">
+                            <div className="flex gap-12 md:gap-20">
                                 {[1, 2].map((n) => (
                                     <motion.div key={n} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.4 + n * 0.1 }}
-                                        className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gray-800 border-2 border-red-500/50 flex items-center justify-center shadow-[0_0_15px_rgba(227,6,19,0.2)]">
-                                        <span className="text-xs text-gray-400 font-bold uppercase tracking-tighter">L1</span>
+                                        className="w-14 h-14 md:w-16 md:h-16 rounded-[1.5rem] bg-white border-2 border-brand-red/20 flex items-center justify-center shadow-xl group hover:-translate-y-1 transition-all">
+                                        <span className="text-[10px] text-slate-400 font-black uppercase tracking-tighter italic">L1</span>
                                     </motion.div>
                                 ))}
                             </div>
 
                             {/* L2 nodes */}
-                            <div className="flex gap-3 md:gap-4">
+                            <div className="flex gap-4 md:gap-6">
                                 {[1, 2, 3, 4].map((n) => (
                                     <motion.div key={n} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.6 + n * 0.1 }}
-                                        className="w-9 h-9 md:w-10 md:h-10 rounded-full bg-gray-900 border border-red-500/30 flex items-center justify-center">
-                                        <span className="text-[10px] text-white/80 font-bold">L2</span>
+                                        className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-brand-mint border border-brand-red/10 flex items-center justify-center opacity-60">
+                                        <span className="text-[8px] text-slate-400 font-black italic">L2</span>
                                     </motion.div>
                                 ))}
                             </div>
                         </div>
-                        <div className="mt-4 px-4 py-1.5 rounded-full bg-red-500/10 border border-red-500/20 text-red-300 text-xs font-mono uppercase tracking-widest">
-                            2×2 BINARY STRUCTURE
+                        <div className="mt-12 px-8 py-3 rounded-full bg-brand-mint border border-brand-red/10 text-brand-red text-[10px] font-black uppercase tracking-[0.3em] italic shadow-sm flex items-center gap-3">
+                            <Layers className="w-4 h-4" />
+                            2×2 Binary Architecture
                         </div>
                     </div>
 
                     {/* Right: Key Features */}
-                    <div className="space-y-4">
-                        <h3 className="text-lg font-bold text-white border-b border-white/10 pb-2">Key Features</h3>
-                        <ul className="space-y-3">
+                    <div className="space-y-8">
+                        <h3 className="text-xl font-black text-slate-900 border-b-2 border-brand-green/10 pb-4 uppercase italic tracking-tight flex items-center gap-3">
+                            <Cpu className="w-6 h-6 text-brand-green" />
+                            Core Engine
+                        </h3>
+                        <ul className="space-y-6">
                             {[
                                 "Earn from Matrix Tiers L0 to L17",
-                                "Auto-filled: Top-to-Bottom, Left-to-Right",
-                                "Global Spillover Supported",
-                                "Massive income from deep structure",
+                                "Auto-filled Strategy Deployment",
+                                "Native Global Spillover Support",
+                                "Scale Yield through Structural Depth",
                             ].map((item, i) => (
                                 <motion.li key={i} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.1 }}
-                                    className="flex items-start gap-3 text-sm text-gray-300">
-                                    <span className="flex-shrink-0 w-5 h-5 rounded-full bg-red-500/20 flex items-center justify-center text-red-400 mt-0.5 text-xs">➤</span>
-                                    {item}
+                                    className="flex items-start gap-4 text-sm md:text-lg font-bold text-slate-600 italic">
+                                    <span className="flex-shrink-0 w-6 h-6 rounded-lg bg-brand-mint border border-brand-green/10 flex items-center justify-center text-brand-green mt-1 text-[8px] font-black">X</span>
+                                    <span className="pt-0.5">{item}</span>
                                 </motion.li>
                             ))}
                         </ul>
 
-                        <div className="bg-gradient-to-r from-red-900/40 to-rose-900/40 rounded-xl p-5 border border-white/5 shadow-inner">
-                            <div className="text-gray-400 text-xs uppercase tracking-widest font-bold mb-1">Max Potential</div>
-                            <div className="text-3xl font-black text-white">UNLIMITED</div>
-                            <div className="text-red-300 text-sm italic">Exponential Growth</div>
+                        <div className="bg-white border border-brand-green/10 rounded-[2.5rem] p-10 shadow-2xl relative overflow-hidden group">
+                            <div className="absolute inset-0 bg-brand-green/[0.02] group-hover:bg-brand-green/[0.05] transition-colors" />
+                            <div className="relative z-10">
+                                <div className="text-slate-400 text-[10px] uppercase tracking-widest font-black mb-2 italic">Max Structural Potential</div>
+                                <div className="text-4xl font-black text-slate-900 italic tracking-tighter">UNLIMITED</div>
+                                <div className="text-brand-green text-[10px] font-black uppercase tracking-widest mt-2 italic">Exponential Scaling Enabled</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="text-center text-xs text-gray-600 py-2 border-t border-white/5">
-                    * Refer to smart contract for exact distribution logic details
+                <div className="text-center font-black uppercase text-[10px] tracking-[0.3em] text-slate-400 py-6 border-t border-brand-green/10 italic">
+                    * Verifiable via BSC Smart Contract Protocol Architecture
                 </div>
             </div>
 
             {/* ── BOTTOM NAV ── */}
-            <div className="sticky bottom-0 z-50 bg-black/70 backdrop-blur-md border-t border-white/10 px-4 md:px-8 py-3 flex items-center justify-between gap-4">
+            <div className="sticky bottom-0 z-50 bg-white/80 backdrop-blur-md border-t border-brand-green/10 px-6 md:px-12 py-5 flex items-center justify-between gap-8">
                 <Link href="/presentation/direct-referral"
-                    className="flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/20 text-white px-4 py-2.5 rounded-xl font-bold text-sm transition-all hover:scale-105">
+                    className="flex items-center gap-3 bg-slate-900 text-white px-6 py-3.5 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] transition-all hover:bg-slate-800 hover:scale-105 italic shadow-xl">
                     <ArrowLeft className="w-4 h-4" />
                     <span className="hidden sm:block">Direct Referral</span>
                     <span className="sm:hidden">Prev</span>
                 </Link>
-                <div className="flex gap-2">
+                <div className="flex gap-3">
                     {['direct-referral', 'matrix-income', 'level-income', 'reward-pools'].map((s, i) => (
-                        <div key={i} className={`w-2.5 h-2.5 rounded-full transition-all ${s === 'matrix-income' ? 'bg-red-500 scale-125 shadow-[0_0_8px_rgba(227,6,19,0.5)]' : 'bg-white/20'}`} />
+                        <div key={i} className={`h-1.5 rounded-full transition-all duration-500 ${s === 'matrix-income' ? 'w-10 bg-brand-red shadow-lg shadow-brand-red/20' : 'w-4 bg-brand-red/10'}`} />
                     ))}
                 </div>
                 <Link href="/presentation/level-income"
-                    className="flex items-center gap-2 bg-gradient-to-r from-red-600 to-rose-800 text-white px-5 py-2.5 rounded-xl font-black text-sm shadow-lg shadow-red-500/20 transition-all hover:scale-105 border border-red-500/30">
+                    className="flex items-center gap-3 bg-brand-green text-white px-8 py-3.5 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-brand-green/20 transition-all hover:scale-105 hover:bg-brand-green/90 border border-brand-green/20 italic">
                     <span className="hidden sm:block">Next: Level Income</span>
                     <span className="sm:hidden">Next</span>
-                    <ArrowRight className="w-4 h-4" />
+                    <ArrowRight className="w-4 h-4 animate-pulse" />
                 </Link>
             </div>
         </div>
     );
 }
+
+
+

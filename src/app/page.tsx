@@ -1,13 +1,13 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount, useReadContract, useBalance } from 'wagmi';
 import Link from 'next/link';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, Activity, Terminal, Shield, Cpu, Zap, Globe, BarChart3, Users } from 'lucide-react';
 import { CONTRACT_ADDRESSES, AIPCORE_ABI } from '@/lib/contract';
 
-/* ─── Animated Counter ─── */
+/* â”€â”€â”€ Animated Counter â”€â”€â”€ */
 function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
@@ -30,7 +30,7 @@ function AnimatedCounter({ target, suffix = '' }: { target: number; suffix?: str
   return <span ref={ref}>{count.toLocaleString()}{suffix}</span>;
 }
 
-/* ─── Fade-in on Scroll ─── */
+/* â”€â”€â”€ Fade-in on Scroll â”€â”€â”€ */
 function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
@@ -42,45 +42,38 @@ function FadeIn({ children, delay = 0, className = '' }: { children: React.React
     return () => observer.disconnect();
   }, []);
   return (
-    <div ref={ref} className={`transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'} ${className}`}
+    <div ref={ref} className={`transition-all duration-1000 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'} ${className}`}
       style={{ transitionDelay: `${delay}ms` }}>
       {children}
     </div>
   );
 }
 
-/* ─── FAQ Item ─── */
+/* â”€â”€â”€ FAQ Item â”€â”€â”€ */
 const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="relative overflow-hidden bg-[#0f1117] border border-white/10 shadow-[0_4px_15px_rgba(0,0,0,0.4)] rounded-[2rem] transition-all hover:-translate-y-1 hover:shadow-[8px_8px_20px_rgba(0,0,0,0.5)]">
-      <button onClick={() => setIsOpen(!isOpen)} className="w-full p-6 text-left flex justify-between items-center gap-4">
-        <h3 className="text-lg font-bold text-white uppercase tracking-tighter">{question}</h3>
-        {isOpen ? <ChevronUp className="w-5 h-5 text-yellow-400 shrink-0" /> : <ChevronDown className="w-5 h-5 text-neural-gold shrink-0" />}
+    <div className={`glass-card overflow-hidden transition-all duration-300 ${isOpen ? 'border-brand-amber/40 bg-brand-amber/5' : 'border-white/5'}`}>
+      <button onClick={() => setIsOpen(!isOpen)} className="w-full p-6 text-left flex justify-between items-center gap-4 group">
+        <h3 className={`text-lg font-bold transition-colors ${isOpen ? 'text-brand-amber' : 'text-slate-300 group-hover:text-white'}`}>{question}</h3>
+        {isOpen ? <ChevronUp className="w-5 h-5 text-brand-amber shrink-0" /> : <ChevronDown className="w-5 h-5 text-slate-500 shrink-0" />}
       </button>
       <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96' : 'max-h-0'}`}>
-        <div className="px-6 pb-6 text-neural-gold border-t border-white/5 pt-4 text-sm leading-relaxed">{answer}</div>
+        <div className="px-6 pb-6 text-slate-400 border-t border-white/5 pt-4 text-sm leading-relaxed">{answer}</div>
       </div>
     </div>
   );
 };
 
-/* ─── Neural Grid Background ─── */
-const NeuralGrid = () => (
-  <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-20">
-    <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-  </div>
-);
-
 const Particle = ({ style }: { style: React.CSSProperties }) => (
-  <div className="absolute rounded-full bg-neural-gold/30 blur-sm animate-neural" style={style} />
+  <div className="absolute rounded-full bg-white/5 blur-sm animate-heartbeat" style={style} />
 );
 
 export default function Home() {
   const { isConnected } = useAccount();
   const [scrollY, setScrollY] = useState(0);
 
-  // ── Fetch real stats from smart contract ──
+  // â”€â”€ Fetch real stats from smart contract â”€â”€
   const contractAddress = CONTRACT_ADDRESSES[56] as `0x${string}`;
 
   const { data: configData } = useReadContract({
@@ -111,123 +104,121 @@ export default function Home() {
     { width: 12, height: 12, top: '25%', left: '85%', animationDuration: '4s', animationDelay: '0.5s' },
     { width: 6, height: 6, top: '60%', left: '5%', animationDuration: '5s', animationDelay: '1s' },
     { width: 10, height: 10, top: '75%', left: '90%', animationDuration: '3.5s', animationDelay: '1.5s' },
-    { width: 14, height: 14, top: '40%', left: '50%', animationDuration: '6s', animationDelay: '0.2s' },
-    { width: 7, height: 7, top: '85%', left: '30%', animationDuration: '4.5s', animationDelay: '0.8s' },
-    { width: 9, height: 9, top: '10%', left: '65%', animationDuration: '3.8s', animationDelay: '1.2s' },
-    { width: 5, height: 5, top: '50%', left: '20%', animationDuration: '5.5s', animationDelay: '0.3s' },
   ];
 
   const archItems = [
-    { num: '1️⃣', title: 'Nodes', desc: 'Each participant is assigned a unique Node ID in the global registry.' },
-    { num: '2️⃣', title: 'Layers', desc: 'Each layer upgrade unlocks deeper reward layers within the hierarchy.' },
-    { num: '3️⃣', title: 'Flow Logic', desc: 'Contract distributes Direct, Layer, and Matrix rewards algorithmically.' },
-    { num: '4️⃣', title: 'Price Oracle', desc: 'BNB costs auto-update via USD-pegged oracles for stability.' },
+    { icon: <Cpu className="w-8 h-8 text-brand-blue" />, title: 'Nodes', desc: 'Each participant is assigned a unique Node ID in the global registry.', glow: 'glow-blue' },
+    { icon: <Globe className="w-8 h-8 text-brand-blue" />, title: 'Layers', desc: 'Each layer upgrade unlocks deeper reward layers within the hierarchy.', glow: 'glow-blue' },
+    { icon: <Terminal className="w-8 h-8 text-brand-blue" />, title: 'Flow Logic', desc: 'Contract distributes rewards algorithmically based on node connections.', glow: 'glow-blue' },
+    { icon: <Shield className="w-8 h-8 text-brand-blue" />, title: 'Security', desc: 'Immutable smart contracts ensure zero bias and 100% autonomy.', glow: 'glow-blue' },
   ];
 
   const stats = [
-    { label: 'Active Nodes', value: totalUsers, suffix: '' },
-    { label: 'Network Value', value: Math.round(bnbDistributed * 100) / 100, suffix: ' BNB' },
-    { label: 'Reward Layers', value: maxLevels, suffix: '' },
-    { label: 'Uptime', value: 100, suffix: '%' },
+    { label: 'Active Nodes', value: totalUsers, suffix: '', color: 'text-brand-blue' },
+    { label: 'Network Value', value: Math.round(bnbDistributed * 100) / 100, suffix: ' BNB', color: 'text-brand-amber' },
+    { label: 'Reward Layers', value: maxLevels, suffix: '', color: 'text-brand-green' },
+    { label: 'Uptime', value: 100, suffix: '%', color: 'text-brand-blue' },
   ];
 
   const steps = [
-    { num: '01', title: 'Create Node', desc: 'Initialize your presence in the protocol by registering your Node ID.', color: 'from-red-400 to-rose-600' },
-    { num: '02', title: 'Connect to Network', desc: 'Synchronize with your sponsor and join the global binary structure.', color: 'from-blue-400 to-purple-500' },
-    { num: '03', title: 'Unlock Layers', desc: 'Propagate through the network by activating higher reward layers.', color: 'from-purple-400 to-pink-500' },
-    { num: '04', title: 'Earn Algorithmic Rewards', desc: 'Receive on-chain rewards automatically as the engine processes flows.', color: 'from-red-500 to-rose-700' },
+    { num: '01', title: 'Create Node', desc: 'Register your Node ID and secure your spot in the protocol.', color: 'border-brand-green/30' },
+    { num: '02', title: 'Neural Sync', desc: 'Connect with your sponsor to join the global structure.', color: 'border-brand-green/30' },
+    { num: '03', title: 'Unlock Layers', desc: 'Activate reward flows by propagating through the network.', color: 'border-brand-green/30' },
+    { num: '04', title: 'Auto-Earn', desc: 'Rewards flow directly to your wallet via on-chain compute.', color: 'border-brand-green/30' },
   ];
 
   const faqs = [
-    { q: 'What is AIPCore?', a: 'AIPCore is a decentralized, on-chain community coordination protocol that distributes rewards algorithmically based on network expansion and participation.' },
-    { q: 'Is it fully autonomous?', a: 'Yes. There is no manual payout and no admin interference in the reward logic. Everything is governed by immutable smart contracts on the BNB Smart Chain.' },
-    { q: 'How do rewards flow?', a: 'The engine calculates flows based on node connections. When a node unlocks a layer, the smart contract immediately distributes rewards to qualified upline nodes.' },
-    { q: 'What are the risks?', a: 'As an algorithmic protocol, rewards depend on network activity. Ensure you understand the mechanics of layers and matrix propagation before participating.' },
+    { q: 'What is AIPCore?', a: 'AIPCore is a decentralized, on-chain community coordination protocol that distributes rewards algorithmically based on network expansion.' },
+    { q: 'Is it fully autonomous?', a: 'Yes. There is no manual payout. Everything is governed by immutable smart contracts on the BNB Smart Chain.' },
+    { q: 'How do rewards flow?', a: 'Rewards flow instantly from node to node based on connection logic, with zero intermediary delay.' },
+    { q: 'What are the risks?', a: 'As an algorithmic protocol, rewards depend on network activity. Participate only with funds you are comfortable allocating.' },
   ];
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-white overflow-x-hidden font-sans">
-      <NeuralGrid />
-
-      {/* Animated background glows */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-neural-gold/5 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '4s' }} />
-        <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-cyber-cyan/10 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '6s', animationDelay: '1s' }} />
+    <div className="min-h-screen bg-[#020617] text-slate-200 overflow-x-hidden font-sans selection:bg-brand-amber selection:text-black">
+      {/* Dynamic Background Glows */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-[-15%] left-[-10%] w-[60%] h-[60%] bg-brand-blue/15 rounded-full blur-[140px] animate-pulse" />
+        <div className="absolute top-[10%] right-[-15%] w-[50%] h-[50%] bg-brand-green/10 rounded-full blur-[140px] animate-pulse" style={{ animationDelay: '2s' }} />
+        <div className="absolute bottom-[-15%] left-[20%] w-[70%] h-[60%] bg-brand-amber/10 rounded-full blur-[140px] animate-pulse" style={{ animationDelay: '4s' }} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-mesh-gradient opacity-20" />
       </div>
 
-      {/* ── NAVBAR ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-4 md:px-8 py-4 flex justify-between items-center"
-        style={{ backdropFilter: 'blur(16px)', background: scrollY > 50 ? 'rgba(15,17,23,0.95)' : 'transparent', transition: 'background 0.3s', borderBottom: scrollY > 50 ? '1px solid rgba(255,255,255,0.06)' : 'none' }}>
+      {/* â”€â”€ NAVBAR â”€â”€ */}
+      <nav className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-5 flex justify-between items-center transition-all duration-300 ${scrollY > 50 ? 'bg-[#020617]/90 backdrop-blur-2xl border-b border-white/5 shadow-2xl' : 'bg-transparent'}`}>
         <Link href="/" className="flex items-center gap-3 group">
-          <img src="/aipcore-logo.svg" alt="AIPCore" className="h-12 w-auto drop-shadow-[0_0_10px_rgba(250,204,21,0.3)]" />
+          <div className="relative">
+            <img src="/aipcore-logo.svg" alt="AIPCore" className="h-10 w-auto transition-all duration-300 drop-shadow-[0_0_20px_rgba(0,136,255,0.4)]" />
+            <div className="absolute -inset-4 bg-brand-blue/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+          </div>
         </Link>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
           {isConnected && (
-            <Link href="/dashboard" className="bg-gradient-to-br from-yellow-400/20 to-yellow-400/5 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4),_0_4px_8px_rgba(0,0,0,0.3)] border border-yellow-400/30 text-yellow-400 px-4 py-2 rounded-xl text-sm font-bold transition-all hover:scale-105 active:scale-95">
-              Dashboard →
+            <Link href="/dashboard" className="hidden md:flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 px-5 py-2.5 rounded-full text-sm font-bold transition-all hover:scale-105 active:scale-95 group">
+              <Activity className="w-4 h-4 text-brand-green group-hover:animate-pulse" />
+              Dashboard
             </Link>
           )}
-          <ConnectButton showBalance={{ smallScreen: false, largeScreen: true }} accountStatus="address" />
+          <ConnectButton />
         </div>
       </nav>
 
-      {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-6 overflow-hidden">
+      {/* â”€â”€ HERO â”€â”€ */}
+      <section className="relative min-h-[95vh] flex items-center justify-center pt-32 pb-20 px-6 overflow-hidden">
         {particles.map((p, i) => <Particle key={i} style={{ width: p.width, height: p.height, top: p.top, left: p.left, animationDuration: p.animationDuration, animationDelay: p.animationDelay }} />)}
 
-        <div className="relative z-10 text-center max-w-5xl mx-auto">
+        <div className="relative z-10 text-center max-w-6xl mx-auto">
           <FadeIn>
-            <div className="flex justify-center mb-8">
-              <img 
-                src="/aipcore-logo.svg" 
-                alt="AIP CORE" 
-                className="h-32 w-auto drop-shadow-[0_0_25px_rgba(227,6,19,0.4)] animate-neural-slow" 
-              />
+            <div className="inline-flex items-center gap-3 mb-10 px-6 py-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl">
+              <span className="flex h-3 w-3 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-green opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-brand-green"></span>
+              </span>
+              <span className="text-[10px] font-black tracking-[0.3em] uppercase text-brand-green/90">Autonomous Protocol Sync Active</span>
             </div>
 
-            <div className="inline-flex items-center gap-2 mb-6 px-5 py-2 rounded-full border border-red-400/30 bg-gradient-to-br from-red-400/20 to-red-400/5 shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4),_0_4px_8px_rgba(0,0,0,0.3)] backdrop-blur-md animate-neural">
-              <span className="w-2 h-2 bg-[#e30613] rounded-full animate-ping" />
-              <span className="text-[#e30613] text-sm font-semibold tracking-widest uppercase">Autonomous Node Network v4.0</span>
-            </div>
-
-            <h1 className="text-5xl sm:text-7xl md:text-8xl font-black leading-[1.05] mb-8 tracking-tighter">
-              <span className="block text-white mb-2 uppercase drop-shadow-2xl">Connect To</span>
-              <span className="bg-gradient-to-r from-neural-gold via-cyber-cyan to-white bg-clip-text text-transparent uppercase text-glow">AIPCore</span>
+            <h1 className="text-6xl sm:text-8xl md:text-[10rem] font-black leading-[0.8] mb-12 tracking-tighter uppercase">
+              <span className="block text-white drop-shadow-2xl">EVOLUTION OF</span>
+              <span className="text-gradient-multi animate-neural-slow px-6 filter drop-shadow-[0_0_20px_rgba(0,136,255,0.3)]">CAPITAL</span>
             </h1>
 
-            <p className="text-lg sm:text-xl md:text-2xl text-[#e30613]/80 max-w-4xl mx-auto mb-12 leading-relaxed font-medium">
-              AIPCore is a decentralized, on-chain community coordination protocol that distributes rewards <span className="text-white">algorithmically</span> based on network expansion and participation.
+            <p className="text-lg md:text-2xl text-slate-400 max-w-3xl mx-auto mb-16 leading-relaxed font-medium">
+              AIPCORE is a decentralized node protocol that coordinates global capital flows <span className="text-brand-amber border-b-2 border-brand-amber/30 px-1 font-black">algorithmically</span> across a neural reward matrix.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex flex-col sm:flex-row gap-8 justify-center items-center">
               <Link href="/register"
-                className="w-full sm:w-auto relative overflow-hidden bg-gradient-to-r from-red-600 to-rose-800 text-white px-10 py-5 rounded-[2rem] font-black text-xl shadow-[0_4px_15px_rgba(227,6,19,0.5),inset_1px_1px_2px_rgba(255,255,255,0.3),inset_-1px_-1px_2px_rgba(0,0,0,0.2)] hover:scale-105 hover:shadow-[0_8px_25px_rgba(227,6,19,0.6)] transition-all border border-red-500 active:scale-95">
-                Initialize Node →
+                className="w-full sm:w-auto bg-brand-amber hover:bg-brand-amber/90 text-black px-14 py-6 rounded-full font-black text-xl shadow-[0_0_40px_rgba(245,158,11,0.4)] hover:scale-105 transition-all active:scale-95 uppercase tracking-widest flex items-center justify-center gap-4 group">
+                <Zap className="w-6 h-6 fill-current group-hover:animate-bounce" />
+                Initiate Sync
               </Link>
               <a href={`https://bscscan.com/address/${contractAddress}`} target="_blank" rel="noopener noreferrer"
-                className="w-full sm:w-auto relative overflow-hidden bg-[#0f1117] border border-white/10 shadow-[0_4px_15px_rgba(0,0,0,0.4)] text-white px-10 py-5 rounded-[2rem] font-bold text-xl hover:scale-105 transition-all active:scale-95">
-                View Contract
+                className="w-full sm:w-auto bg-white/5 hover:bg-white/10 border border-white/10 text-white px-14 py-6 rounded-full font-black text-xl hover:scale-105 transition-all active:scale-95 uppercase tracking-widest flex items-center justify-center gap-4">
+                <Terminal className="w-6 h-6 text-brand-blue" />
+                Trace Logic
               </a>
             </div>
           </FadeIn>
         </div>
       </section>
 
-      {/* ── ARCHITECTURE SECTION ── */}
-      <section className="py-24 px-6 relative border-y border-white/5 bg-white/[0.01]">
-        <div className="max-w-6xl mx-auto">
-          <FadeIn className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4 uppercase tracking-tighter text-glow">Protocol Architecture</h2>
-            <p className="text-neural-gold text-lg font-medium">Sophisticated reward flows, simplified for participation.</p>
+      {/* â”€â”€ ARCHITECTURE â”€â”€ */}
+      <section className="py-32 px-6 relative bg-white/[0.01]">
+        <div className="max-w-7xl mx-auto">
+          <FadeIn className="text-center mb-24">
+            <h2 className="text-4xl md:text-7xl font-black mb-8 uppercase tracking-tighter text-white">Protocol <span className="text-brand-blue filter drop-shadow-[0_0_15px_rgba(0,136,255,0.4)]">Architecture</span></h2>
+            <p className="text-slate-500 text-lg max-w-2xl mx-auto font-bold uppercase tracking-widest">Sophisticated on-chain reward flows powered by immutable neural logic.</p>
           </FadeIn>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             {archItems.map((item, i) => (
               <FadeIn key={i} delay={i * 100}>
-                <div className="relative overflow-hidden bg-[#0f1117] border border-white/10 shadow-[0_4px_15px_rgba(0,0,0,0.4)] rounded-[2rem] p-8 h-full transition-all group hover:-translate-y-2 hover:shadow-[10px_10px_30px_rgba(0,0,0,0.6)] active:scale-[0.98]">
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform inline-block drop-shadow-lg">{item.num}</div>
-                  <h3 className="text-2xl font-bold text-white mb-3 tracking-tight">{item.title}</h3>
-                  <p className="text-neural-gold leading-relaxed text-sm font-medium">{item.desc}</p>
+                <div className={`glass-card p-12 h-full group ${item.glow} hover:bg-brand-blue/5`}>
+                  <div className="mb-10 p-5 bg-white/5 rounded-3xl w-fit group-hover:scale-110 transition-transform duration-500">
+                    {item.icon}
+                  </div>
+                  <h3 className="text-2xl font-black mb-5 tracking-tight uppercase text-white">{item.title}</h3>
+                  <p className="text-slate-400 leading-relaxed font-bold uppercase text-[10px] tracking-widest opacity-70 group-hover:opacity-100 transition-opacity">{item.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -235,165 +226,137 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── STATS ── */}
-      <section className="py-20 px-6 relative bg-black/20">
-        <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8">
+      {/* â”€â”€ STATS â”€â”€ */}
+      <section className="py-24 px-6 relative overflow-hidden">
+        <div className="absolute inset-0 bg-brand-blue/5 blur-3xl rounded-full" />
+        <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 relative z-10">
           {stats.map((s, i) => (
-            <FadeIn key={i} delay={i * 100} className="text-center p-6 relative overflow-hidden bg-black/50 border border-white/10 shadow-[inset_1px_1px_3px_rgba(0,0,0,0.6)] rounded-[2rem]">
-              <div className="text-3xl md:text-4xl font-black text-white mb-1 tracking-tighter text-glow drop-shadow-lg">
+            <FadeIn key={i} delay={i * 100} className="glass-card text-center p-8 border-white/5">
+              <div className={`text-3xl md:text-5xl font-black mb-3 tracking-tighter ${s.color}`}>
                 <AnimatedCounter target={s.value} suffix={s.suffix} />
               </div>
-              <div className="text-neural-gold/80 text-[10px] font-black uppercase tracking-[0.2em]">{s.label}</div>
+              <div className="text-slate-500 text-[11px] font-black uppercase tracking-[0.3em]">{s.label}</div>
             </FadeIn>
           ))}
         </div>
       </section>
 
-      {/* ── SIMPLE EXPLANATION ── */}
-      <section className="py-32 px-6 relative">
-        <div className="max-w-4xl mx-auto bg-gradient-to-br from-neural-gold to-cyber-cyan p-[1px] rounded-[3rem] overflow-hidden neural-glow">
-          <div className="bg-[#0a0a0f] rounded-[2.9rem] p-8 md:p-16 text-center space-y-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-neural-gold/5 rounded-full blur-3xl animate-neural" />
-            <FadeIn>
-              <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter uppercase text-glow">Trust the Logic.</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mt-12">
-                <div className="space-y-4">
-                  <div className="flex gap-4 items-center">
-                    <div className="w-10 h-10 rounded-full glass border-neural-gold/30 flex items-center justify-center text-neural-gold font-bold">✓</div>
-                    <span className="text-lg text-gray-300">Every participant = <strong className="text-white">Neural Node</strong></span>
-                  </div>
-                  <div className="flex gap-4 items-center">
-                    <div className="w-10 h-10 rounded-full glass border-neural-gold/30 flex items-center justify-center text-neural-gold font-bold">✓</div>
-                    <span className="text-lg text-gray-300">Nodes connect via Neural Links</span>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex gap-4 items-center">
-                    <div className="w-10 h-10 rounded-full glass border-neural-gold/30 flex items-center justify-center text-neural-gold font-bold">✓</div>
-                    <span className="text-lg text-gray-300">On-chain compute distribution</span>
-                  </div>
-                  <div className="flex gap-4 items-center">
-                    <div className="w-10 h-10 rounded-full glass border-neural-gold/30 flex items-center justify-center text-neural-gold font-bold">✓</div>
-                    <span className="text-lg text-gray-300">Zero intervention. Pure Code.</span>
-                  </div>
-                </div>
+      {/* â”€â”€ HOW IT WORKS â”€â”€ */}
+      <section id="how-it-works" className="py-32 px-6 relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-green/5 blur-[120px] rounded-full" />
+        <FadeIn className="text-center mb-24 relative z-10">
+          <span className="text-brand-green font-black text-[10px] uppercase tracking-[0.5em] mb-6 block">System Sequencing</span>
+          <h2 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter">Protocol <span className="text-brand-green filter drop-shadow-[0_0_15px_rgba(34,197,94,0.4)]">Sync</span></h2>
+        </FadeIn>
+
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
+          {steps.map((s, i) => (
+            <FadeIn key={i} delay={i * 150} className="relative">
+              <div className={`glass-card p-12 h-full border-t-4 ${s.color} hover:bg-brand-green/5`}>
+                <div className="text-6xl font-black text-white/10 mb-8 font-mono">{s.num}</div>
+                <h3 className="text-2xl font-black text-white mb-5 tracking-tight uppercase">{s.title}</h3>
+                <p className="text-slate-400 leading-relaxed font-bold text-[10px] uppercase tracking-widest opacity-80">{s.desc}</p>
               </div>
+              {i < 3 && <div className="hidden lg:block absolute top-1/2 -right-6 w-12 h-[2px] bg-gradient-to-r from-brand-green/20 to-transparent" />}
             </FadeIn>
-            <FadeIn delay={200}>
-              <p className="text-neural-gold text-lg italic border-t border-white/10 pt-8 mt-8">
-                "Autonomous On-Chain Community Reward Protocol"
-              </p>
-            </FadeIn>
+          ))}
+        </div>
+      </section>
+
+      {/* â”€â”€ FAQ â”€â”€ */}
+      <section className="py-32 px-6 bg-white/[0.01]">
+        <div className="max-w-4xl mx-auto">
+          <FadeIn className="text-center mb-16">
+            <h2 className="text-4xl md:text-6xl font-black text-white uppercase tracking-tighter">F.A.Q</h2>
+            <p className="text-slate-500 mt-4 font-bold tracking-widest uppercase text-sm">Everything you need to know about the neural core.</p>
+          </FadeIn>
+          <div className="space-y-4">
+            {faqs.map((f, i) => (
+              <FadeIn key={i} delay={i * 60}>
+                <FAQItem question={f.q} answer={f.a} />
+              </FadeIn>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ── */}
-      <section id="how-it-works" className="py-24 px-6 relative">
-        <FadeIn className="text-center mb-16">
-          <span className="text-neural-gold font-mono text-xs uppercase tracking-[0.4em]">Protocol Sequencing</span>
-          <h2 className="text-4xl md:text-5xl font-black text-white mt-2 uppercase tracking-tighter text-glow">The Sync Process</h2>
-        </FadeIn>
-
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {steps.map((s, i) => (
-            <FadeIn key={i} delay={i * 150}>
-              <div className="relative overflow-hidden bg-[#0f1117] border border-white/10 shadow-[0_4px_15px_rgba(0,0,0,0.4)] rounded-[2rem] p-8 h-full transition-all hover:-translate-y-2 hover:shadow-[10px_10px_30px_rgba(34,211,238,0.3)]">
-                <div className={`text-xs font-black bg-gradient-to-r ${s.color} bg-clip-text text-transparent mb-4 tracking-[0.2em] uppercase`}>PHASE {s.num}</div>
-                <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{s.title}</h3>
-                <p className="text-neural-gold text-sm leading-relaxed font-medium">{s.desc}</p>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
-
-      {/* ── FAQ ── */}
-      <section className="py-24 px-6 bg-white/[0.01]">
-        <FadeIn className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-black text-white mt-2 uppercase tracking-tighter">Intelligence Briefing</h2>
-        </FadeIn>
-        <div className="max-w-3xl mx-auto space-y-3">
-          {faqs.map((f, i) => (
-            <FadeIn key={i} delay={i * 60}>
-              <FAQItem question={f.q} answer={f.a} />
-            </FadeIn>
-          ))}
-        </div>
-      </section>
-
-      {/* ── FINAL CTA ── */}
-      <section className="py-32 px-6 text-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-neural-gold/5 blur-[150px] animate-neural" />
-        <FadeIn className="max-w-3xl mx-auto relative z-10">
-          <h2 className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter uppercase text-glow">
-            Initialize Your <br />
-            <span className="text-[#e30613]">Node.</span>
+      {/* â”€â”€ FINAL CTA â”€â”€ */}
+      <section className="py-48 px-6 text-center relative overflow-hidden">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-brand-amber/15 blur-[180px] rounded-full animate-pulse" />
+        <FadeIn className="max-w-4xl mx-auto relative z-10">
+          <h2 className="text-6xl md:text-[10rem] font-black text-white mb-16 tracking-tighter uppercase leading-none filter drop-shadow-[0_0_30px_rgba(245,158,11,0.2)]">
+            JOIN THE <br />
+            <span className="text-brand-amber">CORE.</span>
           </h2>
           <Link href="/register"
-            className="inline-block relative overflow-hidden bg-gradient-to-r from-red-600 to-rose-800 text-white px-12 py-6 rounded-[2rem] font-black text-2xl shadow-[0_4px_15px_rgba(227,6,19,0.5),inset_1px_1px_2px_rgba(255,255,255,0.3),inset_-1px_-1px_2px_rgba(0,0,0,0.2)] hover:scale-105 hover:shadow-[0_8px_30px_rgba(227,6,19,0.7)] transition-all border border-red-500 active:scale-95">
-            Sync To Network →
+            className="inline-flex items-center gap-5 bg-brand-amber hover:bg-brand-amber/90 text-black px-20 py-8 rounded-full font-black text-2xl shadow-[0_0_60px_rgba(245,158,11,0.5)] hover:scale-110 transition-all active:scale-95 uppercase tracking-widest group">
+            <Cpu className="w-10 h-10 group-hover:rotate-90 transition-transform duration-500" />
+            Launch Interface
           </Link>
         </FadeIn>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="border-t border-white/10 py-20 px-6 bg-black">
-        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-16">
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <img src="/aipcore-logo.svg" alt="AIPCore" className="h-10 w-auto" />
-              <span className="text-2xl font-black text-white tracking-tighter uppercase">AIP CORE</span>
+      {/* â”€â”€ FOOTER â”€â”€ */}
+      <footer className="border-t border-white/5 py-32 px-6 bg-black">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-16">
+          <div className="md:col-span-1 space-y-8">
+            <div className="flex items-center gap-4">
+              <img src="/aipcore-logo.svg" alt="AIPCore" className="h-10 w-auto brightness-200" />
             </div>
-            <p className="text-white/80 text-sm leading-relaxed font-medium">
+            <p className="text-slate-500 text-sm leading-relaxed font-bold uppercase tracking-tight">
               An autonomous coordination protocol for the decentralized neural community.
-              Built on BNB Smart Chain. 100% on-chain compute distribution.
+              Powered by immutable code on the BNB Smart Chain.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-8">
+          <div className="space-y-8">
+            <h4 className="text-white font-black text-xs uppercase tracking-[0.4em]">Protocol</h4>
             <div className="space-y-4">
-              <h4 className="text-white font-black text-[10px] uppercase tracking-[0.2em] opacity-60">Protocol</h4>
-              <a href={`https://bscscan.com/address/${contractAddress}`} className="block text-white/80 hover:text-neural-gold transition-colors text-sm font-medium">On-Chain Logic</a>
-              <Link href="/dashboard" className="block text-white/80 hover:text-neural-gold transition-colors text-sm font-medium">Global Dashboard</Link>
-              <Link href="/register" className="block text-white/80 hover:text-neural-gold transition-colors text-sm font-medium">Node Registry</Link>
-            </div>
-            <div className="space-y-4">
-              <h4 className="text-white font-black text-[10px] uppercase tracking-[0.2em] opacity-60">Intelligence</h4>
-              <Link href="/reference" className="block text-white/80 hover:text-neural-gold transition-colors text-sm font-medium">Briefing</Link>
-              <Link href="/disclaimer" className="block text-white/80 hover:text-neural-gold transition-colors text-sm font-medium">Risk Constraints</Link>
-              <Link href="/regulatory-compliance" className="block text-white/80 hover:text-neural-gold transition-colors text-sm font-medium">Compliance</Link>
-              <Link href="/presentation" className="block text-white/80 hover:text-neural-gold transition-colors text-sm font-medium">Sync Technicals</Link>
+              <a href={`https://bscscan.com/address/${contractAddress}`} className="block text-slate-500 hover:text-brand-amber transition-colors text-sm font-bold uppercase tracking-widest">Smart Contract</a>
+              <Link href="/dashboard" className="block text-slate-500 hover:text-brand-amber transition-colors text-sm font-bold uppercase tracking-widest">Global Matrix</Link>
+              <Link href="/register" className="block text-slate-500 hover:text-brand-amber transition-colors text-sm font-bold uppercase tracking-widest">Node Registry</Link>
             </div>
           </div>
 
-          <div className="space-y-6">
-            <h4 className="text-white font-black text-[10px] uppercase tracking-[0.2em] opacity-60">Neural Status</h4>
-            <div className="bg-black/60 border-t border-l border-black/80 border-b border-r border-white/10 shadow-[inset_2px_2px_10px_rgba(0,0,0,0.8),inset_-1px_-1px_2px_rgba(255,255,255,0.1)] p-5 rounded-2xl space-y-3">
-              <div className="flex justify-between text-[10px] font-black tracking-widest uppercase">
-                <span className="text-white/80">Node Sync</span>
-                <span className="text-[#e30613]">ACTIVE</span>
+          <div className="space-y-8">
+            <h4 className="text-white font-black text-xs uppercase tracking-[0.4em]">Documentation</h4>
+            <div className="space-y-4">
+              <Link href="/reference" className="block text-slate-500 hover:text-brand-amber transition-colors text-sm font-bold uppercase tracking-widest">Technical Brief</Link>
+              <Link href="/disclaimer" className="block text-slate-500 hover:text-brand-amber transition-colors text-sm font-bold uppercase tracking-widest">Risk Guard</Link>
+              <Link href="/regulatory-compliance" className="block text-slate-500 hover:text-brand-amber transition-colors text-sm font-bold uppercase tracking-widest">Compliance</Link>
+            </div>
+          </div>
+
+          <div className="space-y-8">
+            <h4 className="text-white font-black text-xs uppercase tracking-[0.4em]">Node Status</h4>
+            <div className="bg-white/5 border border-white/10 p-6 rounded-2xl space-y-4">
+              <div className="flex justify-between items-center text-[11px] font-black tracking-widest uppercase">
+                <span className="text-slate-500">Node Sync</span>
+                <span className="text-brand-green flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-brand-green rounded-full animate-ping" />
+                  ACTIVE
+                </span>
               </div>
-              <div className="flex justify-between text-[10px] font-black tracking-widest uppercase">
-                <span className="text-white/80">Reward Flow</span>
-                <span className="text-[#e30613]">NOMINAL</span>
+              <div className="flex justify-between items-center text-[11px] font-black tracking-widest uppercase">
+                <span className="text-slate-500">Reward Flow</span>
+                <span className="text-brand-amber">NOMINAL</span>
               </div>
-              <div className="flex justify-between text-[10px] font-black tracking-widest uppercase">
-                <span className="text-white/80">Core Engine</span>
-                <span className="text-cyber-cyan">AIPCORE v4.0</span>
+              <div className="flex justify-between items-center text-[11px] font-black tracking-widest uppercase py-3 border-t border-white/5">
+                <span className="text-slate-500">Engine V4.1</span>
+                <span className="text-brand-blue">STABLE</span>
               </div>
             </div>
           </div>
         </div>
-        <div className="max-w-6xl mx-auto mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-600">
-          <p>© 2025 AIPCORE PROTOCOL. OPERATIONAL DATA IS IMMUTABLE ON-CHAIN.</p>
-          <div className="flex gap-8">
-            <span>V4.0.1 CORE ENGINE</span>
-            <span className="text-neural-gold">HIGH FIDELITY NODE MATRIX</span>
+        
+        <div className="max-w-7xl mx-auto mt-32 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] text-slate-600 font-black tracking-[0.3em] uppercase">
+          <p>Â© 2026 AIPCORE FINANCE. MULTI-COLOR NODE PROTOCOL.</p>
+          <div className="flex gap-10">
+            <span className="hover:text-brand-amber transition-colors cursor-help">BNB_SMART_CHAIN_NATIVE</span>
+            <span className="text-brand-amber">SECURE_NEURAL_LINK</span>
           </div>
         </div>
       </footer>
     </div>
   );
 }
-

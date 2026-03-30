@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft, ChevronDown, ChevronUp, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ChevronDown, ChevronUp, ArrowRight, ShieldCheck, Zap, Layers, Gift } from 'lucide-react';
 
 export default function Presentation() {
     const [mounted, setMounted] = useState(false);
@@ -16,16 +16,16 @@ export default function Presentation() {
         {
             number: '1',
             title: 'Direct Referral Income',
-            icon: '🤝',
+            icon: <Zap className="w-12 h-12 text-brand-green" />,
             mainStat: '10%',
             mainLabel: 'Commission',
             details: ['On Registration & Upgrades', 'All 18 Reward Tiers', 'Unlimited Width'],
             badge: 'INSTANT PAYMENT',
-            borderColor: 'border-red-400/40',
-            bgGlow: 'from-red-500/20 to-rose-600/10',
-            badgeBg: 'bg-red-500/20 text-red-300 border-red-500/30',
-            titleColor: 'text-red-300',
-            expandBg: 'bg-red-900/20 border-red-500/20',
+            borderColor: 'border-brand-green/20',
+            bgGlow: 'from-brand-green/20 to-brand-green/5',
+            badgeBg: 'bg-brand-mint text-brand-green border-brand-green/20',
+            titleColor: 'text-brand-green',
+            expandBg: 'bg-brand-mint border-brand-green/10',
             link: '/presentation/direct-referral',
             expandDetails: [
                 { label: 'Commission Rate', value: '10% instant on every referral' },
@@ -38,20 +38,20 @@ export default function Presentation() {
         {
             number: '2',
             title: 'Matrix Level Income',
-            icon: '🔺',
+            icon: <Layers className="w-12 h-12 text-brand-red" />,
             mainStat: '70%',
             mainLabel: 'Distribution',
-            details: ['2×2 Binary Matrix', 'Auto Spillover', 'Tiers L1 to L18'],
+            details: ['2x2 Binary Matrix', 'Auto Spillover', 'Tiers L1 to L18'],
             badge: '18 LAYERS DEEP',
-            borderColor: 'border-rose-400/40',
-            bgGlow: 'from-rose-500/20 to-red-600/10',
-            badgeBg: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
-            titleColor: 'text-rose-300',
-            expandBg: 'bg-rose-900/20 border-rose-500/20',
+            borderColor: 'border-brand-red/20',
+            bgGlow: 'from-brand-red/20 to-brand-red/5',
+            badgeBg: 'bg-brand-mint text-brand-red border-brand-red/20',
+            titleColor: 'text-brand-red',
+            expandBg: 'bg-brand-mint border-brand-red/10',
             link: '/presentation/matrix-income',
             expandDetails: [
                 { label: 'Distribution', value: '70% of upgrade cost to upline' },
-                { label: 'Structure', value: '2×2 Binary — auto fill L→R' },
+                { label: 'Structure', value: '2x2 Binary — auto fill L→R' },
                 { label: 'Spillover', value: 'Global spillover supported' },
                 { label: 'Matrix Depth', value: 'Earns up to 18 layers deep' },
                 { label: 'Qualification', value: 'Must be upgraded > tier level' },
@@ -60,16 +60,16 @@ export default function Presentation() {
         {
             number: '3',
             title: 'Level Income',
-            icon: '💰',
+            icon: <ShieldCheck className="w-12 h-12 text-brand-green" />,
             mainStat: '15%',
             mainLabel: 'Total Dist.',
             details: ['17 Unilevel Layers', 'L1-5: 1.5%, L6-10: 1.0%', 'L11-17: 0.35% each'],
             badge: 'PASSIVE INCOME',
-            borderColor: 'border-red-400/40',
-            bgGlow: 'from-red-500/20 to-rose-600/10',
-            badgeBg: 'bg-red-500/20 text-red-300 border-red-500/30',
-            titleColor: 'text-red-300',
-            expandBg: 'bg-red-900/20 border-red-500/20',
+            borderColor: 'border-brand-green/20',
+            bgGlow: 'from-brand-green/20 to-brand-green/5',
+            badgeBg: 'bg-brand-mint text-brand-green border-brand-green/20',
+            titleColor: 'text-brand-green',
+            expandBg: 'bg-brand-mint border-brand-green/10',
             link: '/presentation/level-income',
             expandDetails: [
                 { label: 'Layers 1–5', value: '1.50% per layer (Foundation)' },
@@ -82,16 +82,16 @@ export default function Presentation() {
         {
             number: '4',
             title: 'Reward Pools',
-            icon: '🏆',
+            icon: <Gift className="w-12 h-12 text-brand-red" />,
             mainStat: '5%',
             mainLabel: 'Global Revenue',
             details: ['Top Performers', 'Achiever Bonuses', 'Periodic Distribution'],
             badge: 'GLOBAL SHARE',
-            borderColor: 'border-red-400/40',
-            bgGlow: 'from-red-500/20 to-rose-600/10',
-            badgeBg: 'bg-red-500/20 text-red-300 border-red-500/30',
-            titleColor: 'text-red-300',
-            expandBg: 'bg-red-900/20 border-red-500/20',
+            borderColor: 'border-brand-red/20',
+            bgGlow: 'from-brand-red/20 to-brand-red/5',
+            badgeBg: 'bg-brand-mint text-brand-red border-brand-red/20',
+            titleColor: 'text-brand-red',
+            expandBg: 'bg-brand-mint border-brand-red/10',
             link: '/presentation/reward-pools',
             expandDetails: [
                 { label: 'Allocation', value: '5% of all global revenue' },
@@ -106,29 +106,28 @@ export default function Presentation() {
     const toggle = (i: number) => setExpanded(expanded === i ? null : i);
 
     return (
-        <div className="min-h-screen bg-[#050510] font-sans text-white">
+        <div className="min-h-screen bg-[#f8faf8] font-sans text-slate-800 relative overflow-hidden">
 
-            {/* Background */}
+            {/* Background Decor */}
             <div className="fixed inset-0 pointer-events-none">
-                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_transparent_0%,_#000_100%)] z-10" />
-                <div className="absolute w-[800px] h-[800px] bg-red-600/10 rounded-full blur-[120px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse" />
-                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
+                <div className="absolute w-[1000px] h-[1000px] bg-brand-green/5 rounded-full blur-[150px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
             </div>
 
             {/* Main Content */}
-            <div className="relative z-20 w-full max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-14">
+            <div className="relative z-20 w-full max-w-6xl mx-auto px-4 md:px-6 py-10 md:py-20 animate-in fade-in duration-700">
 
                 {/* Header */}
-                <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10">
-                    <h1 className="text-4xl md:text-6xl font-black tracking-tighter">
-                        <span className="bg-gradient-to-r from-red-400 via-rose-500 to-red-600 bg-clip-text text-transparent uppercase">AIPCore</span>
-                        <span className="text-white/80 block md:inline md:ml-4"> — 4 Reward Flows</span>
+                <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
+                    <h1 className="text-4xl md:text-7xl font-black tracking-tighter italic uppercase">
+                        <span className="text-brand-green">AIPCore</span>
+                        <span className="text-slate-800 block md:inline md:ml-6"> — 4 Reward Flows</span>
                     </h1>
-                    <p className="text-white/80 text-sm mt-3 tracking-widest uppercase">Select an architectural layer to expand technical details</p>
+                    <p className="text-slate-500 text-[10px] font-black mt-6 tracking-[0.4em] uppercase italic">Select an architectural layer to expand technical details</p>
                 </motion.div>
 
-                {/* 2×2 Card Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-6">
+                {/* 2x2 Card Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                     {incomeStreams.map((stream, index) => {
                         const isOpen = expanded === index;
                         return (
@@ -137,37 +136,37 @@ export default function Presentation() {
                                 initial={{ opacity: 0, y: 30 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.12, duration: 0.5 }}
-                                className={`relative overflow-hidden bg-gradient-to-br from-white/10 to-transparent backdrop-blur-xl border-t border-l border-white/20 border-b border-r border-black/50 shadow-[6px_6px_15px_rgba(0,0,0,0.4),-2px_-2px_8px_rgba(255,255,255,0.02),inset_1px_1px_2px_rgba(255,255,255,0.2)] rounded-[2rem] transition-all duration-300 group ${isOpen ? `shadow-[10px_10px_30px_rgba(0,0,0,0.7)] scale-[1.01] z-10 ${stream.borderColor}` : ''}`}
+                                className={`relative overflow-hidden bg-white border border-brand-green/10 rounded-[3rem] transition-all duration-500 group shadow-2xl ${isOpen ? `shadow-brand-green/10 scale-[1.02] z-10 ${stream.borderColor}` : 'hover:scale-[1.01]'}`}
                             >
-                                <div className={`absolute inset-0 bg-gradient-to-br ${stream.bgGlow} opacity-30 pointer-events-none`} />
+                                <div className={`absolute inset-0 bg-gradient-to-br ${stream.bgGlow} opacity-10 pointer-events-none`} />
 
-                                {/* Card Header — always visible, clickable */}
+                                {/* Card Header */}
                                 <button
                                     onClick={() => toggle(index)}
-                                    className="relative z-10 w-full text-left p-5 md:p-6 flex items-start justify-between gap-3 group"
+                                    className="relative z-10 w-full text-left p-8 md:p-10 flex items-start justify-between gap-6 group"
                                 >
-                                    <div className="flex items-start gap-4 flex-1">
-                                        <div className="text-4xl md:text-5xl mt-0.5">{stream.icon}</div>
+                                    <div className="flex items-start gap-8 flex-1">
+                                        <div className="mt-1 transform group-hover:scale-110 transition-transform duration-500">{stream.icon}</div>
                                         <div className="flex-1">
-                                            <h2 className={`text-xl md:text-2xl font-bold ${stream.titleColor} mb-1`}>
+                                            <h2 className={`text-xl md:text-2xl font-black ${stream.titleColor} mb-2 uppercase italic tracking-tight`}>
                                                 {stream.number}. {stream.title}
                                             </h2>
-                                            <div className="text-2xl md:text-3xl font-black text-white leading-tight">{stream.mainStat}</div>
-                                            <div className="text-xs text-white/50 font-semibold uppercase tracking-wide">{stream.mainLabel}</div>
-                                            <div className="mt-2 flex flex-wrap gap-x-3 gap-y-0.5">
+                                            <div className="text-4xl md:text-6xl font-black text-slate-900 tracking-tighter italic">{stream.mainStat}</div>
+                                            <div className="text-[10px] text-slate-500 font-black uppercase tracking-[0.2em] mt-1 italic">{stream.mainLabel}</div>
+                                            <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
                                                 {stream.details.map((d, i) => (
-                                                    <span key={i} className="text-xs text-gray-400 font-bold uppercase tracking-tighter">{d}</span>
+                                                    <span key={i} className="text-[10px] text-slate-400 font-black uppercase tracking-widest bg-brand-mint px-3 py-1 rounded-full border border-brand-green/5 italic">{d}</span>
                                                 ))}
                                             </div>
                                         </div>
                                     </div>
 
                                     {/* View More button */}
-                                    <div className={`flex flex-col items-center gap-1 shrink-0 px-3 py-2 rounded-xl border transition-all duration-200 ${isOpen ? `${stream.badgeBg} scale-95` : 'border-white/10 bg-white/5 text-white/50 group-hover:border-white/20 group-hover:text-white/80'}`}>
-                                        <span className="text-xs font-bold uppercase tracking-wider whitespace-nowrap">
-                                            {isOpen ? 'Less' : 'View More'}
+                                    <div className={`flex flex-col items-center gap-2 shrink-0 px-5 py-4 rounded-2xl border transition-all duration-300 ${isOpen ? `${stream.badgeBg} shadow-lg shadow-brand-green/10` : 'border-slate-100 bg-brand-mint text-slate-500 group-hover:border-brand-green/20 group-hover:text-brand-green'}`}>
+                                        <span className="text-[10px] font-black uppercase tracking-widest whitespace-nowrap italic">
+                                            {isOpen ? 'Less' : 'Proof'}
                                         </span>
-                                        {isOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                                        {isOpen ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5 transition-transform group-hover:translate-y-1" />}
                                     </div>
                                 </button>
 
@@ -179,28 +178,28 @@ export default function Presentation() {
                                             initial={{ height: 0, opacity: 0 }}
                                             animate={{ height: 'auto', opacity: 1 }}
                                             exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
                                             className="overflow-hidden"
                                         >
-                                            <div className="relative z-10 mx-5 mb-5 bg-black/40 border-t border-l border-black/80 border-b border-r border-white/10 shadow-[inset_2px_2px_10px_rgba(0,0,0,0.8),inset_-1px_-1px_2px_rgba(255,255,255,0.1)] rounded-2xl p-5 space-y-3">
+                                            <div className="relative z-10 mx-8 md:mx-10 mb-10 bg-brand-mint/30 border border-brand-green/10 rounded-[2rem] p-8 space-y-4 shadow-inner">
                                                 {stream.expandDetails.map((item, i) => (
-                                                    <div key={i} className="flex justify-between items-start gap-3 text-sm border-b border-white/5 pb-2 last:border-0 last:pb-0">
-                                                        <span className="text-gray-400 shrink-0 font-bold uppercase tracking-tighter">{item.label}</span>
-                                                        <span className="text-white font-semibold text-right">{item.value}</span>
+                                                    <div key={i} className="flex justify-between items-start gap-4 text-sm border-b border-brand-green/5 pb-3 last:border-0 last:pb-0">
+                                                        <span className="text-slate-500 shrink-0 font-black uppercase tracking-widest text-[10px] italic">{item.label}</span>
+                                                        <span className="text-slate-800 font-black text-right italic">{item.value}</span>
                                                     </div>
                                                 ))}
 
                                                 {/* Badge + Go to slide */}
-                                                <div className="flex items-center justify-between pt-2 gap-3 flex-wrap">
-                                                    <span className={`inline-block px-3 py-1 text-xs font-bold uppercase tracking-widest rounded border ${stream.badgeBg}`}>
+                                                <div className="flex items-center justify-between pt-6 gap-6 flex-wrap">
+                                                    <span className={`inline-block px-5 py-2 text-[10px] font-black uppercase tracking-[0.2em] rounded-xl border italic ${stream.badgeBg} shadow-sm`}>
                                                         {stream.badge}
                                                     </span>
                                                     <Link
                                                         href={stream.link}
-                                                        className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-black transition-all hover:scale-105 ${stream.badgeBg} border`}
+                                                        className={`flex items-center gap-3 px-8 py-3 rounded-2xl text-[10px] font-black transition-all hover:scale-105 shadow-xl uppercase tracking-widest italic ${stream.badgeBg} border`}
                                                         onClick={(e) => e.stopPropagation()}
                                                     >
-                                                        View Full Slide <ArrowRight className="w-4 h-4" />
+                                                        Scale Operations <ArrowRight className="w-4 h-4" />
                                                     </Link>
                                                 </div>
                                             </div>
@@ -213,61 +212,65 @@ export default function Presentation() {
                 </div>
 
                 {/* Extra Navigation Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
                     <Link href="/presentation/how-to-join">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7 }}
-                            className="p-6 relative overflow-hidden bg-gradient-to-br from-white/10 to-transparent backdrop-blur-xl border-t border-l border-white/20 border-b border-r border-black/50 shadow-[6px_6px_15px_rgba(0,0,0,0.4),-2px_-2px_8px_rgba(255,255,255,0.02),inset_1px_1px_2px_rgba(255,255,255,0.2)] rounded-[2rem] cursor-pointer hover:scale-[1.02] hover:shadow-[8px_8px_20px_rgba(227,6,19,0.2)] transition-all group"
+                            className="p-10 relative overflow-hidden bg-white border border-brand-green/10 rounded-[3rem] cursor-pointer hover:scale-[1.02] shadow-2xl transition-all group"
                         >
-                            <div className="flex items-center gap-4">
-                                <span className="text-4xl">⚙️</span>
-                                <div>
-                                    <h3 className="text-xl font-bold text-red-400 group-hover:text-red-300 transition-colors uppercase tracking-widest">How to Join & Upgrade</h3>
-                                    <p className="text-sm text-white/60">Step-by-step registration & upgrade guide</p>
+                            <div className="flex items-center gap-8">
+                                <div className="p-5 bg-brand-mint rounded-3xl border border-brand-green/10 group-hover:bg-brand-green/10 transition-colors">
+                                    <Zap className="w-10 h-10 text-brand-green" />
                                 </div>
-                                <ArrowRight className="ml-auto w-5 h-5 text-white/20 group-hover:text-red-500 transition-colors" />
+                                <div className="flex-1">
+                                    <h3 className="text-2xl font-black text-brand-green group-hover:translate-x-1 transition-transform uppercase tracking-tight italic">Node Activation</h3>
+                                    <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1 italic">Step-by-step registration & upgrade guide</p>
+                                </div>
+                                <ArrowRight className="w-8 h-8 text-slate-200 group-hover:text-brand-green group-hover:translate-x-2 transition-all" />
                             </div>
                         </motion.div>
                     </Link>
                     <Link href="/presentation/income-calculator">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}
-                            className="p-6 relative overflow-hidden bg-gradient-to-br from-white/10 to-transparent backdrop-blur-xl border-t border-l border-white/20 border-b border-r border-black/50 shadow-[6px_6px_15px_rgba(0,0,0,0.4),-2px_-2px_8px_rgba(255,255,255,0.02),inset_1px_1px_2px_rgba(255,255,255,0.2)] rounded-[2rem] cursor-pointer hover:scale-[1.02] hover:shadow-[8px_8px_20px_rgba(227,6,19,0.2)] transition-all group"
+                            className="p-10 relative overflow-hidden bg-white border border-brand-green/10 rounded-[3rem] cursor-pointer hover:scale-[1.02] shadow-2xl transition-all group"
                         >
-                            <div className="flex items-center gap-4">
-                                <span className="text-4xl">📊</span>
-                                <div>
-                                    <h3 className="text-xl font-bold text-rose-400 group-hover:text-rose-300 transition-colors uppercase tracking-widest">Detailed AI Calculator</h3>
-                                    <p className="text-sm text-white/60">Level costs, matrix income, earning scenarios</p>
+                            <div className="flex items-center gap-8">
+                                <div className="p-5 bg-brand-mint rounded-3xl border border-brand-green/10 group-hover:bg-brand-red/10 transition-colors">
+                                    <ShieldCheck className="w-10 h-10 text-brand-red" />
                                 </div>
-                                <ArrowRight className="ml-auto w-5 h-5 text-white/20 group-hover:text-rose-500 transition-colors" />
+                                <div className="flex-1">
+                                    <h3 className="text-2xl font-black text-brand-red group-hover:translate-x-1 transition-transform uppercase tracking-tight italic">AI Scalability</h3>
+                                    <p className="text-slate-500 text-[10px] font-bold uppercase tracking-widest mt-1 italic">Level costs, matrix income, earning scenarios</p>
+                                </div>
+                                <ArrowRight className="w-8 h-8 text-slate-200 group-hover:text-brand-red group-hover:translate-x-2 transition-all" />
                             </div>
                         </motion.div>
                     </Link>
                 </div>
 
                 {/* Bottom Summary */}
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }} className="text-center space-y-4">
-                    <div className="inline-block px-6 md:px-8 py-3 bg-black/40 border-t border-l border-black/80 border-b border-r border-red-500/20 shadow-[inset_2px_2px_10px_rgba(0,0,0,0.8),inset_-1px_-1px_2px_rgba(255,255,255,0.1)] rounded-2xl">
-                        <span className="text-gray-400 text-base md:text-lg font-semibold uppercase tracking-tighter">Total Startup Cost: </span>
-                        <span className="text-white text-base md:text-lg font-black">$5 Entry</span>
-                        <span className="text-gray-500 text-base md:text-lg"> (18 Tiers L0–L17) · </span>
-                        <span className="text-red-400 text-base md:text-lg font-black italic uppercase">Unlimited Payout Potential</span>
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.9 }} className="text-center space-y-10">
+                    <div className="inline-block px-10 py-6 bg-brand-mint border border-brand-green/10 rounded-[2.5rem] shadow-xl">
+                        <span className="text-slate-500 text-lg font-black uppercase tracking-widest italic mr-4">Total Startup Basis:</span>
+                        <span className="text-brand-green text-3xl font-black italic tracking-tighter mr-6">$5 Entry</span>
+                        <span className="text-brand-red text-lg font-black opacity-40 italic"> [18 Tiers L0–L17] </span>
                     </div>
-                    <div className="flex items-center justify-center gap-4 md:gap-6 flex-wrap">
-                        <div className="flex items-center gap-2 text-sm text-gray-500 font-bold uppercase tracking-tighter">
-                            <span className="text-red-500">⚙️</span>
-                            <span><strong className="text-white">Network:</strong> BSC Mainnet</span>
+                    
+                    <div className="flex items-center justify-center gap-12 flex-wrap">
+                        <div className="flex items-center gap-3">
+                            <Zap className="w-5 h-5 text-brand-green" />
+                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] italic">Network: BSC Mainnet</span>
                         </div>
-                        <span className="text-white/20 hidden sm:block">|</span>
-                        <div className="flex items-center gap-2 text-sm text-gray-500 font-bold uppercase tracking-tighter">
-                            <span><strong className="text-white">Assets:</strong> Native BNB</span>
-                            <span className="text-red-500">🪙</span>
+                        <div className="flex items-center gap-3">
+                            <Layers className="w-5 h-5 text-brand-red" />
+                            <span className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] italic">Assets: Native BNB</span>
                         </div>
                     </div>
-                    <div>
-                        <Link href="/" className="inline-flex items-center gap-2 text-white/30 hover:text-white transition-colors text-sm">
-                            <ArrowLeft size={16} /> Back to Home
+                    
+                    <div className="pt-6">
+                        <Link href="/" className="inline-flex items-center gap-4 text-slate-400 hover:text-brand-green font-black text-[10px] uppercase tracking-[0.5em] transition-all italic group">
+                            <ArrowLeft size={16} className="group-hover:-translate-x-2 transition-transform" /> Back to Home Base
                         </Link>
                     </div>
                 </motion.div>
@@ -275,3 +278,6 @@ export default function Presentation() {
         </div>
     );
 }
+
+
+

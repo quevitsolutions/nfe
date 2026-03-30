@@ -1,9 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Calculator, BarChart3, TrendingUp, PieChart, ShieldCheck, Zap, Info, ChevronRight } from 'lucide-react';
 
 const LAYER_COSTS = [
     5, 5, 10, 20, 40, 80, 160, 320, 640, 1280,
@@ -31,396 +31,413 @@ export default function IncomeCalculatorPage() {
     if (!mounted) return null;
 
     const tabs = [
-        { id: 'levels' as const, label: '📊 Level Costs', color: 'text-red-400' },
-        { id: 'matrix' as const, label: '🔺 Matrix Income', color: 'text-rose-400' },
-        { id: 'level-income' as const, label: '💰 Level Income', color: 'text-red-300' },
-        { id: 'scenarios' as const, label: '🏆 Earning Scenarios', color: 'text-rose-300' },
+        { id: 'levels' as const, label: 'Tier Costs', icon: <PieChart className="w-4 h-4" /> },
+        { id: 'matrix' as const, label: 'Matrix Income', icon: <TrendingUp className="w-4 h-4" /> },
+        { id: 'level-income' as const, label: 'Unilevel Income', icon: <BarChart3 className="w-4 h-4" /> },
+        { id: 'scenarios' as const, label: 'Yield Scenarios', icon: <Zap className="w-4 h-4" /> },
     ];
 
     return (
-        <div className="min-h-screen bg-[#050510] overflow-auto relative font-sans text-white">
+        <div className="min-h-screen bg-[#f8faf8] overflow-auto relative font-sans text-slate-800 pb-20">
 
-            {/* Nav */}
-            <Link href="/presentation" className="fixed top-6 left-6 z-50 flex items-center gap-2 text-white/50 hover:text-white transition-colors group">
-                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                <span className="text-sm tracking-widest uppercase font-mono">Back to Presentation</span>
-            </Link>
-
-            {/* Background */}
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10" />
-                <div className="absolute w-[600px] h-[600px] bg-red-600/10 rounded-full blur-[120px] top-1/3 right-1/4" />
+            {/* Background Decor */}
+            <div className="fixed inset-0 pointer-events-none">
+                <div className="absolute w-[1000px] h-[1000px] bg-brand-green/5 rounded-full blur-[200px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
+                <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-[0.03]" />
             </div>
 
-            <div className="relative z-20 max-w-7xl mx-auto px-6 py-20">
+            {/* Nav */}
+            <Link href="/presentation" className="fixed top-8 left-8 z-50 flex items-center gap-3 text-slate-500 hover:text-brand-green transition-all group font-black text-[10px] uppercase tracking-[0.2em] italic">
+                <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+                <span className="hidden sm:block">Back to Presentation Hub</span>
+                <span className="sm:hidden">Back</span>
+            </Link>
+
+            <div className="relative z-20 max-w-7xl mx-auto px-8 py-24">
 
                 {/* Title */}
-                <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-                    <h1 className="text-4xl md:text-5xl font-black tracking-tight">
-                        <span className="bg-gradient-to-r from-red-400 to-rose-600 bg-clip-text text-transparent uppercase">AIPCore</span>
-                        <span className="text-gray-400 uppercase"> CALCULATOR</span>
+                <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-[1.5rem] bg-brand-mint border border-brand-green/10 shadow-xl mb-8">
+                        <Calculator className="w-8 h-8 text-brand-green" />
+                    </div>
+                    <h1 className="text-5xl md:text-8xl font-black tracking-tighter uppercase italic drop-shadow-sm mb-4">
+                        <span className="text-brand-green">AIPCORE</span>
+                        <span className="text-slate-300 mx-4 opacity-50 italic">CALCULATOR</span>
                     </h1>
-                    <p className="text-white/80 mt-2">All 18 Tiers (L0–L17) · All 4 Reward Flows · Live on BSC Mainnet</p>
+                    <p className="text-[10px] md:text-xs text-slate-400 font-black tracking-[0.5em] uppercase italic">Quantum Yield Projection Engine · 18 Tiers · Multi-Stream Utility</p>
                 </motion.div>
 
                 {/* Tab Navigation */}
-                <div className="flex flex-wrap justify-center gap-3 mb-10">
+                <div className="flex flex-wrap justify-center gap-4 mb-20 bg-white/50 p-2 rounded-[2.5rem] border border-brand-green/5 shadow-inner backdrop-blur-sm max-w-4xl mx-auto">
                     {tabs.map(tab => (
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`px-5 py-2.5 rounded-full font-bold text-sm tracking-wider transition-all border ${activeTab === tab.id
-                                ? `${tab.color} bg-white/10 border-white/20 scale-105`
-                                : 'text-white/80 bg-white/5 border-white/5 hover:bg-white/10'
+                            className={`flex items-center gap-3 px-8 py-4 rounded-[1.8rem] font-black text-[10px] uppercase tracking-[0.2em] transition-all italic ${activeTab === tab.id
+                                ? `bg-slate-900 text-brand-green shadow-2xl scale-105`
+                                : 'text-slate-400 hover:bg-brand-mint hover:text-brand-green'
                                 }`}
                         >
+                            {tab.icon}
                             {tab.label}
                         </button>
                     ))}
                 </div>
 
-                {/* TAB: Level Costs */}
-                {activeTab === 'levels' && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
-                        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                            {/* Table */}
-                            <div className="lg:col-span-2 overflow-x-auto">
-                                <h2 className="text-2xl font-black text-red-400 mb-4 uppercase tracking-tighter">COMPLETE TIER COSTS — ALL 18 TIERS</h2>
-                                <table className="w-full text-sm border-collapse">
-                                    <thead>
-                                        <tr className="bg-red-900/30 text-red-400 uppercase tracking-widest font-mono">
-                                            <th className="p-2 text-left border border-white/10">Layer</th>
-                                            <th className="p-2 text-right border border-white/10">USD Cost</th>
-                                            <th className="p-2 text-right border border-white/10">Cumulative</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {LAYER_COSTS.map((cost, i) => {
-                                            const cumulative = LAYER_COSTS.slice(0, i + 1).reduce((a, b) => a + b, 0);
-                                            return (
-                                                <tr key={i} className={`${i % 2 === 0 ? 'bg-white/[0.02]' : 'bg-white/[0.05]'} hover:bg-white/10 transition-colors`}>
-                                                    <td className="p-2 border border-white/10 font-bold text-white font-mono">L{i}</td>
-                                                    <td className="p-2 border border-white/10 text-right text-gray-300 font-mono">{fmtUSD(cost)}</td>
-                                                    <td className="p-2 border border-white/10 text-right text-red-300 font-bold font-mono">{fmtUSD(cumulative)}</td>
+                <AnimatePresence mode="wait">
+                    {/* TAB: Level Costs */}
+                    {activeTab === 'levels' && (
+                        <motion.div key="levels" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-12">
+                            <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                                {/* Table */}
+                                <div className="lg:col-span-2">
+                                    <h2 className="text-2xl font-black text-slate-900 mb-8 uppercase italic tracking-tight flex items-center gap-4">
+                                        <PieChart className="w-6 h-6 text-brand-green" />
+                                        Tier Cost Archetype
+                                    </h2>
+                                    <div className="overflow-hidden rounded-[3rem] border border-brand-green/10 shadow-3xl bg-white">
+                                        <table className="w-full text-sm border-collapse">
+                                            <thead>
+                                                <tr className="bg-brand-mint text-brand-green uppercase tracking-widest font-black italic text-[10px]">
+                                                    <th className="px-8 py-6 text-left border-b border-brand-green/10">Hierarchy</th>
+                                                    <th className="px-8 py-6 text-right border-b border-brand-green/10">Standard Unit (USD)</th>
+                                                    <th className="px-8 py-6 text-right border-b border-brand-green/10">Aggregate Cost</th>
                                                 </tr>
-                                            );
-                                        })}
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            {/* Key Insights */}
-                            <div className="space-y-6">
-                                <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                                    <h3 className="text-xl font-bold text-white mb-4">KEY INSIGHTS:</h3>
-                                    <ul className="space-y-3 text-gray-300 text-sm">
-                                        <li>• Progressive <strong className="text-white">doubling</strong> structure</li>
-                                        <li>• Each level <strong className="text-white">doubles</strong> the previous cost</li>
-                                        <li>• <strong className="text-white">BNB amount</strong> adjusts with market price</li>
-                                        <li>• Cumulative cost grows exponentially</li>
-                                    </ul>
-                                </div>
-                                <div className="p-6 rounded-2xl bg-red-900/10 border border-red-500/20">
-                                    <h3 className="text-lg font-bold text-red-400 mb-3 uppercase tracking-widest">PAYMENT DISTRIBUTION:</h3>
-                                    <ul className="space-y-2 text-sm text-gray-300">
-                                        <li>- Direct Referral (Sponsor): <strong className="text-white">10%</strong></li>
-                                        <li>- Binary Matrix: <strong className="text-white">70%</strong></li>
-                                        <li>- Layer (Unilevel) Income: <strong className="text-white">~15%</strong></li>
-                                        <li>- Reward Pool: <strong className="text-white">5%</strong></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="p-4 rounded-xl bg-gradient-to-r from-red-900/20 to-rose-900/20 border border-red-500/20 text-center">
-                            <p className="text-red-300 font-bold uppercase tracking-widest text-xs font-mono">Dynamic BNB Pricing via Chainlink Oracle | BSC Mainnet</p>
-                        </div>
-                    </motion.div>
-                )}
-
-                {/* TAB: Matrix Income */}
-                {activeTab === 'matrix' && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
-                        {/* Formula */}
-                        <div className="p-6 rounded-2xl bg-rose-900/15 border border-rose-500/20 flex flex-col md:flex-row items-center gap-6">
-                            <div className="text-5xl">🔺</div>
-                            <div>
-                                <h2 className="text-2xl font-black text-rose-400 uppercase tracking-tighter">MATRIX INCOME FORMULA:</h2>
-                                <p className="text-xl text-white mt-1 uppercase font-black">70% of Upgrade Cost → <span className="text-rose-300">First Qualified Upline</span></p>
-                            </div>
-                            <div className="ml-auto text-sm text-gray-400 max-w-sm font-bold uppercase tracking-widest text-right">
-                                Income earned when a member in your downline upgrades, calculated as 70% of their upgrade cost, goes to the first qualified upline in the chain.
-                            </div>
-                        </div>
-
-                        {/* Qualification */}
-                        <div className="p-5 rounded-xl bg-red-900/10 border border-red-500/20">
-                            <h3 className="text-lg font-bold text-red-400 mb-2 uppercase tracking-widest">✅ QUALIFICATION REQUIREMENTS:</h3>
-                            <div className="flex flex-wrap gap-6 text-sm text-gray-300 font-bold uppercase tracking-tighter">
-                                <span>✅ Your level &gt; Payer&apos;s level</span>
-                                <span>✅ Within 18 layers</span>
-                                <span>✅ Active account</span>
-                            </div>
-                        </div>
-
-                        {/* Income Table */}
-                        <div>
-                            <h3 className="text-xl font-bold text-white mb-4">INCOME PER UPGRADE BY LEVEL:</h3>
-                            <div className="overflow-x-auto">
-                                <table className="w-full text-sm border-collapse max-w-3xl">
-                                    <thead>
-                                        <tr className="bg-purple-900/30 text-purple-300">
-                                            <th className="p-2 text-left border border-white/10">Level</th>
-                                            <th className="p-2 text-right border border-white/10">Upgrade Cost</th>
-                                            <th className="p-2 text-right border border-white/10">Matrix Income (70%)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {LAYER_COSTS.map((cost, i) => (
-                                            <tr key={i} className={`${i % 2 === 0 ? 'bg-white/[0.02]' : 'bg-white/[0.05]'}`}>
-                                                <td className="p-2 border border-white/10 font-bold text-white">L{i + 1}</td>
-                                                <td className="p-2 border border-white/10 text-right text-gray-300">{fmtUSD(cost)}</td>
-                                                <td className="p-2 border border-white/10 text-right text-purple-300 font-semibold">{fmtUSD(cost * 0.7)}</td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        {/* Scenarios */}
-                        <div>
-                            <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-widest">EXAMPLE SCENARIOS:</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
-                                {[
-                                    { label: 'Scenario A', desc: "You're L10, someone in layer 5 upgrades to L7", result: fmtUSD(320 * 0.7), color: 'border-red-500/30 bg-red-900/10', emoji: '✅' },
-                                    { label: 'Scenario B', desc: "You're L13, 5 people upgrade to L10 this month", result: fmtUSD(2560 * 0.7 * 5), color: 'border-rose-500/30 bg-rose-900/10', emoji: '🚀' },
-                                    { label: 'Scenario C', desc: "You're L8, someone in layer 3 upgrades to L9", result: '$0', color: 'border-white/10 bg-white/5', emoji: '❌' },
-                                    { label: 'Scenario D', desc: "You're L13 with 200-person team, 20 upgrades/month", result: '$20k-$50k', color: 'border-red-500/50 bg-red-900/20', emoji: '👑' },
-                                ].map((s, i) => (
-                                    <div key={i} className={`p-4 rounded-xl border ${s.color}`}>
-                                        <h4 className="font-bold text-white mb-1 uppercase">{s.emoji} {s.label}</h4>
-                                        <p className="text-xs text-gray-400 mb-3 font-bold uppercase tracking-tighter">{s.desc}</p>
-                                        <div className="text-xl font-black text-white">→ You earn: {s.result}</div>
-                                        {s.result === '$0' && <p className="text-xs text-red-400 mt-1 uppercase font-bold">(Not qualified)</p>}
+                                            </thead>
+                                            <tbody>
+                                                {LAYER_COSTS.map((cost, i) => {
+                                                    const cumulative = LAYER_COSTS.slice(0, i + 1).reduce((a, b) => a + b, 0);
+                                                    return (
+                                                        <tr key={i} className={`hover:bg-brand-mint/30 transition-colors group`}>
+                                                            <td className="px-8 py-5 border-b border-brand-green/5 font-black text-slate-900 italic">Tier {i}</td>
+                                                            <td className="px-8 py-5 border-b border-brand-green/5 text-right text-slate-400 font-bold italic">{fmtUSD(cost)}</td>
+                                                            <td className="px-8 py-5 border-b border-brand-green/5 text-right text-brand-green font-black italic tracking-tighter text-lg">{fmtUSD(cumulative)}</td>
+                                                        </tr>
+                                                    );
+                                                })}
+                                            </tbody>
+                                        </table>
                                     </div>
+                                </div>
+
+                                {/* Key Insights */}
+                                <div className="space-y-8">
+                                    <div className="p-8 rounded-[3rem] bg-white border border-brand-green/5 shadow-2xl relative overflow-hidden group">
+                                        <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:rotate-12 transition-transform duration-700">
+                                            <Info className="w-24 h-24 text-brand-green" />
+                                        </div>
+                                        <h3 className="text-lg font-black text-slate-900 mb-8 uppercase italic tracking-tight">Protocol Logic</h3>
+                                        <ul className="space-y-6">
+                                            {[
+                                                'Geometric 2x Scaling Structure',
+                                                'Exponential Tier Cost Progression',
+                                                'Oracle-Linked BNB Settlement',
+                                                'Permanent Atomic Verification'
+                                            ].map((text, i) => (
+                                                <li key={i} className="flex items-center gap-4 text-sm font-bold text-slate-500 italic">
+                                                    <div className="w-1.5 h-1.5 rounded-full bg-brand-green" />
+                                                    {text}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    <div className="p-8 rounded-[3rem] bg-slate-900 text-white shadow-3xl">
+                                        <h3 className="text-[10px] font-black text-white/40 mb-8 uppercase tracking-[0.3em] italic">Yield Distribution Vector</h3>
+                                        <ul className="space-y-6">
+                                            {[
+                                                { label: 'Direct Node Reward', val: '10%', color: 'text-brand-green' },
+                                                { label: 'Binary Matrix Flow', val: '70%', color: 'text-brand-green' },
+                                                { label: 'Unilevel Aggregate', val: '15%', color: 'text-brand-red' },
+                                                { label: 'Global Reward Pool', val: '5%', color: 'text-white' },
+                                            ].map((item, i) => (
+                                                <li key={i} className="flex justify-between items-center group">
+                                                    <span className="text-[10px] font-black uppercase tracking-widest text-white/60 italic group-hover:text-white transition-colors">{item.label}</span>
+                                                    <span className={`text-2xl font-black italic tracking-tighter ${item.color}`}>{item.val}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="p-8 rounded-[2.5rem] bg-brand-mint/50 border border-brand-green/10 text-center shadow-inner">
+                                <p className="text-brand-green font-black uppercase tracking-[0.4em] text-[8px] italic flex items-center justify-center gap-4">
+                                    <Zap className="w-3 h-3" />
+                                    Dynamic Unit Parity via Chainlink Integrity Protocol
+                                    <Zap className="w-3 h-3" />
+                                </p>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {/* TAB: Matrix Income */}
+                    {activeTab === 'matrix' && (
+                        <motion.div key="matrix" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-12">
+                            {/* Formula */}
+                            <div className="p-10 rounded-[4rem] bg-white border border-brand-green/10 flex flex-col md:flex-row items-center gap-12 shadow-3xl relative overflow-hidden group">
+                                <div className="absolute inset-0 bg-brand-green/[0.02]" />
+                                <div className="relative z-10 w-24 h-24 rounded-[2rem] bg-brand-mint flex items-center justify-center border border-brand-green/10 group-hover:scale-110 transition-transform">
+                                    <TrendingUp className="w-10 h-10 text-brand-green" />
+                                </div>
+                                <div className="relative z-10 flex-1">
+                                    <h2 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] mb-4 italic">Matrix Value Propagation</h2>
+                                    <p className="text-3xl md:text-5xl text-slate-900 font-black italic tracking-tighter">
+                                        <span className="text-brand-green">70% Yield Flow</span> → First Qualified Node
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                                <div className="space-y-10">
+                                    <h3 className="text-xl font-black text-slate-900 uppercase italic tracking-tight flex items-center gap-3">
+                                        <ShieldCheck className="w-6 h-6 text-brand-green" />
+                                        Qualification Protocol
+                                    </h3>
+                                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                                        {[
+                                            { label: 'Tier Parity', val: 'My Tier ≥ Payer' },
+                                            { label: 'Network Depth', val: 'Within 18 Nodes' },
+                                            { label: 'Active Hash', val: 'Protocol Verified' },
+                                        ].map((item, i) => (
+                                            <div key={i} className="p-6 rounded-[2rem] bg-white border border-brand-mint shadow-xl text-center group hover:border-brand-green/30 transition-all">
+                                                <span className="block text-[8px] font-black text-slate-400 uppercase tracking-widest mb-2 italic">{item.label}</span>
+                                                <span className="block text-slate-900 font-black text-[13px] uppercase italic tracking-tighter">{item.val}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className="p-8 rounded-[3rem] bg-slate-900 text-white shadow-3xl group">
+                                        <h4 className="text-[10px] font-black text-brand-red mb-6 uppercase tracking-widest italic flex items-center gap-2">
+                                            <Info className="w-4 h-4" />
+                                            Pass-Up Mechanism
+                                        </h4>
+                                        <p className="text-white/60 font-bold text-sm leading-relaxed italic">
+                                            Yield from non-qualified nodes traverses the hierarchy until reaching the <strong className="text-white">first verified parity node</strong>. Avoid revenue leakage by maintaining tier superiority.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="space-y-8">
+                                    <h3 className="text-xl font-black text-slate-900 uppercase italic tracking-tight">Yield Vector Per Node Type</h3>
+                                    <div className="overflow-hidden rounded-[3rem] border border-brand-green/10 shadow-3xl bg-white">
+                                        <div className="max-h-[400px] overflow-y-auto custom-scrollbar">
+                                            <table className="w-full text-sm border-collapse">
+                                                <thead className="sticky top-0 z-10 bg-brand-mint">
+                                                    <tr className="text-brand-green uppercase tracking-widest font-black italic text-[9px]">
+                                                        <th className="px-8 py-4 text-left">Unit Type</th>
+                                                        <th className="px-8 py-4 text-right">Yield Flow (70%)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {LAYER_COSTS.map((cost, i) => (
+                                                        <tr key={i} className="hover:bg-brand-mint/30 transition-colors border-b border-brand-green/5">
+                                                            <td className="px-8 py-4 font-black text-slate-900 italic">Tier {i} Node</td>
+                                                            <td className="px-8 py-4 text-right text-brand-green font-black italic tracking-tighter text-lg">{fmtUSD(cost * 0.7)}</td>
+                                                        </tr>
+                                                    ))}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {/* TAB: Level Income */}
+                    {activeTab === 'level-income' && (
+                        <motion.div key="level-income" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-12">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20">
+                                {/* Table */}
+                                <div>
+                                    <h2 className="text-2xl font-black text-slate-900 mb-8 uppercase italic tracking-tight flex items-center gap-3">
+                                        <BarChart3 className="w-6 h-6 text-brand-green" />
+                                        Unilevel Architecture
+                                    </h2>
+                                    <div className="overflow-hidden rounded-[3rem] border border-brand-green/10 shadow-3xl bg-white">
+                                        <table className="w-full text-sm border-collapse">
+                                            <thead>
+                                                <tr className="bg-brand-mint text-brand-green uppercase tracking-widest font-black italic text-[10px]">
+                                                    <th className="px-8 py-6 text-left border-b border-brand-green/10">Network depth</th>
+                                                    <th className="px-8 py-6 text-right border-b border-brand-green/10">Yield %</th>
+                                                    <th className="px-8 py-6 text-right border-b border-brand-green/10">Unit Flow</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {levelIncomePercents.map((pct, i) => (
+                                                    <tr key={i} className="hover:bg-brand-mint/30 transition-colors">
+                                                        <td className="px-8 py-4 border-b border-brand-green/5 font-black text-slate-900 italic">Layer {i + 1}</td>
+                                                        <td className="px-8 py-4 border-b border-brand-green/5 text-right text-brand-green font-black italic">{pct}%</td>
+                                                        <td className="px-8 py-4 border-b border-brand-green/5 text-right text-slate-400 font-bold italic tracking-tighter text-xs">${(1000 * pct / 100).toFixed(2)} / $1K</td>
+                                                    </tr>
+                                                ))}
+                                                <tr className="bg-slate-900 text-white font-black italic">
+                                                    <td className="px-8 py-6 uppercase tracking-widest text-[10px]">Aggregate Net Flow</td>
+                                                    <td className="px-8 py-6 text-right text-brand-green">15.00%</td>
+                                                    <td className="px-8 py-6 text-right">$150.00</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                {/* Right Side Info */}
+                                <div className="space-y-10">
+                                    <div className="p-10 rounded-[3.5rem] bg-white border border-brand-green/5 shadow-2xl">
+                                        <h3 className="text-[10px] font-black text-slate-400 mb-8 uppercase tracking-[0.3em] italic">Projection Modeling ($2,560 Upgrade)</h3>
+                                        <ul className="space-y-6">
+                                            {[
+                                                { label: 'Layer 1-5 Yield', pct: '1.50%', val: '$38.40', color: 'text-brand-green' },
+                                                { label: 'Layer 6-10 Yield', pct: '1.00%', val: '$25.60', color: 'text-brand-red' },
+                                                { label: 'Tier 11-18 Yield', pct: '0.35%', val: '$8.96', color: 'text-slate-900' },
+                                            ].map((item, i) => (
+                                                <li key={i} className="flex justify-between items-center group">
+                                                    <div className="flex flex-col">
+                                                        <span className="text-slate-900 font-black italic text-lg">{item.label}</span>
+                                                        <span className="text-[10px] font-black uppercase text-slate-400 italic tracking-widest">{item.pct} Coefficient</span>
+                                                    </div>
+                                                    <span className={`text-3xl font-black italic tracking-tighter ${item.color}`}>{item.val}</span>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+
+                                    <div className="grid grid-cols-1 gap-6">
+                                        {[
+                                            { label: 'Precision Node Map', desc: '50 Nodes • 5 Directs • Avg T5', earn: '$500+', accent: 'bg-brand-mint' },
+                                            { label: 'Expansion Grid', desc: '200 Nodes • 10 Directs • Avg T8', earn: '$5,000+', accent: 'bg-brand-mint' },
+                                            { label: 'Quantum Network', desc: '1000 Nodes • 20 Directs • Avg T10', earn: '$25,000+', accent: 'bg-slate-900 text-white' },
+                                        ].map((p, i) => (
+                                            <div key={i} className={`p-8 rounded-[2.5rem] border border-brand-green/10 shadow-xl flex justify-between items-center group transition-all hover:scale-[1.02] ${p.accent}`}>
+                                                <div>
+                                                    <span className={`block font-black uppercase text-[10px] tracking-widest italic mb-1 ${p.accent.includes('slate-900') ? 'text-brand-green' : 'text-slate-400'}`}>{p.label}</span>
+                                                    <span className={`block font-bold text-xs italic ${p.accent.includes('slate-900') ? 'text-white/40' : 'text-slate-500'}`}>{p.desc}</span>
+                                                </div>
+                                                <div className="text-right">
+                                                    <span className={`block text-2xl font-black italic tracking-tighter ${p.earn.includes('25,000') ? 'text-brand-green' : 'text-slate-900'}`}>{p.earn}</span>
+                                                    <span className="block text-[8px] font-black uppercase tracking-widest text-slate-400 italic">Net Projection</span>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+
+                    {/* TAB: Earning Scenarios */}
+                    {activeTab === 'scenarios' && (
+                        <motion.div key="scenarios" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-16">
+                            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+                                {[
+                                    {
+                                        title: 'Micro Node', members: '10 Nodes', accent: 'border-brand-green/10', color: 'text-brand-green',
+                                        team: ['5 Direct Propagation', '5 Secondary Layers', 'Avg Tier: T3'],
+                                        income: [
+                                            { label: 'Direct Yield', val: '$23.75' },
+                                            { label: 'Matrix Flow', val: '$340.00' },
+                                            { label: 'Unilevel Aggregate', val: '$100.00' },
+                                        ],
+                                        total: '$463.75',
+                                    },
+                                    {
+                                        title: 'Growth Cell', members: '50 Nodes', accent: 'border-brand-green/20', color: 'text-brand-green',
+                                        team: ['10 Direct Propagation', '40 Network Nodes', 'Avg Tier: T6'],
+                                        income: [
+                                            { label: 'Direct Yield', val: '$47.50' },
+                                            { label: 'Matrix Flow', val: '$3,000.00' },
+                                            { label: 'Unilevel Aggregate', val: '$1,000.00' },
+                                        ],
+                                        total: '$4,047.50',
+                                    },
+                                    {
+                                        title: 'Strategic Grid', members: '200 Nodes', accent: 'border-brand-red/20', color: 'text-brand-red',
+                                        team: ['20 Direct Propagation', '180 Network Nodes', 'Protocol Tier: T10'],
+                                        income: [
+                                            { label: 'Direct Yield', val: '$95.00' },
+                                            { label: 'Matrix Flow', val: '$15,000.00' },
+                                            { label: 'Unilevel Aggregate', val: '$5,000.00' },
+                                            { label: 'Reward Pool Share', val: '$1,500.00' },
+                                        ],
+                                        total: '$21,595.00',
+                                    },
+                                    {
+                                        title: 'Quantum Apex', members: '1,000+ Nodes', accent: 'border-slate-900', color: 'text-brand-green', isDark: true,
+                                        team: ['50+ Direct Propagation', '950+ Network Nodes', 'Protocol Tier: T15'],
+                                        income: [
+                                            { label: 'Direct Yield', val: '$237.50' },
+                                            { label: 'Matrix Flow', val: '$100K+' },
+                                            { label: 'Unilevel Aggregate', val: '$30,000.00' },
+                                            { label: 'Reward Pool Share', val: '$10,000.00' },
+                                        ],
+                                        total: '$140K+',
+                                    },
+                                ].map((s, i) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, y: 20 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: i * 0.1 }}
+                                        className={`rounded-[3rem] border ${s.accent} ${s.isDark ? 'bg-slate-900 text-white' : 'bg-white text-slate-800'} overflow-hidden shadow-3xl hover:-translate-y-2 transition-transform group flex flex-col h-full`}
+                                    >
+                                        <div className={`p-8 ${s.isDark ? 'bg-white/5' : 'bg-brand-mint'} text-center border-b ${s.accent}`}>
+                                            <h3 className={`text-2xl font-black italic tracking-tight uppercase ${s.isDark ? 'text-brand-green' : 'text-slate-900'}`}>{s.title}</h3>
+                                            <p className={`text-[8px] font-black uppercase tracking-[0.3em] italic mt-2 ${s.isDark ? 'text-white/40' : 'text-slate-400'}`}>{s.members} ARCHETYPE</p>
+                                        </div>
+                                        <div className="p-8 space-y-8 flex-1">
+                                            <div>
+                                                <h4 className={`text-[8px] font-black uppercase tracking-widest mb-4 italic ${s.isDark ? 'text-white/20' : 'text-slate-300'}`}>Network Topology</h4>
+                                                <ul className="space-y-2">
+                                                    {s.team.map((t, j) => (
+                                                        <li key={j} className="flex items-center gap-3 text-[10px] font-black italic tracking-tight uppercase transition-colors hover:text-brand-green">
+                                                            <ChevronRight className="w-3 h-3 text-brand-green opacity-50" />
+                                                            {t}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                            <div>
+                                                <h4 className={`text-[8px] font-black uppercase tracking-widest mb-4 italic ${s.isDark ? 'text-white/20' : 'text-slate-300'}`}>Yield Vectors</h4>
+                                                <ul className="space-y-3">
+                                                    {s.income.map((inc, j) => (
+                                                        <li key={j} className="flex justify-between items-center">
+                                                            <span className={`text-[9px] font-black uppercase italic tracking-widest ${s.isDark ? 'text-white/40' : 'text-slate-400'}`}>{inc.label}</span>
+                                                            <span className="text-sm font-black italic tracking-tighter">{inc.val}</span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div className={`p-8 ${s.isDark ? 'bg-brand-green text-slate-900' : 'bg-slate-900 text-white'} text-center mt-auto`}>
+                                            <span className="text-[10px] font-black uppercase tracking-[0.3em] opacity-50 italic">Aggregated Yield</span>
+                                            <div className="text-3xl font-black italic tracking-tighter">{s.total}</div>
+                                        </div>
+                                    </motion.div>
                                 ))}
                             </div>
-                        </div>
 
-                        {/* Warning */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div className="p-5 rounded-xl bg-red-900/10 border border-red-500/20">
-                                <h4 className="font-bold text-red-400 mb-2 uppercase tracking-widest">⚠️ WHAT IF NOT QUALIFIED?</h4>
-                                <ul className="text-sm text-gray-400 space-y-1 font-bold uppercase tracking-tighter">
-                                    <li>- Income goes to next qualified upline</li>
-                                    <li>- Or to root user if no one qualified</li>
-                                    <li>- This is &quot;lost income&quot; - motivation to qualify!</li>
-                                </ul>
+                            {/* Control Protocol */}
+                            <div className="flex flex-wrap justify-center gap-12 text-[10px] font-black text-slate-400 uppercase tracking-[0.4em] italic py-10 border-t border-brand-green/10">
+                                <span className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-brand-green shadow-xl shadow-brand-green/20" />
+                                    Active Network Propagation
+                                </span>
+                                <span className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-brand-red shadow-xl shadow-brand-red/20" />
+                                    Tier Parity Verification
+                                </span>
+                                <span className="flex items-center gap-3">
+                                    <div className="w-2 h-2 rounded-full bg-slate-900" />
+                                    Atomic Settlement Cycle
+                                </span>
                             </div>
-                            <div className="p-5 rounded-xl bg-red-950/20 border border-red-500/20">
-                                <h4 className="font-bold text-rose-400 mb-2 uppercase tracking-widest">💡 QUALIFICATION TIPS:</h4>
-                                <ol className="text-sm text-gray-400 space-y-1 list-decimal pl-4 font-bold uppercase tracking-tighter">
-                                    <li>Always be higher level than your team</li>
-                                    <li>Encourage team to upgrade</li>
-                                    <li>Stay active in the system</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-
-                {/* TAB: Level Income */}
-                {activeTab === 'level-income' && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                            {/* Table */}
-                            <div>
-                                <h2 className="text-2xl font-black text-red-400 mb-4 uppercase tracking-tighter">LEVEL INCOME STRUCTURE</h2>
-                                <p className="text-gray-400 mb-4 uppercase font-bold tracking-widest">Total: ~15% across 17 unilevel layers</p>
-                                <table className="w-full text-sm border-collapse">
-                                    <thead>
-                                        <tr className="bg-red-900/30 text-red-300 font-mono uppercase tracking-widest">
-                                            <th className="p-2 text-left border border-white/10">Level</th>
-                                            <th className="p-2 text-right border border-white/10">Commission %</th>
-                                            <th className="p-2 text-right border border-white/10">Per $1,000 Upgrade</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {levelIncomePercents.map((pct, i) => (
-                                            <tr key={i} className={`${i % 2 === 0 ? 'bg-white/[0.02]' : 'bg-white/[0.05]'}`}>
-                                                <td className="p-2 border border-white/10 font-bold text-white font-mono uppercase tracking-tighter">L{i + 1}</td>
-                                                <td className="p-2 border border-white/10 text-right text-red-300 font-mono">{pct}%</td>
-                                                <td className="p-2 border border-white/10 text-right text-gray-400 font-mono">${(1000 * pct / 100).toFixed(1)}</td>
-                                            </tr>
-                                        ))}
-                                        <tr className="bg-red-900/40 font-bold font-mono">
-                                            <td className="p-2 border border-white/10 text-red-400">TOTAL</td>
-                                            <td className="p-2 border border-white/10 text-right text-red-400">~14.95%</td>
-                                            <td className="p-2 border border-white/10 text-right text-red-400">$149.5</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            {/* Right Side Info */}
-                            <div className="space-y-6">
-                                <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                                    <h3 className="text-lg font-bold text-white mb-3 uppercase tracking-widest">📋 EXAMPLE CALCULATION:</h3>
-                                    <p className="text-gray-300 text-sm mb-3 uppercase font-bold tracking-tighter">Team member upgrades to L10 ($1,920)</p>
-                                    <ul className="space-y-2 text-sm text-gray-400 font-bold uppercase tracking-tighter">
-                                        <li>• As L1 upline: <strong className="text-white font-mono">${(1920 * 0.015).toFixed(1)}</strong> (1.50%)</li>
-                                        <li>• As L5 upline: <strong className="text-white font-mono">${(1920 * 0.015).toFixed(1)}</strong> (1.50%)</li>
-                                        <li>• As L10 upline: <strong className="text-white font-mono">${(1920 * 0.01).toFixed(0)}</strong> (1.00%)</li>
-                                        <li>• As L15 upline: <strong className="text-white font-mono">${(1920 * 0.0035).toFixed(1)}</strong> (0.35%)</li>
-                                    </ul>
-                                </div>
-
-                                <div className="p-6 rounded-2xl bg-red-900/10 border border-red-500/20">
-                                    <h3 className="text-lg font-bold text-red-400 mb-3 uppercase tracking-widest">📈 MONTHLY INCOME PROJECTIONS:</h3>
-                                    {[
-                                        { label: 'Small Network', desc: '50 upgrades/month, avg $200', vol: '$10,000', earn: '$100 - $500' },
-                                        { label: 'Medium Network', desc: '200 upgrades/month, avg $500', vol: '$100,000', earn: '$1,000 - $5,000' },
-                                        { label: 'Large Network', desc: '1000 upgrades/month, avg $1,000', vol: '$1,000,000', earn: '$10,000 - $50,000' },
-                                    ].map((p, i) => (
-                                        <div key={i} className="mb-3 p-3 rounded-lg bg-black/30 border border-white/5">
-                                            <span className="text-red-300 font-bold text-sm uppercase">{p.label}</span>
-                                            <span className="text-white/60 text-xs font-bold uppercase tracking-tighter"> ({p.desc})</span>
-                                            <div className="text-xs text-gray-500 mt-1 font-bold uppercase tracking-widest">→ Total volume: {p.vol}</div>
-                                            <div className="text-xs text-white font-black uppercase">→ Your commission: {p.earn}</div>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                <div className="p-5 rounded-xl bg-white/5 border border-white/10">
-                                    <h4 className="font-bold text-red-400 mb-2 uppercase tracking-widest">🌿 POWER OF COMPOUNDING:</h4>
-                                    <ul className="text-sm text-gray-400 space-y-1 font-bold uppercase tracking-tighter">
-                                        <li>• Build deep networks for exponential growth!</li>
-                                        <li>• 17 layers deep = massive earning potential</li>
-                                        <li>• Passive income from your entire downline</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="p-4 rounded-xl bg-gradient-to-r from-red-900/20 to-rose-900/20 border border-red-500/20 text-center">
-                            <p className="text-red-300 font-bold uppercase tracking-widest text-xs font-mono">Passive income from 17 layers deep | Qualification-based rewards</p>
-                        </div>
-                    </motion.div>
-                )}
-
-                {/* TAB: Earning Scenarios */}
-                {activeTab === 'scenarios' && (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
-                        <h2 className="text-3xl font-black text-center uppercase tracking-tighter">
-                            <span className="bg-gradient-to-r from-red-400 to-rose-600 bg-clip-text text-transparent">Team Building & AI Scenarios</span>
-                        </h2>
-
-                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
-                            {[
-                                {
-                                    title: 'SMALL TEAM', members: '10 Active Members', color: 'border-red-500/30', titleBg: 'bg-red-900/30 text-red-400',
-                                    team: ['5 Direct referrals', '5 Indirect (2nd level)', 'Average level: L5'],
-                                    income: [
-                                        'Direct Referrals: $23.75',
-                                        'Matrix Income: $170 - $340',
-                                        'Level Income: $50 - $100',
-                                        'Reward Pools: Not eligible yet',
-                                    ],
-                                    total: '$243 - $463',
-                                },
-                                {
-                                    title: 'MEDIUM TEAM', members: '50 Active Members', color: 'border-rose-500/30', titleBg: 'bg-rose-900/30 text-rose-400',
-                                    team: ['10 Direct referrals', '40 Downline across levels', 'Average level: L8'],
-                                    income: [
-                                        'Direct Referrals: $47.50',
-                                        'Matrix Income: $1,500 - $3,000',
-                                        'Level Income: $500 - $1,000',
-                                        'Reward Pools: Not eligible yet',
-                                    ],
-                                    total: '$2,047 - $4,047',
-                                },
-                                {
-                                    title: 'LARGE TEAM', members: '200 Active Members', color: 'border-red-500/40', titleBg: 'bg-red-900/40 text-red-300',
-                                    team: ['20 Direct referrals', '180 Downline across levels', 'Average level: L10', 'You at L10 (Royalty eligible)'],
-                                    income: [
-                                        'Direct Referrals: $95',
-                                        'Matrix Income: $8,000 - $15,000',
-                                        'Level Income: $2,500 - $5,000',
-                                        'Reward Pools: $500 - $1,500',
-                                    ],
-                                    total: '$11,095 - $21,595',
-                                },
-                                {
-                                    title: 'ENTERPRISE', members: '1000+ Active Members', color: 'border-rose-500/40', titleBg: 'bg-rose-900/40 text-rose-300',
-                                    team: ['50+ Direct referrals', '950+ Deep network', 'Average layer: L12', 'You at L13 (All royalty pools)'],
-                                    income: [
-                                        'Direct Referrals: $237.50',
-                                        'Matrix Income: $50,000 - $100,000',
-                                        'Level Income: $15,000 - $30,000',
-                                        'Reward Pools: $3,000 - $10,000',
-                                    ],
-                                    total: '$68,237 - $140,237',
-                                },
-                            ].map((s, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: i * 0.15 }}
-                                    className={`rounded-2xl border ${s.color} bg-black/30 overflow-hidden`}
-                                >
-                                    <div className={`p-4 ${s.titleBg} text-center`}>
-                                        <h3 className="text-lg font-black">{s.title}</h3>
-                                        <p className="text-xs opacity-70">({s.members})</p>
-                                    </div>
-                                    <div className="p-4 space-y-4">
-                                        <div>
-                                            <h4 className="text-xs font-bold text-white/50 uppercase mb-2 tracking-widest">Team Structure</h4>
-                                            <ul className="text-xs text-gray-500 font-bold uppercase tracking-tighter space-y-1">
-                                                {s.team.map((t, j) => <li key={j}>- {t}</li>)}
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <h4 className="text-xs font-bold text-white/80 uppercase mb-2">Monthly Income</h4>
-                                            <ul className="text-xs text-gray-300 space-y-1">
-                                                {s.income.map((inc, j) => <li key={j}>• {inc}</li>)}
-                                            </ul>
-                                        </div>
-                                        <div className="p-3 rounded-xl bg-white/5 text-center">
-                                            <span className="text-xs text-white/80">Monthly Total:</span>
-                                            <div className="text-xl font-black text-white">{s.total}</div>
-                                        </div>
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-
-                        {/* Key Factors */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="p-5 rounded-xl bg-white/5 border border-white/10 shadow-lg">
-                                <h4 className="font-bold text-white mb-3 uppercase tracking-widest">KEY FACTORS:</h4>
-                                <div className="grid grid-cols-2 gap-2 text-sm text-gray-400 font-bold uppercase tracking-tighter">
-                                    <span>✅ Team activity level</span>
-                                    <span>✅ Direct referral count</span>
-                                    <span>✅ Upgrade frequency</span>
-                                    <span>✅ Royalty pool eligibility</span>
-                                    <span>✅ Your qualification status</span>
-                                </div>
-                            </div>
-                            <div className="p-5 rounded-xl bg-white/5 border border-white/10 shadow-lg">
-                                <h4 className="font-bold text-white mb-3 uppercase tracking-widest">GROWTH MULTIPLIERS:</h4>
-                                <ul className="space-y-1 text-sm text-gray-400 font-bold uppercase tracking-tighter">
-                                    <li>→ Higher Levels = <strong className="text-white">Higher Earnings</strong></li>
-                                    <li>→ More Directs = <strong className="text-white">More Qualifications</strong></li>
-                                    <li>→ Deeper Network = <strong className="text-white">More Layers</strong></li>
-                                    <li>→ Active Team = <strong className="text-white">Consistent Income</strong></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <p className="text-center text-gray-600 text-xs italic">Actual earnings depend on team performance and activity levels</p>
-                    </motion.div>
-                )}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
             </div>
         </div>
     );
 }
+
+

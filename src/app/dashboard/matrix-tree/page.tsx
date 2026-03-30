@@ -1,9 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAccount } from 'wagmi';
 import { Network, ZoomIn, ZoomOut, Maximize, ChevronDown, ChevronUp } from 'lucide-react';
 import { useMatrixPosition, useUserIdByAddress, useUserStats, useUserInfo } from '@/lib/hooks/useContract';
+
+const safeNum = (val: any): number => {
+    if (val === undefined || val === null) return 0;
+    const n = Number(val);
+    return isNaN(n) ? 0 : n;
+};
 
 function MatrixTreeNode({ id, position, defaultExpanded = false }: { id: number; position: string; defaultExpanded?: boolean }) {
     const { data: matrixPosition } = useMatrixPosition(id);
@@ -13,17 +19,17 @@ function MatrixTreeNode({ id, position, defaultExpanded = false }: { id: number;
     if (id === 0) {
         return (
             <div className="flex flex-col items-center">
-                <div className="w-32 h-32 rounded-2xl bg-white border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-3 relative shadow-sm">
-                    <div className="text-gray-500 text-sm font-bold uppercase tracking-wider">Empty</div>
+                <div className="w-32 h-32 rounded-2xl bg-brand-mint border-2 border-dashed border-brand-green/10 flex flex-col items-center justify-center p-3 relative opacity-50">
+                    <div className="text-foreground text-sm font-black uppercase tracking-widest italic">Node Empty</div>
                 </div>
-                <div className="mt-4 text-xs font-bold text-gray-500 uppercase tracking-widest">{position}</div>
+                <div className="mt-4 text-xs font-black text-brand-blue uppercase tracking-tighter italic">{position} SLOT</div>
             </div>
         );
     }
 
-    const leftChildId = matrixPosition ? Number(matrixPosition[1]) : 0;
-    const rightChildId = matrixPosition ? Number(matrixPosition[2]) : 0;
-    const level = userInfo ? Number(userInfo[3]) : 1;
+    const leftChildId = matrixPosition ? safeNum((matrixPosition as any)[1]) : 0;
+    const rightChildId = matrixPosition ? safeNum((matrixPosition as any)[2]) : 0;
+    const level = userInfo ? safeNum((userInfo as any)[3]) : 1;
     // Always consider it has children slots to show the binary structure
     const hasChildren = true;
 
@@ -31,16 +37,16 @@ function MatrixTreeNode({ id, position, defaultExpanded = false }: { id: number;
         <div className="flex flex-col items-center">
             {/* Node Card */}
             <div 
-                className={`relative w-36 h-36 p-4 flex flex-col items-center justify-center transition-all duration-300 rounded-[2rem] bg-white shadow-sm border ${
-                    isExpanded ? 'border-[#e30613] shadow-md ring-4 ring-red-50' : 'border-slate-200 hover:-translate-y-1 hover:shadow-lg cursor-pointer'
+                className={`relative w-40 h-40 p-4 flex flex-col items-center justify-center transition-all duration-500 rounded-[2.5rem] bg-white shadow-xl border ${
+                    isExpanded ? 'border-brand-green ring-8 ring-brand-green/10' : 'border-brand-green/10 hover:border-brand-green/30 hover:-translate-y-2 cursor-pointer'
                 }`}
                 onClick={!isExpanded ? () => setIsExpanded(true) : undefined}
             >
-                <div className="text-[#e30613] font-black text-3xl mb-1 [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">#{id}</div>
-                <div className={`text-xs font-black mt-1 px-3 py-1 rounded border uppercase tracking-wider ${
-                    level >= 20 ? 'bg-amber-50 text-amber-600 border-amber-200' :
-                    level >= 10 ? 'bg-red-50 text-red-600 border-red-200' :
-                    'bg-blue-50 text-blue-600 border-blue-200'
+                <div className="text-brand-green font-black text-4xl mb-1 italic">#{id}</div>
+                <div className={`text-xs font-black mt-2 px-3 py-1 rounded-full uppercase tracking-tighter italic ${
+                    level >= 15 ? 'bg-brand-red text-foreground' :
+                    level >= 8 ? 'bg-brand-green text-foreground' :
+                    'bg-white text-brand-blue border border-brand-green/10'
                 }`}>
                     Layer {level}
                 </div>
@@ -48,31 +54,31 @@ function MatrixTreeNode({ id, position, defaultExpanded = false }: { id: number;
                 {hasChildren && (
                     <button 
                         onClick={(e) => { e.stopPropagation(); setIsExpanded(!isExpanded); }}
-                        className="absolute -bottom-4 bg-slate-50 border border-slate-200 shadow-sm rounded-full p-1.5 text-gray-500 hover:text-[#e30613] hover:border-[#e30613] transition-colors z-10"
+                        className="absolute -bottom-5 bg-white border border-brand-green/10 shadow-xl rounded-full p-2 text-brand-green hover:bg-brand-green hover:text-foreground transition-all transform hover:scale-110 z-10"
                     >
-                        {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                        {isExpanded ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                     </button>
                 )}
             </div>
-            <div className="mt-6 text-xs font-bold text-gray-500 uppercase tracking-widest">{position}</div>
+            <div className="mt-8 text-xs font-black text-brand-blue uppercase tracking-widest italic">{position} NODE</div>
 
             {/* Children Container */}
             {isExpanded && (
-                <div className="mt-2 flex flex-col items-center">
+                <div className="mt-4 flex flex-col items-center">
                     {/* Main vertical drop */}
-                    <div className="w-[3px] h-8 bg-gray-300"></div>
-                    <div className="flex gap-16 md:gap-32 relative">
+                    <div className="w-[3px] h-10 bg-brand-green/10"></div>
+                    <div className="flex gap-12 md:gap-40 lg:gap-64 relative">
                         {/* Horizontal connection line */}
-                        <div className="absolute top-0 left-1/4 right-1/4 h-[3px] bg-gray-300" style={{ width: '50%', transform: 'translateX(50%)' }}></div>
+                        <div className="absolute top-0 left-1/4 right-1/4 h-[3px] bg-brand-green/10" style={{ width: '50%', transform: 'translateX(50%)' }}></div>
                         
-                        <div className="flex flex-col items-center relative pt-8">
+                        <div className="flex flex-col items-center relative pt-10">
                             {/* Vertical drop line for left child */}
-                            <div className="absolute top-0 w-[3px] h-8 bg-gray-300"></div>
+                            <div className="absolute top-0 w-[3px] h-10 bg-brand-green/10"></div>
                             <MatrixTreeNode id={leftChildId} position="Left" />
                         </div>
-                        <div className="flex flex-col items-center relative pt-8">
+                        <div className="flex flex-col items-center relative pt-10">
                             {/* Vertical drop line for right child */}
-                            <div className="absolute top-0 w-[3px] h-8 bg-gray-300"></div>
+                            <div className="absolute top-0 w-[3px] h-10 bg-brand-green/10"></div>
                             <MatrixTreeNode id={rightChildId} position="Right" />
                         </div>
                     </div>
@@ -92,8 +98,8 @@ export default function MatrixTreePage() {
 
     // Get matrix position to calculate top level leg stats
     const { data: matrixPosition } = useMatrixPosition(userId);
-    const leftChildId = matrixPosition ? Number(matrixPosition[1]) : 0;
-    const rightChildId = matrixPosition ? Number(matrixPosition[2]) : 0;
+    const leftChildId = matrixPosition ? safeNum((matrixPosition as any)[1]) : 0;
+    const rightChildId = matrixPosition ? safeNum((matrixPosition as any)[2]) : 0;
 
     // Get stats for left and right children to calculate leg counts
     const { data: leftChildInfo } = useUserInfo(leftChildId);
@@ -101,43 +107,68 @@ export default function MatrixTreePage() {
 
     // Calculate actual leg counts: 1 (the child) + their matrix team
     const leftTeam = leftChildId > 0 && leftChildInfo
-        ? 1 + Number(leftChildInfo[5])
+        ? 1 + safeNum((leftChildInfo as any)[5])
         : 0;
 
     const rightTeam = rightChildId > 0 && rightChildInfo
-        ? 1 + Number(rightChildInfo[5])
+        ? 1 + safeNum((rightChildInfo as any)[5])
         : 0;
 
     const balance = leftTeam + rightTeam > 0 ? ((Math.min(leftTeam, rightTeam) / Math.max(leftTeam, rightTeam)) * 100).toFixed(0) : 0;
 
+    useEffect(() => {
+        const handleResize = () => {
+            if (window.innerWidth < 768) {
+                setZoom(0.5);
+            } else {
+                setZoom(1);
+            }
+        };
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     const handleResetZoom = () => {
-        setZoom(1);
+        setZoom(window.innerWidth < 768 ? 0.5 : 1);
     };
 
     return (
-        <div className="-m-6 p-6 min-h-[calc(100vh-48px)] bg-gradient-to-b from-[#e31837] to-[#b01025] text-white flex flex-col items-center">
+        <div className="-m-6 p-6 min-h-[calc(100vh-48px)] bg-brand-mint text-foreground flex flex-col items-center">
             <div className="max-w-7xl w-full space-y-6">
             {/* Controls */}
-            <div className="relative overflow-hidden bg-slate-50 rounded-2xl p-6 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)]">
+            <div className="relative overflow-hidden bg-white border border-brand-green/10 rounded-2xl p-6 shadow-xl">
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
-                        <h2 className="text-2xl font-black text-[#e30613] mb-1 uppercase tracking-wider [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">Node Matrix</h2>
-                        <p className="text-gray-500 font-bold">View and expand your dynamic matrix structure</p>
+                        <h2 className="text-2xl font-black text-brand-green mb-1 uppercase tracking-tighter italic">Neural Matrix</h2>
+                        <p className="text-brand-blue font-bold uppercase tracking-widest text-xs italic">Real-time node propagation visualization</p>
                     </div>
                     <div className="flex gap-3">
                         <button
-                            onClick={() => setZoom(Math.max(0.25, zoom - 0.25))}
-                            className="p-2 bg-white border border-slate-200 text-gray-600 rounded-lg hover:bg-slate-50 hover:text-[#e30613] transition-colors shadow-sm"
+                            onClick={() => setZoom(Math.max(0.1, zoom - 0.1))}
+                            className="p-3 bg-brand-mint border border-brand-green/10 rounded-xl text-brand-blue hover:text-brand-green transition-all shadow-sm"
                         >
                             <ZoomOut className="w-5 h-5" />
+                        </button>
+                        <button
+                            onClick={() => setZoom(Math.min(2, zoom + 0.1))}
+                            className="p-3 bg-brand-mint border border-brand-green/10 rounded-xl text-brand-blue hover:text-brand-green transition-all shadow-sm"
+                        >
+                            <ZoomIn className="w-5 h-5" />
+                        </button>
+                        <button
+                            onClick={handleResetZoom}
+                            className="p-3 bg-brand-mint border border-brand-green/10 rounded-xl text-brand-blue hover:text-brand-green transition-all shadow-sm"
+                        >
+                            <Maximize className="w-5 h-5" />
                         </button>
                     </div>
                 </div>
             </div>
 
             {/* Binary Tree Visualization - Interactive Expandable */}
-            <div className="relative overflow-hidden bg-white rounded-[3rem] p-6 overflow-x-auto min-h-[600px] flex justify-center py-12 border border-slate-100 shadow-[inset_0_4px_10px_rgba(0,0,0,0.03)]"
-                 style={{ backgroundImage: 'radial-gradient(#e5e7eb 1px, transparent 1px)', backgroundSize: '40px 40px' }}
+            <div className="relative overflow-hidden bg-white rounded-[3rem] p-6 overflow-x-auto min-h-[600px] flex justify-center py-20 border border-brand-green/10 shadow-2xl w-full"
+                 style={{ backgroundImage: 'radial-gradient(rgba(34, 197, 94, 0.05) 1px, transparent 1px)', backgroundSize: '40px 40px' }}
             >
                 <div 
                     style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }} 
@@ -146,8 +177,8 @@ export default function MatrixTreePage() {
                     {userId > 0 ? (
                         <MatrixTreeNode id={userId} position="You" defaultExpanded={true} />
                     ) : (
-                        <div className="text-center py-20 text-gray-500 font-bold text-lg">
-                            Please connect a registered wallet to view your matrix.
+                        <div className="text-center py-20 text-brand-red font-black uppercase tracking-widest italic animate-pulse">
+                            Wallet Connection Required for Neural Sync
                         </div>
                     )}
                 </div>
@@ -155,43 +186,43 @@ export default function MatrixTreePage() {
 
             {/* Stats */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="relative overflow-hidden bg-slate-50 rounded-[2rem] p-5 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] border border-slate-200 hover:-translate-y-1 hover:shadow-lg transition-all group">
+                <div className="relative overflow-hidden bg-white rounded-[2rem] p-5 shadow-xl border border-brand-green/10 hover:-translate-y-1 transition-all group">
                     <div className="flex items-center gap-3 mb-4">
-                        <div className="bg-blue-50 border border-blue-200 p-2.5 rounded-xl shadow-[inset_1px_1px_3px_rgba(255,255,255,1)]">
-                            <Network className="w-5 h-5 text-blue-500 drop-shadow-sm" />
+                        <div className="bg-brand-mint border border-brand-green/20 p-2.5 rounded-xl">
+                            <Network className="w-5 h-5 text-brand-green" />
                         </div>
-                        <span className="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-widest">Left Leg</span>
+                        <span className="text-xs md:text-sm text-foreground font-black uppercase tracking-widest italic">Logic: Left Prop</span>
                     </div>
                     <div>
-                        <div className="text-3xl md:text-4xl font-black text-blue-500 tracking-tighter leading-none flex items-baseline gap-1 [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">
-                            {leftTeam}
+                        <div className="text-4xl font-black text-brand-green tracking-tighter leading-none italic">
+                            {String(leftTeam).padStart(2, '0')}
                         </div>
                     </div>
                 </div>
                 
-                <div className="relative overflow-hidden bg-[#f4f8f4] rounded-[2rem] p-5 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] border border-[#c8e6c9] hover:-translate-y-1 hover:shadow-lg transition-all group">
+                <div className="relative overflow-hidden bg-white rounded-[2rem] p-5 shadow-xl border border-brand-green/10 hover:-translate-y-1 transition-all group">
                     <div className="flex items-center gap-3 mb-4">
-                        <div className="bg-purple-50 border border-purple-200 p-2.5 rounded-xl shadow-[inset_1px_1px_3px_rgba(255,255,255,1)]">
-                            <Network className="w-5 h-5 text-purple-500 drop-shadow-sm" />
+                        <div className="bg-brand-mint border border-brand-green/20 p-2.5 rounded-xl">
+                            <Network className="w-5 h-5 text-brand-green" />
                         </div>
-                        <span className="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-widest">Right Leg</span>
+                        <span className="text-xs md:text-sm text-foreground font-black uppercase tracking-widest italic">Logic: Right Prop</span>
                     </div>
                     <div>
-                        <div className="text-3xl md:text-4xl font-black text-purple-500 tracking-tighter leading-none flex items-baseline gap-1 [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">
-                            {rightTeam}
+                        <div className="text-4xl font-black text-brand-green tracking-tighter leading-none italic">
+                            {String(rightTeam).padStart(2, '0')}
                         </div>
                     </div>
                 </div>
 
-                <div className="relative overflow-hidden bg-[#f4f8f4] rounded-[2rem] p-5 shadow-[0_8px_30px_rgba(0,0,0,1),inset_0_1px_0_rgba(255,255,255,0.05)] border border-[#c8e6c9] hover:-translate-y-1 hover:shadow-lg transition-all group">
+                <div className="relative overflow-hidden bg-white rounded-[2rem] p-5 shadow-xl border border-brand-green/10 hover:-translate-y-1 transition-all group">
                     <div className="flex items-center gap-3 mb-4">
-                        <div className="bg-red-50 border border-red-200 p-2.5 rounded-xl shadow-[inset_1px_1px_3px_rgba(255,255,255,1)]">
-                            <Network className="w-5 h-5 text-[#e30613] drop-shadow-sm" />
+                        <div className="bg-brand-red/10 border border-brand-red/20 p-2.5 rounded-xl">
+                            <Network className="w-5 h-5 text-brand-red" />
                         </div>
-                        <span className="text-xs md:text-sm text-gray-500 font-bold uppercase tracking-widest">Matrix Balance</span>
+                        <span className="text-xs md:text-sm text-foreground font-black uppercase tracking-widest italic">Matrix Sync</span>
                     </div>
                     <div>
-                        <div className="text-3xl md:text-4xl font-black text-[#e30613] tracking-tighter leading-none flex items-baseline gap-1 [text-shadow:0_1px_1px_rgba(255,255,255,0.8)]">
+                        <div className="text-4xl font-black text-brand-red tracking-tighter leading-none italic">
                             {balance}%
                         </div>
                     </div>
@@ -201,3 +232,5 @@ export default function MatrixTreePage() {
         </div>
     );
 }
+
+
